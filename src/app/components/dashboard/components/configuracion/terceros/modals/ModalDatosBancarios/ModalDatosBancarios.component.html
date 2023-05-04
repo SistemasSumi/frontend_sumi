@@ -1,0 +1,89 @@
+
+<div class="modal-body">
+  <form (submit)="guardar()" [formGroup]="formBanco" #formDirective="" id="formBanco">
+
+    <div class="row">
+      
+        <div class="col-md-2">
+          <div class="form-group">    
+              <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">TIPO DE CUENTA</mat-label>
+                  <mat-select formControlName="tipo">    
+                      <mat-option value="CORRIENTE">CORRIENTE</mat-option>
+                      <mat-option value="AHORROS">AHORROS</mat-option>
+                      
+
+                      
+                  </mat-select>
+              </mat-form-field>
+
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">BANCO</mat-label>
+              <input  required formControlName="banco" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+      </div> 
+      <div class="col-md-5">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">N° CUENTA</mat-label>
+            <input  required formControlName="cuenta" matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+    </div>  
+      <div class="col-md-1">
+        <button style="margin-top: 15px;" type="submit" [disabled]="formBanco.invalid" class="btn btn-primary">Agregar</button>
+
+      </div>  
+        
+       
+        
+
+    </div>
+  </form>
+
+</div>
+
+
+
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="row">
+      <p-divider [text]="'BANCOS'" [align]="''"></p-divider>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table mb-0">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="text-center">TIPO</th>
+                        <th class="text-center">BANCO</th>
+                        <th class="text-center">N° CUENTA</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of bancos; let i = index;">
+                        <th scope="row">{{i+1}}</th>
+                        <td class="text-center">{{item.tipo}}</td>
+                        <td class="text-center">{{item.banco}}</td>
+                        <td class="text-center">{{item.cuenta}}</td>
+                       
+                    </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,167 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <!-- <h1 class="page-header mb-3">SigBan
+        <small>Sistema Gestor Bananero</small>
+
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse animated fadeInDown">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">REGISTRAR CLIENTE
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="newEmployed()" [formGroup]="formEmployed" #formDirective="" id="formEmployed">
+
+                            <div class="row" style="padding:10px">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <app-input-image [imagen]="recuperarFoto()" [urlDIR]="urlDIR" [tooltipFoto]="tooltipFoto" [tituloFoto]="tituloFoto" (archivoSeleccionado)="archivoSeleccionado($event)"> </app-input-image>
+                                        <input formControlName="foto" matInput type="text" id="foto" style="display:none" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Cedula</mat-label>
+                                            <input required formControlName="cedula" matInput type="text" id="nombre" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombres</mat-label>
+                                            <input formControlName="nombres" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Apellidos</mat-label>
+                                            <input formControlName="apellidos" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Cargo</mat-label>
+                                            <mat-select formControlName="cargo" style="text-align: center;">
+                                                <ng-container *ngFor="let cargo of dataCargos">
+                                                    <mat-option [value]="cargo.id">{{ cargo.cargo }}</mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;">Tipo empleado</mat-label>
+                                            <mat-select required formControlName="tipoEmpleado" style="text-align: center;">
+                                                <ng-container *ngFor="let tipo of dataTiposEmpleados">
+                                                    <mat-option [value]="tipo.id">{{ tipo.tipo }}</mat-option>
+                                                </ng-container>
+                                            </mat-select>
+
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentType()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;">Finca</mat-label>
+                                            <mat-select required formControlName="finca" style="text-align: center;">
+                                                <ng-container *ngFor="let finca of dataFinca">
+                                                    <mat-option [value]="finca.id">{{ finca.nombre }}</mat-option>
+                                                </ng-container>
+                                            </mat-select>
+
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentType()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Direccion</mat-label>
+                                            <input required formControlName="direccion" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Telefono</mat-label>
+                                            <input maxlength="10" formControlName="telefonos" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px; ">Correo electronico</mat-label>
+                                            <input formControlName="email" matInput type="email" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" [disabled]="this.formEmployed.invalid">Guardar</button>
+
+                                    <a href="javascript:;" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+</div>
+<!-- end #content -->

@@ -1,0 +1,53 @@
+<div class="main-content">
+
+  <div class="page-content">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">Username</mat-label>
+              <input [(ngModel)]="username" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">email</mat-label>
+              <input [(ngModel)]="email" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">password</mat-label>
+              <input [(ngModel)]="password" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <button (click)="guardar()" class="btn btn-primary">Guardar</button>
+      </div>
+
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

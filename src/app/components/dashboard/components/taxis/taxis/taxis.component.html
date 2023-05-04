@@ -1,0 +1,274 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h5 class="card-title">Lista de taxis <span class="text-muted fw-normal ms-2"></span></h5>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-md-6">
+                                <div class="d-flex flex-wrap align-items-start justify-content-md-end mt-2 mt-md-0 gap-2 mb-3">
+
+                                    <div>
+                                        <a href="javascript:;" (click)="nuevo()" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="uil uil-plus me-1"></i> Añadir  Taxi</a>
+
+                                    </div>
+
+                                    <!-- end dropdown -->
+                                </div>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <h5 class="modal-title" id="addContactModalLabel" *ngIf="!editar">Añadir Taxí</h5>
+                                        <h5 class="modal-title" id="addContactModalLabel" *ngIf="editar">Editar Taxí</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form (submit)="guardar()" [formGroup]="formTaxis" #formDirective="" id="formTaxis">
+                                        <div class="modal-body p-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label style="font-size: 16px;">Placa</mat-label>
+                                                            <input required formControlName="placa" matInput type="text" id="documento" />
+                                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label style="font-size: 16px;">Modelo</mat-label>
+                                                            <input required formControlName="modelo" matInput type="text" id="documento" />
+                                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label>Vencimiento Soat</mat-label>
+                                                            <input matInput [matDatepicker]="soat" formControlName="soat">
+
+                                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                                            <mat-datepicker-toggle matSuffix [for]="soat"></mat-datepicker-toggle>
+                                                            <mat-datepicker #soat></mat-datepicker>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label>Vencimiento Tecnomecanica</mat-label>
+                                                            <input matInput [matDatepicker]="tecno" formControlName="tecno">
+                                                            <mat-hint>MM/DD/YYYY</mat-hint>
+                                                            <mat-datepicker-toggle matSuffix [for]="tecno"></mat-datepicker-toggle>
+                                                            <mat-datepicker #tecno></mat-datepicker>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" (click)="this.editar = false" class="btn btn-light w-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary w-sm" [disabled]="formTaxis.invalid">Guardar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end modal -->
+                        <div class="modal fade" id="addTurnoModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addContactModalLabel">Añadir Turno</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form (submit)="guardarTurno()" [formGroup]="formTurnos" #formDirective="" id="formTurnos">
+                                        <div class="modal-body p-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label style="font-size: 16px;">Nombre del turno</mat-label>
+                                                            <input required formControlName="turno" matInput type="text" id="documento" />
+                                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                            <mat-label style="font-size: 16px;">Conductor</mat-label>
+                                                            <mat-select required formControlName="conductor" style="text-align: center;">
+                                                                <ng-container *ngFor="let data of ListConductores">
+                                                                    <mat-option [value]="data.id_conductor">{{ data.nombres | uppercase }} {{ data.apellidos | uppercase }}</mat-option>
+                                                                </ng-container>
+                                                            </mat-select>
+                                                            <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label style="font-size: 16px;">Tarifa</mat-label>
+                                                            <input required formControlName="tarifa" matInput type="number" id="documento" />
+                                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" (click)="this.editar = false" class="btn btn-light w-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary w-sm" [disabled]="formTurnos.invalid">Guardar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="addKmModal" tabindex="-1" aria-labelledby="addKmModal" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addContactModalLabel">Añadir Kilometraje</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form (submit)="guardarTaxiKm()" [formGroup]="formTaxisKm" #formDirective="" id="formTaxisKm">
+                                        <div class="modal-body p-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                            <mat-label style="font-size: 16px;">Kilometraje</mat-label>
+                                                            <input required formControlName="km" matInput type="number" id="documento" />
+                                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                    <div class="d-flex flex-wrap gap-2" style="margin-top: 10px;">
+                                                        <button type="submit" class="btn btn-primary"><i class="uil uil-save"></i></button>
+                                                        <button type="button" (click)="updateTaxiKm()" class="btn btn-warning"><i class="uil uil-redo"></i></button>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap table-check">
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col"># Placa</th>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col" class="text-center">Soat</th>
+                                        <th scope="col" class="text-center">Tecno</th>
+                                        <th scope="col" class="text-center">KM</th>
+                                        <th scope="col">Turnos</th>
+                                        <th style="width: 80px; min-width: 80px;">Acciones</th>
+                                    </tr>
+                                    <!-- end tr -->
+                                </thead>
+                                <!-- end thead -->
+                                <tbody *ngFor="let item of taxisList; let i = index;">
+                                    <tr>
+
+                                        <td>
+                                            {{item.taxi.placa | uppercase }}
+                                        </td>
+                                        <td> {{item.taxi.modelo }}</td>
+                                        <td class="text-center"> {{item.taxi.soat | diffTime }}</td>
+                                        <td class="text-center"> {{item.taxi.tecno | diffTime }}</td>
+                                        <td class="text-center"> - {{item.taxi.km_fin - item.taxi.km }} KM</td>
+
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <div class="row" *ngFor="let t of item.turnos; let i = index;">
+                                                    <div class="col-md-6">
+                                                        <a href="javascript:;" (click)="editarTurno(t)" class="badge badge-soft-primary" data-bs-toggle="modal" data-bs-target="#addTurnoModal" style="margin-bottom: 10px;">{{t.turno | uppercase}}</a>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- <a href="#" class="badge badge-soft-primary">illustrator</a> -->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="uil uil-ellipsis-h"></i>
+                                            </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a data-bs-toggle="modal" data-bs-target="#addContactModal" class="dropdown-item" href="javascript:;" (click)="editarTaxi(item)">Editar</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:;" (click)="crearTurnos(item.taxi.id_taxi)" data-bs-toggle="modal" data-bs-target="#addTurnoModal">Agregar turno</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:;" (click)="registrarKilometraje(item.taxi.id_taxi,item.taxi.km,item.taxi.km_fin)" data-bs-toggle="modal" data-bs-target="#addKmModal">Kilometraje</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- end tr -->
+
+                                </tbody>
+                                <!-- end tbody -->
+                            </table>
+                            <!-- end table -->
+                        </div>
+                        <!-- end table responsive -->
+
+
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

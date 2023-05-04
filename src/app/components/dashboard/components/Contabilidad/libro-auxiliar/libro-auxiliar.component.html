@@ -1,0 +1,232 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="invoce-title">
+                          <div class="float-end font-size-15 ">
+                              <button (click)="imprimir()" style="margin-right: 10px;" type="button" class="btn btn-outline-danger mb-4" (click)="null">
+                                  <i class="squire ico-pdf"></i>&nbsp; Exportar pdf
+                              </button>
+                              <button type="button"  class="btn btn-outline-primary mb-4">
+                                <i class="squire ico-excel"></i>&nbsp; Exportar excel
+                              </button>
+                          </div>
+                          <div class="mb-4">
+                              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                          </div>
+                            <!-- <div class="text-muted">
+                                <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
+                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                                <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                            </div> -->
+                      </div>
+
+                      
+                      <div class="row">
+                        <p-divider [text]="'LIBRO AUXILIAR'" [align]="'left'"></p-divider>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                  <mat-label style="font-size: 16px;">CUENTA</mat-label>
+                                    <mat-select [(ngModel)]="cuentaContable" required   style="text-align: center;">
+            
+                                        <mat-option>
+                                            <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                            </ngx-mat-select-search>
+                                        </mat-option>
+            
+                                        <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                            <mat-option *ngFor="let c of group.cuentas" [value]="c.codigo">
+                                              {{c.codigo }} - {{ c.nombre}}
+                                            </mat-option>
+                                        </mat-optgroup>
+                                    
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                          <div class="form-group d-flex aling-items-center">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                                  <mat-label style="font-size: 18px;">Tercero</mat-label>
+                                  <mat-select  [(ngModel)]="tercero" placeholder="Seleccionar tercero">
+                                      <mat-option>
+                                          <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                              placeholderLabel="Buscar tercero" noEntriesFoundLabel="No hay resultados">
+                                              <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                          </ngx-mat-select-search>
+                                      </mat-option>
+                                      <mat-option style="text-align: center;" value="0" >
+                                         TODOS LOS TERCEROS
+                                      </mat-option>
+                                      <mat-option *ngFor="let t of filtroTerceros | async" [value]="t.id" >
+                                          {{t.nombreComercial}}
+                                      </mat-option>
+      
+                                      
+                                  </mat-select>
+                           
+                              </mat-form-field>
+                              
+      
+                          </div>
+                         
+                      </div>
+
+
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <mat-form-field class="example-form-field" appearance="outline">
+                              <mat-label>Fechas</mat-label>
+                              <mat-date-range-input
+                               
+                                [rangePicker]="campaignOnePicker">
+                                <input matStartDate placeholder="Fecha inicial" [(ngModel)]="inicio" >
+                                <input matEndDate placeholder="Fecha final" [(ngModel)]="fin" >
+                              </mat-date-range-input>
+                              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                              <a matSuffix mat-icon-button aria-label="Clear"  (click)="campaignOnePicker.open()">
+                                <mat-icon color="primary">calendar_month</mat-icon>
+                              </a>
+                              <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                            </mat-form-field>
+            
+                          </div>
+                        </div>
+                        <div class="col-md-1" >
+                            <a mat-fab color="primary" (click)="Consultar()">
+                              <mat-icon class="text-white">search</mat-icon>
+                            </a>
+                          <!-- <button  mat-raised-button color="primary">Consultar</button> -->
+                        </div>
+                      </div>
+                      
+                      <div class="row" *ngIf="this.libro?.length > 0">
+                        <div class="col-md-3">
+                          <div class="card">
+                              
+                            <div class="card-header">
+                              <div class="row">
+                                <p-divider [text]="'SALDO ANTERIOR'"></p-divider>
+                              </div>
+                            </div>
+
+                              
+                                <div class="row">
+                                  <P class="font-size-20 text-center">
+                                    {{this.saldoAnterior| currency}}
+                                  </P>
+                                </div>
+                             
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="card">
+                              
+                            <div class="card-header">
+                              <div class="row">
+                                <p-divider [text]="'SALDO ACTUAL'"></p-divider>
+                              </div>
+                            </div>
+
+                              
+                                <div class="row">
+                                  <P class="font-size-20 text-center">
+                                    {{this.saldoActual| currency}}
+                                  </P>
+                                </div>
+                             
+                          </div>
+                        </div>
+                      </div>
+
+                   
+
+
+                          
+                      <div class="row">
+                          <table style="width:100%"id="Tablelibro" class="table  table-responsive align-middle table-normal table-centered mb-0">
+                              <thead>
+                                  <tr>
+                                      <th style="white-space: nowrap;" width="auto" class="text-center">
+                                        <a type="button" class="btn position-relative" style="padding: 0; color: #fff; font-size: 16px; font-weight: bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <i class="fas fa-search"></i>
+                                        </a>
+                                        &nbsp;
+                                        &nbsp;
+                                        &nbsp;
+                                        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu">
+                                          <div class="input-group">
+                                              <input type="search" placeholder="Buscar " aria-describedby="button-addon1" class="form-control border-0 bg-light" [(ngModel)]="txtBuscar" (ngModelChange)="table.search($event).draw();">
+                                              <div class="input-group-append">
+                                                  <a id="button-addon1" type="button" class="btn btn-link text-primary"><i class="fa fa-search color-primary"></i></a>
+                                              </div>
+                                        </div>
+                                      </div>
+                                      </th>
+                                      <th style="white-space: nowrap;" width="auto" class="text-center">ASIENTO</th>
+                                      <th style="white-space: nowrap;" width="auto" >TIPO</th>
+                                      <th style="white-space: nowrap;" width="auto" >DOC. REFERENCIA</th>
+                                      <th width="40%" style="white-space: nowrap;">TERCERO &nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                
+                                      <th style="white-space: nowrap;" width="auto" class="text-center">CUENTA</th>
+                                      <th style="white-space: nowrap;" width="auto" class="text-center">FECHA</th>
+                              
+                                      <th style="white-space: nowrap;" width="auto" class="text-end">DÉBITO</th>
+                                      <th style="white-space: nowrap;" width="auto" class="text-end">CRÉDITO</th>
+                                      <th style="white-space: nowrap;" width="auto" class="text-end">SALDO</th>
+                                      <th width="auto" class="text-center">CONCEPTO</th>
+                                      
+                                  </tr>
+                              </thead><!-- end thead -->
+                              
+                          </table><!-- end table -->
+                      </div><!-- end table responsive -->
+                      
+                    
+                   
+                  </div>
+
+                 
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+  </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

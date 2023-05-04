@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+    <ng-container>
+
+        <!-- animated -->
+        <div class="col-md-12">
+
+            <div class="row justify-content-center">
+                <div class="mb-3">
+
+                    <input #fileInput (change)="change($event)" accept=".png,.jpg,jpeg,.xlsx,.pdf,.docx" class="form-control" type="file" id="formFile">
+                </div>
+                <!-- <img src="./assets/theme/img/input-file.png" class="well drop-zone" alt="foto" matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()" style="width: 170px; height: 200px">
+                <input type="file" hidden #fileInput (change)="change($event)" accept=".png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br> -->
+                <!-- <div class="progess">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) +'%'">
+
+                    </div>
+                </div> -->
+
+            </div>
+
+
+        </div>
+        <br>
+    </ng-container>
+
+</div>
+<input #imageUser type="text" id="imageUser" style="display: none;">

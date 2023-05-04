@@ -1,0 +1,35 @@
+<form (submit)="guardar()" [formGroup]="formForma" #formDirective="" id="formForma">
+  <div class="modal-body">
+
+      <div class="row">
+        
+          <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Nombre</mat-label>
+                  <input required formControlName="nombre" matInput type="text" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                      <mat-label style="font-size: 16px;">Plazo(Dias)</mat-label>
+                      <input  formControlName="plazo" matInput type="number" id="plazo" />
+                      <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                  </mat-form-field>
+              </div>
+          </div>
+         
+
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="this.resetformForma()">Cancelar</button>
+      <button type="submit" [disabled]="formForma.invalid" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

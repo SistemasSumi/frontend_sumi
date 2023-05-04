@@ -1,0 +1,5 @@
+@import '@angular/material/core/theming/theming';
+$custom-color-primary: md-palette($md-blue);
+$custom-color-accent : md-palette($md-pink, A200, A100, A400);
+$custom-color-warn : md-palette($md-red);
+$custom-theme: md-light-theme($color-primary, $color-accent, $color-warn);

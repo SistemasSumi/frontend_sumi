@@ -1,0 +1,61 @@
+<div class="container_fluid">
+    <div class="forms-container_fluid">
+      <div class="signin-signup">
+        <form (submit)="Login()"  [formGroup]="form" class="sign-in-form">
+            <img style="margin-right:10px" src="assets/images/Logo_a_claro.png" alt="icono" width="200px" height="auto">
+
+          <!-- <h4 class="title">INGRESAR</h4> -->
+          <div class="input-field">
+            <i class="fas fa-user text-primary"></i>
+            <input toUppercase formControlName="Correo" matInput  type="text" placeholder="Usuario" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock text-primary"></i>
+            <input formControlName="Password" matInput [type]="typePassword" placeholder="Contraseña" />
+            <i (click)="changeInput()" style="cursor: pointer;" [class]="iconoPassword +' text-primary'"></i>
+            
+        </div>
+          <mat-checkbox color="primary" formControlName="recordarPassword" class="text-primary">Recordarme</mat-checkbox>
+          
+          <input  type="submit"  value="ENTRAR" class="btn solid" />
+
+          <p class="social-text"></p>
+          <div class="social-media">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </form>
+     
+      </div>
+    </div>
+
+    <div class="panels-container_fluid">
+      <div class="panel left-panel">
+        <div class="content">
+        <img style="margin-bottom :10px" src="assets/images/logoSimple.png" alt="icono" width="40%" height="auto">
+
+          <h3 style="color:#fff;">SUMIPROD DE LA COSTA S.A.S.</h3>
+            
+          <h6 style="color:#fff;">
+             COMPROMETIDOS CON LA SALUD 
+          </h6>
+         
+        </div>
+        <img src="assets/images/log.svg" class="image" alt="" />
+      </div>
+      
+    </div>
+  </div>
+
+
+<!--  -->

@@ -1,0 +1,66 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="invoice-title">
+                          <!-- <h4 class="float-end font-size-15">Invoice #DS0204 </h4> -->
+                          <div class="mb-4">
+                              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                          </div>
+                          <!-- <div class="text-muted">
+                              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>Sumiprod de la costa S.A.S. </strong> </p>
+                              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                          </div> -->
+                      </div>
+
+            
+
+                      <div class="row">
+                        <p-divider [text]="'HISTORIAL DEL PRODUCTO'" [align]="'left'"></p-divider>
+                      </div>
+                      <div class="row">
+                        <ng-container *ngIf="mostrarKardex == true">
+                          <app-kardex [listado]="kardex"></app-kardex>
+                        </ng-container>
+                      </div>
+                      <!-- end row -->
+                    
+                    
+                  </div>
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+  </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

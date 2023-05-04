@@ -1,0 +1,54 @@
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    /* height: 350px; */
+    min-height: 350px;
+    max-height: 350px;
+  }
+
+
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  /* background: rgb(175, 174, 174); */
+  color: #fff;
+  z-index:4;
+}
+/* .example-right-align {
+    text-align: right;
+  } */
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+
+.table-scroll tbody,
+.table-scroll tbody th,
+.table-scroll tbody td {
+  height: auto;
+}
+
+
+
+.table-scroll thead,
+.table-scroll thead th,
+.table-scroll thead td {
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  
+    color: #fff;
+    z-index:4;
+
+    color: #fff;
+
+    background-color: #41B6FF; 
+}

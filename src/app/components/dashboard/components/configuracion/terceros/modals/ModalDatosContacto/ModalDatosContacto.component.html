@@ -1,0 +1,99 @@
+
+<div class="modal-body">
+  <form (submit)="guardar()" [formGroup]="formContacto" #formDirective="" id="formContacto">
+
+    <div class="row">
+      
+        <div class="col-md-2">
+          <div class="form-group">    
+              <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Tipo de contacto</mat-label>
+                  <mat-select formControlName="tipo">    
+                      <mat-option value="CONTABILIDAD">CONTABILIDAD</mat-option>
+                      <mat-option value="FACTURACION">FACTURACION</mat-option>
+                      <mat-option value="COMPRAS">COMPRAS</mat-option>
+
+                      
+                  </mat-select>
+              </mat-form-field>
+
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">Persona de contacto</mat-label>
+              <input  required formControlName="nombre" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+      </div> 
+      <div class="col-md-2">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">Telefono</mat-label>
+              <input  required formControlName="telefono" matInput type="text" id="" />
+            </mat-form-field>
+          </div>
+      </div> 
+      <div class="col-md-4">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Correo de contacto</mat-label>
+            <input  required formControlName="correo" matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+    </div>  
+      <div class="col-md-1">
+        <button style="margin-top: 15px;" type="submit" [disabled]="formContacto.invalid" class="btn btn-primary">Agregar</button>
+
+      </div>  
+        
+       
+        
+
+    </div>
+  </form>
+
+</div>
+
+
+
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="row">
+      <p-divider [text]="'CONTACTOS'" [align]="''"></p-divider>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table mb-0">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="text-center">TIPO</th>
+                        <th class="text-center">PERSONA</th>
+                        <th class="text-center">TELÉFONO</th>
+                        <th class="text-center">CORREO</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of contactos; let i = index;">
+                        <th scope="row">{{i+1}}</th>
+                        <td class="text-center">{{item.tipo}}</td>
+                        <td class="text-center">{{item.nombre}}</td>
+                        <td class="text-center">{{item.telefono}}</td>
+                        <td class="text-center">{{item.correo}}</td>
+                       
+                    </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+
+</div>

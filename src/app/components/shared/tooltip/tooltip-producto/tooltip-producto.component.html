@@ -1,0 +1,111 @@
+<div class="card" (click)="cerrar()">
+    <div class="card-header border-bottom-0">
+        <h5 class="card-title">INFORMACIÓN DEL PRODUCTO</h5>
+    </div>
+    <div>
+
+        <div class="list-group list-group-flush mb-2">
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Bodega</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.bodega.nombre}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Tipo de producto</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.tipoProducto.nombre}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action" *ngIf="data.invima">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Codigo invima</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.invima}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action" *ngIf="data.cum">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Codigo cum</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.cum}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Unidades</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.stock_inicial}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Valor de compra</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.valorCompra |currency}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">¿ Regulado ?</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.regulado | Boolean}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="list-group-item list-group-item-action" *ngIf="data.regulado">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">¿ Regulado ?</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.valorRegulacion | currency}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+           
+            <a class="list-group-item list-group-item-action" *ngIf="data.impuesto">
+                <div class="d-flex align-items-center">
+                   
+                    <div class="flex-grow-1">
+                        <div>
+                            <h5 class="font-size-14 mb-1">Impuesto</h5>
+                            <p class="font-size-13 text-muted mb-0">{{data.impuesto.nombre}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+           
+        </div>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+@import '~@angular/material/theming';
+@include mat-core();
+// GAMA COLORES
+$my-primary-color:( 50: #e4faff, 100: #bcf2fe, 200: #90eafe, 300: #64e1fe, 400: #42dafd, 500: #21d4fd, 600: #1dcffd, 700: #18c9fc, 800: #14c3fc, 900: #0bb9fc, A100: #ffffff, A200: #f2fbff, A400: #bfecff, A700: #a6e4ff, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #FFF, 500: #FFF, 600: #000000, 700: #000000, 800: #000000, 900: #000000, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$my-accent-color: ( 50: #fffde7, 100: #fff9c4, 200: #fff59d, 300: #fff176, 400: #ffee58, 500: #ffeb3b, 600: #ffe935, 700: #ffe52d, 800: #ffe226, 900: #ffdd19, A100: #ffffff, A200: #fffffd, A400: #fff7ca, A700: #fff2b1, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #000000, 800: #000000, 900: #000000, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$my-accent-color-dark: ( 50: #fff3e0, 100: #ffe0b3, 200: #ffcc80, 300: #ffb74d, 400: #ffa726, 500: #ff9800, 600: #ff9000, 700: #ff8500, 800: #ff7b00, 900: #ff6a00, A100: #ffffff, A200: #fff7f2, A400: #ffd6bf, A700: #ffc5a6, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #000000, 800: #000000, 900: #000000, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$my-warn-color: ( 50: #fee8e7, 100: #fcc7c3, 200: #faa19b, 300: #f77b72, 400: #f65f54, 500: #f44336, 600: #f33d30, 700: #f13429, 800: #ef2c22, 900: #ec1e16, A100: #ffffff, A200: #ffe9e9, A400: #ffb8b6, A700: #ff9f9c, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #ffffff, 600: #ffffff, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+// PALETA DE COLORES
+$my-palette-primary: mat-palette($my-primary-color);
+$my-palette-accent: mat-palette($my-accent-color);
+$my-palette-accent-dark: mat-palette($my-accent-color-dark);
+$my-palette-warn: mat-palette($my-warn-color);
+// TEMA PROPIO
+$my-theme: mat-light-theme(( color: ( primary: $my-palette-primary, accent: $my-palette-accent, warn: $my-palette-warn)));
+$my-theme-dark: mat-dark-theme(( color: ( primary: $my-palette-primary, accent: $my-palette-accent-dark, warn: $my-palette-warn)));
+// APLICAR NUESTRO TEMA A ANGULAR
+.theme-light {
+    @include angular-material-theme($my-theme);
+}
+
+.theme-dark {
+    @include angular-material-theme($my-theme-dark);
+}
+
+.text-white {
+    color: white;
+}
+
+.color-primary {
+    color: #41B6FF;
+}
+
+.btn-primary{
+    background-color: #41B6FF;
+    color: white;
+    border-color: #41B6FF;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: #22BB33;
+    color: white;
+    border-color: #22BB33;
+    font-weight: bold;
+}
+
+.btn-primary:focus{
+    background-color: #22BB33;
+    color: white;
+    border-color: #22BB33;
+    font-weight: bold;
+}
+
+
+.inputGroup {
+    background-color: #fff;
+    display: block;
+    margin: 10px 0;
+    position: relative;
+
+    label {
+      padding: 12px 30px;
+      width: 100%;
+      display: block;
+      text-align: left;
+      color: #3C454C;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: color 200ms ease-in;
+      overflow: hidden;
+
+      &:before {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        content: '';
+        background-color: #5562eb;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale3d(1, 1, 1);
+        transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+        opacity: 0;
+        z-index: -1;
+      }
+
+      &:after {
+        width: 32px;
+        height: 32px;
+        content: '';
+        border: 2px solid #D1D7DC;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+        background-repeat: no-repeat;
+        background-position: 2px 3px;
+        border-radius: 50%;
+        z-index: 2;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        transition: all 200ms ease-in;
+      }
+    }
+
+    input:checked ~ label {
+      color: #fff;
+
+      &:before {
+        transform: translate(-50%, -50%) scale3d(56, 56, 1);
+        opacity: 1;
+      }
+
+      &:after {
+        background-color: #54E0C7;
+        border-color: #54E0C7;
+      }
+    }
+
+    input {
+      width: 32px;
+      height: 32px;
+      order: 1;
+      z-index: 2;
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      visibility: hidden;
+    }
+  }
+
+
+$color-primario: #41B6FF;
+// REEMPLAZA EN ANGULAR.JSON -> STYLES
+// "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+// POR LA RUTA DEL CUSTOM THEME
+// "src/assets/styles/my-theme.scss",

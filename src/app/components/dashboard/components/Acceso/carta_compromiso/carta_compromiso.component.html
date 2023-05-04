@@ -1,0 +1,162 @@
+<div class="main-content">
+
+    <div class="page-content">
+
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">Comercial</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Inventario</a></li>
+
+                                <li class="breadcrumb-item active">Comercial</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <div class="col-xl-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header justify-content-between d-flex align-items-center">
+                            <h4 class="card-title">Registrar Carta de compromiso</h4>
+
+                        </div>
+                        <!-- end card header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="row">
+                                    <form (submit)="Registrar()" [formGroup]="formCartas" #formDirective="" id="formEmployed" style="width: 100%;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                        <mat-label style="font-size: 16px;">Codigo</mat-label>
+                                                        <input formControlName="codigo" matInput type="text" id="codigo" (keyup)="onChangeCodigo($event.target.value)" />
+                                                        <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                        <mat-label style="font-size: 16px;">Producto</mat-label>
+                                                        <mat-select formControlName="producto" style="text-align: center;" (ngModelChange)="onChangeProducto($event)">
+                                                            <ng-container *ngFor="let data of dataProducto$">
+                                                                <mat-option [value]="data.id">{{ data.nombre }}</mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                        <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12" style="margin-bottom: 30px;">
+                                                <div class="form-group">
+                                                    <app-input-image [urlDIR]="urlDIR" [tooltipFoto]="tooltipFoto" [tituloFoto]="tituloFoto" (archivoSeleccionado)="archivoSeleccionado($event)" (TipoArchivoSeleccionado)="TipoArchivoSeleccionado($event)"> </app-input-image>
+                                                    <input formControlName="archivo" matInput type="text" id="foto" style="display:none" />
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="col-md-12">
+                                                <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                                                    <mat-label>Observaciones ...</mat-label>
+                                                    <textarea formControlName="observaciones" matInput placeholder="Ingrese cualquier observación adicional"></textarea>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                        <div class="row" style="padding:10px">
+
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn  float-right btn-save" [disabled]="this.formCartas.invalid">Guardar</button>
+
+                                                <a href="javascript:;" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                            </div>
+                                        </div>
+
+                                        <!-- end wizard-form -->
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <div class="col-xl-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-header justify-content-between d-flex align-items-center">
+                            <h4 class="card-title">Cartas de compromiso</h4>
+
+                        </div>
+                        <!-- end card header -->
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="row">
+                                    <table id="TableCartas" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>CÓDIGO</th>
+                                                <th>PRODUCTO</th>
+                                                <th>ARCHIVO</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+
+
+                <!-- end col -->
+            </div>
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

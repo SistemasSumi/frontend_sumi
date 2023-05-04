@@ -1,0 +1,688 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <h5 class="card-title text-truncate mb-3">Saldos</h5>
+                                <!-- <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addMoviModal" class="btn btn-light float-right"><i class="uil uil-plus me-1"></i>Movimiento</a> -->
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Taxi</th>
+                                        <th scope="col">Efectivo</th>
+                                        <th scope="col">Banco</th>
+                                        <th scope="col" style="width: 25%;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let item of ListTaxisTotales">
+                                        <th scope="row">
+                                            <div class="badge badge-soft-warning font-size-16"> {{item.placa | uppercase }}</div>
+                                        </th>
+                                        <td>{{item.totalEfectivo | currency}}</td>
+                                        <td>{{item.totalBanco | currency}}</td>
+                                        <td>
+                                            <div class="text-success text-nowrap">
+                                                {{item.total | currency}}<i class="uil uil-arrow-up-right text-success ms-1"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr style="background-color:black;">
+                                        <th scope="row">
+                                            <div class="text-white font-size-16"> Total</div>
+                                        </th>
+                                        <td class="text-white">{{this.totalEfectivo | currency}}</td>
+                                        <td class="text-white">{{this.totalBanco | currency}}</td>
+                                        <td>
+                                            <div class="text-success text-nowrap">
+                                                {{this.total | currency}}<i class="uil uil-arrow-up-right text-success ms-1"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end table responsive -->
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <h5 class="card-title text-truncate mb-3">Gastos</h5>
+                                <!-- <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addMoviModal" class="btn btn-light float-right"><i class="uil uil-plus me-1"></i>Movimiento</a> -->
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let item of ListTaxisTotales">
+                                <div class="d-flex align-items-center">
+
+                                    <div class="flex-grow-1">
+                                        <!-- <p class="text-muted mb-1">Taxi</p> -->
+                                        <div class="badge badge-soft-warning font-size-16"> {{item.placa | uppercase }}</div>
+                                    </div>
+                                    <div class="flex-shrink-0 align-self-end">
+
+                                        <div class="text-danger text-nowrap ms-2">{{item.totalEgreso | currency}}<i class="uil uil-arrow-down-right text-danger ms-1"></i></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="background-color: black; color: white">
+                                <div class="d-flex align-items-center">
+
+                                    <div class="flex-grow-1">
+                                        <p class="text-white mb-1 font-size-16"><b> TOTAL</b></p>
+
+                                    </div>
+                                    <div class="flex-shrink-0 align-self-end">
+
+                                        <div class="text-danger text-nowrap ms-2">{{this.totalEgreso | currency}}<i class="uil uil-arrow-down-right text-danger ms-1"></i></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h5 class="card-title">Lista de tarifas <span class="text-muted fw-normal ms-2"></span></h5>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-wrap align-items-start justify-content-md-end mt-2 mt-md-0 gap-2 mb-3">
+
+                                        <div>
+                                            <a href="javascript:;" class="btn btn-light" (click)="mostrarTodos()"><i class="uil uil-eye me-1"></i> Ver todos</a>
+                                        </div>
+
+                                        <!-- end dropdown -->
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addContactModalLabel">Registrar tarifa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form (submit)="guardar()" [formGroup]="formTarifa" #formDirective="" id="formTarifa">
+                                            <div class="modal-body p-4">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Taxi</mat-label>
+                                                                <mat-select required formControlName="taxi" style="text-align: center;" (ngModelChange)="onChangeTaxi($event)">
+                                                                    <ng-container *ngFor="let data of  taxisList">
+                                                                        <mat-option [value]="data.taxi.id_taxi">{{ data.taxi.placa | uppercase }}</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Turno</mat-label>
+                                                                <mat-select required formControlName="turno" style="text-align: center;" (ngModelChange)="onChangeTurno($event)">
+                                                                    <ng-container *ngFor="let data of  turnosActuales">
+                                                                        <mat-option [value]="data.id_turno">{{ data.turno | uppercase }}</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Conductor</mat-label>
+                                                                <mat-select required formControlName="conductor" style="text-align: center;">
+                                                                    <ng-container *ngFor="let data of  ListConductores">
+                                                                        <mat-option [value]="data.id_conductor">{{ data.nombres | uppercase }} {{ data.apellidos | uppercase }}</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                                <mat-label style="font-size: 16px;">Valor recibido</mat-label>
+                                                                <input required formControlName="valor" matInput type="number" id="documento" />
+                                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                                <mat-label>Fecha de la tarifa</mat-label>
+                                                                <input matInput [matDatepicker]="soat" formControlName="fecha_creacion">
+
+                                                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                                                <mat-datepicker-toggle matSuffix [for]="soat"></mat-datepicker-toggle>
+                                                                <mat-datepicker #soat></mat-datepicker>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light w-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary w-sm" [disabled]="formTarifa.invalid">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal -->
+
+                            <div class="modal fade" id="addMoviModal" tabindex="-1" aria-labelledby="addMoviModal" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addContactModalLabel">Registrar Movimiento</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form (submit)="guardarMovi()" [formGroup]="formMovimiento" #formDirective="" id="formMovimiento">
+                                            <div class="modal-body p-4">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Taxi</mat-label>
+                                                                <mat-select required formControlName="taxi" style="text-align: center;">
+                                                                    <ng-container *ngFor="let data of  taxisList">
+                                                                        <mat-option [value]="data.taxi.id_taxi">{{ data.taxi.placa | uppercase }}</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Banco</mat-label>
+                                                                <mat-select required formControlName="banco" style="text-align: center;" (ngModelChange)="onChangeTurno($event)">
+                                                                    <ng-container *ngFor="let data of  bancos">
+                                                                        <mat-option [value]="data.nombre">{{ data.nombre | uppercase }}</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Tipo</mat-label>
+                                                                <mat-select required formControlName="tipo" style="text-align: center;">
+                                                                    <ng-container>
+                                                                        <mat-option value="Ingreso">Ingreso</mat-option>
+                                                                        <mat-option value="Egreso">Egreso</mat-option>
+                                                                    </ng-container>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                                <mat-label style="font-size: 16px;">Valor recibido</mat-label>
+                                                                <input required formControlName="valor" matInput type="number" id="documento" />
+                                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                                <mat-label style="font-size: 16px;">Concepto</mat-label>
+                                                                <textarea required formControlName="concepto" matInput></textarea>
+
+                                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light w-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary w-sm" [disabled]="formMovimiento.invalid">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="this.ListTarifasPagadas">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-check">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col" style="text-align:center;">Taxi</th>
+                                                <th scope="col" style="text-align:center;">Turno</th>
+                                                <th scope="col" class="text-center">Fecha</th>
+                                                <th scope="col">Conductor</th>
+                                                <th scope="col">Tarifa</th>
+                                                <th scope="col">Recibido</th>
+                                                <th scope="col">saldo</th>
+                                                <th style="width: 80px; min-width: 80px;">Acciones</th>
+                                            </tr>
+                                            <!-- end tr -->
+                                        </thead>
+                                        <!-- end thead -->
+                                        <tbody *ngFor="let item of ListTarifasPagadas | pag:page:search">
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="badge badge-soft-warning font-size-16"> {{item.taxi.placa | uppercase }}</div>
+
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    <div class="badge badge-soft-primary font-size-16"> {{item.turno.turno | uppercase}}</div>
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="font-size-16"> {{item.fecha_creacion | datetime | uppercase}}</div>
+
+                                                </td>
+                                                <td>
+                                                    <img src="https://posgrado.emi.edu.bo/images/Autoridades/avatar.jpg" alt="" class="avatar-sm rounded-circle me-2">
+                                                    <a class="text-body fw-medium">{{item.conductor.nombres  }} {{item.conductor.apellidos }}</a>
+                                                </td>
+                                                <td>{{item.turno.tarifa | currency}}</td>
+                                                <td>{{item.valor | currency }}</td>
+                                                <td>
+                                                    {{item.saldo | currency }}
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="uil uil-ellipsis-h"></i>
+                                                    </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li><a class="dropdown-item" href="javascript:;" (click)="eliminarTarifa(item.id_tarifa)">Eliminar</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- end tr -->
+
+                                            <!-- end tr -->
+                                        </tbody>
+                                        <!-- end tbody -->
+                                    </table>
+                                    <!-- end table -->
+                                </div>
+                                <!-- end table responsive -->
+
+                                <div class="row g-0 text-center text-sm-start">
+                                    <div class="col-sm-6">
+                                        <div>
+                                            <p style="vertical-align: inherit;">Mostrando del {{page+1}} al {{page + 5}} de {{this.ListTarifasPagadas.length}} registros</p>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="col-sm-6" *ngIf="this.ListTarifasPagadas.length > 5">
+                                        <ul class="pagination pagination-rounded justify-content-center justify-content-sm-end mb-sm-0">
+                                            <li class="page-item active">
+                                                <button (click)="prevPage()" class="page-link"><i class="mdi mdi-chevron-left"></i></button>
+                                            </li>
+
+                                            <li class="page-item active">
+                                                <button (click)="nextPage()" [disabled]="( ListTarifasPagadas | pag:page:search).length === 0" class="page-link"><i class="mdi mdi-chevron-right"></i></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!this.ListTarifasPagadas">
+                                <div class="text-center">
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-primary m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+
+                                </div>
+                            </ng-container>
+
+
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <h5 class="card-title">Lista de tarifas <span class="text-muted fw-normal ms-2">(saldo pendiente)</span></h5>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                            <!-- Modal -->
+
+                            <!-- end modal -->
+
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-check">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col" style="text-align:center;">Taxi</th>
+                                            <th scope="col" style="text-align:center;">Turno</th>
+                                            <th scope="col" class="text-center">Fecha</th>
+                                            <th scope="col">Conductor</th>
+                                            <th scope="col">Tarifa</th>
+                                            <th scope="col">Recibido</th>
+                                            <th scope="col">saldo</th>
+                                            <th style="width: 80px; min-width: 80px;">Acciones</th>
+                                        </tr>
+                                        <!-- end tr -->
+                                    </thead>
+                                    <!-- end thead -->
+                                    <tbody *ngFor="let item of ListTarifasSaldo">
+                                        <tr>
+                                            <td style="text-align:center;">
+                                                <div class="badge badge-soft-warning font-size-16"> {{item.taxi.placa | uppercase }}</div>
+
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div class="badge badge-soft-primary font-size-16"> {{item.turno.turno | uppercase}}</div>
+
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="font-size-16"> {{item.fecha_creacion | datetime | uppercase}}</div>
+
+                                            </td>
+                                            <td>
+                                                <img src="https://posgrado.emi.edu.bo/images/Autoridades/avatar.jpg" alt="" class="avatar-sm rounded-circle me-2">
+                                                <a class="text-body fw-medium">{{item.conductor.nombres  }} {{item.conductor.apellidos }}</a>
+                                            </td>
+                                            <td>{{item.turno.tarifa | currency}}</td>
+                                            <td>{{item.valor | currency }}</td>
+                                            <td>
+                                                {{item.saldo | currency }}
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="uil uil-ellipsis-h"></i>
+                                                </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                        <!-- <li><a class="dropdown-item" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addContactModal" (click)="editarConductor(item)">Editar</a></li> -->
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- end tr -->
+
+                                        <!-- end tr -->
+                                    </tbody>
+                                    <!-- end tbody -->
+                                </table>
+                                <!-- end table -->
+                            </div>
+                            <!-- end table responsive -->
+
+                            <div class="row g-0 text-center text-sm-start">
+                                <div class="col-sm-6">
+
+                                </div>
+                                <!-- end col -->
+
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+        </div>
+
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <div class="botonFlotante">
+        <input type="checkbox" id="btn-mas" (click)="mostrarAyudas()">
+        <div class="redes">
+            <a href="#" data-bs-toggle="modal" matTooltipClass="custom-tooltip" data-bs-target="#addContactModal" class="fas fa-taxi" style="font-size: 24px;" #tooltipTarifa="matTooltip" matTooltip="Registrar tarifa" matTooltipPosition="left"></a>
+            <a href="#" data-bs-toggle="modal" matTooltipClass="custom-tooltip" data-bs-target="#addMoviModal" style="font-size: 24px;" class="fas fa-money-check-alt" #tooltipMovi="matTooltip" matTooltip="Registrar movimiento" matTooltipPosition="left"></a>
+
+        </div>
+        <div class="btn-mas" #tooltip="matTooltip" matTooltipClass="custom-tooltip" matTooltip="Pulse aqui para mostrar Acciones.." matTooltipPosition="left">
+            <label for="btn-mas" class="fa fa-plus"></label>
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<ng-template #ReportePdf let-modal>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container" id="reporte">
+        <div class="col-md-12">
+            <div class="invoice">
+                <!-- begin invoice-company -->
+                <div class="invoice-company text-inverse f-w-600" style="cursor:pointer;" (click)="downloadPDF()">
+                    Sarp, taxis
+                </div>
+                <!-- end invoice-company -->
+                <!-- begin invoice-header -->
+                <div class="invoice-header">
+                    <div class="invoice-from">
+                        <strong class="text-inverse m-t-5">Taxi</strong>
+                        <address class="m-t-5 m-b-5">
+                      <strong class="text-inverse">Placa: # {{moviReport.taxi.placa}}</strong><br>
+                      Modelo: {{moviReport.taxi.modelo}}<br>
+                   </address>
+                    </div>
+                    <div class="invoice-to">
+                        <small></small>
+                        <address class="m-t-5 m-b-5">
+                      <strong class="text-inverse"> </strong><br>
+                    <br>
+                    <br>
+                    <br>
+                   </address>
+                    </div>
+                    <div class="invoice-date">
+                        <ng-container *ngIf="moviReport.tipo == 'Ingreso'">
+                            <strong class="text-inverse m-t-5"> Comprobante de ingreso</strong>
+                        </ng-container>
+                        <ng-container *ngIf="moviReport.tipo == 'Egreso'">
+                            <strong class="text-inverse m-t-5">
+                            Comprobante de egreso
+                        </strong>
+                        </ng-container>
+
+                        <div class="date text-inverse m-t-5">{{currentDay | datetime | uppercase}}</div>
+                        <div class="invoice-detail">
+                            Movimiento #:{{moviReport.id_movimeinto | ceros}}
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <!-- end invoice-header -->
+                <!-- begin invoice-content -->
+                <div class="invoice-content">
+                    <!-- begin table-responsive -->
+                    <div class="table-responsive">
+                        <table class="table table-invoice">
+                            <thead>
+                                <tr>
+                                    <th>Concepto / Fecha</th>
+                                    <th class="text-center" width="10%"></th>
+                                    <th class="text-center" width="10%">Banco</th>
+
+                                    <th class="text-center" width="10%">Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <small>{{this.moviReport.concepto}}</small><br>
+                                        <span class="text-inverse">{{this.moviReport.fecha | datetime}}</span></td>
+
+                                    <td>
+
+                                    </td>
+                                    <td class="text-center"> {{this.moviReport.banco}}</td>
+                                    <td class="text-right"> {{this.moviReport.valor | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table-responsive -->
+                    <!-- begin invoice-price -->
+                    <div class="invoice-price">
+                        <div class="invoice-price-left">
+                            <div class="invoice-price-row">
+                                <div class="sub-price">
+                                    <small></small>
+                                    <span class="text-inverse"></span>
+                                </div>
+                                <div class="sub-price">
+
+                                </div>
+                                <div class="sub-price">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-price-right">
+                            <small>TOTAL</small> <span class="f-w-600">{{this.moviReport.valor | currency}}</span>
+                        </div>
+                    </div>
+                    <!-- end invoice-price -->
+                </div>
+                <!-- end invoice-content -->
+                <!-- begin invoice-note -->
+                <div class="invoice-note">
+                    <!-- * Make all cheques payable to [Your Company Name]<br> * Payment is due within 30 days<br> * If you have any questions concerning this invoice, contact [Name, Phone Number, Email] -->
+                </div>
+                <!-- end invoice-note -->
+                <!-- begin invoice-footer -->
+                <div class="invoice-footer">
+                    <p class="text-center m-b-5 f-w-600">
+
+                    </p>
+                    <p class="text-center">
+
+                    </p>
+                </div>
+                <!-- end invoice-footer -->
+            </div>
+        </div>
+    </div>
+</ng-template>

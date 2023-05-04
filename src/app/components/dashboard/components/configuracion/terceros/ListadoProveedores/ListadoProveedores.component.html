@@ -1,0 +1,130 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="row">
+        <div class="card">
+          <div class="card-body">
+              <div class="row align-items-start">
+                  
+               
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                        <table id="TableTerceros" class="table table-striped  table-bordered" style="width:100%">
+                      <thead>
+
+                        <tr>
+                          <th style="width: 3%;text-align: center;">
+
+                          </th>
+                          <th style="white-space: nowrap; width: auto">Tipo documento</th>
+                          <th style="width: auto">Documento</th>
+                          <th style="white-space: nowrap; width: 60%">Razon social - Nombre comercial</th>
+                          <th style="white-space: nowrap; width: 5%;">Dirección de contacto</th>
+                          <th style="white-space: nowrap; width: auto;">Departamento</th>
+                          <th style="white-space: nowrap; width: auto">Municipio</th>
+                          <th style="white-space: nowrap; width: auto">Telefono</th>
+                          <th style="white-space: nowrap; width: 5%;">Forma de pago</th>
+                          <th style="white-space: nowrap; width: 5%;">Contacto</th>
+                          <th style="width: auto;">Correo</th>
+                          
+                          <th style="white-space: nowrap; width: 5%;">Tipo de persona</th>
+                          <th style="white-space: nowrap; width: 5%;">Regimen</th>
+                          <th style="white-space: nowrap; width: 5%;">Obligaciones</th>
+                          <th style="white-space: nowrap; width: auto;">Matricula</th>
+                          <th style="white-space: nowrap; width: auto;">Codigo postal</th>
+                          <th style="white-space: nowrap; width: auto">Contabilidad</th>
+                          <th style="white-space: nowrap; width: auto">Compras</th>
+
+
+                          <th style="width: 5%;text-align: center;">
+                              <a type="button" class="btn position-relative" style="padding: 0; color: #fff; font-size: 16px; font-weight: bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fas fa-search"></i>
+                              </a>
+                              <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu">
+                                  <div class="input-group">
+                                      <input type="search" placeholder="Buscar en Terceros" aria-describedby="button-addon1" class="form-control border-0 bg-light" [(ngModel)]="txtbuscarTercero" (ngModelChange)="table.search($event).draw();">
+                                      <div class="input-group-append">
+                                          <a id="button-addon1" type="button" class="btn btn-link text-primary"><i class="fa fa-search color-primary"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </th>
+                      </tr>
+                        
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                  </table>
+                </div>
+
+              
+              </div>
+
+
+
+
+              <!-- end row -->
+          </div>
+          <!-- end card body -->
+      </div>
+    </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto. Sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+
+<ng-template #contentDescuentos let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Registrar plazos descuentos(Pronto pago)</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalDescuento()"></button>
+	</div>
+   <app-ModalDescuentoProveedor (resultado)="cerrarModalDescuento()" [idProveedor]="this.idProveedor" ></app-ModalDescuentoProveedor>
+</ng-template>
+
+<ng-template #contentRetenciones let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Retenciones</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalRetencion()"></button>
+	</div>
+   <app-ModalRetencionProveedor [idProveedor]="this.idProveedor"  ></app-ModalRetencionProveedor>
+</ng-template>
+
+
+<ng-template #contentContactos let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Libreta de contactos</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalContactos()"></button>
+	</div>
+   <app-ModalDatosContacto [idProveedor]="this.idProveedor"  ></app-ModalDatosContacto>
+</ng-template>
+
+
+<ng-template #contentBancos let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Lista de bancos</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalBancos()"></button>
+	</div>
+   <app-ModalDatosBancarios [idProveedor]="this.idProveedor"  ></app-ModalDatosBancarios>
+</ng-template>

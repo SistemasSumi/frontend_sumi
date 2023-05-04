@@ -1,0 +1,117 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <!-- <ol class="breadcrumb float-xl-right">
+      <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+  </ol> -->
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <!-- <h1 class="page-header mb-3">Sumiprod de la Costa
+      <small>Comprometidos con la salud</small>
+  </h1> -->
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <div class="row float-lg-right">
+        <button type="button" class="btn btn-outline-primary">
+        Cerrar Caja
+      </button>
+    </div>
+
+    <div class="caja">
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="widget widget-stats bg-indigo">
+                    <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+                    <div class="stats-content">
+                        <h2 class="stats-title">Caja N° {{dataCaja.data.caja.idCaja}}</h2>
+                        <hr class="bg-white bg-opacity-50">
+                        <div class="stats-number">{{dataCaja.data.caja.saldoActual | currency}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="widget widget-stats bg-green">
+                    <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+                    <div class="stats-content">
+                        <h2 class="stats-title">BANCOLOMBIA</h2>
+                        <hr class="bg-white bg-opacity-50">
+                        <div class="stats-number">{{dataCaja.data.banco | currency}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- begin col-6 -->
+            <div class="col-xl-4 col-lg-6" *ngFor="let data of dataBarber">
+
+                <div class="card border-0 mb-3 bg-gray-900 text-white">
+
+                    <div class="card-body" style="background: no-repeat bottom right; background-image: url(../assets/theme/img/svg/logo.jpg); background-size: auto 100%; background-color: black;">
+
+                        <div class="mb-3 text-gray-500 ">
+                            <b>{{data.barbero.nombres }} </b>
+                            <span class="text-gray-500 ms-2"><i class="fa fa-info-circle" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sales by social source" data-bs-placement="top" data-bs-content="Total online store sales that came from a social referrer source." data-bs-original-title="" title=""></i></span>
+                        </div>
+
+
+                        <h3 class="mb-10px"><span>{{data.totalBarbero}}</span></h3>
+
+
+                        <!-- <div class="text-gray-500 mb-1px"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="45.76">45.76</span>% increased</div> -->
+
+                    </div>
+
+
+                    <div class="widget-list rounded-bottom dark-mode">
+
+                        <a href="#" class="widget-list-item rounded-0 pt-3px" *ngFor="let cortes of data.cortes; let i = index">
+
+                            <div class="widget-list-content">
+                                <div class="widget-list-title">{{data.cortes[i].idServicio.nombres}}</div>
+                            </div>
+                            <div class="widget-list-action text-nowrap text-gray-500">
+                                <span>{{data.cortes[i].total | currency}}</span>
+                            </div>
+                        </a>
+
+
+                    </div>
+                    <div class="widget-list rounded-bottom dark-mode">
+                        <a href="#" class="widget-list-item rounded-0 pt-3px">
+                            <a href="#" class="widget-list-item rounded-0 pt-3px" style="background-color: #2D353C;">
+
+                                <div class="widget-list-content">
+                                    <div class="widget-list-title text-white"><b> TOTAL </b></div>
+                                </div>
+                                <div class="widget-list-action text-nowrap text-white">
+                                    <span> <b>{{data.total | currency}}</b></span>
+                                </div>
+                            </a>
+
+                        </a>
+
+                    </div>
+
+                </div>
+                <!-- end col-6 -->
+
+                <!-- begin col-6 -->
+                <!-- end col-6 -->
+            </div>
+            <!-- end row -->
+            <!-- begin row -->
+            <!-- end row -->
+            <!-- begin row -->
+
+            <!-- end row -->
+        </div>
+    </div>
+
+
+
+
+</div>
+<!-- end #content -->

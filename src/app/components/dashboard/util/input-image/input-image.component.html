@@ -1,0 +1,135 @@
+<div class="row justify-content-center">
+    <ng-container *ngIf="!urlImage">
+
+        <!-- animated -->
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+
+                <div class="col-md-2  col-xs-6" *ngIf="showBar">
+                    <div class="progress rounded-corner m-b-15">
+                        <div class="progress-bar bg-green-darker progress-bar-striped progress-bar-animated" [style.width]="(uploadPercent) + '%'">Cargando Archivo..</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <img src="./assets/theme/img/input-file.png" class="well drop-zone" alt="foto" matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()" style="width: 170px; height: 200px">
+                <input type="file" hidden #fileInput (change)="change($event)" accept=".png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br>
+                <!-- <div class="progess">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) +'%'">
+
+                    </div>
+                </div> -->
+
+            </div>
+
+
+        </div>
+        <br>
+        <div class="col-md-12">
+            <div class="row text-center">
+                <!-- animated -->
+                <h6 style="margin-top:10px"><b>{{obtenerTituloFoto()}}</b> </h6>
+
+            </div>
+
+
+        </div>
+
+
+
+    </ng-container>
+    <ng-container *ngIf="urlImage && TypeImage =='EXCEL'">
+        <div class="col-md-12 ">
+            <div class="row justify-content-center">
+
+                <!-- <img [src]="urlImage" style="width: 170px; height: 200px" class="img-thumbnail"> -->
+                <img src="./assets/theme/iconos/archivos/ecxel.png" style="width: 170px; height: 200px" class="img-thumbnail">
+
+            </div>
+            <div class="row text-center">
+                <!-- animated -->
+                <h6 style="margin-top:10px"><b>{{obtenerTituloFoto()}}</b> </h6>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row text-center justify-content-center">
+                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar foto" matTooltipPosition="right" (click)="urlImage = null; showBar = false;">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="urlImage && TypeImage =='WORD'">
+        <div class="col-md-12 ">
+            <div class="row justify-content-center">
+
+                <!-- <img [src]="urlImage" style="width: 170px; height: 200px" class="img-thumbnail"> -->
+                <img src="./assets/theme/iconos/archivos/word.png" style="width: 170px; height: 200px" class="img-thumbnail">
+
+            </div>
+            <div class="row text-center">
+                <!-- animated -->
+                <h6 style="margin-top:10px"><b>{{obtenerTituloFoto()}}</b> </h6>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row text-center justify-content-center">
+                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar foto" matTooltipPosition="right" (click)="urlImage = null; showBar = false;">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="urlImage && TypeImage =='PDF'">
+        <div class="col-md-12 ">
+            <div class="row text-center justify-content-center">
+
+                <!-- <img [src]="urlImage" style="width: 170px; height: 200px" class="img-thumbnail"> -->
+                <img src="./assets/theme/iconos/archivos/pdf.png" style="width: 170px; height: 200px" class="img-thumbnail">
+
+            </div>
+            <div class="row text-center">
+                <!-- animated -->
+                <h6 style="margin-top:10px"><b>{{obtenerTituloFoto()}}</b> </h6>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row text-center justify-content-center">
+                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar Archvio" matTooltipPosition="right" (click)="urlImage = null; showBar = false;">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="urlImage && TypeImage =='IMG'">
+        <div class="col-md-12 ">
+            <div class="row justify-content-center">
+
+                <img [src]="urlImage" style="width: 170px; height: 200px" class="img-thumbnail">
+                <!-- <img src="./assets/theme/iconos/archivos/pdf.png" style="width: 170px; height: 200px" class="img-thumbnail"> -->
+
+            </div>
+            <div class="row text-center">
+                <!-- animated -->
+                <h4 style="margin-top:10px"><b>{{obtenerTituloFoto()}}</b> </h4>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row text-center">
+                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar Archvio" matTooltipPosition="right" (click)="urlImage = null; showBar = false;">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+
+</div>
+<input #imageUser type="text" id="imageUser" style="display: none;">

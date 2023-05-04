@@ -1,0 +1,361 @@
+{
+    "tiposDocumentos": [
+        {
+            "codigo": "1",
+            "nombre": "Cédula de ciudadanía"
+        },
+        {
+            "codigo": "2",
+            "nombre": "Cédula de extranjería"
+        },
+        {
+            "codigo": "3",
+            "nombre": "Tarjeta de identidad"
+        },
+        {
+            "codigo": "4",
+            "nombre": "Pasaporte"
+        }
+    ],
+    "tiposContrato": [
+        {
+            "codigo": "1",
+            "nombre": "Termino Fijo"
+        },
+        {
+            "codigo": "2",
+            "nombre": "Término Indefinido"
+        },
+        {
+            "codigo": "3",
+            "nombre": "Obra o Labor"
+        },
+        {
+            "codigo": "4",
+            "nombre": "Aprendizaje"
+        },
+        {
+            "codigo": "5",
+            "nombre": "Prácticas"
+        }
+    ],
+    "tipoDeIncapacidad": [
+        {
+            "codigo": "1",
+            "nombre": "Común"
+        },
+        {
+            "codigo": "2",
+            "nombre": "Profesional"
+        },
+        {
+            "codigo": "3",
+            "nombre": "Laboral"
+        }
+
+    ],
+    "tiposDeTrabjador": [
+        {
+            "codigo": 1,
+            "tipo": "Dependiente"
+        },
+        {
+            "codigo": 2,
+            "tipo": "Servicio domestico"
+        },
+        {
+            "codigo": 3,
+            "tipo": "Independiente"
+        },
+        {
+            "codigo": 4,
+            "tipo": "Madre comunitaria"
+        },
+        {
+            "codigo": 12,
+            "tipo": "Aprendices del Sena en etapa lectiva"
+        },
+        {
+            "codigo": 16,
+            "tipo": "Independiente agremiado o asociado"
+        },
+        {
+            "codigo": 18,
+            "tipo": "Funcionarios públicos sin tope máximo de ibc"
+        },
+        {
+            "codigo": 19,
+            "tipo": "Aprendices del SENA en etapa productiva"
+        },
+        {
+            "codigo": 20,
+            "tipo": "Estudiantes (régimen especial ley 789 de 2002)"
+        },
+        {
+            "codigo": 21,
+            "tipo": "Estudiantes de postgrado en salud"
+        },
+        {
+            "codigo": 22,
+            "tipo": "Profesor de establecimiento particular"
+        },
+        {
+            "codigo": 23,
+            "tipo": "Estudiantes aportes solo riesgos laborales"
+        },
+        {
+            "codigo": 30,
+            "tipo": "Dependiente entidades o universidades públicas con régimen especial en salud"
+        },
+        {
+            "codigo": 31,
+            "tipo": "Cooperados o pre cooperativas de trabajo asociado"
+        },
+        {
+            "codigo": 32,
+            "tipo": "Cotizante miembro de la carrera diplomática o consular de un país extranjero o funcionario de organismo multilateral"
+        },
+       
+        {
+            "codigo": 33,
+            "tipo": "Beneficiario del fondo de solidaridad pensional"
+        },
+        {
+            "codigo": 34,
+            "tipo": "Concejal municipal o distrital o edil de junta administrativa local que percibe honorarios amparado por póliza de salud"
+        },
+        
+        {
+            "codigo": 35,
+            "tipo": "Concejal municipal o distrital que percibe honorarios no amparado con póliza de salud"
+        },
+      
+        {
+            "codigo": 36,
+            "tipo": "Concejal municipal o distrital que percibe honorarios no amparado con póliza de salud beneficiario del fondo de solidaridad pensional."
+        },
+      
+        {
+            "codigo": 40,
+            "tipo": "Beneficiario upc adicional"
+        },
+        {
+            "codigo": 41,
+            "tipo": "Beneficiario sin ingresos con pago por tercero"
+        },
+        {
+            "codigo": 42,
+            "tipo": "Cotizante pago solo salud articulo 2 ley 1250 de 2008 (independientes de bajos ingresos)"
+        },
+        {
+            "codigo": 43,
+            "tipo": "Cotizante voluntario a pensiones con pago por tercero"
+        },
+        {
+            "codigo": 44,
+            "tipo": "Cotizante dependiente de empleo de emergencia con duración mayor o igual a un mes"
+        },
+        {
+            "codigo": 45,
+            "tipo": "Cotizante dependiente de empleo de emergencia con duración menor a un mes"
+        },
+        {
+            "codigo": 47,
+            "tipo": "Trabajador dependiente de entidad beneficiaria del sistema general de participaciones - aportes patronales"
+        },
+       
+        {
+            "codigo": 51,
+            "tipo": "Trabajador de tiempo parcial"
+        },
+        {
+            "codigo": 52,
+            "tipo": "Beneficiario del mecanismo de protección al cesante"
+        },
+        {
+            "codigo": 53,
+            "tipo": "Afiliado participe"
+        },
+        {
+            "codigo": 54,
+            "tipo": "Pre pensionado de entidad en liquidación."
+        },
+        {
+            "codigo": 55,
+            "tipo": "Afiliado participe - dependiente"
+        },
+        {
+            "codigo": 56,
+            "tipo": "Pre pensionado con aporte voluntario a salud"
+        },
+        {
+            "codigo": 57,
+            "tipo": "Independiente voluntario al sistema de riesgos laborales"
+        },
+        {
+            "codigo": 58,
+            "tipo": "Estudiantes de prácticas laborales en el sector público"
+        },
+        {
+            "codigo": 59,
+            "tipo": "Independiente con contrato de prestación de servicios superior a 1 mes"
+        },
+        {
+            "codigo": 61,
+            "tipo": "Beneficiario programa de reincorporación"
+        }
+    ],
+    "riegosLaborales": [
+        {
+            "nombre": "Minimo - Riesgo 1",
+            "porcentaje": 0.522
+        },
+        {
+            "nombre": "Bajo - Riesgo 2",
+            "porcentaje": 1.044
+        },
+        {
+            "nombre": "Medio - Riesgo 3",
+            "porcentaje": 2.436
+        },
+        {
+            "nombre": "Alto - Riesgo 4",
+            "porcentaje": 4.350
+        },
+        {
+            "nombre": "Máximo - Riesgo 5",
+            "porcentaje": 6.960
+        }
+    ],
+    "bancos": [
+        {
+            "nombre": "Aportes en Línea"
+        },
+        {
+            "nombre": "Asopagos"
+        },
+        {
+            "nombre": "Banco Agrario de Colombia"
+        },
+        {
+            "nombre": "Banco AV Villas"
+        },
+        {
+            "nombre": "Banco BBVA"
+        },
+        {
+            "nombre": "Banco BCSC"
+        },
+        {
+            "nombre": "Banco Citibank"
+        },
+        {
+            "nombre": "Banco Coopcentral"
+        },
+        {
+            "nombre": "Banco Davivienda"
+        },
+        {
+            "nombre": "Banco de Bogotá"
+        },
+        {
+            "nombre": "Banco de la República"
+        },
+        {
+            "nombre": "Banco de Occidente"
+        },
+        {
+            "nombre": "Banco Falabella"
+        },
+        {
+            "nombre": "Banco Finandina"
+        },
+        {
+            "nombre": "Banco GNB Sudameris"
+        },
+        {
+            "nombre": "Banco Itaú Corpbanca Colombia S.A."
+        },
+        {
+            "nombre": "Banco Mundo Mujer"
+        },
+        {
+            "nombre": "Banco Pichincha"
+        },
+        {
+            "nombre": "Banco Popular"
+        },
+        {
+            "nombre": "Banco Credifinanciera"
+        },
+        {
+            "nombre": "Banco Santander de Negocios Colombia S.A."
+        },
+        {
+            "nombre": "Bancamia S.A."
+        },
+        {
+            "nombre": "Banco Serfinanza"
+        },
+        {
+            "nombre": "Bancoldex"
+        },
+        {
+            "nombre": "Bancolombia"
+        },
+        {
+            "nombre": "Bancoomeva"
+        },
+        {
+            "nombre": "BNP Paribas"
+        },
+        {
+            "nombre": "Coltefinanciera"
+        },
+        {
+            "nombre": "Compensar"
+        },
+        {
+            "nombre": "Confiar Cooperativa Financiera"
+        },
+        {
+            "nombre": "Coofinep Cooperativa Financiera"
+        },
+        {
+            "nombre": "Cooperativa Financiera Cotrafa"
+        },
+        {
+            "nombre": "Cooperativa Financiera de Antioquia"
+        },
+        {
+            "nombre": "Deceval"
+        },
+        {
+            "nombre": "Dirección del Tesoro Nacional  - Regalias"
+        },
+        {
+            "nombre": "Dirección del Tesoro Nacional"
+        },
+        {
+            "nombre": "Enlace Operativo S.A."
+        },
+        {
+            "nombre": "Financiera Juriscoop"
+        },
+        {
+            "nombre": "Banco JP Morgan Colombia"
+        },
+        {
+            "nombre": "Mibanco S.A"
+        },
+        {
+            "nombre": "Red Multibanca Colpatria"
+        },
+        {
+            "nombre": "Simple S.A"
+        },
+        {
+            "nombre": "FOGAFIN"
+        }
+    ]
+}

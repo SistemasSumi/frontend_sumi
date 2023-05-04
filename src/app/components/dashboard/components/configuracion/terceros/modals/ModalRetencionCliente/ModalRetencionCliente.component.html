@@ -1,0 +1,74 @@
+<div class="modal-body">
+    <form (submit)="guardar()" [formGroup]="formRetencion" #formDirective="" id="formRetencion">
+
+      <div class="row">
+        
+          <div class="col-md-6">
+            <div class="form-group">    
+                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                    <mat-label style="font-size: 16px;">Seleccione Retención</mat-label>
+                    <mat-select formControlName="retencion">    
+                        <mat-option *ngFor="let item of ListaRetenciones" [value]="item">{{item.nombre}}</mat-option>
+
+                        
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+        </div>
+        <div class="col-md-4" style="width: 25%;">
+          <div  class="inputGroup" style="background-color: #cecece;">
+              <input  formControlName="fija" id="fija" name="Fija?" type="checkbox"/>
+              <label  for="fija">Fija ?</label>
+          </div>
+        </div>  
+        <div class="col-md-2">
+          <button style="margin-top: 15px;" type="submit" [disabled]="formRetencion.invalid" class="btn btn-primary">Agregar</button>
+
+        </div>  
+          
+         
+          
+
+      </div>
+    </form>
+
+  </div>
+ 
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="row">
+        <p-divider [text]="'LISTADO DE RETENCIONES'" [align]="''"></p-divider>
+      </div>
+
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table mb-0">
+
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Retención</th>
+                          <th class="text-center">Fija</th>
+                          
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of Retenciones">
+                          <th scope="row">{{item.id}}</th>
+                          <td>{{item.retencion.nombre}}</td>
+                          <td class="text-center">{{item.fija | Boolean }}</td>
+                         
+                      </tr>
+                  
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

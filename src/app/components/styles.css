@@ -1,0 +1,136 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr';
+::-webkit-scrollbar {
+    display: none;
+}
+
+::ng-deep .mat-tooltip {
+    /* your own custom styles here */
+    /* e.g. */
+    color: yellow !important;
+}
+
+:root {
+    --color-primario: #41B6FF;
+    --color-primario-light: #b2c6d3;
+}
+
+
+/* html,
+body {
+    height: 100%;
+} */
+
+.toass-success {
+    color: #ffffff;
+    background-color: #3b4db5;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    padding: 10px !important;
+}
+
+
+/* body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+} */
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 99999 !important;
+}
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+.page-header {
+    font-family: 'Dancing Script', cursive;
+} */
+
+
+/* .ck-editor__editable_inline {
+    min-height: 500px important;
+} */
+
+.btn-save {
+    display: inline-block;
+    text-decoration: none;
+    color: #3b4db5;
+    border: 2px solid #3b4db5;
+    transition: .3s linear;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(106, 108, 143, 0.47);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(106, 108, 143, 0.47);
+    box-shadow: 1px 1px 3px 0px rgba(106, 108, 143, 0.47);
+}
+
+.btn-save:hover {
+    background: #3b4db5;
+    color: #f2f2f2;
+}
+
+
+/* html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+} */
+
+.mat-button-toggle-focus-overlay {
+    display: none;
+}
+
+.example-input-label,
+.example-add-tab-button,
+.example-delete-tab-button {
+    margin: 8px;
+}
+
+.example-tab-icon {
+    margin-right: 10px;
+}
+
+::ng-deep .mat-ink-bar {
+    background-color: #3b4db5 !important;
+}
+
+.snackbar {
+    max-width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 1rem !important;
+    padding: 10px !important;
+    background-color: #3b4db5;
+    color: color;
+}
+
+
+
+.mat-button-wrapper {
+    color: black !important;
+}
+
+
+/* Styles for tab labels */
+
+::ng-deep .mat-tab-label {
+    min-width: auto !important;
+    padding: 5px;
+    background-color: transparent;
+    font-weight: 700;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+    height: auto !important;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+    min-width: 200px !important;
+    padding: 5px;
+    color: #1a35cc;
+    font-weight: 700;
+    opacity: 1;
+}

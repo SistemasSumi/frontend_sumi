@@ -1,0 +1,48 @@
+/* 🐞 codyhouse.co */
+.text-divider {
+    --text-divider-gap: 1rem;
+    display: flex;
+    text-align:center;
+    white-space: nowrap;
+    align-items: center;
+    font-size: 0.9375rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1em;
+  }
+  
+  .text-divider::before, .text-divider::after {
+    content: '';
+    height: 1px;
+    background-color: silver;
+    flex-grow: 1;
+  }
+  
+  .text-divider::before {
+    margin-right: var(--text-divider-gap);
+   
+  }
+  
+  .left::before{
+     width:5%;
+  }
+  
+  
+  .left::after{
+    width:100%;
+  }
+  
+  .rigth::before{
+     width:100%;
+  }
+  
+  
+  .rigth::after{
+    width:5%;
+  }
+  
+  
+  .text-divider::after {
+    margin-left: var(--text-divider-gap);
+    
+  }

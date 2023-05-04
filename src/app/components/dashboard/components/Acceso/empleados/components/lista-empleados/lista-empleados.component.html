@@ -1,0 +1,55 @@
+<ng-container *ngIf="!editar">
+    <!-- begin #content -->
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb float-xl-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <h1 class="page-header mb-3">Sumiprod de la Costa
+            <small>Comprometidos con la salud</small>
+        </h1>
+        <!-- end page-header -->
+        <!-- begin daterange-filter -->
+        <!-- end daterange-filter -->
+        <!-- begin row -->
+        <div class="panel panel-inverse animated fadeInDown">
+
+            <div class="panel-heading">
+                <img src="./assets/sigban/login/platanos1.png" width="30" style="margin-right: 10px;">
+                <h4 class="panel-title text-center">INVENTARIO INSTITUCIONAL
+                </h4>
+
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-blue" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-container>
+                    <app-data-table [COLUMNS_DEFS]="COLUMNS_DEFS" [CABEZERA]="CABEZERA" [DATA]="DATA" [NAME]="NAME" [COLUMNS]="Columns" (itemEdit)="editarEmpleado($event)">
+                    </app-data-table>
+
+
+
+                </ng-container>
+
+
+
+            </div>
+        </div>
+        <!-- end row -->
+        <!-- begin row -->
+
+        <!-- end row -->
+        <!-- begin row -->
+
+        <!-- end row -->
+    </div>
+    <!-- end #content -->
+</ng-container>
+<ng-container *ngIf="editar">
+    <app-form-empleados [data]="data"></app-form-empleados>
+</ng-container>

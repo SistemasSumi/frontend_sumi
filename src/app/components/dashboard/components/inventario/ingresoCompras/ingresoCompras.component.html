@@ -1,0 +1,294 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-flex align-items-center justify-content-between">
+                  <h4 class="mb-0">Registrar ingreso</h4>
+
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Inventario</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);" [routerLink]="['/purchaseOrder']">Listado</a></li>
+                        <li class="breadcrumb-item active">Crear nuevo ingreso</li>
+                    </ol>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="invoice-title">
+                          <!-- <h4 class="float-end font-size-15">Invoice #DS0204 </h4> -->
+                          <div class="mb-4">
+                              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                          </div>
+                          <!-- <div class="text-muted">
+                              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>Sumiprod de la costa S.A.S. </strong> </p>
+                              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                          </div> -->
+                      </div>
+
+            
+
+                      <div class="row">
+                        <p-divider [text]="'DATOS DEL INGRESO'" [align]="'left'"></p-divider>
+                      </div>
+                      <!-- end row -->
+                     
+                    <form (submit)="guardarIngreso()" [formGroup]="formIngreso" #formDirective="" id="formIngreso">
+
+
+                    <div class="row">
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Numeración</mat-label>
+                                    <mat-select formControlName="numeracion" required  style="text-align: center;">
+                                        <mat-option *ngFor="let data of numeraciones | async" [value]="data.id">
+                                            {{data.numero}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                         
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 18px;">Proveedores</mat-label>
+                                <mat-select  [disabled]="true" placeholder="Seleccionar proveedor" formControlName="proveedor" >
+                                 
+                                    <mat-option *ngFor="let proveedor of filtroProveedores | async" [value]="proveedor.id" >
+                                        {{proveedor.nombreComercial}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                           
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Factura</mat-label>
+                                        <input required formControlName="factura" matInput type="text" id="factura" />
+                                    </mat-form-field>
+                                </div>
+    
+                            </div>
+                        </div>
+                       
+
+                    </div>
+                    <div class="mb-4 row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Observaciones</mat-label>
+                                    <textarea  formControlName="observacion" matInput placeholder=""></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Fecha</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fecha">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                                  <mat-icon color="primary">calendar_month</mat-icon>
+                                </a>
+                              
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    
+                   
+
+                      <div class="row">
+                        <p-divider [text]="'PRODUCTOS DEL INGRESO'"></p-divider>
+                      </div>
+                      
+                      <div class="py-2">
+                          <h5 class="font-size-15">Detalle del ingreso </h5>
+
+                          <div class="table-responsive">
+                              <table class="table table-responsive align-middle table-normal table-centered mb-0">
+                                  <thead>
+                                      <tr>
+                                          <th width="auto" class="text-center">COD.</th>
+                                          <th width="20%" style="white-space: normal;">PRODUCTO</th>
+                                          <th width="auto" class="text-center">CANT-OC</th>
+                                          <th width="auto" class="text-end">CANT-IN</th>
+                                          <th width="auto" class="text-end">VALOR UND</th>
+                                          <th width="auto" class="text-center">LOTE</th>
+                                          
+                                          <th width="auto" class="text-end">SUBTOTAL</th>
+                                          <th width="auto" class="text-end">DESC %</th>
+                                          <th width="auto" class="text-end">IVA</th>
+                                          <th width="auto" class="text-end">TOTAL</th>
+                                      </tr>
+                                  </thead><!-- end thead -->
+                                  <tbody>
+                                      <tr *ngFor="let item of detalleIngreso; let i = index"  style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                                            <mat-menu #menu="matMenu">
+                                                
+                                                <button *ngIf="item.cantOrden>0" mat-menu-item (click)="addLote(i)"><mat-icon color="primary">add</mat-icon>AÑADIR LOTE</button>
+                                                <button mat-menu-item (click)="editarFila(i,content)"><mat-icon style="color:red;">edit</mat-icon>EDITAR FILA</button>
+                                            </mat-menu>
+
+                                          <th class="text-center">{{item.producto.codigoDeBarra}}</th>
+                                          <td >
+                                            
+                                            {{item.producto.nombreymarcaunico | acortarText:50}}
+                                            
+                                          </td>
+                                          <td class="text-center">{{item.cantOrden}}</td>
+                                          <td class="text-center">{{item.cantidad}}</td>
+                                          <td class="text-end">{{item.valorUnidad | currency }}</td>
+                                          <td class="text-center">{{item.lote}}</td>
+                                        
+                                          <td class="text-end">{{item.subtotal | currency}}</td>
+                                          <td class="text-end">{{item.descuento | currency}}</td>
+                                          <td class="text-end">{{item.iva | currency}}</td>
+                                          <td class="text-end">{{item.total | currency}}</td>
+                                      </tr>
+                                    
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="9" class="text-end">Subtotal:</th>
+                                          <td class="text-end">{{subtotalIngreso | currency}}</td>
+                                      </tr>
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="9" class="border-0 text-end">
+                                              Descuento :</th>
+                                          <td class="border-0 text-end" style="color: red;">- {{descuentoIngreso | currency}}</td>
+                                      </tr>
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="9" class="border-0 text-end">
+                                              IVA :</th>
+                                          <td class="border-0 text-end">{{ivaIngreso | currency}}</td>
+                                      </tr>
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="9" class="border-0 text-end">
+                                              Retención:</th>
+                                          <td class="border-0 text-end" style="color: red;">- {{retencionIngreso | currency}}</td>
+                                      </tr>
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="9" class="border-0 text-end">Total:</th>
+                                          <td class="border-0 text-end"><h4 class="m-0 fw-semibold">{{totalIngreso | currency}}</h4></td>
+                                      </tr>
+                                      <!-- end tr -->
+                                  </tbody><!-- end tbody -->
+                              </table><!-- end table -->
+                          </div><!-- end table responsive -->
+                          <div class="d-print-none mt-4">
+                              <div class="float-end">
+                                  <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a> 
+                                  <button class="btn btn-primary w-md" type="submit" [disabled]="formIngreso.invalid">Guardar </button>
+                                
+                              </div>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+  </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalMarca">Editar fila Ingreso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalPRoducto()" aria-label="Close"></button>
+    </div>
+    
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                    <mat-label style="font-size: 16px;">Cantidad</mat-label>
+                    <input  required [(ngModel)]="cantidad" matInput type="number" id="cantidad" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                    <mat-label style="font-size: 16px;">Lote</mat-label>
+                    <input  required [(ngModel)]="lote" matInput type="text" id="lote" />
+                </mat-form-field>
+              </div>
+            </div>
+      
+            <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput [matDatepicker]="picker2" [(ngModel)]="fechaVencimiento">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker2.open()">
+                          <mat-icon color="primary">calendar_month</mat-icon>
+                        </a>
+                      
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                </div>
+            </div>
+         
+        </div>
+      
+
+    </div>
+    <div class="modal-footer">
+        
+        <button type="button" (click)="setInformacionFila()" [disabled]="false" class="btn btn-primary">Agregar</button>
+    </div>
+</ng-template>
+
+
+

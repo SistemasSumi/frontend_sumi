@@ -1,0 +1,77 @@
+
+thead {
+    background-color: var(--color-primario);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+th {
+    border: none;
+}
+
+
+::ng-deep .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-round{
+    border: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    padding: 10%;
+}
+
+
+
+
+
+
+.dropdown-menu i{
+    margin-right: 10px;
+ 
+}
+
+.botones-header button{
+    margin-right: 10px;
+}
+
+::ng-deep .swal2-styled.swal2-confirm {
+    background-color: #41B6FF;
+}
+
+
+
+::ng-deep .nowrap-center {
+    text-align: center;
+    white-space: nowrap;
+}
+
+::ng-deep .ancho {
+    width: auto;
+    text-align: end;
+    margin-left: 20px;
+}
+
+
+
+::ng-deep .normal {
+ 
+    white-space: normal;
+}
+
+
+
+
+
+
+
+
+

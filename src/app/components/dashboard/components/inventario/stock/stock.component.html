@@ -1,0 +1,209 @@
+<div class="main-content">
+
+  <div class="page-content">
+      <div class="container-fluid">
+
+          <!-- start page title -->
+          <div class="row">
+              <div class="col-12">
+                  <div class="page-title-box d-flex align-items-center justify-content-between">
+                      <h4 class="mb-0">Bodegas</h4>
+
+                      <div class="page-title-right">
+                          <ol class="breadcrumb m-0">
+                              <li class="breadcrumb-item"><a href="javascript: void(0);">Inventario</a></li>
+                              <li class="breadcrumb-item active">Bodegas</li>
+                          </ol>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- end page title -->
+
+          <div class="d-xl-flex">
+              <div class="w-100">
+                  <div class="d-md-flex">
+                      <div class="card filemanager-sidebar me-md-3">
+                          <div class="card-body">
+
+                              <div class="d-flex flex-column h-100">
+                                  <div class="mb-4">
+                                      <ul class="list-unstyled categories-list">
+                                          <li *ngFor="let item of bodegas | async">
+                                              <div class="custom-accordion">
+                                                  <a class="text-body fw-medium py-1 d-flex align-items-center collapsed" data-bs-toggle="collapse" [href]="'#'+item.nombre | uppercase | trim" role="button" aria-expanded="false" aria-controls="categories-collapse">
+                                                      <i class="fa fa-university font-size-13 me-2 text-primary"></i> {{item.nombre | uppercase}} <i class="mdi mdi-chevron-up accor-down-icon ms-auto"></i>
+                                                  </a>
+                                                  <div class="collapse" [id]="item.nombre | uppercase | trim">
+                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                          <ul class="list-unstyled mb-0">
+                                                              <li *ngFor="let tipo of item.tiposDeProducto">
+                                                                <a href="javascript:;" class="d-flex align-items-center" (click)="buscarProductos(item.id,tipo.id)">
+                                                                  <span class="me-auto">{{tipo.nombre}}</span>
+                                                                  
+                                                                  <i class="fas fa-pallet font-size-10 ms-auto"></i>
+                                                                </a>
+                                                              </li>
+                                                             
+                                                          </ul> 
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                         
+                                      </ul>
+                                  </div>
+
+                                 
+                              </div>
+                          </div><!-- end cardbody-->
+                      </div><!-- end card -->
+                      <!-- filemanager-leftsidebar -->
+
+                      <div class="w-100">
+                          <div class="card">
+                              <div class="card-body">
+                                  <div>
+                                      <div class="row mb-3">
+                                          <div class="col-lg-9 col-sm-9">
+                                              <div class="search-box mb-2">
+                                                  <div class="position-relative">
+                                                    <div class="form-group">
+                                                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                        <mat-label style="font-size: 16px;">Buscar productos</mat-label>
+                                                        <input   [(ngModel)]="buscarText" matInput type="text" id="buscarText" />
+                                                      </mat-form-field>
+                                                    </div>
+                                                      
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-3 col-sm-3">
+                                              <div class="mt-4 mt-sm-0 d-flex align-items-center justify-content-sm-end">
+                                                  <div class="mb-2 me-2">
+                                                      <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                          <mat-label style="font-size: 16px;">Buscar por</mat-label>
+                                                          <mat-select [(ngModel)]="buscarPor" style="text-align: center;">
+                                                              <mat-option  value="codigoDeBarra">Codigo</mat-option>
+                                                              <mat-option value="nombre">Nombre</mat-option>
+                                                          </mat-select>
+                                                        </mat-form-field>
+                                                      </div>
+                                                  </div>
+
+                                                  
+                                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                               
+
+                                  <div class="mt-4">
+                                      <div class="d-flex flex-wrap">
+                                          <h5 class="font-size-16 me-3">Productos</h5>
+                                         
+                                          <div class="ms-auto">
+                                              <a *ngIf="mostrarKardex" href="javascript: void(0);" class="fw-medium text-reset" (click)="mostrarKardex = !mostrarKardex"> <i class="fas fa-arrow-left"></i> Volver</a>
+                                          </div>
+                                      </div>
+                                      <p *ngIf="Productos"> <span style="font-size:16px ;" class="badge badge-outline-info"> <strong>TOTAL: {{Productos?.length}}</strong></span></p>
+                                      <hr class="mt-2">
+
+                                      <div class="table-responsive" style="max-height: 400px;">
+                                        <ng-container *ngIf="spinner" style="width: 100%;">
+                                          
+                                          <div  class="row" style="text-align: center; display: flex; justify-content: center; align-items: center;" >
+                                       
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                               <div class="spinner-grow text-primary m-1" role="status" style="margin: 0px auto;" ></div>
+                                                
+                                               
+                                           
+                                          </div>
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="!spinner">
+                                            <ng-container *ngIf="mostrarKardex == false">
+
+                                              <table class="table align-middle  table-hover mb-2">
+                                                  <thead class="bg-light">
+                                                      <tr>
+                                                          <th style="width: 5%;" class="text-center"  >COD.</th>
+                                                          <th style="width: 40%;" class="text-left"  >PRODUCTO</th>
+                                                          <th style="width: 15%;" class="text-center">UND MIN</th>
+                                                          <th style="width: 15%;" class="text-center">UND MAX</th>
+                                                          <th style="width: 15%;" class="text-center">UND</th>
+                                                          <th style="width: 10%;" class="text-center"></th>
+                                                      </tr><!-- end tr -->
+                                                    </thead><!-- end thead -->
+                                                    <tbody>
+  
+                                                      <tr *ngFor="let item of Productos  | filtro:buscarText:buscarPor">
+                                                        <td class="text-center">{{item.codigoDeBarra}}</td>
+                                                        <td style="white-space: normal;" class="text-left  ">{{item.nombre}}</td>
+                                                        <td class="text-center">{{item.stock_min}}</td>
+                                                        <td class="text-center">{{item.stock_max}}</td>
+                                                        <td class="text-center">{{item.stock_inicial}}</td>
+                                                        <td class="text-center text-primary">
+                                                          <a href="javascript:;" matTooltip="Visualizar kardex" (click)="showKardex(item.id)">
+  
+                                                            <span class="mdi mdi-timeline-help" style="font-size: 24px;"></span>
+                                                          </a>
+                                                        </td>
+                                                      </tr>
+                                                    </tbody><!-- end tbody -->
+                                              </table>
+
+                                            </ng-container>
+
+                                            <ng-container *ngIf="mostrarKardex == true">
+                                              <app-kardex [listado]="kardex"></app-kardex>
+                                            </ng-container>
+                                                
+                                               
+                                          </ng-container>
+                                                 <!-- end tr -->
+                                                  
+                                      </div><!-- end table responsive -->
+                                  </div>
+                              </div><!-- end cardbody-->
+                          </div><!-- end card -->
+                      </div><!-- end w-100 -->
+                  </div>
+              </div>
+
+           
+          </div><!-- end row -->   
+      </div> <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>document.write(new Date().getFullYear())</script>2023 © Dashonic.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset">Pichforest</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

@@ -1,0 +1,407 @@
+<ng-container *ngIf="auth.estaLogueado()">
+
+    <!-- begin #sidebar -->
+
+    <div class="vertical-menu">
+
+        <!-- LOGO -->
+        <div class="navbar-brand-box">
+            <a href="" class="logo logo-dark">
+                <span class="logo-sm">
+                    <img src="assets/images/icono_sarp_p.png" alt="" height="40">
+
+                    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/sigban-autentication.appspot.com/o/Archivos%2FlogoSimplificado.png?alt=media&token=36861849-3c79-45f3-b147-30676e8f741f" alt="" height="40" style="
+                    margin-left: -10px;"> -->
+                </span>
+                <span class="logo-lg" >
+                    <img src="assets/images/logo_b_claro.png" alt="logo" height="60">
+
+
+                </span>
+            </a>
+
+            <a href="" class="logo logo-light">
+                <span class="logo-sm">
+                    <img src="assets/images/icono_sarp_p.png" alt="" height="40">
+
+                </span>
+                <span class="logo-lg">
+                    <img src="assets/images/Logo_b_oscuro.png" alt="logo" height="60">
+                </span>
+            </a>
+        </div>
+
+        <button type="button" class="btn btn-sm px-3 font-size-16 header-item vertical-menu-btn">
+            <i class="fa fa-fw fa-bars"></i>
+        </button>
+
+        <div data-simplebar class="sidebar-menu-scroll">
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <!-- Left Menu Start -->
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title" data-key="t-dashboards">Principal</li>
+                    <ng-container>
+                        <li routerLinkActive="mm-active">
+                            <a [routerLink]="['home']" routerLinkActive="active">
+                                <i class="icon  nav-icon" data-feather="book-open"></i>
+                                <span class="menu-item" data-key="t-sales">Dashboard</span>
+                                <span class="badge rounded-pill badge-soft-secondary">5+</span>
+                            </a>
+                        </li>
+                    </ng-container>
+
+
+
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="codepen"></i>
+
+                            <span class="menu-item" data-key="t-contacts">Inventario</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['stock']" routerLinkActive="active" >Bodegas</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['purchaseOrder']" routerLinkActive="active" >Orden de compra</a>
+                            </li>
+                            <li routerLinkActive="mm-active"><a [routerLink]="['productos','add']" routerLinkActive="active">Crear producto</a></li>
+                            <li routerLinkActive="mm-active"><a [routerLink]="['productos','listado']" routerLinkActive="active">Listado producto</a></li>
+                          
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['nota-credito']" routerLinkActive="active" >Nota credito</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['a']" routerLinkActive="active" >Ajuste</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['s']" routerLinkActive="active" >Consumo</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="credit-card"></i>
+                            <span class="menu-item" data-key="t-chat">Contabilidad</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['puc']" routerLinkActive="active" data-key="t-user-grid">Plan único de cuentas(PUC)
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['comprobantes-contables']" routerLinkActive="active" data-key="t-user-grid">Comprobantes contables
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['reportes-contables']" routerLinkActive="active" data-key="t-user-grid">Informes
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <!-- <a [routerLink]="['cxpm']" routerLinkActive="active" data-key="t-user-grid">NOTA CONTABLE
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a> -->
+                                <a [routerLink]="['libroAux']" routerLinkActive="active" data-key="t-user-grid">Libro Auxiliar
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['c']" routerLinkActive="active" data-key="t-user-grid">Conciliación
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="trending-down"></i>
+                            <span class="menu-item" data-key="t-chat">Pagos</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['cxp']" routerLinkActive="active" data-key="t-user-grid">Cuentas x Pagar
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['ce']" routerLinkActive="active" data-key="t-user-grid">Egreso
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['listado_ce']" routerLinkActive="active" data-key="t-user-grid">Comprobantes Egreso
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="trending-up"></i>
+                            <span class="menu-item" data-key="t-chat">Cobros</span>
+                            
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['cxc']" routerLinkActive="active" data-key="t-user-grid">Cuentas x cobrar
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['ci']" routerLinkActive="active" data-key="t-user-grid">Ingreso
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['listado_ci']" routerLinkActive="active" data-key="t-user-grid">Comprobantes Ingreso
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                
+                                
+                            </li>
+                            
+                            
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="file-text"></i>
+                            <span class="menu-item" data-key="t-chat">Informes</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['informes']" routerLinkActive="active" data-key="t-user-grid">Informes
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                               
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="corner-down-right"></i>
+                            <span class="menu-item" data-key="t-chat">Ventas</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['facturacion','nueva-factura']" routerLinkActive="active" data-key="t-user-grid">Crear factura
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['facturacion','proformas']" routerLinkActive="active" data-key="t-user">Proformas
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['facturacion','facturas']" routerLinkActive="active" data-key="t-fac">Facturas
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['facturacion','cotizacion']" routerLinkActive="active" data-key="t-fac">Cotizacion
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li class="menu-title" data-key="t-applications">Nomina</li>
+
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="users"></i>
+                            <span class="menu-item" data-key="t-chat">Empleados</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['empleados','nuevo']" routerLinkActive="active" data-key="t-user-EMP">Nuevo empleado
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['empleados','listado']" routerLinkActive="active" data-key="t-user-EMP">Listado de empleados
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="paperclip"></i>
+                            <span class="menu-item" data-key="t-chat">Nomina</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['puc']" routerLinkActive="active" data-key="t-user-grid">Quincenal
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['sfw']" routerLinkActive="active" data-key="t-user-grid">Mensual
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                                <a [routerLink]="['configuracion_nomina']" routerLinkActive="active" data-key="t-user-grid">Configuración
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <!-- <li class="menu-title" data-key="t-applications">Nómina</li>
+
+                    <li *ngIf="true" routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" [routerLink]="['calendario']" routerLinkActive="active">
+                            <i class="icon  nav-icon" data-feather="calendar"></i>
+
+                            <span class="menu-item" data-key="t-calendar">Calendar</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="mm-active" *ngIf="true">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="activity"></i>
+                            <span class="menu-item" data-key="t-chat">Empresas</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['empresa','crear-empresa']" routerLinkActive="active" data-key="t-user-grid">Registrar empresa
+                                    <span class="badge rounded-pill badge-soft-danger left">🚧</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="users"></i>
+                            <span class="menu-item" data-key="t-chat">Empleados</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['empleados']" routerLinkActive="active" data-key="t-user-grid">Registrar empleado
+                                    <span class="badge rounded-pill badge-soft-danger left">🚧</span>
+                                </a>
+                                <a [routerLink]="['listado']" routerLinkActive="active" data-key="t-user-grid">Listado empleados
+                                    <span class="badge rounded-pill badge-soft-danger left">🚧</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li> -->
+                    <!-- <li class="menu-title" data-key="t-applications">Facturacíon</li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="shopping-cart"></i>
+                            <span class="menu-item" data-key="t-chat">Cotización</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['cotizacion']" routerLinkActive="active" data-key="t-user-grid">Registrar cotización
+                                    <span class="badge rounded-pill badge-soft-danger left">🚧</span>
+                                </a>
+                                <a [routerLink]="['cotizacion']" routerLinkActive="active" data-key="t-user-grid">Listado cotización
+                                    <span class="badge rounded-pill badge-soft-danger left">🚧</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li class="menu-title" data-key="t-applications">TAXIS</li>
+
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="shield"></i>
+                            <span class="menu-item" data-key="t-chat">Taxis</span>
+s
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['conductores']" routerLinkActive="active" data-key="t-user-grid">Conductores
+                                    <span class="badge rounded-pill badge-soft-danger left">👔</span>
+                                </a>
+                                <a [routerLink]="['taxis']" routerLinkActive="active" data-key="t-user-grid">Taxis
+                                    <span class="badge rounded-pill badge-soft-danger left">🚕</span>
+                                </a>
+                                <a [routerLink]="['tarifas']" routerLinkActive="active" data-key="t-user-grid">Tarifas
+                                    <span class="badge rounded-pill badge-soft-danger left">💰</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li> -->
+
+                    <li class="menu-title" data-key="t-applications">Configuración</li>
+
+                    <li routerLinkActive="mm-active" class="has-arrow">
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="briefcase"></i>
+                            <span class="menu-item" data-key="t-chat">Empresa</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['configuracion','empresa']" routerLinkActive="active" data-key="t-user-grid">Datos de la empresa
+                                    <span class="badge rounded-pill badge-soft-danger left">👔</span>
+                                </a>
+
+
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" [routerLink]="['tablas-Basicas']" routerLinkActive="active">
+                            <i class="icon  nav-icon" data-feather="database"></i>
+                            <span class="menu-item" data-key="t-chat">Tablas basicas</span>
+
+                        </a>
+                        
+                    </li>
+                    
+                    <li routerLinkActive="mm-active" class="has-arrow">
+                        <a href="javascript: void(0);"  class="has-arrow">
+                            <i class="icon  nav-icon" data-feather="users"></i>
+                            <span class="menu-item" data-key="t-chat">Terceros</span>
+
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a  [routerLink]="['terceros']" routerLinkActive="active" data-key="t-user-grid">Registrar terceros
+                                    
+                                </a>
+                                <a [routerLink]="['proveedores']" routerLinkActive="active" data-key="t-user-grid">Listado de proveedores
+                                    
+                                </a>
+                                <a [routerLink]="['clientes']" routerLinkActive="active" data-key="t-user-grid">Listado de clientes
+                                    
+                                </a>
+                                
+                            </li>
+
+
+                        </ul>
+                    </li> 
+                    
+
+
+
+                </ul>
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+</ng-container>

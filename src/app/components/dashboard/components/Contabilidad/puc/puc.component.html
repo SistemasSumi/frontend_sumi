@@ -1,0 +1,319 @@
+<div class="main-content">
+
+  <div class="page-content">
+
+    <div class="row">
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h4 class="mb-0">Plan único de cuentas (PUC)</h4>
+
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="javascript: void(0);">Contabilidad</a></li>
+                      <li class="breadcrumb-item active">Puc</li>
+                  </ol>
+              </div>
+
+          </div>
+        </div> 
+            <div class="mt-auto" style="margin-bottom: 15px;">
+              <div class="alert alert-info alert-dismissible fade show mb-0" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <div class="mb-3">
+                      <i class="fas fa-folder-open h1 text-info"></i>
+                  </div>
+
+                  <div>
+                      <h5 class="text-info">Catálogo de cuentas</h5>
+                      <p>Configura y ordena tu catálogo de cuentas personalizado, editando, desactivando o creando nuevas cuentas</p>
+                      <div class="text-center mt-4">
+                          <!-- <a href="pricing-basic.html" class="btn btn-link text-decoration-none text-info w-100 shadow-none">Upgrade <i class="mdi mdi-arrow-right"></i></a> -->
+                      </div>
+                  </div>
+              </div>
+            </div>
+          
+            <div class="card col-md-12">
+            
+              <div class="card-body">
+
+                  <div class="d-flex flex-column h-100 fs-5">
+                      <div class="mb-12">
+                          <ul class="list-unstyled fs-5 categories-list" *ngFor="let clase of pucClases">
+                              <li>
+                                  <div class="custom-accordion">
+                                    <span style="position: absolute; margin-top: 5px;">
+                                      <div class="dropdown mb-0">
+                                        <a class="btn btn-link text-muted dropdown-toggle p-1 mt-n2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="uil uil-ellipsis-v font-size-20"></i>
+                                        </a>
+                                      
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                          <a href="javascript:;" (click)="agregar(this.SUBCLASE,clase)" class="dropdown-item"><i class="mdi mdi-plus-circle-outline font-size-16 text-info me-1"></i>
+                                            Agregar</a>
+                                          <a href="javascript:;" (click)="editar(clase)" class="dropdown-item"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i>
+                                            Editar</a>
+                                          <a href="#" class="dropdown-item"><i class="mdi mdi-eye font-size-16 text-warning me-1"></i>
+                                            Ver detalle</a>
+                                            
+                                        </div>
+                                    </div>
+                                    </span>
+                                      <a style="margin-left: 20px;" class="text-body fw-medium py-1 d-flex align-items-center collapsed" data-bs-toggle="collapse" role="button"  aria-expanded="false" aria-controls="categories-collapse" [href]="'#'+clase.tipoDeCuenta+clase.nombre|trim">
+                                        <small  *ngIf="clase.codigo" class="badge badge-soft-success font-size-20 ms-2">{{clase.codigo}}</small>&nbsp;<i class="fas fa-folder text-warning font-size-20 me-2"></i> {{clase.nombre}}  <i class="mdi mdi-chevron-up  accor-down-icon ms-auto"></i>
+                                      </a>
+                                      
+                                      <div class="collapse" [id]="clase.tipoDeCuenta+clase.nombre|trim">
+                                          <div class="card border-0 shadow-none ps-2 mb-0">
+                                              <ul class="list-unstyled mb-0" *ngFor="let SC of pucSubclases|filtro:clase.codigo.toString():'padre'">
+                                                  <li>
+                                                    <div class="custom-accordion">
+                                                      <span style="position: absolute; margin-top: 10px;">
+                                                        <div class="dropdown mb-0">
+                                                          <a class="btn btn-link text-muted dropdown-toggle p-1 mt-n2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                              <i class="uil uil-ellipsis-v font-size-20"></i>
+                                                          </a>
+                                                        
+                                                          <div class="dropdown-menu dropdown-menu-end">
+                                                            <a href="javascript:;" (click)="agregar(this.GRUPO,SC)" class="dropdown-item"><i class="mdi mdi-plus-circle-outline font-size-16 text-info me-1"></i>
+                                                              Agregar</a>
+                                                            <a href="javascript:;" (click)="editar(SC)" class="dropdown-item"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i>
+                                                              Editar</a>
+                                                            <a href="#" class="dropdown-item"><i class="mdi mdi-eye font-size-16 text-warning me-1"></i>
+                                                              Ver detalle</a>
+                                                          </div>
+                                                      </div>
+                                                      </span>
+                                                      <a style="margin-left: 20px;" class="text-body fw-medium py-1 d-flex align-items-center collapsed" data-bs-toggle="collapse" role="button"  aria-expanded="false" aria-controls="categories-collapse" [href]="'#'+SC.tipoDeCuenta+SC.nombre|trim">
+                                                        <small  *ngIf="SC.codigo" class="badge badge-soft-success font-size-20 ms-2">{{SC.codigo}}</small>&nbsp;&nbsp;<i class="fas fa-folder text-warning font-size-20 me-2"></i> {{SC.nombre }} <i class="mdi mdi-chevron-up fs-3 accor-down-icon ms-auto"></i>
+                                                      </a>
+                                                      <div class="collapse" [id]="SC.tipoDeCuenta+SC.nombre|trim">
+                                                          <div class="card border-0 shadow-none ps-2 mb-0">
+                                                            <ul class="list-unstyled mb-0" *ngFor="let g of pucGrupos|filtro:SC.codigo.toString():'padre'">
+                                                              <li>
+                                                                <div class="custom-accordion">
+                                                                  <span style="position: absolute; margin-top: 10px;">
+                                                                    <div class="dropdown mb-0">
+                                                                      <a class="btn btn-link text-muted dropdown-toggle p-1 mt-n2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                          <i class="uil uil-ellipsis-v font-size-20"></i>
+                                                                      </a>
+                                                                    
+                                                                      <div class="dropdown-menu dropdown-menu-end" >
+                                                                        <a href="javascript:;" (click)="agregar(this.CUENTA,g)" class="dropdown-item"><i class="mdi mdi-plus-circle-outline font-size-16 text-info me-1"></i>
+                                                                          Agregar</a>
+                                                                        <a href="javascript:;" (click)="editar(g)" class="dropdown-item"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i>
+                                                                          Editar</a>
+                                                                        <a href="#" class="dropdown-item"><i class="mdi mdi-eye font-size-16 text-warning me-1"></i>
+                                                                          Ver detalle</a>
+                                                                      </div>
+                                                                  </div>
+                                                                  </span>
+                                                                  <a style="margin-left: 20px;" class="text-body fw-medium py-1 d-flex align-items-center collapsed" data-bs-toggle="collapse" role="button"  aria-expanded="false" aria-controls="categories-collapse" [href]="'#'+g.tipoDeCuenta+g.nombre|trim">
+                                                                    <small  *ngIf="clase.codigo" class="badge badge-soft-success font-size-20 ms-2">{{g.codigo}}</small>&nbsp;<i class="fas fa-folder text-warning font-size-20 me-2"></i> {{g.nombre }} <i class="mdi mdi-chevron-up fs-3 accor-down-icon ms-auto"></i>
+                                                                  </a>
+                                                                  <div class="collapse" [id]="g.tipoDeCuenta+g.nombre|trim">
+                                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                                        <ul class="list-unstyled mb-0" *ngFor="let cuenta of pucCuentas|filtro:g.codigo.toString():'padre'">
+                                                                          <li>
+                                                                            <div class="custom-accordion">
+                                                                              <span style="position: absolute; margin-top: 10px;">
+                                                                                <div class="dropdown mb-0">
+                                                                                  <a class="btn btn-link text-muted dropdown-toggle p-1 mt-n2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                      <i class="uil uil-ellipsis-v font-size-20"></i>
+                                                                                  </a>
+                                                                                
+                                                                                  <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <a href="javascript:;" (click)="agregar(this.SUBCUENTA,cuenta)" class="dropdown-item"><i class="mdi mdi-plus-circle-outline font-size-16 text-info me-1"></i>
+                                                                                      Agregar</a>
+                                                                                    <a href="javascript:;" (click)="editar(cuenta)" class="dropdown-item"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i>
+                                                                                      Editar</a>
+                                                                                    <a href="#" class="dropdown-item"><i class="mdi mdi-eye font-size-16 text-warning me-1"></i>
+                                                                                      Ver detalle</a>
+                                                                                  </div>
+                                                                              </div>
+                                                                              </span>
+                                                                              <a style="margin-left: 20px;" class="text-body fw-medium py-1 d-flex align-items-center collapsed" data-bs-toggle="collapse" role="button"  aria-expanded="false" aria-controls="categories-collapse" [href]="'#'+cuenta.tipoDeCuenta+cuenta.nombre|trim">
+                                                                                <small  *ngIf="clase.codigo" class="badge badge-soft-success font-size-20 ms-2">{{cuenta.codigo}}</small>&nbsp;<i class="fas fa-folder text-warning font-size-20 me-2"></i> {{cuenta.nombre }} <i class="mdi mdi-chevron-up fs-3 accor-down-icon ms-auto"></i>
+                                                                              </a>
+                                                                              <div class="collapse" [id]="cuenta.tipoDeCuenta+cuenta.nombre|trim">
+                                                                                  <div class="card border-0 shadow-none ps-2 mb-0">
+                                                                                    <ul class="list-unstyled mb-0" *ngFor="let subcuenta of pucSubcuentas|filtro:cuenta.codigo.toString():'padre'">
+                                                                                      <li>
+                                                                                        <div class="custom-accordion">
+                                                                                          <span style="position: absolute; margin-top: 10px;">
+                                                                                            <div class="dropdown mb-0">
+                                                                                              <a class="btn btn-link text-muted dropdown-toggle p-1 mt-n2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                  <i class="uil uil-ellipsis-v font-size-20"></i>
+                                                                                              </a>
+                                                                                            
+                                                                                              <div class="dropdown-menu dropdown-menu-end">
+                                                                                                
+                                                                                                <a href="javascript:;" (click)="editar(subcuenta)" class="dropdown-item"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i>
+                                                                                                  Editar</a>
+                                                                                                <a href="#" class="dropdown-item"><i class="mdi mdi-eye font-size-16 text-warning me-1"></i>
+                                                                                                  Ver detalle</a>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                          </span>
+                                                                                          <a style="margin-left: 20px;" class="text-body fw-medium py-1 d-flex align-items-center">
+                                                                                            <small  *ngIf="clase.codigo" class="badge badge-soft-success font-size-20 ms-2">{{subcuenta.codigo}}</small>&nbsp; <i class="fas fa-folder text-warning font-size-20 me-2"></i> {{subcuenta.nombre }} <i class="mdi mdi-chevron-up fs-3 accor-down-icon ms-auto"></i>
+                                                                                          </a>
+                                                                                          
+                                                                                      </div>
+                                                                                      </li>
+                                                                                    
+                                                                                  </ul>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+                                                                          </li>
+                                                                        
+                                                                      </ul>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              </li>
+                                                            
+                                                          </ul>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  </li>
+                                                
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  
+                              </li>
+                            
+                          </ul>
+                      </div>
+
+                      
+                  </div>
+              </div><!-- end cardbody-->
+          </div>
+      </div>
+    </div>
+     
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="" target="_blank" class="text-reset"> José Escudero</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+
+ <!-- MODAL PARA REGISTRAR UNA CUENTA EN EL PUC -->
+<ng-template #modalPuc let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Registrar cuenta (PUC)</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+    <form (submit)="guardar()" [formGroup]="formCuentasPuc" #formDirective="" id="formCuentasPuc">
+      <div class="modal-body">
+
+          <div class="row">
+            <div class="col-12">
+              <p> 
+                <mat-form-field  appearance="outline" style="width: 100%;" color="primary">
+                <mat-label style="font-size: 20px;">Pertenece A:</mat-label>
+                <input style="font-size: 26px;" [readonly]="true" required formControlName="padre" matInput type="text" id="nombre" />
+                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+              </mat-form-field>
+            </p>
+            </div>
+              <div class="col-md-12">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                      <mat-label style="font-size: 16px;">Nombre de la cuenta</mat-label>
+                      <input required formControlName="nombre" matInput type="text" id="nombre" />
+                      <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                    </mat-form-field>
+
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                          <mat-label style="font-size: 16px;">Codigo</mat-label>
+                          <input  formControlName="codigo" matInput type="text" id="codigo" />
+                          <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                        <mat-label style="font-size: 16px;">Tipo de cuenta</mat-label>
+                        <input required [readonly]="true"  formControlName="tipoDeCuenta" matInput type="text" id="tipoDeCuenta" />
+                        <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                          <mat-label style="font-size: 16px;">Naturaleza</mat-label>
+                          <input required [readonly]="true"  formControlName="naturaleza" matInput type="text" id="naturaleza" />
+                          <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="col-md-6">
+               
+                <div class="col-md-6">
+                  <mat-checkbox  color="primary" (change)="RI.checked = !EF.checked" #EF formControlName="estadoFinanciero" >¿ Estado Financiero ?</mat-checkbox>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox color="primary" (change)="EF.checked = !RI.checked" #RI formControlName="estadoResultado" >¿ Estado Resultado ?</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <div class="form-group">
+                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                          <mat-label style="font-size: 16px;">GRUPO</mat-label>
+                          <mat-select required  formControlName="grupoReporte" style="text-align: center;">
+                            
+                            <ng-container  *ngIf="EF.checked">
+
+                              <mat-option *ngFor="let item of ESTADOFINANCIERO" [value]="item.value" >{{item.nombre}}</mat-option>
+                            </ng-container>
+                            <ng-container  *ngIf="RI.checked">
+
+                              <mat-option *ngFor="let item of RESULTADOSINTEGRALES" [value]="item.value" >{{item.nombre}}</mat-option>
+                            </ng-container>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                  </div>
+              </div>
+             
+
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="this.close()">Cancelar</button>
+          <button type="submit" [disabled]="formCuentasPuc.invalid" class="btn btn-primary">Guardar</button>
+      </div>
+  </form>
+</ng-template>

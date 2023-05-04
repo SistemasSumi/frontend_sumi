@@ -1,0 +1,177 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">Institucional</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Inventario</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Institucional</a></li>
+                                <li class="breadcrumb-item active">Inventario</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+
+                        <!-- end card header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <mat-tab-group mat-stretch-tabs (selectedTabChange)="tabClick($event)">
+
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+                                            <img src="./assets/sigban/tablas-basicas-navbar/producto.png" class="example-tab-icon" width="40" alt="no fount">
+                                            <h6 class="mb-0">INVENTARIO</h6>
+                                        </ng-template>
+
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-md-12">
+                                                <table id="TableProductos" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th width="10%">Codigo</th>
+                                                            <th width="35%">Nombre</th>
+                                                            <th width="10%">Marca</th>
+                                                            <th width="5%">Unidades</th>
+                                                            <th width="10%">Precio</th>
+                                                            <th width="10%">Precio 2</th>
+                                                            <th width="10%">Precio 3</th>
+                                                            <th width="10%">Ubicación</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+
+                                    <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE CARGOS (SIGBAN) -->
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+                                            <img src="./assets/sigban/tablas-basicas-navbar/lote.png" class="example-tab-icon" width="40" alt="no fount">
+                                            <h6 class="mb-0">INVENTARIO POR LOTES</h6>
+                                        </ng-template>
+
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-md-12">
+                                                <table id="TablestockLotes" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="2%"></th>
+                                                            <th width="5%">Codigo</th>
+                                                            <th width="40%">Nombre</th>
+                                                            <th width="10%">Marca</th>
+                                                            <th width="10%">Lote</th>
+                                                            <th width="10%">Vence</th>
+                                                            <th width="5%">Cantidad</th>
+                                                            <th width="10%">Ubicación</th>
+                                                            <th width="10%"></th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <!-- FIN PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE CARGOS (SIGBAN) -->
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+                                            <img src="./assets/sigban/tablas-basicas-navbar/costo.png" class="example-tab-icon" width="40" alt="no fount">
+                                            <h6 class="mb-0">INVENTARIO POR COSTO</h6>
+                                        </ng-template>
+
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-md-12">
+                                                <table id="TablestockCosto" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th width="5%">Codigo</th>
+                                                            <th width="40%">Producto</th>
+                                                            <th width="10%">Marca</th>
+                                                            <th width="10%">Lote</th>
+                                                            <th width="10%">Vence</th>
+                                                            <th width="5%">Unidades</th>
+                                                            <th width="5%">Costo</th>
+                                                            <th width="10%" style="text-align:left;">Val Venta</th>
+                                                            <th width="10%">Ubicación</th>
+                                                            <th width="10%"></th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE COLORES (SIGBAN) -->
+
+                                    <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE LABORES (SIGBAN) -->
+
+
+
+                                    <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE LABORES (SIGBAN) -->
+
+
+                                    <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE FUNCIONES EMPLEADOS   (SIGBAN) -->
+
+                                </mat-tab-group>
+
+                            </div>
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+
+
+                <!-- end col -->
+            </div>
+        </div>
+
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- end #content -->

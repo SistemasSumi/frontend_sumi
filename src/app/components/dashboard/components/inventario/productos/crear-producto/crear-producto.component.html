@@ -1,0 +1,298 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-flex align-items-center justify-content-between">
+                  <h4 class="mb-0">CREAR NUEVO PRODUCTO</h4>
+
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Inventario</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);" [routerLink]="['/purchaseOrder']">Listado</a></li>
+                        <li class="breadcrumb-item active">Crear nuevo producto</li>
+                    </ol>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="invoice-title">
+                          <!-- <h4 class="float-end font-size-15">Invoice #DS0204 </h4> -->
+                          <div class="mb-4">
+                              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                          </div>
+                          <!-- <div class="text-muted">
+                              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>Sumiprod de la costa S.A.S. </strong> </p>
+                              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                          </div> -->
+                      </div>
+
+            
+
+                      <div class="row">
+                        <p-divider [text]="'DATOS DEL PRODUCTO'" [align]="'left'"></p-divider>
+                      </div>
+                      <!-- end row -->
+                     
+                    <form (submit)="guardarProducto()" [formGroup]="formProducto" #formDirective="" id="formProducto">
+
+
+
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                         
+                        <div class="form-group">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                              <mat-label style="font-size: 16px;">Nombre del producto</mat-label>
+                              <input  formControlName="nombre" matInput type="text" id="" />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                         
+                      </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Bodega</mat-label>
+                                    <mat-select formControlName="bodega" required  style="text-align: center;">
+                                        <mat-option *ngFor="let data of bodegas" [value]="data.id">
+                                            {{data.nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Tipo de producto</mat-label>
+                                    <mat-select required  style="text-align: center;" formControlName="tipoProducto">
+                                        <mat-option *ngFor="let item of tipos" [value]="item.id">{{item.nombre}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-2">
+                         
+                          <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Filtro</mat-label>
+                                <mat-select required  style="text-align: center;" formControlName="Filtro">
+                                    <mat-option value="HOSPITALARIO">HOSPITALARIO</mat-option>
+                                    <mat-option value="INSUMOS">INSUMOS</mat-option>
+                                    <mat-option value="OTC">OTC</mat-option>
+                                    <mat-option value="POS">POS</mat-option>
+                                    <mat-option value="POS">SUTURAS</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                          </div>
+                           
+                        </div>
+                        <div class="col-md-2">
+                         
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Invima</mat-label>
+                                <input  required formControlName="invima" matInput type="text" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                           
+                        </div>
+                        <div class="col-md-2">
+                         
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">CUM</mat-label>
+                                <input  formControlName="cum" matInput type="text" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                           
+                        </div>
+
+                       
+
+                  
+                    
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Valor de compra</mat-label>
+                                <input  required formControlName="valorCompra" matInput type="number" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                            
+                                <mat-checkbox color="primary" class="example-margin" formControlName="fv">Vencimiento ?</mat-checkbox>
+                           
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                            
+                                <mat-checkbox color="primary" class="example-margin" formControlName="regulado">Regulado ?</mat-checkbox>
+                           
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Valor de regulación</mat-label>
+                                <input  required formControlName="valorRegulacion" matInput type="number" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Stock inicial</mat-label>
+                                <input  required formControlName="stock_inicial" matInput type="number" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Stock Minimo</mat-label>
+                                <input  required formControlName="stock_min" matInput type="number" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Stock Maximo</mat-label>
+                                <input  required formControlName="stock_max" matInput type="number" id="" />
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                       
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <div class="form-group">
+                            
+                                <mat-checkbox color="primary" class="example-margin" formControlName="habilitado">Habilitado ?</mat-checkbox>
+                           
+                            </div>
+                          </div>
+                        </div>
+                       
+                        <div class="col-md-3">
+                          <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                  <mat-label style="font-size: 16px;">Impuesto</mat-label>
+                                  <mat-select formControlName="impuesto"   style="text-align: center;">
+                                      <mat-option *ngFor="let data of impuestos" [value]="data.id">
+                                          {{data.nombre}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Tipo de unidad</mat-label>
+                                <mat-select formControlName="unidad"  required style="text-align: center;">
+                                    <mat-option value="100 YARDAS">100 YARDAS</mat-option>
+                                    <mat-option value="AMPOLLA">AMPOLLA</mat-option>
+                                    <mat-option value="BOLSA">BOLSA</mat-option>
+                                    <mat-option value="BOTEPACK">BOTEPACK</mat-option>
+                                    <mat-option value="CAJA X 100">CAJA X 100</mat-option>
+                                    <mat-option value="CÁPSULA">CÁPSULA</mat-option>
+                                    <mat-option value="FRASCOS">FRASCOS</mat-option>
+                                    <mat-option value="GOTAS">GOTAS</mat-option>
+                                    <mat-option value="JERINGA PRELLENADA">JERINGA PRELLENADA</mat-option>
+                                    <mat-option value="OVULO">OVULO</mat-option>
+                                    <mat-option value="SOLUCIÓN INHALADORA">SOLUCIÓN INHALADORA</mat-option>
+                                    <mat-option value="SUSPENCIÓN">SUSPENCIÓN</mat-option>
+                                    <mat-option value="TABLETA">TABLETA</mat-option>
+                                    <mat-option value="TUBO">TUBO</mat-option>
+                                    <mat-option value="UNIDAD">UNIDAD</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    
+                   
+
+                     
+                      <div class="d-print-none mt-4">
+                          <div class="float-end">
+                              <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>
+                              
+                              <button class="btn btn-primary w-md" type="submit" [disabled]="formProducto.invalid">Guardar </button>
+                            
+                          </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+  </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

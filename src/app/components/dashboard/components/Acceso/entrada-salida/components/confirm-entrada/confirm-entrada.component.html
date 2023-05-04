@@ -1,0 +1,71 @@
+<!-- begin #content -->
+<div id="content" class="content">
+
+    <!-- begin page-header -->
+    <h1 class="page-header mb-3">SigBan
+        <small>Sistema Gestor Bananero</small>
+    </h1>
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+
+    <div class="auth-card animated fadeInLeft" style="width:100%">
+        <div class="image-part">
+            <img src="../assets/sigban/entrada-salida/entrada1.svg" alt="vector image" width="100%">
+        </div>
+        <ng-container *ngIf="!smsEnviado">
+            <div class="main-part" style="overflow-y:scroll; justify-content:center; margin-top: 5%;">
+                <h1 class="text-center heading">
+                    ACCESO A LA FINCA
+                </h1>
+                <div class="alert alert-primary" role="alert">
+                    Ingresa la cédula del empleado o visistante el cual va a ingresar a la finca.
+                </div>
+                <hr class="separator w-100">
+                <form (submit)="getPerson(formCedula)" [formGroup]="formCedula" #formDirective="" id="formCedula">
+                    <div class="form-group">
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label style="font-size: 16px;"> Cédula del empleado o visitante</mat-label>
+                            <input required formControlName="cedula" maxlength="10" matInput type="number" id="nombre" />
+                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <button type="submit" class="primary-button  cursor-pointer">VERIFICAR</button>
+                </form>
+                <hr class="separator w-100">
+
+            </div>
+        </ng-container>
+        <ng-container *ngIf="smsEnviado" class="animated fadeInRight">
+            <div class="main-part" style="overflow-y:scroll; justify-content:center;">
+                <h1 class="text-center heading">
+                    Verificar Codigo
+                </h1>
+                <div class="alert alert-primary" role="alert">
+                    Para validar el ingreso, por favor,introduce aquí el codigo que hemos enviado por SMS al {{this.phone}}
+                </div>
+                <hr class="separator w-100">
+                <form (submit)="verificarSmsCode(formCode)" [formGroup]="formCode" #formDirective="" id="formCode">
+                    <div class="form-group">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label style="font-size: 16px;">Introduce el codigo</mat-label>
+                            <input required formControlName="code" matInput id="code" class="text-center" style="font-size: 26px;" />
+                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+
+                    <button class="primary-button  cursor-pointer">VERIFICAR</button>
+                </form>
+                <hr class="separator w-100">
+
+            </div>
+        </ng-container>
+
+        <div id="recaptcha-container"></div>
+    </div>
+
+</div>
+<!-- end #content -->

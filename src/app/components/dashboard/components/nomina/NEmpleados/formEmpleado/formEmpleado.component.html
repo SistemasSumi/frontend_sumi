@@ -1,0 +1,351 @@
+<div class="page">
+  
+  <form (submit)="guardar()" [formGroup]="formEmpleado" #formDirective="" id="formEmpleado">
+
+ 
+    <div class="row">
+      <p-divider [text]="'DATOS BASICOS DEL EMPLEADO'" [align]="'left'"></p-divider>
+    </div>
+    
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Nombres del empleado</mat-label>
+            <input formControlName="nombres" required  matInput type="text" id="nombre" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Apellidos del empleado</mat-label>
+            <input formControlName="apellidos" required  matInput type="text" id="nombre" />
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker" >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+            <mat-icon color="primary">calendar_month</mat-icon>
+          </a>
+        
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Tipo de documento</mat-label>
+            <mat-select formControlName="tipoDocumento" style="text-align: center;">
+              <mat-option value="1">Cédula de ciudadanía</mat-option>
+              <mat-option value="2">Cédula de extranjería</mat-option>
+              <mat-option value="3">Tarjeta de identidad</mat-option>
+              <mat-option value="4">Pasaporte</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field  appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Documento</mat-label>
+            <input formControlName="documento" required  matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Teléfono</mat-label>
+            <input formControlName="telefono" required  matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Correo</mat-label>
+            <input formControlName="correo" required  matInput type="email" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16poutlinex;">Dirección</mat-label>
+            <input formControlName="direccion" required  matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Cargo</mat-label>
+            <input formControlName="cargo" required  matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 18px;">Proveedor</mat-label>
+            <mat-select  placeholder="Seleccionar cliente" formControlName="tercero" >
+                <mat-option>
+                    <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                        placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                        <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                    </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of filtroProveedor | async" [value]="item.id">
+                    {{item.nombreComercial}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <p-divider [text]="'DATOS DEL CONTRATO'" [align]="'left'"></p-divider>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          
+          <mat-form-field appearance="fill" floatLabel="always" style="width:100%; height: auto;"> 
+            <mat-label style="font-size: 16px;">Salario(Mensual)</mat-label>
+            <input formControlName="salarioBase" matInput type="number" class="example-right-align" #salarioBase>
+            <span matPrefix>$&nbsp;</span>
+            <span matSuffix>.00</span>
+            <mat-hint>Valor del dia ({{salarioBase.value/30 | currency}})</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">EPS</mat-label>
+            <mat-select formControlName="eps" style="text-align: center;">
+              
+              <mat-option *ngFor="let item of listadoEps" [value]="item.id">{{item.tercero}}</mat-option>
+            </mat-select>
+            <mat-hint>
+              <a href="javascript:;" (click)="openModalPrestacionesEPS(prestaciones)">Agregar nueva eps <i class="fas fa-plus-circle"></i></a>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Pensión</mat-label>
+          <mat-select formControlName="fondoPension" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoPension" [value]="item.id">{{item.tercero}}</mat-option>
+          </mat-select>
+          <mat-hint>
+            <a  href="javascript:;" (click)="openModalPrestacionesPENSION(prestaciones)">Agregar nuevo fondo pensional <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+        
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Cesantias</mat-label>
+          <mat-select  formControlName="fondoCesantias" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoCesantias" [value]="item.id">{{item.tercero}}</mat-option>
+        
+          </mat-select>
+          <mat-hint>
+            <a  href="javascript:;" (click)="openModalPrestacionesCESANTIAS(prestaciones)">Agregar nuevo fondo cesantia <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Caja de compensación</mat-label>
+          <mat-select formControlName="cajaCompensacion" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoCajaCompensacion" [value]="item.id">{{item.tercero}}</mat-option>
+            
+          </mat-select>
+          <mat-hint>
+            <a  href="javascript:;" (click)="openModalPrestacionesCAJA(prestaciones)">Agregar nueva <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">ARL</mat-label>
+          <mat-select formControlName="arl" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoArl" [value]="item.id">{{item.tercero}}</mat-option>
+            
+          </mat-select>
+          <mat-hint>
+            <a href="javascript:;" (click)="openModalPrestacionesARL(prestaciones)">Agregar nueva arl <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Riesgo</mat-label>
+          <mat-select formControlName="riesgo" style="text-align: center;">
+            <mat-option value="0.522"> Minimo - Riesgo 1 </mat-option>
+            <mat-option value="1.044"> Bajo - Riesgo 2 </mat-option>
+            <mat-option value="2.436"> Medio - Riesgo 3 </mat-option>
+            <mat-option value="4.350"> Alto - Riesgo 4 </mat-option>
+            <mat-option value="6.960"> Máximo - Riesgo 5 </mat-option>
+            
+          </mat-select>
+        
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Tipo de contrato</mat-label>
+          <mat-select formControlName="tipoContrato" #tipoContrato style="text-align: center;">
+            <mat-option value="1"> Termino fijo </mat-option>
+            <mat-option value="2"> Termino indefinido </mat-option>
+            <mat-option value="3"> Obra o labor </mat-option>
+            <mat-option value="4"> Aprendizaje </mat-option>
+            <mat-option value="5"> Practicas </mat-option>
+
+          
+          </mat-select>
+        
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Tipo de trabajador</mat-label>
+          <mat-select formControlName="tipoTrabajador" style="text-align: center;">
+            <mat-option value="1"> Dependiente </mat-option>
+            <mat-option value="2"> Servicio domestico </mat-option>
+            <mat-option value="3"> Independiente </mat-option>
+            <mat-option value="4"> Madre comunitaria </mat-option>
+            <mat-option value="12"> Aprendices del Sena en etapa lectiva </mat-option>
+            <mat-option value="16"> Independiente agremiado o asociado </mat-option>
+            <mat-option value="19"> Aprendices del SENA en etapa productiva </mat-option>
+            <mat-option value="20"> Estudiantes (régimen especial ley 789 de 2002) </mat-option>
+            <mat-option value="21"> Estudiantes de postgrado en salud </mat-option>
+            <mat-option value="23"> Estudiantes aportes solo riesgos laborales </mat-option>
+            <mat-option value="59"> Independiente con contrato de prestación de servicios superior a 1 mes </mat-option>
+          </mat-select>
+        
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">N° contrato</mat-label>
+            <input formControlName="noContrato" required  matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Fecha Inicial (contrato)</mat-label>
+          <input matInput formControlName="fechaInicioContrato" [matDatepicker]="f_i" >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <a matSuffix mat-icon-button aria-label="Clear"  (click)="f_i.open()">
+            <mat-icon color="primary">calendar_month</mat-icon>
+          </a>
+        
+          <mat-datepicker #f_i></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="col-md-3" *ngIf="tipoContrato.value != 2">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Fecha final (contrato)</mat-label>
+          <input matInput formControlName="fechaFinalContrato" [matDatepicker]="f_f" >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <a matSuffix mat-icon-button aria-label="Clear"  (click)="f_f.open()">
+            <mat-icon color="primary">calendar_month</mat-icon>
+          </a>
+        
+          <mat-datepicker #f_f></mat-datepicker>
+        </mat-form-field>
+        
+      </div>
+    </div>
+    <div class="row">
+      <p-divider [text]="'DATOS DE PAGO DEL EMPLEADO'" [align]="'left'"></p-divider>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Forma de pago</mat-label>
+            <mat-select formControlName="formaDePago"  style="text-align: center;">
+                <mat-option value="1">Instrumento no definido</mat-option>
+                <mat-option value="10">Efectivo</mat-option>
+                <mat-option value="42">Consignación bancaria</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Banco</mat-label>
+            <mat-select formControlName="banco"  style="text-align: center;">
+                <mat-option value="Banco Davivienda">Banco Davivienda</mat-option>
+                <mat-option value="Banco de Bogotá">Banco de Bogotá</mat-option>
+                <mat-option value="Banco de Occidente">Banco de Occidente</mat-option>
+                <mat-option value="Bancolombia">Bancolombia</mat-option>
+                
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">N° Cuenta</mat-label>
+            <input  formControlName="noCuenta" matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+  
+      <button type="submit" [disabled]="formEmpleado.invalid" class="btn btn-primary">Agregar empleado</button>
+    </div>
+  </form>
+</div>
+
+
+<ng-template #prestaciones let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="modalMarca">Agregar Prestacion ({{ TIPO }})</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalPrestaciones()" aria-label="Close"></button>
+  </div>
+  
+  <div class="modal-body">
+     <app-modalPrestaciones (resultadoForm)="guardarPrestacion($event)" ></app-modalPrestaciones>
+    
+
+  </div>
+ 
+</ng-template>

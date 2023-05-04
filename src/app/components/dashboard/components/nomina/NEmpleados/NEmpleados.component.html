@@ -1,0 +1,53 @@
+<div class="main-content">
+
+  <div class="page-content">
+
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+              <div class="card-body">
+          
+
+                      <div class="row align-items-center">
+                          <div class="col-sm-7">
+                              <p class="font-size-18 fw-semibold">Empleados <span class="fw-normal">La información del empleado será utilizada para ayudarte a generar la nómina más rápida que has visto, recuerda que siempre podrás regresar a editar cualquier valor.</span></p>
+                              <div class="mt-4">
+                                  <a href="javascript:;" class="btn btn-primary" [routerLink]="['nuevo']">Registrar empleado<i class="mdi mdi-arrow-right"></i></a>
+                              </div>
+                          </div>
+                          <div class="col-sm-5">
+                              <img src="assets/images/illustrator/empleados.png" class="img-fluid" alt="">
+                          </div>
+                      </div>
+                  </div> <!-- end card-body-->
+                  <br>
+                  <div class="row">
+                      <router-outlet></router-outlet>
+                  </div>
+              </div>
+              <!-- end card -->
+            
+          </div>
+      </div>
+      
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                
+                      {{ano}} &copy; Sarp Soft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

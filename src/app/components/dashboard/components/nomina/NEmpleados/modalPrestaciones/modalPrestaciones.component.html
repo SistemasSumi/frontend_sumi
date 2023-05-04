@@ -1,0 +1,40 @@
+<form (submit)="guardar()" [formGroup]="formPrestacion" #formDirective="" id="formDescuento">
+  <div class="modal-body">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+              <mat-label style="font-size: 16px;">Concepto</mat-label>
+              <mat-select formControlName="concepto" style="text-align: center;">
+                <mat-option *ngFor="let item of conceptos" [value]="item.id">{{item.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 18px;">Proveedor</mat-label>
+            <mat-select  placeholder="Seleccionar cliente" formControlName="tercero" >
+                <mat-option>
+                    <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                        placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                        <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                    </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let item of filtroProveedor | async" [value]="item.id">
+                    {{item.nombreComercial}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+      
+      <button type="submit" [disabled]="formPrestacion.invalid" class="btn btn-primary">Agregar</button>
+  </div>
+</form>

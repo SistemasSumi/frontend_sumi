@@ -1,0 +1,318 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-flex align-items-center justify-content-between">
+                  <h4 class="mb-0">GENERAR INGRESO</h4>
+
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cobros</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);" [routerLink]="['/listado_ci']">CI</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="invoice-title">
+                          
+                          <div class="mb-4">
+                              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                          </div>
+                          <!-- <div class="text-muted">
+                              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
+                              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                          </div> -->
+                      </div>
+
+                      
+                      <div class="row">
+                        <p-divider [text]="'DATOS DEL INGRESO'" [align]="'left'"></p-divider>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-2">
+                          <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                  <mat-label style="font-size: 16px;">Numeración</mat-label>
+                                  <mat-select [(ngModel)]="GlobalNumeracion"  required  style="text-align: center;">
+                                      <mat-option *ngFor="let data of numeraciones" [value]="data.id" >
+                                          {{data.numero}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Forma de pago</mat-label>
+                                <mat-select required [(ngModel)]="GlobalFormaDePago"  style="text-align: center;">
+                                    <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.nombre">
+                                        <mat-option *ngFor="let cuenta of group.cuentas" [value]="cuenta.id">
+                                            {{cuenta.nombre}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                 
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group d-flex aling-items-center">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                                <mat-label style="font-size: 18px;">Clientes</mat-label>
+                                <mat-select [(ngModel)]="GlobalTerceroSeleccionado"  placeholder="Seleccionar cliente">
+                                    <mat-option>
+                                        <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                            placeholderLabel="Buscar cliente" noEntriesFoundLabel="No hay resultados">
+                                            <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                        </ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let proveedor of filtroProveedores | async" [value]="proveedor.id" (click)="getFacturas(proveedor)">
+                                        {{proveedor.nombreComercial}}
+                                    </mat-option>
+
+                                    
+                                </mat-select>
+                         
+                            </mat-form-field>
+                            
+
+                        </div>
+                       
+                    </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <mat-form-field appearance="outline" style=" width:100%; height: auto;">
+                                  <mat-label style="font-size: 16px;">Observaciones</mat-label>
+                                  <textarea [(ngModel)]="GlobalObservacion"   matInput placeholder=""></textarea>
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">Saldo a favor</mat-label>
+                                            <input readonly class="example-right-align" #InputSaldoAFavor [onblur]="transform" [(ngModel)]="saldoAFavor"  matInput type="text" id="" />
+                                        </mat-form-field>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">Diferencia</mat-label>
+                                            <input [(ngModel)]="GlobalDiferencia"  class="example-right-align" [(ngModel)]="Diferencia" [onblur]="transform" matInput type="text" id="" />
+                                        </mat-form-field>
+                                    </div>
+                               </div>
+                            </div>
+
+                        </div>
+                      </div>
+                      </div>
+                   
+                    <div class="row">
+                      <p-divider [text]="'TOTAL FACTURAS '+ '('+this.detalle.length+')'"></p-divider>
+                    </div>
+                      <div class="py-2">
+                        <div  class="d-flex float-end">
+                            <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
+
+                        </div>
+                        <br>
+                        <br>
+
+                          <div class="table-scroll">
+                              <table class="table table-responsive table-nowrap table-centered mb-0">
+                                  <thead>
+                                      <tr>
+                                          
+                                          <th width="auto" class="text-center">FACTURA</th>
+                                          <th width="auto" class="text-center">FECHA</th>
+                                          <th width="auto" class="text-center">VENCE</th>
+                                          <th width="auto" class="text-center">VALOR FACTURA</th>
+                                          <th width="auto" class="text-center">VALOR ABONO</th>
+                                          <th width="auto" class="text-center">RETEFUENTE</th>
+                                          <th width="auto" class="text-center">RETEICA</th>
+                                          <th width="auto" class="text-center">A FAVOR</th>
+                                          <th width="auto" class="text-center">DESCUENTO %</th>
+                                          <th width="auto" class="text-center">SALDO</th>
+                                          <th width="auto" class="text-center"></th>
+                                          
+                                      </tr>
+                                  </thead><!-- end thead -->
+                                  <tbody >
+                                      <tr *ngFor="let item of detalle; let i = index"  style="cursor: pointer;">
+                                            
+
+                                          
+                                          <td class="text-center font-weight-bold">{{item.factura}}</td>
+                                          <td class="text-center font-weight-bold">{{item.fecha}}</td>
+                                          <td class="text-center font-weight-bold">{{item.vence}}</td>
+                                          <td class="text-end">{{item.valorFactura | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.valorAbono   | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.retefuente   | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.reteica   | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.saldoFavor   | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.descuento   | currency}}</td>
+                                          <td class="text-end  text-primary">{{item.saldo   | currency}}</td>
+                                          <td class="text-center">
+                                            <a type="button" (click)="openModalADDAbono(content,i)" class="btn btn-soft-primary"><i class="fas fa-download"></i></a   >
+                                        </td>
+                                          
+                                      </tr>
+                                    
+                                    
+                                      <!-- end tr -->
+                                  </tbody><!-- end tbody -->
+                                  <tfoot >
+                                    <tr>
+                                        <th width="auto" colspan="4" class="text-center font-weight-bold font-size-18" style="background-color: rgb(207, 205, 205); color: white;">TOTAL INGRESO</th>
+                                      
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalAbono   | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalRetefuente   | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalReteica   | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalSaldoAFavor  | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalDescuento   | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalSaldo  | currency}}</th>
+                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary"></th>
+                                        
+                                    </tr>
+                                  </tfoot>
+                                </table><!-- end table -->
+                                </div><!-- end table responsive -->
+                         
+                          <div class="d-print-none mt-4">
+                              <div class="float-end">
+                                  <!-- <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>  -->
+                                  <!-- <button class="btn btn-primary w-md" type="submit" [disabled]="formIngreso.invalid">Guardar </button> -->
+                                
+                              </div>
+                          </div>
+                      </div>
+                   
+                  </div>
+
+                  
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+  </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalMarca">Agregar abono</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalADDAbono()" aria-label="Close"></button>
+    </div>
+    
+    <div class="modal-body">
+        <div class="row">
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Valor Abono</mat-label>
+                      <input  class="example-right-align" [(ngModel)]="dTotalAbono" [onblur]="transform"    matInput type="text" id="cantidad" />
+                  </mat-form-field>
+              </div>
+            </div>
+           
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Saldo a favor</mat-label>
+                      <input  (keyup)="validarSaldo()"  class="example-right-align" [(ngModel)]="dTotalSaldo" [onblur]="transform" matInput type="text" id="descuento" />            
+                    </mat-form-field>
+              </div>
+            
+            </div>
+            
+           
+            <div class="col-md-4">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Descuento</mat-label>
+                        <input   class="example-right-align"   [(ngModel)]="dTotalDescuento" matInput type="number" id="descuento" />
+                        <mat-checkbox  (change)="validarDescuento()" [(ngModel)]="descuentoPorcentaje" matPrefix >%</mat-checkbox>
+                    </mat-form-field>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Retefuente</mat-label>
+                      <input [onblur]="transform" [readonly]="this.detalle[this.filaAEditar]?.retencionTotal == 0"  class="example-right-align"   [(ngModel)]="dRetefuente" matInput type="text" id="descuento" />
+                      <mat-checkbox  (change)="validarRTF()" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal > 0" [(ngModel)]="rtf" matPrefix > </mat-checkbox>
+                      <mat-hint style="font-weight: bold;" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal > 0">{{this.detalle[this.filaAEditar]?.retencionTotal  | currency }}</mat-hint>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Reteica</mat-label>
+                      <input [onblur]="transform"  class="example-right-align"   [(ngModel)]="dReteica" matInput type="text" id="descuento" />
+                      <!-- <mat-checkbox  (change)="validarDescuento()" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal <=  0" [(ngModel)]="descuentoPorcentaje" matPrefix > </mat-checkbox> -->
+                  </mat-form-field>
+              </div>
+            </div>
+        </div>
+      
+  
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="limpiar()" [disabled]="false" class="btn btn-secundary">Limpiar</button>
+        <button type="button" (click)="agregar()" [disabled]="this.detalle[this.filaAEditar]?.valorAbono > 0" class="btn btn-primary">Agregar</button>
+        
+    </div>
+  </ng-template>
+  

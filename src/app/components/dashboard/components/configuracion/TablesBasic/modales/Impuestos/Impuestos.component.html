@@ -1,0 +1,80 @@
+<form (submit)="guardar()" [formGroup]="formImpuesto" #formDirective="" id="formImpuesto">
+  <div class="modal-body">
+
+      <div class="row">
+        
+          <div class="col-md-12">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Nombre</mat-label>
+                  <input required formControlName="nombre" matInput type="text" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                      <mat-label style="font-size: 16px;">Porcentaje(%)</mat-label>
+                      <input  formControlName="porcentaje" matInput type="number" id="plazo" />
+                      <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                      <mat-label style="font-size: 16px;">Base</mat-label>
+                      <input  formControlName="base" matInput type="number" id="base" />
+                      <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+
+                <mat-form-field class="example-full-width" appearance="outline" style="width:100%; height: auto;">
+                    <mat-label>Cuenta Compras</mat-label>
+                    <input type="text" placeholder="Seleccione una cuenta" aria-label="cuenta" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="textBuscarCuentaC" [matAutocomplete]="compras">
+                    <mat-autocomplete autoActiveFirstOption #compras="matAutocomplete" (optionSelected)='seleccionarCuentaCompras($event.option.value)'>
+                        <ng-container *ngFor="let data of listCuentas | filtro:textBuscarCuentaC:'nombre'">
+                            <mat-option [value]="data.nombre">
+                                {{ data.nombre }}
+                            </mat-option>
+                        </ng-container>
+                    </mat-autocomplete>
+                    
+                </mat-form-field>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <mat-form-field class="example-full-width" appearance="outline" style="width:100%; height: auto;">
+              <mat-label>Cuenta Ventas</mat-label>
+              <input type="text" placeholder="Seleccione una cuenta" aria-label="cuenta" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="textBuscarCuentaV" [matAutocomplete]="ventas">
+              <mat-autocomplete autoActiveFirstOption #ventas="matAutocomplete" (optionSelected)='seleccionarCuentaVentas($event.option.value)'>
+                  <ng-container *ngFor="let data of listCuentas | filtro:textBuscarCuentaV:'nombre'">
+                      <mat-option [value]="data.nombre">
+                          {{ data.nombre }}
+                      </mat-option>
+                  </ng-container>
+              </mat-autocomplete>
+              
+          </mat-form-field>
+
+          </div>
+      </div>
+
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="this.resetformImpuesto()">Cancelar</button>
+      <button type="submit" [disabled]="formImpuesto.invalid" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

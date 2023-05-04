@@ -1,0 +1,26 @@
+{
+  "projects": {
+    "intranet": "intranet-75a18",
+    "default": "intranet-75a18",
+    "sarp": "sarpsoft-5482d"
+  },
+  "targets": {
+    "sigban-autentication": {
+      "hosting": {
+        "target-name": [
+          "resource-name"
+        ],
+        "FrontEnd": [
+          "SigBan-Autentication"
+        ]
+      }
+    },
+    "intranet-75a18": {
+      "hosting": {
+        "FrontEnd": [
+          "intranet"
+        ]
+      }
+    }
+  }
+}

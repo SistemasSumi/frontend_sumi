@@ -1,0 +1,87 @@
+<div class="main-content">
+
+  <div class="page-content">
+      <div class="row">
+        <div class="col-xxl-6 col-lg-6">
+          <div class="card">
+              <div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                          <div class="d-flex align-items-center">
+                              <div class="flex-shrink-0 me-3">
+                                  <div class="avatar-sm">
+                                      <div class="avatar-title rounded-circle font-size-16">
+                                          <i class="fas fa-chart-line"></i>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                  <p class="text-left mb-1"><strong>BALANCE DE PRUEBA</strong></p>
+                                  <h5 class="font-size-16 mb-0">
+                                    <div class="col-md-10">
+                                      <div class="form-group">
+                                        <mat-form-field style="width: 100%;" class="example-form-field" appearance="fill">
+                                          <!-- <mat-label>Fechas</mat-label> -->
+                                          <mat-date-range-input
+                                           
+                                            [rangePicker]="campaignOnePicker">
+                                            <input matStartDate placeholder="FECHA INICIAL" [(ngModel)]="fechaInicialBalancePrueba">
+                                            <input matEndDate placeholder="FECHA FINAL" [(ngModel)]="fechaFinalalBalancePrueba">
+                                          </mat-date-range-input>
+                                          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                          <a matSuffix mat-icon-button aria-label="Clear"  (click)="campaignOnePicker.open()">
+                                            <!-- <mat-icon color="primary">calendar_month</mat-icon> -->
+                                            <i class="fas fa-calendar"></i>
+                                          </a>
+                                          <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                                        </mat-form-field>
+                        
+                                      </div>
+                                    </div>
+                                  </h5>
+                              </div>
+                              <div class="flex-shrink-0 align-self-end">
+                                  <div class="ms-2">
+                                    <button (click)="imprimirBalance()" style="margin-right: 10px;" type="button" class="btn btn-outline-danger mb-4" (click)="null">
+                                      <i class="squire ico-pdf"></i> 
+                                    </button>
+                                    <button  (click)="imprimirEstadoFinanciero()" type="button"  class="btn btn-outline-primary mb-4">
+                                      <i class="squire ico-excel"></i>
+                                    </button>
+                                    
+                                  </div>
+                              </div>
+                          </div>
+                      </li>
+                   
+                  </ul>
+              </div>
+          </div>
+          <!-- end card -->
+
+          
+          <!-- end card -->
+      </div>
+      </div>
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

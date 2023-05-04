@@ -1,0 +1,87 @@
+<form (submit)="guardar()" [formGroup]="formDescuento" #formDirective="" id="formDescuento">
+  <div class="modal-body">
+
+      <div class="row">
+        
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(15)</mat-label>
+                  <input required formControlName="quince" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(30)</mat-label>
+                  <input required formControlName="treinta" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(40)</mat-label>
+                  <input required formControlName="cuarenta" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(45)</mat-label>
+                  <input required formControlName="cuarentaycinco" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(60)</mat-label>
+                  <input required formControlName="sesenta" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+          <div class="col-md-2">
+              <div class="form-group">
+                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                  <mat-label style="font-size: 16px;">Dias(90)</mat-label>
+                  <input required formControlName="noventa" matInput type="number" id="nombre" />
+                  <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                </mat-form-field>
+
+              
+              </div>
+          
+          </div>
+
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+      
+      <button type="submit" [disabled]="formDescuento.invalid" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

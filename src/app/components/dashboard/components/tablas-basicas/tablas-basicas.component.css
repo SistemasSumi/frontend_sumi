@@ -1,0 +1,49 @@
+.example-input-label,
+.example-add-tab-button,
+.example-delete-tab-button {
+    margin: 8px;
+}
+
+.example-tab-icon {
+    margin-right: 10px;
+}
+
+::ng-deep .mat-ink-bar {
+    background-color: #4acf50 !important;
+}
+
+.snackbar {
+    max-width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 1rem !important;
+    padding: 10px !important;
+    background-color: green;
+    color: color;
+}
+
+.mat-button-wrapper {
+    color: black !important;
+}
+
+
+/* Styles for tab labels */
+
+::ng-deep .mat-tab-label {
+    min-width: auto !important;
+    padding: 5px;
+    background-color: transparent;
+    font-weight: 700;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+    height: auto !important;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+    min-width: 200px !important;
+    padding: 5px;
+    color: #24b12b;
+    font-weight: 700;
+    opacity: 1;
+}

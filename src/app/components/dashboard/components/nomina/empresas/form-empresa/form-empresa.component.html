@@ -1,0 +1,334 @@
+<div class="main-content">
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Registrar empresa</font>
+                        </font>
+                    </h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript: void(0);">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Empresa</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">Registrar empresa</font>
+                                </font>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <ul class="wizard-nav mb-5">
+                                <li class="wizard-list-item">
+                                    <div class="list-item active">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Datos básicos">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="wizard-list-item">
+                                    <div class="list-item">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Áreas">
+                                            <i class="fas fa-th"></i>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="wizard-list-item">
+                                    <div class="list-item">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Cargos">
+                                            <i class="fas fa-project-diagram"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="wizard-list-item">
+                                    <div class="list-item">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Datos del pago">
+                                            <i class="fas fa-money-check-alt"></i>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+
+                            </ul>
+                            <!-- wizard-nav -->
+                            <form (submit)="guardar()" [formGroup]="formEmpresa" #formDirective="" id="formEmpresa">
+
+
+                                <div class="wizard-tab" style="display: block;">
+                                    <div class="text-center mb-4">
+                                        <h5>Datos básicos</h5>
+                                        <p class="card-title-desc">Registrar datos basicos de la empresa.</p>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Razón social</mat-label>
+                                                    <input required formControlName="razon_social" matInput type="text" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Slogan</mat-label>
+                                                    <input required formControlName="slogan" matInput type="text" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Telefono</mat-label>
+                                                    <input required formControlName="telefono" matInput type="number" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Correo electrónico</mat-label>
+                                                    <input required formControlName="correo" matInput type="email" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Tipo documento</mat-label>
+                                                    <mat-select required formControlName="tipo_documento" style="text-align: center;">
+                                                        <ng-container *ngFor="let data of  tiposDocumentos">
+                                                            <mat-option [value]="data.nombre">{{ data.nombre }}</mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Documento</mat-label>
+                                                    <input required formControlName="documento" matInput type="text" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Áreas</h5>
+                                        <p class="card-title-desc">Registrar áreas de la empresa.</p>
+                                    </div>
+                                    <div class="row" formArrayName="areas">
+                                        <ng-container *ngFor="let item of getAreas.controls; let i = index" [formGroupName]="i">
+                                            <div class="col-md-4">
+                                                <div class="row">
+
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%; align-content: center; justify-content: center" color="primary">
+                                                            <mat-label style="font-size: 16px;">Area {{i + 1}}</mat-label>
+                                                            <input required formControlName="nombre" matInput type="text" id="documento" />
+                                                            <a mat-icon-button matSuffix (click)="removeArea(i,item.value.id_area)">
+                                                                <i style="color: rgb(241, 6, 6);" class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </ng-container>
+                                        <div class="row">
+                                            <div class="example-button-container">
+                                                <a mat-mini-fab color="primary" (click)="addArea()">
+                                                    <i style="color: white;" class="fas fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Cargos</h5>
+                                        <p class="card-title-desc">Registrar cargos de la empresa.</p>
+                                    </div>
+                                    <div class="row" formArrayName="cargos">
+                                        <ng-container *ngFor="let item of getCargos.controls; let i = index" [formGroupName]="i">
+                                            <div class="col-md-4">
+                                                <div class="row">
+
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%; align-content: center; justify-content: center" color="primary">
+                                                            <mat-label style="font-size: 16px;">Cargo {{i + 1}}</mat-label>
+                                                            <input required formControlName="nombre" matInput type="text" id="documento" />
+                                                            <a mat-icon-button matSuffix (click)="removeCargo(i,item.value.id_cargo)">
+                                                                <i style="color: rgb(241, 6, 6);" class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </ng-container>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-flex float-right">
+                                            <a style="right: 0" class="ml-auto" mat-mini-fab color="primary" (click)="addCargo()">
+                                                <i style="color: white;" class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Datos de pago</h5>
+                                        <p class="card-title-desc">Registrar datos de pago.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Frecuencia de pago</mat-label>
+                                                    <mat-select required formControlName="frecuencia_pago" style="text-align: center;">
+                                                        <mat-option value="QUINCENAL">QUINCENAL</mat-option>
+                                                        <mat-option value="MENSUAL">MENSUAL</mat-option>
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Medio pago</mat-label>
+                                                    <mat-select required formControlName="medio_pago" style="text-align: center;">
+                                                        <mat-option value="TRANSFERENCIA BANCARIA">TRANSFERENCIA BANCARIA</mat-option>
+                                                        <mat-option value="EFECTIVO">EFECTIVO</mat-option>
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Banco</mat-label>
+                                                    <mat-select required formControlName="banco" style="text-align: center;">
+
+                                                        <mat-option value="DAVIVIENDA S.A.">DAVIVIENDA S.A.</mat-option>
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Tipo cuenta</mat-label>
+                                                    <mat-select required formControlName="tipo_cuenta" style="text-align: center;">
+                                                        <mat-option value="CUENTA DE AHORROS">CUENTA DE AHORROS</mat-option>
+                                                        <mat-option value="CUENTA DE CORRIENTE">CUENTA CORRIENTE</mat-option>
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Numero cuenta</mat-label>
+                                                    <input required formControlName="numero_cuenta" matInput type="email" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Operador de pila</mat-label>
+                                                    <mat-select required formControlName="operador_pila" style="text-align: center;">
+                                                        <mat-option value="1">APORTES EN LINEA</mat-option>
+
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- wizard-tab -->
+
+
+                                <div class="d-flex align-items-start gap-3 mt-4">
+                                    <button type="button" class="btn btn-primary w-sm" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Anterior</button>
+
+                                    <div id="btn_guardar" class="w-sm ms-auto">
+                                        <button type="button" class="btn btn-primary w-sm ms-auto" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

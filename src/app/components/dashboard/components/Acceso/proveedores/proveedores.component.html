@@ -1,0 +1,348 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <!-- <h1 class="page-header mb-3">SigBan
+        <small>Sistema Gestor Bananero</small>
+
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <br>
+    <br>
+    <div class="row">
+
+        <!-- <div class="col-md-12">
+            <div class="ms-auto">
+                <a href="javascript:;" (click)="registrar = !registrar" class="btn btn-primary btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> &nbsp;Registrar Proveedor</a>
+            </div>
+            <br>
+            <br>
+        </div> -->
+
+        <div class="col-md-12" *ngIf="registrar">
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="!editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">REGISTRAR PROVEEDOR
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="createNewProveedor()" [formGroup]="formProveedor" #formDirective="" id="formProveedor">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Documento</mat-label>
+                                            <input required formControlName="documento" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombres</mat-label>
+                                            <input formControlName="nombres" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Apellidos</mat-label>
+                                            <input formControlName="apellidos" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Direccion</mat-label>
+                                            <input formControlName="direccion" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Telefono</mat-label>
+                                            <input maxlength="10" formControlName="telefono" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" [disabled]="formProveedor.invalid">Guardar</button>
+
+                                    <a href="javascript:;" (click)="resetFormProveedor()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">EDITAR PROVEEDOR
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="editProveedor()" [formGroup]="formProveedorEdit" #formDirective="" id="formProveedor">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Documento</mat-label>
+                                            <input required formControlName="documento" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombres</mat-label>
+                                            <input formControlName="nombres" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Apellidos</mat-label>
+                                            <input formControlName="apellidos" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Direccion</mat-label>
+                                            <input formControlName="direccion" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Telefono</mat-label>
+                                            <input maxlength="10" formControlName="telefono" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" mat-raised-button color="accent" class="btn  float-right btn-save" [disabled]="formProveedorEdit.invalid">Actualizar</button>
+
+                                    <a href="javascript:;" (click)="resetFormProveedor()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-inverse animated fadeInDown">
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">LISTADO DE PRROVEEDORES
+                    </h4>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table id="TableProveedores" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Documento</th>
+                                <th>Empresa</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Forma de pago</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+
+
+    <div *ngIf="viewProveedor" class="row">
+        <article class="resume-wrapper text-center position-relative">
+            <div class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
+                <header class="resume-header pt-4 pt-md-0">
+                    <div class="row">
+                        <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
+                            <img class="picture" src="assets/images/profile.jpg" alt="">
+                        </div>
+                        <!--//col-->
+                        <div class="col">
+                            <div class="row p-4 justify-content-center justify-content-md-between">
+                                <div class="primary-info col-auto">
+                                    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">{{viewProveedorCurrent.empresa}}</h1>
+                                    <div class="title mb-3">{{viewProveedorCurrent.direccion}}</div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><a class="text-link" href="#"><i class="far fa-envelope fa-fw me-2" data-fa-transform="grow-3"></i>{{viewProveedorCurrent.email}}</a></li>
+                                        <li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>{{viewProveedorCurrent.telefono}}</a></li>
+                                    </ul>
+                                </div>
+                                <!--//primary-info-->
+
+                                <!--//secondary-info-->
+                            </div>
+                            <!--//row-->
+
+                        </div>
+                        <!--//col-->
+                    </div>
+                    <!--//row-->
+                </header>
+                <div class="resume-body p-5">
+
+                    <!--//summary-section-->
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">INFORMACION DE CONTACTO</h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        <article class="resume-timeline-item position-relative pb-5">
+
+                                            <div class="resume-timeline-item-header mb-2">
+                                                <div class="d-flex flex-column flex-md-row">
+                                                    <h3 class="resume-position-title font-weight-bold mb-1">DEPARTAMENTO DE VENTA</h3>
+
+                                                </div>
+                                                <!--//row-->
+
+                                            </div>
+                                            <!--//resume-timeline-item-header-->
+                                            <div class="resume-timeline-item-desc">
+
+                                                <ul>
+                                                    <li><span class="font-weight-bold">Encargado:</span> Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                                                    <li><span class="font-weight-bold">Telefono:</span> At vero eos et accusamus et iusto odio dignissimos.</li>
+                                                    <li><span class="font-weight-bold">Correo:</span> Blanditiis praesentium voluptatum deleniti atque corrupti.</li>
+
+                                                </ul>
+
+
+                                            </div>
+                                            <!--//resume-timeline-item-desc-->
+
+                                        </article>
+                                        <!--//resume-timeline-item-->
+
+                                        <article class="resume-timeline-item position-relative pb-5">
+
+                                            <div class="resume-timeline-item-header mb-2">
+                                                <div class="d-flex flex-column flex-md-row">
+                                                    <h3 class="resume-position-title font-weight-bold mb-1">DEPARTAMENTO DE CONTABILIDAD</h3>
+
+                                                </div>
+                                                <!--//row-->
+
+                                            </div>
+                                            <!--//resume-timeline-item-header-->
+                                            <div class="resume-timeline-item-desc">
+                                                <li><span class="font-weight-bold">Encargado:</span> Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                                                <li><span class="font-weight-bold">Telefono:</span> At vero eos et accusamus et iusto odio dignissimos.</li>
+                                                <li><span class="font-weight-bold">Correo:</span> Blanditiis praesentium voluptatum deleniti atque corrupti.</li>
+
+                                            </div>
+                                            <!--//resume-timeline-item-desc-->
+
+                                        </article>
+                                        <!--//resume-timeline-item-->
+
+
+                                        <!--//resume-timeline-item-->
+
+
+                                    </div>
+                                    <!--//resume-timeline-->
+
+
+
+
+
+
+                                </div>
+                            </section>
+                            <!--//experience-section-->
+                        </div>
+
+                    </div>
+                    <!--//row-->
+                </div>
+                <!--//resume-body-->
+
+
+            </div>
+        </article>
+    </div>
+</div>
+<!-- end #content -->

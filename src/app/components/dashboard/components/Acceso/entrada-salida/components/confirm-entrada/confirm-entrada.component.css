@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+:root {
+    --primary: #2a9eda;
+    --secodary: #ef44a9;
+    --lightGray: #b8b8b8;
+    --lighterGray: #d4d4d4;
+    --darkGray: #798490;
+    --darkerGray: #4a5158;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+
+/* utilite css */
+
+.mx-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.py-25 {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.my-35 {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.heading {
+    color: #45C14B;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light-gray {
+    color: var(--lightGray);
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+/* utilite css */
+
+.auth-card {
+    width: 75%;
+    height: calc(100vh - 200px);
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.image-part,
+.main-part {
+    width: 45%;
+    height: 100%;
+}
+
+.image-part {
+    width: 55%;
+    height: 100%;
+    background-color: #DFF7E0;
+}
+
+.alert {
+    font-family: 'Noto Serif TC', serif;
+    width: 100%;
+}
+
+.image-part img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.main-part {
+    padding: 40px 100px;
+}
+
+.separator-wrapper {
+    width: 100%;
+}
+
+.separator {
+    border: none;
+    border-bottom: 1px solid gainsboro;
+    width: 30%;
+}
+
+.separator-wrapper p {
+    color: var(--lighterGray);
+    font-size: 12px;
+    width: 40%;
+}
+
+.secondary-class {
+    font-size: 14px;
+    color: var(--secodary);
+    font-weight: 500;
+}
+
+.check-wrapper label {
+    color: var(--black);
+}
+
+.primary-button {
+    background-color: #45C14B;
+    color: var(--white);
+    border-radius: 20px;
+    width: 100%;
+    padding: 12px 0px;
+    border: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .main-part {
+        padding: 30px 50px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-part {
+        padding: 20px 40px;
+    }
+    .auth-card {
+        height: unset;
+        flex-direction: column;
+    }
+    .image-part,
+    .main-part {
+        width: 100%;
+    }
+    .image-part {
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .auth-card {
+        width: 100%;
+        border-radius: 0px;
+    }
+}

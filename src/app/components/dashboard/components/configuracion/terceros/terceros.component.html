@@ -1,0 +1,606 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="row">
+            
+            <div class="card" >
+
+                <div class="card-header">
+                    <h1 class="card-title">Crear nuevo tercero</h1>
+                </div>
+                <form (submit)="guardar()" [formGroup]="formTercero" #formDirective="" id="formTercero">
+                    <div class="card-body">
+                        
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                Datos Generales
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="inputGroup" style="background-color: #cecece;">
+                                                        <input formControlName="isProveedor" id="option1" name="option1" type="checkbox"/>
+                                                        <label for="option1">Es Proveedor</label>
+                                                    </div>
+                                                </div>  
+                                                <div class="col-md-4"> 
+                                                    <div class="inputGroup" style="background-color: #cecece;">
+                                                        <input formControlName="isCliente"  id="option2" name="option2" type="checkbox"/>
+                                                        <label for="option2">Es Cliente</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                    <hr>
+                                    <div class="row"></div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Razon social / Nombre completo</mat-label>
+                                                    <input formControlName="nombreComercial"  required  matInput type="text" id="nombre" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="fill" style="width: 100%;">
+                                                    <mat-label style="font-size: 14px;">Tipo de documento</mat-label>
+                                                    <mat-select formControlName="tipoDocumento" >
+                                                        <mat-option value="CC">CC</mat-option>
+                                                        <mat-option value="NIT">NIT</mat-option>
+                                                        <mat-option value="CE">CE</mat-option>
+                                                        <mat-option value="RC">RC</mat-option>
+                                                        <mat-option value="PA">PA</mat-option>
+                                                        <mat-option value="TI">TI</mat-option>
+                                                        <mat-option value="MS">MS</mat-option>
+                                                        <mat-option value="AN">AN</mat-option>
+                                                        <mat-option value="DE">DE</mat-option>
+                                                        <mat-option value="RU">RU</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Documento</mat-label>
+                                                    <input formControlName="documento"  required  matInput type="number" id="documento" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">DV</mat-label>
+                                                    <input formControlName="dv"    matInput type="number" id="dv" />
+                                                    <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                Datos de contacto
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body">
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Nombre de Contacto</mat-label>
+                                                <input formControlName="nombreContacto"   matInput type="text" id="nombreContacto" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Dirección</mat-label>
+                                                <input formControlName="direccion"  required  matInput type="text" id="direccion" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Correo de contacto</mat-label>
+                                                <input  formControlName="correoContacto"   matInput type="email" id="correoContacto" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Telefono</mat-label>
+                                                <input formControlName="telefonoContacto"    matInput type="text" id="telefonoContacto" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Correo de facturas</mat-label>
+                                                <input formControlName="correoFacturas"   matInput type="email" id="correoFacturas" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field class="example-full-width" appearance="fill" style="width:100%; height: auto;">
+                                                <mat-label>Departamentos</mat-label>
+                                                <input type="text"  placeholder="Seleccione una cuenta" aria-label="cuenta" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="textDepartamentos" [matAutocomplete]="depa">
+                                                <mat-autocomplete autoActiveFirstOption #depa="matAutocomplete" (optionSelected)='seleccionarDepa($event.option.value)'>
+                                                    <ng-container *ngFor="let data of departamentos | filtro:textDepartamentos:'departamento'">
+                                                        <mat-option [value]="data.departamento">
+                                                            {{ data.departamento }}
+                                                        </mat-option>
+                                                    </ng-container>
+                                                </mat-autocomplete>
+                                                
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field class="example-full-width" appearance="fill" style="width:100%; height: auto;">
+                                                <mat-label>Municipio</mat-label>
+                                                <input type="text" placeholder="Seleccione una cuenta" aria-label="cuenta" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="textMunicipios" [matAutocomplete]="muni">
+                                                <mat-autocomplete autoActiveFirstOption #muni="matAutocomplete" (optionSelected)='seleccionarMuni($event.option.value)'>
+                                                    <ng-container *ngFor="let data of municipios | filtro:textMunicipios:'municipio'">
+                                                        <mat-option [value]="data.municipio">
+                                                            {{ data.municipio }}
+                                                        </mat-option>
+                                                    </ng-container>
+                                                </mat-autocomplete>
+                                                
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">    
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Codigo Postal</mat-label>
+                                                <input  formControlName="codigoPostal"  matInput type="text" id="codigoPostal" />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                Datos contables & Atributos del tercero
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <mat-label style="font-size: 14px;">Forma de pago</mat-label>
+                                                <mat-select formControlName="formaPago" >    
+                                                    <mat-option *ngFor="let item of formasDePago" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                </mat-select> 
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <mat-label style="font-size: 14px;">Tipo de persona</mat-label>
+                                                <mat-select formControlName="tipoPersona" >    
+                                                    <mat-option value="1">Persona Natural</mat-option>
+                                                    <mat-option value="2">Persona Judírica</mat-option>
+                                                    
+                                                </mat-select>
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <mat-label style="font-size: 14px;">Regimen</mat-label>
+                                                <mat-select formControlName="regimen" >    
+                                                    <mat-option value="No responsable del IVA">No responsable del IVA</mat-option>
+                                                    <mat-option value="Responsable del IVA">Responsable del IVA</mat-option>
+                                                    
+                                                </mat-select>
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <mat-label style="font-size: 14px;">Vendedor</mat-label>
+                                                <mat-select formControlName="vendedor" >    
+                                                    <mat-option *ngFor="let item of vendedores" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                    
+                                                </mat-select>
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">    
+                                            <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                <mat-label style="font-size: 16px;">Matricula</mat-label>
+                                                <input formControlName="matriculaMercantil"   matInput type="text" id="matricula " />
+                                                <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                            </mat-form-field>
+                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="fill" style="width: 100%;">
+                                                    <mat-label style="font-size: 14px;">Cuenta por cobrar</mat-label>
+                                                    <mat-select formControlName="cuenta_x_cobrar" >    
+                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                        
+                                                    </mat-select>
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">    
+                                                <mat-form-field appearance="fill" style="width: 100%;">
+                                                    <mat-label style="font-size: 14px;">Cuenta por pagar</mat-label>
+                                                    <mat-select formControlName="cuenta_x_pagar" >    
+                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                        
+                                                    </mat-select>
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">    
+                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Saldo a favor cliente</mat-label>
+                                                    <mat-select formControlName="cuenta_saldo_a_cliente" >    
+                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                        
+                                                    </mat-select>
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">    
+                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                                    <mat-label style="font-size: 16px;">Saldo a favor proveedor</mat-label>
+                                                    <mat-select formControlName="cuenta_saldo_a_proveedor">    
+                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
+
+                                                        
+                                                    </mat-select>
+                                                </mat-form-field>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                <hr>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="inputGroup" style="background-color: #cecece;">
+                                                <input formControlName="isCompras" id="Compras" name="Compras" type="checkbox"/>
+                                                <label  for="Compras">Compras</label>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-2"> 
+                                            <div class="inputGroup" style="background-color: #cecece;">
+                                                <input formControlName="isContabilidad" id="Contabilidad" name="Contabilidad" type="checkbox"/>
+                                                <label  for="Contabilidad">Contabilidad</label>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-2"> 
+                                            <div class="inputGroup" style="background-color: #cecece;">
+                                                <input formControlName="isElectronico" id="Electronico" name="Electronico" type="checkbox"/>
+                                                <label  for="Electronico">Electronico</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2"> 
+                                            <div class="inputGroup" style="background-color: #cecece;">
+                                                <input formControlName="isPos" id="Pos" name="Pos" type="checkbox"/>
+                                                <label  for="Pos">Pos</label>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <hr>    
+                                    <div class="row">
+                                        <!-- <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header justify-content-between d-flex align-items-center">
+                                                    <h4 class="card-title">Descuentos clientes</h4>
+                                                    <a href="javascript:;" (click)="abrirModalDescuentoC(DescuentoCliente)"  class="btn btn-sm btn-soft-primary">Agregar <i class="mdi mdi-plus-circle-outline align-middle"></i></a>
+                                                </div>
+                                                <div class="card-body">                                       
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Dias(15)</th>
+                                                                    <th>Dias(30)</th>
+                                                                    <th>Dias(45)</th>
+                                                                    <th>Dias(60)</th>
+                                                                    <th>Dias(90)</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngIf="descuentoCliente">
+                                                                    <th scope="row">{{descuentoCliente.id}}</th>
+                                                                    <td>{{descuentoCliente.quince}}%</td>
+                                                                    <td>{{descuentoCliente.treinta}}%</td>
+                                                                    <td>{{descuentoCliente.cuarentaycinco}}%</td>
+                                                                    <td>{{descuentoCliente.sesenta}}%</td>
+                                                                    <td>{{descuentoCliente.noventa}}%</td>
+                                                                
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                   
+                                        </div> -->
+                                        <!-- <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header justify-content-between d-flex align-items-center">
+                                                    <h4 class="card-title">Descuentos Proveedor</h4>
+                                                    <a href="javascript:;" (click)="abrirModalDescuentoP(DescuentoProveedor)"  class="btn btn-sm btn-soft-primary">Agregar <i class="mdi mdi-plus-circle-outline align-middle"></i></a>
+
+                                                </div>
+                                                <div class="card-body">                                        
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Dias(15)</th>
+                                                                    <th>Dias(30)</th>
+                                                                    <th>Dias(45)</th>
+                                                                    <th>Dias(60)</th>
+                                                                    <th>Dias(90)</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngIf="descuentoProveedor">
+                                                                    <th scope="row">{{descuentoProveedor.id}}</th>
+                                                                    <td>{{descuentoProveedor.quince}}%</td>
+                                                                    <td>{{descuentoProveedor.treinta}}%</td>
+                                                                    <td>{{descuentoProveedor.cuarentaycinco}}%</td>
+                                                                    <td>{{descuentoProveedor.sesenta}}%</td>
+                                                                    <td>{{descuentoProveedor.noventa}}%</td>
+                                                                
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    
+                                    
+            
+                                        <!-- <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header justify-content-between d-flex align-items-center">
+                                                    <h4 class="card-title">Retenciones Clientes</h4>
+                                                    <a href="javascript:;" (click)="abrirModalRetencion(RetencionCliente)"  class="btn btn-sm btn-soft-primary">Agregar <i class="mdi mdi-plus-circle-outline align-middle"></i></a>
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                    
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Retención</th>
+                                                                    <th class="text-center">Fija</th>
+                                                                    <th class="text-center">opciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody >
+                                                                <tr *ngFor="let item of retencionesCliente">
+                                                                    <th scope="row">{{item.id}}</th>
+                                                                    <td>{{item.retencion.nombre}}</td>
+                                                                    <td class="text-center">{{item.fija | Boolean }}</td>
+                                                                    <td class="text-center">
+                                                                        <button type="button"  (click)="eliminarRetencionCliente(item)" class="btn btn-danger"><i class="uil uil-trash"></i></button>
+                                                                    </td>
+                                                                </tr>
+                                                            
+                                                            </tbody>
+                                                        </table>
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+             -->
+                                        
+                                        <!-- <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header justify-content-between d-flex align-items-center">
+                                                    <h4 class="card-title">Retenciones Proveedor</h4>
+                                                    <a href="javascript:;" (click)="abrirModalRetencion(RetencionProveedor)"  class="btn btn-sm btn-soft-primary">Agregar <i class="mdi mdi-plus-circle-outline align-middle"></i></a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                    
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Retención</th>
+                                                                    <th class="text-center">Fija</th>
+                                                                    <th class="text-center">opciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let item of retencionesProveedor">
+                                                                    <th scope="row">{{item.id}}</th>
+                                                                    <td>{{item.retencion.nombre}}</td>
+                                                                    <td class="text-center">{{item.fija | Boolean }}</td>
+                                                                    <td class="text-center">
+                                                                        <button type="button"  (click)="eliminarRetencionProveedor(item)" class="btn btn-danger"><i class="uil uil-trash"></i></button>
+                                                                    </td>
+                                                                </tr>
+                                                            
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        
+                                        
+                                    </div>  
+                            
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+
+                    <div class="card-footer float-rigth">
+                        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <button type="submit" [disabled]="formTercero.invalid" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+        </div>
+
+        <!-- container-fluid -->
+        </div>
+
+
+
+
+        <footer class="footer ">
+            <div class="container-fluid ">
+                <div class="row ">
+                    <div class="col-sm-6 ">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> &copy; SarpSoft.
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="text-sm-end d-none d-sm-block ">
+                            Crafted with <i class="mdi mdi-heart text-danger "></i> by <a href="https://Pichforest.com/ " target="_blank " class="text-reset "> dpto. sistemas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+<!-- MODAL PARA AGREGAR UN DESCUENTO PROVEEDOR -->
+<!-- <ng-template #DescuentoProveedor let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Parametros Descuento Proveedor</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModalDescuentoP()"></button>
+	</div>
+   <app-ModalDescuentoProveedor [DescuentoEdit]="this.descuentoProveedor" (resultado)="capturarDescuentoP($event)"></app-ModalDescuentoProveedor>
+</ng-template> -->
+
+
+<!-- MODAL PARA AGREGAR UN DESCUENTO CLIENTE -->
+<ng-template #DescuentoCliente let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Parametros Descuento Cliente</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModalDescuentoC()"></button>
+	</div>
+   <app-ModalDescuentoCliente [DescuentoEdit]="this.descuentoCliente" (resultado)="capturarDescuentoC($event)"></app-ModalDescuentoCliente>
+</ng-template>
+
+
+
+<!-- MODAL PARA AGREGAR UNA RETENCION -->
+<ng-template #RetencionCliente let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Retenciones</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModalRetencion()"></button>
+	</div>
+   <app-ModalRetencionCliente  (resultado)="capturarRetencionC($event)"></app-ModalRetencionCliente>
+</ng-template>
+
+<!-- MODAL PARA AGREGAR UNA RETENCION -->
+<ng-template #RetencionProveedor let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Retenciones</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModalRetencion()"></button>
+	</div>
+   <app-ModalRetencionCliente  (resultado)="capturarRetencionP($event)"></app-ModalRetencionCliente>
+</ng-template>
+
+

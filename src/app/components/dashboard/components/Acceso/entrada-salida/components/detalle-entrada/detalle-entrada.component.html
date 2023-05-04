@@ -1,0 +1,122 @@
+<!-- begin #content -->
+<div id="content" class="content">
+
+    <!-- begin page-header -->
+    <h1 class="page-header mb-3">SigBan
+        <small>Sistema Gestor Bananero</small>
+    </h1>
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <div class="panel panel-inverse animated fadeInDown">
+        <div class="panel-heading">
+            <h4 class="panel-title">Detalle de entrada</h4>
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card profile-card-3">
+                        <div class="background-block">
+                            <img src="../assets/sigban/login/fondo_login.jpg" alt="profile-sample1" class="background" />
+                        </div>
+                        <div class="profile-thumb-block">
+                            <img src="{{this.persona.empleado.foto}}" alt="profile-image" class="profile" />
+                        </div>
+                        <div class="card-content">
+                            <h2>{{this.nombreCorto}}<small>Empleado</small></h2>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-8">
+                    <br>
+                    <mat-slide-toggle [(ngModel)]="isChecked">Entrada con vehículo</mat-slide-toggle>
+                    <br>
+                    <hr class="separator w-100">
+                    <ng-container *ngIf="isChecked">
+                        <form (submit)="(0)" [formGroup]="formVehiculo" #formDirective="" id="formVehiculo">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Placa del vehículo</mat-label>
+                                            <input required formControlName="placa_vehiculo" matInput type="text" id="nombre" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Carga de entrada</mat-label>
+                                            <input formControlName="carga_entrada" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Carga de salida</mat-label>
+                                            <input formControlName="carga_salida" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Numero de pomas</mat-label>
+                                            <input formControlName="n_pomas" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Cantidad de pales</mat-label>
+                                            <input required formControlName="cantidad_pales" matInput type="number" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Cantidad de cajas sueltas</mat-label>
+                                            <input required formControlName="cajas_sueltas" matInput type="number" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </ng-container>
+                    <mat-form-field appearance="outline" style="width:100%;">
+                        <mat-label>Detalles de la entrada (opcional)</mat-label>
+                        <textarea matInput placeholder="Ingrese el detalle de la entrada."></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end #content -->

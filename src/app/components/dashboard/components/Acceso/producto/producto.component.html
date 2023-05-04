@@ -1,0 +1,249 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <!-- <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol> -->
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <!-- <h1 class="page-header mb-3">Sumiprod de la Costa
+        <small>Comprometidos con la salud</small>
+    </h1> -->
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <div class="row">
+        <div class="col-md-12" *ngIf="registrar">
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="!editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">REGISTRAR PRODUCTO
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="createNewProducto()" [formGroup]="formProducto" #formDirective="" id="formProductos">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Código</mat-label>
+                                            <input required formControlName="code" matInput type="text" id="code" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombre del producto</mat-label>
+                                            <input formControlName="nombre" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Marca</mat-label>
+                                            <input formControlName="marca" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Precio de compra</mat-label>
+                                            <input formControlName="precioCompra" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Precio de venta</mat-label>
+                                            <input maxlength="10" formControlName="precioVenta" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="fill">
+                                            <mat-label>Observación</mat-label>
+                                            <textarea matInput formControlName="observacion" placeholder="Descripcion de prodcuto"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" [disabled]="formProducto.invalid">Guardar</button>
+
+                                    <a href="javascript:;" (click)="resetFormProductos()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">EDITAR PRODUCTO
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="editProducto()" [formGroup]="formProductoEdit" #formDirective="" id="formProductos">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Código</mat-label>
+                                            <input required formControlName="code" matInput type="text" id="code" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombre del producto</mat-label>
+                                            <input formControlName="nombre" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Marca</mat-label>
+                                            <input formControlName="marca" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Precio de compra</mat-label>
+                                            <input formControlName="precioCompra" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Precio de venta</mat-label>
+                                            <input maxlength="10" formControlName="precioVenta" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;">Unidades</mat-label>
+                                            <input maxlength="10" formControlName="stock" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="fill">
+                                            <mat-label>Observación</mat-label>
+                                            <textarea matInput formControlName="observacion" placeholder="Descripcion de prodcuto"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" mat-raised-button color="accent" [disabled]="formProductoEdit.invalid">Actualizar</button>
+
+                                    <a href="javascript:;" (click)="resetFormProductos()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-inverse animated fadeInDown">
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">LISTADO DE PRODUCTOS
+                    </h4>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table id="TableProductos" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>CÓDIGO</th>
+                                <th>NOMBRE</th>
+                                <th>MARCA</th>
+                                <th>PRECIO COMPRA</th>
+                                <th>PRECIO VENTA</th>
+                                <th>INVENTARIO</th>
+                                <th>OBSERVACIONES</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+</div>
+<!-- end #content -->

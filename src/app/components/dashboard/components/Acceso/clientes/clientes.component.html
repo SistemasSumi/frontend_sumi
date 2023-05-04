@@ -1,0 +1,232 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <!-- <h1 class="page-header mb-3">SigBan
+        <small>Sistema Gestor Bananero</small>
+
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <br>
+    <br>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="ms-auto">
+                <a href="javascript:;" (click)="registrar = !registrar" class="btn btn-primary btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> &nbsp;Registrar Cliente</a>
+            </div>
+            <br>
+            <br>
+        </div>
+
+        <div class="col-md-12" *ngIf="registrar">
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="!editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">REGISTRAR CLIENTE
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="createNewCliente()" [formGroup]="formCliente" #formDirective="" id="formClientes">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Documento</mat-label>
+                                            <input required formControlName="documento" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombres</mat-label>
+                                            <input formControlName="nombres" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Apellidos</mat-label>
+                                            <input formControlName="apellidos" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Direccion</mat-label>
+                                            <input formControlName="direccion" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Telefono</mat-label>
+                                            <input maxlength="10" formControlName="telefono" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" [disabled]="formCliente.invalid">Guardar</button>
+
+                                    <a href="javascript:;" (click)="resetFormCliente()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="editar">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">EDITAR CLIENTE
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form (submit)="editBarber()" [formGroup]="formClienteEdit" #formDirective="" id="formClientes">
+
+                            <div class="row" style="padding:10px">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Documento</mat-label>
+                                            <input required formControlName="documento" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoName()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Nombres</mat-label>
+                                            <input formControlName="nombres" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Apellidos</mat-label>
+                                            <input formControlName="apellidos" matInput type="text" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Direccion</mat-label>
+                                            <input formControlName="direccion" matInput type="text" id="documento" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoDocumentNum()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                            <mat-label style="font-size: 16px;"> Telefono</mat-label>
+                                            <input maxlength="10" formControlName="telefono" matInput type="number" />
+                                            <!-- <mat-error *ngIf="form.invalid ">{{ObtenerErrorCampoEmail()}}</mat-error> -->
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+                                    <button type="submit" mat-raised-button color="accent" class="btn  float-right btn-save" [disabled]="formClienteEdit.invalid">Actualizar</button>
+
+                                    <a href="javascript:;" (click)="resetFormCliente()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+                            </div>
+
+                            <!-- end wizard-form -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-inverse animated fadeInDown">
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">LISTADO DE CLIENTES
+                    </h4>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table id="TableClientes" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Documento</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Telefono</th>
+                                <th>Dirección</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Creado por</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+</div>
+<!-- end #content -->

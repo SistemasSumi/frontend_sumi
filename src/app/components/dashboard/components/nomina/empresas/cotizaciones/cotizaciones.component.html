@@ -1,0 +1,538 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Registrar cotización</font>
+                        </font>
+                    </h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript: void(0);">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">cotización</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">Nueva cotización</font>
+                                </font>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <ul class="wizard-nav mb-5">
+                                <li class="wizard-list-item">
+                                    <div class="list-item active">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Productos">
+                                            <i class="fab fa-product-hunt"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="wizard-list-item">
+                                    <div class="list-item">
+                                        <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Datos de la cotización">
+                                            <i class="far fa-address-card"></i>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                            <!-- wizard-nav -->
+                            <form (submit)="guardar()" [formGroup]="formCotizacion" #formDirective="" id="formEmpresa">
+
+
+                                <div class="wizard-tab" style="display: block;">
+                                    <div class="text-center mb-4">
+                                        <h5>Ingrese productos</h5>
+                                        <p class="card-title-desc">Registrar productos de la cotización.</p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-4 col-sm-2">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Codigo</mat-label>
+                                                    <input [(ngModel)]="codigo" [ngModelOptions]="{standalone: true}" matInput type="text" id="codigo" (keyup)="onChangeCodigo($event.target.value)" />
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12  col-sm-10">
+                                            <div class="form-group">
+
+                                                <mat-form-field class="example-full-width" appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label>Producto</mat-label>
+                                                    <input type="text" placeholder="Seleccione un producto" aria-label="Producto" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="textBuscar" [matAutocomplete]="auto" (ngModelChange)="onChangeProducto($event)">
+                                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectProducto($event)">
+
+                                                        <ng-container *ngFor="let data of dataProducto$ | filtro:textBuscar:'nombre'">
+                                                            <mat-option [value]="data.nombre">
+                                                                {{ data.nombre }}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+
+                                                <!-- <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">Producto</mat-label>
+                                            <mat-select [(ngModel)]="id_producto" [ngModelOptions]="{standalone: true}" style="text-align: center;" (ngModelChange)="onChangeProducto($event)">
+                                                <input style="position: initial; margin-bottom: 5px;" class="form-control" [(ngModel)]="textBuscar" [ngModelOptions]="{standalone: true}" type="text" id="codigo" (keyup)="onChangeCodigo($event.target.value)" placeholder="Buscar productos" />
+
+
+                                                <ng-container *ngFor="let data of dataProducto$ | filtro:textBuscar:'nombre'">
+
+                                                    <mat-option [value]="data.id">{{ data.nombre }}</mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                            <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error>
+                                        </mat-form-field> -->
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 col-sm-2">
+                                            <div class="form-group">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Existencias</mat-label>
+                                                    <input [readonly]="true" [(ngModel)]="existencia" [ngModelOptions]="{standalone: true}" matInput type="text" id="codigo" style="font-size: 16px; text-align: center; color: red" />
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-8  col-sm-2">
+                                            <div class="form-group">
+                                                <mat-form-field class="example-full-width" appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label>Precio de venta</mat-label>
+                                                    <input type="text" placeholder="$0.00" aria-label="Number" matInput [(ngModel)]="precio" [ngModelOptions]="{standalone: true}" [matAutocomplete]="cash">
+                                                    <mat-autocomplete #cash="matAutocomplete">
+                                                        <mat-option *ngFor="let option of preciosDeVenta" [value]="option">
+                                                            {{option | currency }}
+                                                        </mat-option>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-4  col-sm-2">
+                                            <div class="form-group">
+                                                <mat-form-field class="example-full-width" appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label>Cantidad</mat-label>
+                                                    <input [(ngModel)]="cantidad" [ngModelOptions]="{standalone: true}" matInput type="text" id="codigo" style="font-size: 16px; text-align: center; " />
+                                                </mat-form-field>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-4">
+
+                                            <a mat-fab color="primary" (click)="bajarProductos()">
+                                                <i style="color: white; font-size: 16px; text-align: center;" class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-header justify-content-between d-flex align-items-center">
+                                                    <h4 class="card-title">Listado de productos.</h4>
+                                                </div>
+                                                <!-- end card header -->
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center">#</th>
+                                                                    <th>PRODUCTO</th>
+                                                                    <th class="text-center">CANTIDAD</th>
+                                                                    <th>PRECIO</th>
+                                                                    <th>IVA</th>
+                                                                    <th>TOTAL</th>
+                                                                    <th></th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody *ngFor="let p of productos; let i = index">
+                                                                <tr>
+                                                                    <th class="text-center" scope="row">{{p.codigo}}</th>
+                                                                    <td class="text-inline">{{p.producto}}</td>
+                                                                    <td class="text-center">{{p.cantidad}}</td>
+                                                                    <td>{{p.precio |currency}}</td>
+                                                                    <td>{{p.iva | currency}}</td>
+                                                                    <td>{{p.total | currency}}</td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0);" (click)="eliminarProducto(i)">
+                                                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                                                        </a>
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                            <!-- end tbody -->
+                                                        </table>
+                                                        <!-- end table -->
+                                                    </div>
+                                                    <!-- end responsive -->
+                                                </div>
+                                                <!-- end card body -->
+                                            </div>
+                                            <!-- end card -->
+                                        </div>
+                                        <!-- end col -->
+                                    </div>
+
+                                </div>
+                                <div class="wizard-tab">
+                                    <div class="text-center mb-4">
+                                        <h5>Datos de la cotización</h5>
+                                        <p class="card-title-desc">Registrar datos de la cotización.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-xl-3 col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm">
+                                                                    <div class="avatar-title bg-soft-primary text-primary rounded-circle font-size-18">
+                                                                        <img width="100" style="margin-right: 10px; margin-left: 15px" src="https://firebasestorage.googleapis.com/v0/b/sigban-autentication.appspot.com/o/cdn-intranet%2Fassets%2Fimg%2FCoins_Two%20Color.png?alt=media&token=75c4dbc7-e86d-4dc5-b7a4-7050cf078a13"
+                                                                            class="uil uil-list-ul" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex-grow-1 overflow-hidden" style="margin-left: 15px">
+                                                                <p class="mb-1 text-truncate text-muted">Subtotal</p>
+                                                                <h5 class="font-size-16 mb-0">{{subtotalCotizacion | currency}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end card body -->
+                                                </div>
+                                                <!-- end card -->
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-xl-3 col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm">
+                                                                    <div class="avatar-title bg-soft-primary text-primary rounded-circle font-size-18">
+                                                                        <img width="100" style="margin-right: 10px; margin-left: 15px" src="https://firebasestorage.googleapis.com/v0/b/sigban-autentication.appspot.com/o/cdn-intranet%2Fassets%2Fimg%2FCoins_Two%20Color.png?alt=media&token=75c4dbc7-e86d-4dc5-b7a4-7050cf078a13"
+                                                                            class="uil uil-list-ul" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex-grow-1 overflow-hidden" style="margin-left: 25px">
+                                                                <p class="mb-1 text-truncate text-muted">Desuento</p>
+                                                                <h5 class="font-size-16 mb-0">{{descuentoCotizacion | currency}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end card body -->
+                                                </div>
+                                                <!-- end card -->
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-xl-3 col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm">
+                                                                    <div class="avatar-title bg-soft-primary text-primary rounded-circle font-size-18">
+                                                                        <img width="100" style="margin-right: 10px; margin-left: 15px" src="https://firebasestorage.googleapis.com/v0/b/sigban-autentication.appspot.com/o/cdn-intranet%2Fassets%2Fimg%2FCoins_Two%20Color.png?alt=media&token=75c4dbc7-e86d-4dc5-b7a4-7050cf078a13"
+                                                                            class="uil uil-list-ul" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex-grow-1 overflow-hidden" style="margin-left: 15px">
+                                                                <p class="mb-1 text-truncate text-muted">IVA</p>
+                                                                <h5 class="font-size-16 mb-0">{{ivaCotizacion | currency}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end card body -->
+                                                </div>
+                                                <!-- end card -->
+                                            </div>
+                                            <!-- end col -->
+                                            <div class="col-xl-3 col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <div class="avatar-sm">
+                                                                    <div class="avatar-title bg-soft-primary text-primary rounded-circle font-size-18">
+                                                                        <img width="100" style="margin-right: 10px; margin-left: 15px" src="https://firebasestorage.googleapis.com/v0/b/sigban-autentication.appspot.com/o/cdn-intranet%2Fassets%2Fimg%2FCoins_Two%20Color.png?alt=media&token=75c4dbc7-e86d-4dc5-b7a4-7050cf078a13"
+                                                                            class="uil uil-list-ul" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="flex-grow-1 overflow-hidden" style="margin-left: 15px">
+                                                                <p class="mb-1 text-truncate text-muted">Total</p>
+                                                                <h5 class="font-size-16 mb-0">{{totalCotizacion | currency}}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end card body-->
+                                                </div>
+                                                <!-- end card -->
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Cliente</mat-label>
+                                                    <mat-select formControlName="cliente" style="text-align: center;">
+
+                                                        <mat-option value="MOSTRADOR">MOSTRADOR</mat-option>
+                                                        <mat-option value="MOSTRADOR 2">MOSTRADOR 2</mat-option>
+                                                        <mat-option value="MOSTRADOR 3">MOSTRADOR 3</mat-option>
+
+
+                                                    </mat-select>
+                                                    <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <mat-form-field class="example-full-width" appearance="fill" style="width:100%; min-height: auto;">
+                                                    <mat-label>Observaciones</mat-label>
+                                                    <textarea matInput formControlName="observacion"></textarea>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <!-- wizard-tab -->
+
+
+                                <div class="d-flex align-items-start gap-3 mt-4">
+                                    <button type="button" class="btn btn-primary w-sm" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Anterior</button>
+
+                                    <div id="btn_guardar" class="w-sm ms-auto">
+                                        <button type="button" class="btn btn-primary w-sm ms-auto" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> &copy; Sumiprod de la costa.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> dpto. sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<ng-template #ReportePdf let-modal>
+    <div class="row">
+        <br>
+        <div class="float-end">
+            <a href="javascript:void(0);" (click)="downloadPDF()" class="btn btn-success me-1"><i class="fa fa-save"></i></a>
+
+        </div>
+    </div>
+    <br>
+    <div class="row" id="reporte">
+        <div class="col-lg-12">
+            <div class="card report">
+                <div class="card-body">
+                    <div class="invoice-title">
+                        <h3 class="float-end font-size-15">Cotización #<b>{{cotizacionGuardada.id_cotizacion | ceros}}</b></h3>
+                        <div class="mb-4">
+                            <img src="./assets/sigban/login/logoB.png" alt="" height="120">
+                        </div>
+                        <div class="text-muted">
+                            <p class="mb-2">CALLE 44B N° 21G-11 URB SANTA CRUZ</p>
+                            <p class="mb-2"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                            <p><i class="uil uil-phone me-1"></i> (5) 435 3319 - (+57) 311 697 4653</p>
+
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text-muted">
+                                <h4 class="font-size-16 mb-3">Cotizado A:</h4>
+                                <h4 class="font-size-15 mb-2">{{cotizacionGuardada.cliente}}</h4>
+                                <p class="mb-2">xxxxx@gmail.com</p>
+                                <p class="mb-2">(x) xxx xx xxxx</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-sm-6">
+                            <div class="text-muted text-sm-end">
+                                <div>
+                                    <h4 class="font-size-15 mb-1">Cotización No:</h4>
+                                    <p>#<b>{{cotizacionGuardada.id_cotizacion | ceros}}</b></p>
+                                </div>
+                                <div class="mt-4">
+                                    <h4 class="font-size-15 mb-1">Fecha Cotización:</h4>
+                                    <b><p class="mb-2">{{currentDate | datetime | uppercase}}</p></b>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="py-2">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap table-centered mb-0">
+                                <thead style="background-color: #00AEFF;  color: #FFFF;font-weight:bold;">
+                                    <tr>
+                                        <th style="width: 70px;"><b>No.</b></th>
+                                        <th style="width: 50px;height: auto;"><b>Producto</b></th>
+                                        <th><b>Precio</b></th>
+                                        <th class="text-center"><b>Cantidad</b></th>
+                                        <th class="text-end"><b>IVA</b></th>
+                                        <th class="text-end"><b>Desc.</b></th>
+
+                                        <th class="text-end" style="width: 120px;"><b>Subtotal</b></th>
+                                    </tr>
+                                </thead>
+                                <!-- end thead -->
+                                <tbody>
+                                    <ng-container *ngFor="let item of cotizacionGuardada.productos; let i = index">
+                                        <tr>
+                                            <th scope="row">{{i + 1}}</th>
+                                            <td class="text-inline font-size-14 mb-1 p">
+                                                {{item.producto}}
+
+                                            </td>
+                                            <td>{{item.precio | currency}}</td>
+                                            <td class="text-center">{{item.cantidad }}</td>
+                                            <td class="text-end">{{item.iva | currency}}</td>
+                                            <td class="text-end">{{item.descuento | currency}}</td>
+                                            <td class="text-end">{{item.total | currency}}</td>
+                                        </tr>
+                                    </ng-container>
+
+                                    <!-- end tr -->
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+
+
+                                        <th scope="row" colspan="4" class="text-end">Sub Total:</th>
+                                        <td class="text-end">{{cotizacionGuardada.total - cotizacionGuardada.iva | currency}}</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                        <td class="border-0 text-end"></td>
+                                        <td class="border-0 text-end"></td>
+
+                                        <th scope="row" colspan="4" class="border-0 text-end">
+                                            Descuento :</th>
+                                        <td class="border-0 text-end">- {{cotizacionGuardada.descuento | currency}}</td>
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                        <td class="border-0 text-end"></td>
+                                        <td class="border-0 text-end"></td>
+
+
+                                        <th scope="row" colspan="4" class="border-0 text-end">
+                                            IVA :</th>
+                                        <td class="border-0 text-end">{{cotizacionGuardada.iva | currency}}</td>
+                                    </tr>
+                                    <!-- end tr -->
+
+                                    <!-- end tr -->
+                                    <tr>
+                                        <td class="border-0 text-end"></td>
+                                        <td class="border-0 text-end"></td>
+
+
+                                        <th scope="row" colspan="4" class="border-0 text-end">Total:</th>
+                                        <td class="border-0 text-end">
+                                            <h4 class="m-0 fw-semibold">{{cotizacionGuardada.total | currency}}</h4>
+                                        </td>
+                                    </tr>
+                                    <!-- end tr -->
+                                </tbody>
+                                <!-- end tbody -->
+                            </table>
+                            <br>
+                            <br>
+                            <br>
+                            <h6>* Cotización valida por 24 horas o hasta agotar existencias!</h6>
+                            <h6>* Observaciones: {{cotizacionGuardada.observacion}}</h6>
+                            <!-- end table -->
+                        </div>
+                        <!-- end table responsive -->
+                        <div class="d-print-none mt-4">
+                            <!-- <div class="float-end">
+                                <a href="javascript:void(0);" (click)="downloadPDF()" class="btn btn-success me-1"><i class="fa fa-save"></i></a>
+
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col -->
+    </div>
+</ng-template>

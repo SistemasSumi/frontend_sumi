@@ -1,0 +1,464 @@
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <!-- <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol> -->
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header mb-3">
+
+        <small></small>
+    </h1>
+    <!-- end page-header -->
+    <!-- begin daterange-filter -->
+    <!-- end daterange-filter -->
+    <!-- begin row -->
+    <div class="panel panel-inverse animated fadeInDown" width="100%">
+        <div class="panel-heading">
+            <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+            <h4 class="panel-title">REGISTRO DE TABLAS BASICAS
+            </h4>
+
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+
+            <mat-tab-group mat-stretch-tabs (selectedTabChange)="tabClick($event)">
+
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE CARGOS (SIGBAN) -->
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <img src="./assets/sigban/tablas-basicas-navbar/cargo.svg" class="example-tab-icon" width="30" alt="no fount"> Baberos
+                    </ng-template>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div [ngClass]="{'col-md-12': expand,'col-md-6': !expand}">
+                            <div class="panel panel-inverse animated fadeInDown">
+                                <div class="panel-heading">
+                                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                                    <h4 class="panel-title text-center">LISTADO DE BARBEROS
+                                    </h4>
+
+                                    <div class="panel-heading-btn">
+                                        <a (click)="expand = !expand" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default">
+                                            <i [ngClass]="{'fas fa-compress': expand,'fa fa-expand': !expand}"></i>
+                                        </a>
+
+                                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="TableBarberos" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Documento</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Telefono</th>
+                                                <th>Dirección</th>
+                                                <th>Ganancia</th>
+                                                <th>usuario</th>
+                                                <th>Fecha Creación</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'col-md-12': expand,'col-md-6': !expand}">
+                            <div class="panel panel-inverse animated fadeInDown">
+                                <div class="panel-heading">
+                                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                                    <h4 class="panel-title text-center">REGISTRO DE BARBEROS
+                                    </h4>
+
+                                    <div class="panel-heading-btn">
+                                        <a (click)="expand = !expand" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default">
+                                            <i [ngClass]="{'fas fa-compress': expand,'fa fa-expand': !expand}"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <ng-container *ngIf="!editar">
+                                        <form (submit)="createNewBarber()" [formGroup]="formBarberos" #formDirective id="formBarberos">
+
+                                            <div class="row" style="padding:10px">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;">Documento</mat-label>
+                                                            <input required formControlName="documento" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('documento','El documento')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Nombre del Barbero</mat-label>
+                                                            <input required formControlName="nombres" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('nombres','El nombre')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;">Apellidos del Barbero</mat-label>
+                                                            <input required formControlName="apellidos" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('apellidos','El Apellido')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Telefono del Barbero</mat-label>
+                                                            <input required formControlName="telefono" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('telefono','El telefono')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Direccion del Barbero</mat-label>
+                                                            <input required formControlName="direccion" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('direccion','La direccion')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 24px;">%</mat-label>
+                                                            <input required formControlName="porcentaje" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('porcentaje','El Porcentaje')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                            <mat-label style="font-size: 16px;">Usuario</mat-label>
+                                                            <mat-select formControlName="users" style="text-align: center;">
+                                                                <ng-container *ngFor="let user of dataUsers">
+                                                                    <mat-option [value]="user.id">{{ user.email }}</mat-option>
+                                                                </ng-container>
+                                                            </mat-select>
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <button type="submit" mat-raised-button color="primary" class="btn  float-right" [disabled]="this.formBarberos.invalid">
+                                                        Guardar                                              
+                                                     </button>
+                                                    <button type="button" mat-raised-button (click)="resetFormBarber()" class="btn btn-danger float-right" style="margin-right: 15px;">
+                                                        Cancelar                                                     
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end wizard-form -->
+                                        </form>
+                                    </ng-container>
+                                    <ng-container *ngIf="editar">
+                                        <form (submit)="editBarber()" [formGroup]="formBarberosEdit" #formDirective id="formBarberos">
+
+                                            <div class="row" style="padding:10px">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;">Documento</mat-label>
+                                                            <input required formControlName="documento" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('documento','El documento')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Nombre del Barbero</mat-label>
+                                                            <input required formControlName="nombres" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('nombres','El nombre')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;">Apellidos del Barbero</mat-label>
+                                                            <input required formControlName="apellidos" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('apellidos','El Apellido')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Telefono del Barbero</mat-label>
+                                                            <input required formControlName="telefono" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('telefono','El telefono')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Direccion del Barbero</mat-label>
+                                                            <input required formControlName="direccion" matInput type="text" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('direccion','La direccion')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 24px;">%</mat-label>
+                                                            <input required formControlName="porcentaje" matInput type="number" />
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('porcentaje','El Porcentaje')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                            <mat-label style="font-size: 16px;">Usuario</mat-label>
+                                                            <mat-select formControlName="users" style="text-align: center;">
+                                                                <ng-container *ngFor="let user of dataUsers">
+                                                                    <mat-option [value]="user.id">{{ user.email }}</mat-option>
+                                                                </ng-container>
+                                                            </mat-select>
+                                                            <mat-error *ngIf="formBarberos.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <button type="submit" mat-raised-button color="accent" class="btn  float-right" [disabled]="this.formBarberosEdit.invalid">
+                                                        Actualizar                                              
+                                                     </button>
+                                                    <button type="button" mat-raised-button (click)="resetFormBarber()" class="btn btn-danger float-right" style="margin-right: 15px;">
+                                                        Cancelar                                                     
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end wizard-form -->
+                                        </form>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </mat-tab>
+                <!-- FIN PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE CARGOS (SIGBAN) -->
+
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE COLORES (SIGBAN) -->
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <img src="./assets/sigban/tablas-basicas-navbar/colores.svg" class="example-tab-icon" width="30" alt="no fount"> Servicios
+                    </ng-template>
+                    <div class="row" style="margin-top: 20px;">
+                        <div [ngClass]="{'col-md-12': expand,'col-md-6': !expand}">
+                            <div class="panel panel-inverse animated fadeInDown">
+                                <div class="panel-heading">
+                                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                                    <h4 class="panel-title text-center">LISTADO DE SERVICIOS
+                                    </h4>
+
+                                    <div class="panel-heading-btn">
+                                        <a (click)="expand = !expand" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default">
+                                            <i [ngClass]="{'fas fa-compress': expand,'fa fa-expand': !expand}"></i>
+                                        </a>
+
+                                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="TableServicios" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nombre del Servicio</th>
+                                                <th>Valor</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'col-md-12': expand,'col-md-6': !expand}">
+                            <div class="panel panel-inverse animated fadeInDown">
+                                <div class="panel-heading">
+                                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                                    <h4 class="panel-title text-center">REGISTRO DE SERVICIOS
+                                    </h4>
+
+                                    <div class="panel-heading-btn">
+                                        <a (click)="expand = !expand" href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default">
+                                            <i [ngClass]="{'fas fa-compress': expand,'fa fa-expand': !expand}"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <ng-container *ngIf="!editar">
+                                        <form (submit)="createNewServicio()" [formGroup]="formServicios" #formDirective="" id="formServicios">
+
+                                            <div class="row" style="padding:10px">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Nombre del Servicio</mat-label>
+                                                            <input required formControlName="nombres" matInput type="text" id="nombre" />
+                                                            <!-- <mat-error *ngIf="formColores.invalid">{{ObtenerErrorCampoColor()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Valor</mat-label>
+                                                            <input required formControlName="valor" matInput type="number" id="valor" />
+                                                            <!-- <mat-error *ngIf="formColores.invalid">{{ObtenerErrorCampoColor()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div class="col-md-12">
+                                                    <button type="submit" mat-raised-button color="primary" class="btn  float-right" [disabled]="this.formServicios.invalid">
+                
+                                                        Guardar
+                                                       
+                                                    </button>
+                                                    <button type="button" mat-raised-button (click)="resetFormServicios()" class="btn btn-danger float-right" style="margin-right: 15px;">
+                                                      
+                                                        Cancelar
+                                                       
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end wizard-form -->
+                                        </form>
+                                    </ng-container>
+                                    <ng-container *ngIf="editar">
+                                        <form (submit)="editServicio()" [formGroup]="formServiciosEdit" #formDirective="" id="formServicios">
+
+                                            <div class="row" style="padding:10px">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Nombre del Servicio</mat-label>
+                                                            <input required formControlName="nombres" matInput type="text" id="nombre" />
+                                                            <!-- <mat-error *ngIf="formColores.invalid">{{ObtenerErrorCampoColor()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                            <mat-label style="font-size: 18px;"> Valor</mat-label>
+                                                            <input required formControlName="valor" matInput type="number" id="valor" />
+                                                            <!-- <mat-error *ngIf="formColores.invalid">{{ObtenerErrorCampoColor()}}</mat-error> -->
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div class="col-md-12">
+                                                    <button type="submit" mat-raised-button color="accent" class="btn  float-right" [disabled]="this.formServiciosEdit.invalid">
+                
+                                                        Actualizar
+                                                       
+                                                    </button>
+                                                    <button type="button" mat-raised-button (click)="resetFormServicios()" class="btn btn-danger float-right" style="margin-right: 15px;">
+                                                      
+                                                        Cancelar
+                                                       
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end wizard-form -->
+                                        </form>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </mat-tab>
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE COLORES (SIGBAN) -->
+
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE LABORES (SIGBAN) -->
+
+
+
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE LABORES (SIGBAN) -->
+
+
+                <!-- PESTAÑA PARA DARLE MANTENIMIENTO AL MODELO DE FUNCIONES EMPLEADOS   (SIGBAN) -->
+
+            </mat-tab-group>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+    <!-- begin row -->
+
+    <!-- end row -->
+</div>
+<!-- end #content -->

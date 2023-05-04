@@ -1,0 +1,257 @@
+<!-- begin #content -->
+<div id="content" class="content">
+
+    <div class="row">
+        <div class="col-md-12" *ngIf="true">
+            <div class="panel panel-inverse animated fadeInDown" *ngIf="true">
+
+                <div class="panel-heading">
+                    <img src="./assets/sigban/login/platanos.png" width="30" style="margin-right: 10px;">
+                    <h4 class="panel-title text-center">REGISTRAR SOLICITUD
+                    </h4>
+
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-green" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form (submit)="guardarCortes()" [formGroup]="formCorte" #formDirective="" id="formCortes">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Documento</mat-label>
+                                                <input formControlName="documento" matInput type="text" id="documento" />
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Cliente</mat-label>
+                                                <mat-select formControlName="idcliente" style="text-align: center;">
+                                                    <ng-container *ngFor="let data of dataCliente$ | async">
+                                                        <mat-option [value]="data.id">{{ data.nombres }}</mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Forma de pago</mat-label>
+                                                <mat-select formControlName="formaPago" style="text-align: center;">
+                                                    <ng-container>
+                                                        <mat-option [value]="0">CONTADO</mat-option>
+                                                        <mat-option [value]="1">TRANSFERENCIA</mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Usuario</mat-label>
+                                                <mat-select formControlName="idcliente" style="text-align: center;">
+                                                    <ng-container *ngFor="let data of dataCliente$ | async">
+                                                        <mat-option [value]="data.id">{{ data.nombres }}</mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        Detalle Producto
+
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <mat-divider></mat-divider>
+
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Codigo</mat-label>
+                                                <input formControlName="codigo" matInput type="text" id="codigo" (keyup)="onChangeCodigo($event.target.value)" />
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Producto</mat-label>
+                                                <mat-select formControlName="idProducto" style="text-align: center;" (ngModelChange)="onChangeProducto($event)">
+                                                    <ng-container *ngFor="let data of dataProducto$">
+                                                        <mat-option [value]="data.id">{{ data.nombre }}</mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Costo</mat-label>
+                                                <input disabled formControlName="costo" matInput type="text" id="costo" />
+
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Existencia</mat-label>
+                                                <input disabled formControlName="existencia" matInput type="text" id="costo" />
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                <mat-label style="font-size: 16px;">Precio</mat-label>
+                                                <input formControlName="precio" matInput type="text" id="costo" />
+
+                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                        <mat-label style="font-size: 16px;">Cantidad</mat-label>
+                                                        <input formControlName="cantidad" matInput type="number" id="cantidad" />
+                                                        <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                                <mat-label style="font-size: 16px;">Descuento</mat-label>
+                                                                <input formControlName="descuento" matInput type="number" id="cantidad" />
+                                                                <!-- <mat-error *ngIf="formCorte.invalid">{{ObtenerErrorCampo('users','El usuario ')}}</mat-error> -->
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <div class="example-button-container">
+                                                        <button (click)="capturarDetalle()" type="button" mat-fab color="primary" aria-label="">
+                                                            <mat-icon>get_app</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="invoice" style="width: 100%;">
+                                        <div class="invoice-content" style="width: 100%;">
+
+                                            <div class="table-responsive" style="width: 100%;">
+                                                <table class="table table-invoice" style="width: 100%;">
+                                                    <thead style="width: 100%;">
+                                                        <tr>
+                                                            <th>DESCRIPCIÓN</th>
+                                                            <th class="text-end" width="10%">PRECIO</th>
+                                                            <th class="text-center" width="10%">CANTIDAD</th>
+                                                            <th class="text-end" width="6%">DESCUENTO</th>
+                                                            <th class="text-end" width="10%">SUBTOTAL</th>
+                                                            <th class="text-end" width="5%"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="width: 100%;">
+                                                        <tr *ngFor="let producto of dataCarrito$">
+                                                            <td>
+                                                                <span class="text-dark">{{producto.producto | uppercase}}</span><br>
+
+                                                            </td>
+                                                            <td class="text-end">{{producto.precio | currency}}</td>
+                                                            <td class="text-center">{{producto.cantidad }}</td>
+                                                            <td class="text-end">{{producto.descuento | currency}}</td>
+                                                            <td class="text-end">{{producto.subtotal | currency}}</td>
+                                                            <td class="text-end">
+                                                                <a href="javascript:;" style="color:red;" (click)="eliminarProducto(producto.id)">
+                                                                    <mat-icon>delete</mat-icon>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                            <div class="invoice-price">
+                                                <div class="invoice-price-left">
+                                                    <div class="invoice-price-row">
+                                                        <div class="sub-price">
+                                                            <small>SUBTOTAL</small>
+                                                            <span class="text-dark">{{subtotal | currency}}</span>
+                                                        </div>
+                                                        <div class="sub-price">
+                                                            <i class="fa fa-minus text-muted"></i>
+                                                        </div>
+                                                        <div class="sub-price">
+                                                            <small>DESCUENTO (%)</small>
+                                                            <span class="text-dark">{{ descuento | currency}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="invoice-price-right">
+                                                    <small>TOTAL</small> <span class="text-white">{{total | currency}}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn  float-right btn-save" [disabled]="formCorte.invalid">Guardar</button>
+
+                                    <a href="javascript:;" (click)="resetFormCorte()" class="btn btn-white float-right" style="margin-right: 15px;">Cancelar</a>
+                                </div>
+
+
+                                <!-- end wizard-form -->
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+<!-- end #content -->

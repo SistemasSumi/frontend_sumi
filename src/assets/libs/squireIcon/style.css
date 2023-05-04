@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'squireIcon';
+  src:
+    url('fonts/squireIcon.ttf?w17ujz') format('truetype'),
+    url('fonts/squireIcon.woff?w17ujz') format('woff'),
+    url('fonts/squireIcon.svg?w17ujz#squireIcon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.squire {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'squireIcon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-excel:before {
+  content: "\e902";
+  color: #217346;
+}
+.ico-onenote:before {
+  content: "\e903";
+  color: #80397b;
+}
+.ico-outlook:before {
+  content: "\e904";
+  color: #0072c6;
+}
+.ico-powerpoint:before {
+  content: "\e905";
+  color: #d24726;
+}
+.ico-teams:before {
+  content: "\e906";
+  color: #6264a7;
+}
+.ico-word:before {
+  content: "\e907";
+  color: #2b579a;
+}
+.ico-telegram:before {
+  content: "\e908";
+  color: #2ca5e0;
+}
+.ico-stock:before {
+  content: "\e909";
+}
+.ico-editar-blue:before {
+  content: "\e900";
+}
+.ico-pdf:before {
+  content: "\e901";
+}

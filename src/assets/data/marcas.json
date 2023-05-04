@@ -1,0 +1,2702 @@
+[
+  {
+    "nombre": "3M"
+  },
+  {
+    "nombre": "3M**"
+  },
+  {
+    "nombre": "Abbott"
+  },
+  {
+    "nombre": "Abbott**"
+  },
+  {
+    "nombre": "Abbvie"
+  },
+  {
+    "nombre": "Abbvie**"
+  },
+  {
+    "nombre": "Abo"
+  },
+  {
+    "nombre": "Abo**"
+  },
+  {
+    "nombre": "Acetato"
+  },
+  {
+    "nombre": "Acetato**"
+  },
+  {
+    "nombre": "Actifarma"
+  },
+  {
+    "nombre": "Actifarma**"
+  },
+  {
+    "nombre": "Aculife"
+  },
+  {
+    "nombre": "Aculife**"
+  },
+  {
+    "nombre": "Ads Pharma"
+  },
+  {
+    "nombre": "Ads Pharma**"
+  },
+  {
+    "nombre": "Ah Robins"
+  },
+  {
+    "nombre": "Ah Robins**"
+  },
+  {
+    "nombre": "AL FRANCE"
+  },
+  {
+    "nombre": "AL FRANCE**"
+  },
+  {
+    "nombre": "AL PHARMA"
+  },
+  {
+    "nombre": "AL PHARMA**"
+  },
+  {
+    "nombre": "Albor"
+  },
+  {
+    "nombre": "Albor**"
+  },
+  {
+    "nombre": "Alfa Safe"
+  },
+  {
+    "nombre": "Alfa Safe**"
+  },
+  {
+    "nombre": "Alfamedic"
+  },
+  {
+    "nombre": "Alfamedic**"
+  },
+  {
+    "nombre": "Alkem"
+  },
+  {
+    "nombre": "Alkem**"
+  },
+  {
+    "nombre": "Alpharma"
+  },
+  {
+    "nombre": "Alpharma**"
+  },
+  {
+    "nombre": "Atramat"
+  },
+  {
+    "nombre": "Atramat**"
+  },
+  {
+    "nombre": "Aurobindo"
+  },
+  {
+    "nombre": "Aurobindo**"
+  },
+  {
+    "nombre": "Avanpharma"
+  },
+  {
+    "nombre": "Avanpharma**"
+  },
+  {
+    "nombre": "Bago"
+  },
+  {
+    "nombre": "Bago**"
+  },
+  {
+    "nombre": "Balu"
+  },
+  {
+    "nombre": "Balu**"
+  },
+  {
+    "nombre": "Baxter"
+  },
+  {
+    "nombre": "Baxter**"
+  },
+  {
+    "nombre": "Bayer"
+  },
+  {
+    "nombre": "Bayer**"
+  },
+  {
+    "nombre": "Bbraun"
+  },
+  {
+    "nombre": "Bbraun**"
+  },
+  {
+    "nombre": "BCN"
+  },
+  {
+    "nombre": "BCN**"
+  },
+  {
+    "nombre": "BD"
+  },
+  {
+    "nombre": "BD**"
+  },
+  {
+    "nombre": "Besmed"
+  },
+  {
+    "nombre": "Besmed**"
+  },
+  {
+    "nombre": "Best"
+  },
+  {
+    "nombre": "Best**"
+  },
+  {
+    "nombre": "BioEsteril"
+  },
+  {
+    "nombre": "BioEsteril**"
+  },
+  {
+    "nombre": "Biofit"
+  },
+  {
+    "nombre": "Biofit**"
+  },
+  {
+    "nombre": "Biolife"
+  },
+  {
+    "nombre": "Biolife**"
+  },
+  {
+    "nombre": "American Generic"
+  },
+  {
+    "nombre": "American Generic**"
+  },
+  {
+    "nombre": "Anglopharma"
+  },
+  {
+    "nombre": "Anglopharma**"
+  },
+  {
+    "nombre": "Anios"
+  },
+  {
+    "nombre": "Anios**"
+  },
+  {
+    "nombre": "Astellas"
+  },
+  {
+    "nombre": "Astellas**"
+  },
+  {
+    "nombre": "Astrazeneca"
+  },
+  {
+    "nombre": "Astrazeneca**"
+  },
+  {
+    "nombre": "Asypo"
+  },
+  {
+    "nombre": "Asypo**"
+  },
+  {
+    "nombre": "Biosurgery"
+  },
+  {
+    "nombre": "Biosurgery**"
+  },
+  {
+    "nombre": "Biosyntec"
+  },
+  {
+    "nombre": "Biosyntec**"
+  },
+  {
+    "nombre": "Biosystems"
+  },
+  {
+    "nombre": "Biosystems**"
+  },
+  {
+    "nombre": "Biotest"
+  },
+  {
+    "nombre": "Biotest**"
+  },
+  {
+    "nombre": "Biothermic"
+  },
+  {
+    "nombre": "Biothermic**"
+  },
+  {
+    "nombre": "Biotoscana"
+  },
+  {
+    "nombre": "Biotoscana**"
+  },
+  {
+    "nombre": "Blaskov"
+  },
+  {
+    "nombre": "Blaskov**"
+  },
+  {
+    "nombre": "Blau"
+  },
+  {
+    "nombre": "Blau**"
+  },
+  {
+    "nombre": "Boeco"
+  },
+  {
+    "nombre": "Boeco**"
+  },
+  {
+    "nombre": "Boehringer"
+  },
+  {
+    "nombre": "Boehringer**"
+  },
+  {
+    "nombre": "Bremymg"
+  },
+  {
+    "nombre": "Bremymg**"
+  },
+  {
+    "nombre": "Bristol"
+  },
+  {
+    "nombre": "Bristol**"
+  },
+  {
+    "nombre": "BSN"
+  },
+  {
+    "nombre": "BSN**"
+  },
+  {
+    "nombre": "BSS"
+  },
+  {
+    "nombre": "BSS**"
+  },
+  {
+    "nombre": "Buss"
+  },
+  {
+    "nombre": "Buss**"
+  },
+  {
+    "nombre": "Bussie"
+  },
+  {
+    "nombre": "Bussie**"
+  },
+  {
+    "nombre": "Cambridge"
+  },
+  {
+    "nombre": "Cambridge**"
+  },
+  {
+    "nombre": "Capibell"
+  },
+  {
+    "nombre": "Capibell**"
+  },
+  {
+    "nombre": "Cápsulas"
+  },
+  {
+    "nombre": "Cápsulas**"
+  },
+  {
+    "nombre": "Bioplast"
+  },
+  {
+    "nombre": "Bioplast**"
+  },
+  {
+    "nombre": "Bioquifar"
+  },
+  {
+    "nombre": "Bioquifar**"
+  },
+  {
+    "nombre": "Biosano"
+  },
+  {
+    "nombre": "Biosano**"
+  },
+  {
+    "nombre": "Bioselect"
+  },
+  {
+    "nombre": "Bioselect**"
+  },
+  {
+    "nombre": "Arbor"
+  },
+  {
+    "nombre": "Arbor**"
+  },
+  {
+    "nombre": "Aseptic"
+  },
+  {
+    "nombre": "Aseptic**"
+  },
+  {
+    "nombre": "Cdhealth"
+  },
+  {
+    "nombre": "Cdhealth**"
+  },
+  {
+    "nombre": "Celgene"
+  },
+  {
+    "nombre": "Celgene**"
+  },
+  {
+    "nombre": "Ctk"
+  },
+  {
+    "nombre": "Ctk**"
+  },
+  {
+    "nombre": "Cure Band"
+  },
+  {
+    "nombre": "Cure Band**"
+  },
+  {
+    "nombre": "Cuyderm"
+  },
+  {
+    "nombre": "Cuyderm**"
+  },
+  {
+    "nombre": "Delta"
+  },
+  {
+    "nombre": "Delta**"
+  },
+  {
+    "nombre": "Demetech"
+  },
+  {
+    "nombre": "Demetech**"
+  },
+  {
+    "nombre": "Dentsply Sirona"
+  },
+  {
+    "nombre": "Dentsply Sirona**"
+  },
+  {
+    "nombre": "Descarpack"
+  },
+  {
+    "nombre": "Descarpack**"
+  },
+  {
+    "nombre": "Determine"
+  },
+  {
+    "nombre": "Determine**"
+  },
+  {
+    "nombre": "Diagnostica"
+  },
+  {
+    "nombre": "Diagnostica**"
+  },
+  {
+    "nombre": "Dispaclean"
+  },
+  {
+    "nombre": "Dispaclean**"
+  },
+  {
+    "nombre": "Dispromed"
+  },
+  {
+    "nombre": "Dispromed**"
+  },
+  {
+    "nombre": "Disproquim"
+  },
+  {
+    "nombre": "Disproquim**"
+  },
+  {
+    "nombre": "Dobfar"
+  },
+  {
+    "nombre": "Dobfar**"
+  },
+  {
+    "nombre": "domingo"
+  },
+  {
+    "nombre": "domingo**"
+  },
+  {
+    "nombre": "Dongkook"
+  },
+  {
+    "nombre": "Dongkook**"
+  },
+  {
+    "nombre": "Dotamedicas GYD"
+  },
+  {
+    "nombre": "Dotamedicas GYD**"
+  },
+  {
+    "nombre": "Double Ring"
+  },
+  {
+    "nombre": "Double Ring**"
+  },
+  {
+    "nombre": "Dr.Reddy-s"
+  },
+  {
+    "nombre": "Dr.Reddy-s**"
+  },
+  {
+    "nombre": "DTM"
+  },
+  {
+    "nombre": "DTM**"
+  },
+  {
+    "nombre": "Dual Heard"
+  },
+  {
+    "nombre": "Dual Heard**"
+  },
+  {
+    "nombre": "Ecar"
+  },
+  {
+    "nombre": "Ecar**"
+  },
+  {
+    "nombre": "Edan"
+  },
+  {
+    "nombre": "Edan**"
+  },
+  {
+    "nombre": "Chalver**"
+  },
+  {
+    "nombre": "Cipla"
+  },
+  {
+    "nombre": "Cipla**"
+  },
+  {
+    "nombre": "Clay"
+  },
+  {
+    "nombre": "Clay**"
+  },
+  {
+    "nombre": "Closter Pharma"
+  },
+  {
+    "nombre": "Closter Pharma**"
+  },
+  {
+    "nombre": "coaspharma"
+  },
+  {
+    "nombre": "coaspharma**"
+  },
+  {
+    "nombre": "Colgate"
+  },
+  {
+    "nombre": "Colgate**"
+  },
+  {
+    "nombre": "Colmed"
+  },
+  {
+    "nombre": "Colmed**"
+  },
+  {
+    "nombre": "Eterna"
+  },
+  {
+    "nombre": "Eterna**"
+  },
+  {
+    "nombre": "Ethicon"
+  },
+  {
+    "nombre": "Ethicon**"
+  },
+  {
+    "nombre": "Eufar"
+  },
+  {
+    "nombre": "Eufar**"
+  },
+  {
+    "nombre": "Euro Ciencia"
+  },
+  {
+    "nombre": "Euro Ciencia**"
+  },
+  {
+    "nombre": "Eurocast"
+  },
+  {
+    "nombre": "Eurocast**"
+  },
+  {
+    "nombre": "EuroEtika"
+  },
+  {
+    "nombre": "EuroEtika**"
+  },
+  {
+    "nombre": "Europack"
+  },
+  {
+    "nombre": "Europack**"
+  },
+  {
+    "nombre": "Expofarma"
+  },
+  {
+    "nombre": "Expofarma**"
+  },
+  {
+    "nombre": "Facemask"
+  },
+  {
+    "nombre": "Facemask**"
+  },
+  {
+    "nombre": "Cepilab"
+  },
+  {
+    "nombre": "Cepilab**"
+  },
+  {
+    "nombre": "Cepimax"
+  },
+  {
+    "nombre": "Cepimax**"
+  },
+  {
+    "nombre": "Convatec"
+  },
+  {
+    "nombre": "Convatec**"
+  },
+  {
+    "nombre": "Corpaul"
+  },
+  {
+    "nombre": "Corpaul**"
+  },
+  {
+    "nombre": "Cospharma"
+  },
+  {
+    "nombre": "Cospharma**"
+  },
+  {
+    "nombre": "Covidien"
+  },
+  {
+    "nombre": "Covidien**"
+  },
+  {
+    "nombre": "Farmacapsulas"
+  },
+  {
+    "nombre": "Farmacapsulas**"
+  },
+  {
+    "nombre": "Farmioni"
+  },
+  {
+    "nombre": "Farmioni**"
+  },
+  {
+    "nombre": "Farmionni"
+  },
+  {
+    "nombre": "Farmionni**"
+  },
+  {
+    "nombre": "Farmocol"
+  },
+  {
+    "nombre": "Farmocol**"
+  },
+  {
+    "nombre": "Fresenius Kabi"
+  },
+  {
+    "nombre": "Fresenius Kabi**"
+  },
+  {
+    "nombre": "Garmisch"
+  },
+  {
+    "nombre": "Garmisch**"
+  },
+  {
+    "nombre": "General"
+  },
+  {
+    "nombre": "General**"
+  },
+  {
+    "nombre": "Genérico"
+  },
+  {
+    "nombre": "Genérico**"
+  },
+  {
+    "nombre": "Genfar"
+  },
+  {
+    "nombre": "Genfar**"
+  },
+  {
+    "nombre": "Farmaliquidos"
+  },
+  {
+    "nombre": "Farmaliquidos**"
+  },
+  {
+    "nombre": "Farmalogica"
+  },
+  {
+    "nombre": "Farmalogica**"
+  },
+  {
+    "nombre": "Gerson"
+  },
+  {
+    "nombre": "Gerson**"
+  },
+  {
+    "nombre": "GHC"
+  },
+  {
+    "nombre": "GHC**"
+  },
+  {
+    "nombre": "GlaxoSmithKline"
+  },
+  {
+    "nombre": "GlaxoSmithKline**"
+  },
+  {
+    "nombre": "GlucoQuick"
+  },
+  {
+    "nombre": "GlucoQuick**"
+  },
+  {
+    "nombre": "GMD"
+  },
+  {
+    "nombre": "GMD**"
+  },
+  {
+    "nombre": "Golden Care"
+  },
+  {
+    "nombre": "Golden Care**"
+  },
+  {
+    "nombre": "Gothaplast"
+  },
+  {
+    "nombre": "Gothaplast**"
+  },
+  {
+    "nombre": "Grunenthal"
+  },
+  {
+    "nombre": "Grunenthal**"
+  },
+  {
+    "nombre": "GSK"
+  },
+  {
+    "nombre": "GSK**"
+  },
+  {
+    "nombre": "Gypsona"
+  },
+  {
+    "nombre": "Gypsona**"
+  },
+  {
+    "nombre": "Haikangnuo"
+  },
+  {
+    "nombre": "Haikangnuo**"
+  },
+  {
+    "nombre": "Heel"
+  },
+  {
+    "nombre": "Heel**"
+  },
+  {
+    "nombre": "Hetero"
+  },
+  {
+    "nombre": "Hetero**"
+  },
+  {
+    "nombre": "Hidroandina"
+  },
+  {
+    "nombre": "Hidroandina**"
+  },
+  {
+    "nombre": "Higietex"
+  },
+  {
+    "nombre": "Higietex**"
+  },
+  {
+    "nombre": "Holandina"
+  },
+  {
+    "nombre": "Holandina**"
+  },
+  {
+    "nombre": "Huatong Medical"
+  },
+  {
+    "nombre": "Huatong Medical**"
+  },
+  {
+    "nombre": "Improve"
+  },
+  {
+    "nombre": "Improve**"
+  },
+  {
+    "nombre": "Incobra"
+  },
+  {
+    "nombre": "Incobra**"
+  },
+  {
+    "nombre": "Insumos"
+  },
+  {
+    "nombre": "Insumos**"
+  },
+  {
+    "nombre": "Intecma"
+  },
+  {
+    "nombre": "Intecma**"
+  },
+  {
+    "nombre": "Intersurgical"
+  },
+  {
+    "nombre": "Intersurgical**"
+  },
+  {
+    "nombre": "Inverfarma"
+  },
+  {
+    "nombre": "Inverfarma**"
+  },
+  {
+    "nombre": "Janssen"
+  },
+  {
+    "nombre": "Janssen**"
+  },
+  {
+    "nombre": "JGB"
+  },
+  {
+    "nombre": "JGB**"
+  },
+  {
+    "nombre": "Jhonson"
+  },
+  {
+    "nombre": "Jhonson**"
+  },
+  {
+    "nombre": "Joreshtech"
+  },
+  {
+    "nombre": "Joreshtech**"
+  },
+  {
+    "nombre": "Juliao"
+  },
+  {
+    "nombre": "Juliao**"
+  },
+  {
+    "nombre": "Kawa"
+  },
+  {
+    "nombre": "Kawa**"
+  },
+  {
+    "nombre": "Kedrion Biopharma"
+  },
+  {
+    "nombre": "Kedrion Biopharma**"
+  },
+  {
+    "nombre": "Kennedy"
+  },
+  {
+    "nombre": "Kennedy**"
+  },
+  {
+    "nombre": "Kimberly"
+  },
+  {
+    "nombre": "Kimberly**"
+  },
+  {
+    "nombre": "Kioling"
+  },
+  {
+    "nombre": "Kioling**"
+  },
+  {
+    "nombre": "Knovel"
+  },
+  {
+    "nombre": "Knovel Pharma"
+  },
+  {
+    "nombre": "Knovel Pharma**"
+  },
+  {
+    "nombre": "Knovel**"
+  },
+  {
+    "nombre": "Kol"
+  },
+  {
+    "nombre": "Kol**"
+  },
+  {
+    "nombre": "Kramer"
+  },
+  {
+    "nombre": "Kramer**"
+  },
+  {
+    "nombre": "Kwality Pharmaceutical"
+  },
+  {
+    "nombre": "Kwality Pharmaceutical**"
+  },
+  {
+    "nombre": "La Santé"
+  },
+  {
+    "nombre": "La Santé**"
+  },
+  {
+    "nombre": "Labinco"
+  },
+  {
+    "nombre": "Labinco**"
+  },
+  {
+    "nombre": "Labquifar"
+  },
+  {
+    "nombre": "Labquifar**"
+  },
+  {
+    "nombre": "Lafrancol"
+  },
+  {
+    "nombre": "Lafrancol**"
+  },
+  {
+    "nombre": "Laproff"
+  },
+  {
+    "nombre": "Laproff**"
+  },
+  {
+    "nombre": "Lebriut"
+  },
+  {
+    "nombre": "Lebriut**"
+  },
+  {
+    "nombre": "Legrand"
+  },
+  {
+    "nombre": "Legrand**"
+  },
+  {
+    "nombre": "Lemaitre"
+  },
+  {
+    "nombre": "Lemaitre**"
+  },
+  {
+    "nombre": "Humax"
+  },
+  {
+    "nombre": "Humax**"
+  },
+  {
+    "nombre": "Huran"
+  },
+  {
+    "nombre": "Huran**"
+  },
+  {
+    "nombre": "IMC"
+  },
+  {
+    "nombre": "IMC**"
+  },
+  {
+    "nombre": "M&H"
+  },
+  {
+    "nombre": "M&H**"
+  },
+  {
+    "nombre": "Macilla"
+  },
+  {
+    "nombre": "Chalver"
+  },
+  {
+    "nombre": "Macilla**"
+  },
+  {
+    "nombre": "Macth"
+  },
+  {
+    "nombre": "Macth**"
+  },
+  {
+    "nombre": "Mainco"
+  },
+  {
+    "nombre": "Mainco**"
+  },
+  {
+    "nombre": "Master Medical"
+  },
+  {
+    "nombre": "Master Medical**"
+  },
+  {
+    "nombre": "MatchII"
+  },
+  {
+    "nombre": "MatchII**"
+  },
+  {
+    "nombre": "Medex"
+  },
+  {
+    "nombre": "Medex**"
+  },
+  {
+    "nombre": "Medical Supplies"
+  },
+  {
+    "nombre": "Medical Supplies**"
+  },
+  {
+    "nombre": "Medicales"
+  },
+  {
+    "nombre": "Medicales**"
+  },
+  {
+    "nombre": "Mediplus"
+  },
+  {
+    "nombre": "Mediplus**"
+  },
+  {
+    "nombre": "Medipoin"
+  },
+  {
+    "nombre": "Medipoin**"
+  },
+  {
+    "nombre": "Medispo"
+  },
+  {
+    "nombre": "Medispo**"
+  },
+  {
+    "nombre": "Mega Labs"
+  },
+  {
+    "nombre": "Mega Labs**"
+  },
+  {
+    "nombre": "Memphis"
+  },
+  {
+    "nombre": "Memphis**"
+  },
+  {
+    "nombre": "MK"
+  },
+  {
+    "nombre": "MK**"
+  },
+  {
+    "nombre": "Momenta"
+  },
+  {
+    "nombre": "Momenta**"
+  },
+  {
+    "nombre": "MSN"
+  },
+  {
+    "nombre": "MSN**"
+  },
+  {
+    "nombre": "Multicord"
+  },
+  {
+    "nombre": "Multicord**"
+  },
+  {
+    "nombre": "MyH Care"
+  },
+  {
+    "nombre": "MyH Care**"
+  },
+  {
+    "nombre": "Nacional"
+  },
+  {
+    "nombre": "Nacional**"
+  },
+  {
+    "nombre": "Nestle"
+  },
+  {
+    "nombre": "Nestle**"
+  },
+  {
+    "nombre": "Nexpharma"
+  },
+  {
+    "nombre": "Nexpharma**"
+  },
+  {
+    "nombre": "Nipro"
+  },
+  {
+    "nombre": "Nipro**"
+  },
+  {
+    "nombre": "Niritie"
+  },
+  {
+    "nombre": "Niritie**"
+  },
+  {
+    "nombre": "Nitta"
+  },
+  {
+    "nombre": "Nitta**"
+  },
+  {
+    "nombre": "No aplica"
+  },
+  {
+    "nombre": "No aplica**"
+  },
+  {
+    "nombre": "Norstray & Nuart"
+  },
+  {
+    "nombre": "Norstray & Nuart**"
+  },
+  {
+    "nombre": "Novamed"
+  },
+  {
+    "nombre": "Novamed**"
+  },
+  {
+    "nombre": "Ophalac"
+  },
+  {
+    "nombre": "Ophalac**"
+  },
+  {
+    "nombre": "Ophtha"
+  },
+  {
+    "nombre": "Ophtha**"
+  },
+  {
+    "nombre": "Optimal Quality"
+  },
+  {
+    "nombre": "Optimal Quality**"
+  },
+  {
+    "nombre": "Orion"
+  },
+  {
+    "nombre": "Orion**"
+  },
+  {
+    "nombre": "Osa"
+  },
+  {
+    "nombre": "Osa**"
+  },
+  {
+    "nombre": "Otai"
+  },
+  {
+    "nombre": "Otai**"
+  },
+  {
+    "nombre": "Pauly"
+  },
+  {
+    "nombre": "Pauly**"
+  },
+  {
+    "nombre": "Pfizer"
+  },
+  {
+    "nombre": "Pfizer**"
+  },
+  {
+    "nombre": "Pint Pharma"
+  },
+  {
+    "nombre": "Pint Pharma**"
+  },
+  {
+    "nombre": "Pisa"
+  },
+  {
+    "nombre": "Pisa**"
+  },
+  {
+    "nombre": "Plastionce"
+  },
+  {
+    "nombre": "Plastionce**"
+  },
+  {
+    "nombre": "Plus Vital"
+  },
+  {
+    "nombre": "Plus Vital**"
+  },
+  {
+    "nombre": "PQP"
+  },
+  {
+    "nombre": "PQP**"
+  },
+  {
+    "nombre": "Precision "
+  },
+  {
+    "nombre": "Precision **"
+  },
+  {
+    "nombre": "Precision Care"
+  },
+  {
+    "nombre": "Precision Care**"
+  },
+  {
+    "nombre": "Proasepsis"
+  },
+  {
+    "nombre": "Proasepsis**"
+  },
+  {
+    "nombre": "Procaps"
+  },
+  {
+    "nombre": "Procaps**"
+  },
+  {
+    "nombre": "Proclin"
+  },
+  {
+    "nombre": "Proclin**"
+  },
+  {
+    "nombre": "Profamilia"
+  },
+  {
+    "nombre": "Profamilia**"
+  },
+  {
+    "nombre": "Proimde"
+  },
+  {
+    "nombre": "Proimde**"
+  },
+  {
+    "nombre": "Protek"
+  },
+  {
+    "nombre": "Protek**"
+  },
+  {
+    "nombre": "Protex"
+  },
+  {
+    "nombre": "Protex**"
+  },
+  {
+    "nombre": "Pulmo Med"
+  },
+  {
+    "nombre": "Pulmo Med**"
+  },
+  {
+    "nombre": "Quifarma"
+  },
+  {
+    "nombre": "Quifarma**"
+  },
+  {
+    "nombre": "Quirumedicas"
+  },
+  {
+    "nombre": "Quirumedicas**"
+  },
+  {
+    "nombre": "Quirupos"
+  },
+  {
+    "nombre": "Quirupos**"
+  },
+  {
+    "nombre": "Quirurgicos"
+  },
+  {
+    "nombre": "Quirurgicos**"
+  },
+  {
+    "nombre": "Recipe"
+  },
+  {
+    "nombre": "Recipe**"
+  },
+  {
+    "nombre": "Recoveri"
+  },
+  {
+    "nombre": "Recoveri**"
+  },
+  {
+    "nombre": "Novartis"
+  },
+  {
+    "nombre": "Novartis**"
+  },
+  {
+    "nombre": "Novo Nordisk"
+  },
+  {
+    "nombre": "Novo Nordisk**"
+  },
+  {
+    "nombre": "Nubenco"
+  },
+  {
+    "nombre": "Nubenco**"
+  },
+  {
+    "nombre": "Nycocard"
+  },
+  {
+    "nombre": "Nycocard**"
+  },
+  {
+    "nombre": "Licol"
+  },
+  {
+    "nombre": "Licol**"
+  },
+  {
+    "nombre": "Life Care"
+  },
+  {
+    "nombre": "Life Care**"
+  },
+  {
+    "nombre": "Paramount"
+  },
+  {
+    "nombre": "Paramount**"
+  },
+  {
+    "nombre": "Reprefarco"
+  },
+  {
+    "nombre": "Reprefarco**"
+  },
+  {
+    "nombre": "reprograf"
+  },
+  {
+    "nombre": "reprograf**"
+  },
+  {
+    "nombre": "Roche"
+  },
+  {
+    "nombre": "Roche**"
+  },
+  {
+    "nombre": "Rodelg"
+  },
+  {
+    "nombre": "Rodelg**"
+  },
+  {
+    "nombre": "Roemmers"
+  },
+  {
+    "nombre": "Roemmers**"
+  },
+  {
+    "nombre": "Ropsohn"
+  },
+  {
+    "nombre": "Ropsohn**"
+  },
+  {
+    "nombre": "RP Medica"
+  },
+  {
+    "nombre": "RP Medica**"
+  },
+  {
+    "nombre": "Sandox"
+  },
+  {
+    "nombre": "Sandox**"
+  },
+  {
+    "nombre": "Sandoz"
+  },
+  {
+    "nombre": "Sandoz**"
+  },
+  {
+    "nombre": "Sanofi"
+  },
+  {
+    "nombre": "Sanofi**"
+  },
+  {
+    "nombre": "Santtex"
+  },
+  {
+    "nombre": "Santtex**"
+  },
+  {
+    "nombre": "Scandinavia"
+  },
+  {
+    "nombre": "Scandinavia**"
+  },
+  {
+    "nombre": "Scott"
+  },
+  {
+    "nombre": "Scott**"
+  },
+  {
+    "nombre": "Selecto Dent"
+  },
+  {
+    "nombre": "Selecto Dent**"
+  },
+  {
+    "nombre": "Sempercare"
+  },
+  {
+    "nombre": "Sempercare**"
+  },
+  {
+    "nombre": "Ryan"
+  },
+  {
+    "nombre": "Ryan**"
+  },
+  {
+    "nombre": "Rymco"
+  },
+  {
+    "nombre": "Rymco**"
+  },
+  {
+    "nombre": "Salus Pharma"
+  },
+  {
+    "nombre": "Salus Pharma**"
+  },
+  {
+    "nombre": "Seven Pharma"
+  },
+  {
+    "nombre": "Seven Pharma**"
+  },
+  {
+    "nombre": "Sherleg"
+  },
+  {
+    "nombre": "Sherleg**"
+  },
+  {
+    "nombre": "Sicfarma"
+  },
+  {
+    "nombre": "Sicfarma**"
+  },
+  {
+    "nombre": "Sicmafarma"
+  },
+  {
+    "nombre": "Sicmafarma**"
+  },
+  {
+    "nombre": "Siegfried"
+  },
+  {
+    "nombre": "Siegfried**"
+  },
+  {
+    "nombre": "Spinreact"
+  },
+  {
+    "nombre": "Spinreact**"
+  },
+  {
+    "nombre": "Standard Diagno"
+  },
+  {
+    "nombre": "Standard Diagno**"
+  },
+  {
+    "nombre": "Sumimed"
+  },
+  {
+    "nombre": "Sumimed**"
+  },
+  {
+    "nombre": "Supertex"
+  },
+  {
+    "nombre": "Supertex**"
+  },
+  {
+    "nombre": "Supreme"
+  },
+  {
+    "nombre": "Supreme**"
+  },
+  {
+    "nombre": "Sutmedical"
+  },
+  {
+    "nombre": "Sutmedical**"
+  },
+  {
+    "nombre": "Sutures India"
+  },
+  {
+    "nombre": "Sutures India**"
+  },
+  {
+    "nombre": "Synthes"
+  },
+  {
+    "nombre": "Synthes**"
+  },
+  {
+    "nombre": "Tagum"
+  },
+  {
+    "nombre": "Tagum**"
+  },
+  {
+    "nombre": "Takeda"
+  },
+  {
+    "nombre": "Takeda**"
+  },
+  {
+    "nombre": "Taskpro"
+  },
+  {
+    "nombre": "Taskpro**"
+  },
+  {
+    "nombre": "Tearsoft"
+  },
+  {
+    "nombre": "Tearsoft**"
+  },
+  {
+    "nombre": "Techdow"
+  },
+  {
+    "nombre": "Techdow**"
+  },
+  {
+    "nombre": "Tecnofar"
+  },
+  {
+    "nombre": "Tecnofar**"
+  },
+  {
+    "nombre": "Ultra Clean"
+  },
+  {
+    "nombre": "Ultra Clean**"
+  },
+  {
+    "nombre": "Vaselina"
+  },
+  {
+    "nombre": "Vaselina**"
+  },
+  {
+    "nombre": "Vasten"
+  },
+  {
+    "nombre": "Vasten**"
+  },
+  {
+    "nombre": "Venus Remedies"
+  },
+  {
+    "nombre": "Venus Remedies**"
+  },
+  {
+    "nombre": "Vial"
+  },
+  {
+    "nombre": "Vial**"
+  },
+  {
+    "nombre": "Vicar"
+  },
+  {
+    "nombre": "Vicar**"
+  },
+  {
+    "nombre": "Vircel"
+  },
+  {
+    "nombre": "Vircel**"
+  },
+  {
+    "nombre": "Visoft"
+  },
+  {
+    "nombre": "Visoft**"
+  },
+  {
+    "nombre": "Vital Sutures"
+  },
+  {
+    "nombre": "Vital Sutures**"
+  },
+  {
+    "nombre": "Vitalis"
+  },
+  {
+    "nombre": "Vitalis**"
+  },
+  {
+    "nombre": "VonHaller"
+  },
+  {
+    "nombre": "VonHaller**"
+  },
+  {
+    "nombre": "Vygon"
+  },
+  {
+    "nombre": "Vygon**"
+  },
+  {
+    "nombre": "Weacohex"
+  },
+  {
+    "nombre": "Weacohex**"
+  },
+  {
+    "nombre": "Well Lead"
+  },
+  {
+    "nombre": "Well Lead**"
+  },
+  {
+    "nombre": "Well Medicine"
+  },
+  {
+    "nombre": "Well Medicine**"
+  },
+  {
+    "nombre": "Wiener"
+  },
+  {
+    "nombre": "Wiener**"
+  },
+  {
+    "nombre": "Tecnoquimicas"
+  },
+  {
+    "nombre": "Tecnoquimicas**"
+  },
+  {
+    "nombre": "Teqnoquimicas"
+  },
+  {
+    "nombre": "Teqnoquimicas**"
+  },
+  {
+    "nombre": "TexMedical"
+  },
+  {
+    "nombre": "TexMedical**"
+  },
+  {
+    "nombre": "Solostar"
+  },
+  {
+    "nombre": "Solostar**"
+  },
+  {
+    "nombre": "SONY"
+  },
+  {
+    "nombre": "SONY**"
+  },
+  {
+    "nombre": "Theraband"
+  },
+  {
+    "nombre": "Theraband**"
+  },
+  {
+    "nombre": "Troika"
+  },
+  {
+    "nombre": "Troika**"
+  },
+  {
+    "nombre": "Work Seg"
+  },
+  {
+    "nombre": "Work Seg**"
+  },
+  {
+    "nombre": "Xax Medica"
+  },
+  {
+    "nombre": "Xax Medica**"
+  },
+  {
+    "nombre": "Xellia"
+  },
+  {
+    "nombre": "Xellia**"
+  },
+  {
+    "nombre": "Yata"
+  },
+  {
+    "nombre": "Yata**"
+  },
+  {
+    "nombre": "Yipak"
+  },
+  {
+    "nombre": "Yipak**"
+  },
+  {
+    "nombre": "Zaldiar"
+  },
+  {
+    "nombre": "Zaldiar**"
+  },
+  {
+    "nombre": "Zambon"
+  },
+  {
+    "nombre": "Zambon**"
+  },
+  {
+    "nombre": "Zubi-safety"
+  },
+  {
+    "nombre": "Zubi-safety**"
+  },
+  {
+    "nombre": "Bio-Med"
+  },
+  {
+    "nombre": "Bio-Med**"
+  },
+  {
+    "nombre": "Human Biosencie"
+  },
+  {
+    "nombre": "Human Biosencie**"
+  },
+  {
+    "nombre": "Sanderson"
+  },
+  {
+    "nombre": "Sanderson**"
+  },
+  {
+    "nombre": "America"
+  },
+  {
+    "nombre": "America**"
+  },
+  {
+    "nombre": "Impha"
+  },
+  {
+    "nombre": "Impha**"
+  },
+  {
+    "nombre": "Aspen Colombia"
+  },
+  {
+    "nombre": "Aspen Colombia**"
+  },
+  {
+    "nombre": "Imporfar"
+  },
+  {
+    "nombre": "Imporfar**"
+  },
+  {
+    "nombre": "Elite"
+  },
+  {
+    "nombre": "Elite**"
+  },
+  {
+    "nombre": "Gpc Pharma"
+  },
+  {
+    "nombre": "Gpc Pharma**"
+  },
+  {
+    "nombre": "Ncpc Hebei Huamin"
+  },
+  {
+    "nombre": "Ncpc Hebei Huamin**"
+  },
+  {
+    "nombre": "Oxitec"
+  },
+  {
+    "nombre": "Oxitec**"
+  },
+  {
+    "nombre": "Gerco"
+  },
+  {
+    "nombre": "Gerco**"
+  },
+  {
+    "nombre": "Winthrop"
+  },
+  {
+    "nombre": "Winthrop**"
+  },
+  {
+    "nombre": "Sophia"
+  },
+  {
+    "nombre": "Sophia**"
+  },
+  {
+    "nombre": "Biospifar"
+  },
+  {
+    "nombre": "Biospifar**"
+  },
+  {
+    "nombre": "Synthesis"
+  },
+  {
+    "nombre": "Synthesis**"
+  },
+  {
+    "nombre": "Neopharma"
+  },
+  {
+    "nombre": "Neopharma**"
+  },
+  {
+    "nombre": "Fcv"
+  },
+  {
+    "nombre": "Fcv**"
+  },
+  {
+    "nombre": "Ziboject"
+  },
+  {
+    "nombre": "Ziboject**"
+  },
+  {
+    "nombre": "Life**"
+  },
+  {
+    "nombre": "Life"
+  },
+  {
+    "nombre": "RP Pharma"
+  },
+  {
+    "nombre": "RP Pharma**"
+  },
+  {
+    "nombre": "Ag pharmaceutical"
+  },
+  {
+    "nombre": "Ag pharmaceutical**"
+  },
+  {
+    "nombre": "Medyseh"
+  },
+  {
+    "nombre": "Medyseh**"
+  },
+  {
+    "nombre": "Mask"
+  },
+  {
+    "nombre": "Mask**"
+  },
+  {
+    "nombre": "Serfar"
+  },
+  {
+    "nombre": "Serfar**"
+  },
+  {
+    "nombre": "Tecnofarma"
+  },
+  {
+    "nombre": "Tecnofarma**"
+  },
+  {
+    "nombre": "Paulis"
+  },
+  {
+    "nombre": "Paulis**"
+  },
+  {
+    "nombre": "Rendy"
+  },
+  {
+    "nombre": "Rendy**"
+  },
+  {
+    "nombre": "Atenea"
+  },
+  {
+    "nombre": "Atenea**"
+  },
+  {
+    "nombre": "Asofarma"
+  },
+  {
+    "nombre": "Asofarma**"
+  },
+  {
+    "nombre": "Cellux"
+  },
+  {
+    "nombre": "Cellux**"
+  },
+  {
+    "nombre": "Mandani Medical"
+  },
+  {
+    "nombre": "Mandani Medical**"
+  },
+  {
+    "nombre": "Bovie Medical"
+  },
+  {
+    "nombre": "Bovie Medical**"
+  },
+  {
+    "nombre": "Tecnomed"
+  },
+  {
+    "nombre": "Tecnomed**"
+  },
+  {
+    "nombre": "Konfort Plus"
+  },
+  {
+    "nombre": "Konfort Plus**"
+  },
+  {
+    "nombre": "Novapharma"
+  },
+  {
+    "nombre": "Novapharma**"
+  },
+  {
+    "nombre": "Silanes"
+  },
+  {
+    "nombre": "Silanes**"
+  },
+  {
+    "nombre": "Msd"
+  },
+  {
+    "nombre": "Msd**"
+  },
+  {
+    "nombre": "Cardinal"
+  },
+  {
+    "nombre": "Cardinal**"
+  },
+  {
+    "nombre": "Farmanal"
+  },
+  {
+    "nombre": "Farmanal**"
+  },
+  {
+    "nombre": "Clinicos y hospitalarios"
+  },
+  {
+    "nombre": "Clinicos y hospitalarios**"
+  },
+  {
+    "nombre": "The Labs"
+  },
+  {
+    "nombre": "The Labs**"
+  },
+  {
+    "nombre": "Glass Lab"
+  },
+  {
+    "nombre": "Glass Lab**"
+  },
+  {
+    "nombre": "Antibioticos De Colombia"
+  },
+  {
+    "nombre": "Antibioticos De Colombia**"
+  },
+  {
+    "nombre": "Tyco"
+  },
+  {
+    "nombre": "Tyco**"
+  },
+  {
+    "nombre": "Sunmed"
+  },
+  {
+    "nombre": "Sunmed**"
+  },
+  {
+    "nombre": "Familia"
+  },
+  {
+    "nombre": "Familia**"
+  },
+  {
+    "nombre": "One Touch"
+  },
+  {
+    "nombre": "One Touch**"
+  },
+  {
+    "nombre": "Cormelat Farmaceuticas"
+  },
+  {
+    "nombre": "Cormelat Farmaceuticas**"
+  },
+  {
+    "nombre": "P&G"
+  },
+  {
+    "nombre": "P&G**"
+  },
+  {
+    "nombre": "Comix"
+  },
+  {
+    "nombre": "Comix**"
+  },
+  {
+    "nombre": "Leon"
+  },
+  {
+    "nombre": "Leon**"
+  },
+  {
+    "nombre": "Consumer Health Care**"
+  },
+  {
+    "nombre": "CERO"
+  },
+  {
+    "nombre": "CERO**"
+  },
+  {
+    "nombre": "CSL Behring"
+  },
+  {
+    "nombre": "Farmacol Chinoin"
+  },
+  {
+    "nombre": "Farmatech"
+  },
+  {
+    "nombre": "Altadis"
+  },
+  {
+    "nombre": "Lissia"
+  },
+  {
+    "nombre": "Alcon"
+  },
+  {
+    "nombre": "Denova"
+  },
+  {
+    "nombre": "KlenGuard"
+  },
+  {
+    "nombre": "KleenGuard"
+  },
+  {
+    "nombre": "Comercial Medica"
+  },
+  {
+    "nombre": "El Uniforme"
+  },
+  {
+    "nombre": "JS Plasticos"
+  },
+  {
+    "nombre": "NB"
+  },
+  {
+    "nombre": "Mediestética"
+  },
+  {
+    "nombre": "Armesso"
+  },
+  {
+    "nombre": "Panasonic"
+  },
+  {
+    "nombre": "Studio"
+  },
+  {
+    "nombre": "P/R"
+  },
+  {
+    "nombre": "Sello Rojo"
+  },
+  {
+    "nombre": "Manuelita"
+  },
+  {
+    "nombre": "Citronela"
+  },
+  {
+    "nombre": "Nube"
+  },
+  {
+    "nombre": "Offi-Esco"
+  },
+  {
+    "nombre": "Paper Mate"
+  },
+  {
+    "nombre": "Sante"
+  },
+  {
+    "nombre": "Protech Telelinks"
+  },
+  {
+    "nombre": "Dispocol"
+  },
+  {
+    "nombre": "Merck"
+  },
+  {
+    "nombre": "Sanfer"
+  },
+  {
+    "nombre": "Frosst"
+  },
+  {
+    "nombre": "Bacis"
+  },
+  {
+    "nombre": "Hospital"
+  },
+  {
+    "nombre": "Pharmetique"
+  },
+  {
+    "nombre": "King Finos"
+  },
+  {
+    "nombre": "Quality Papers"
+  },
+  {
+    "nombre": "Favini"
+  },
+  {
+    "nombre": "Premium"
+  },
+  {
+    "nombre": "ASP"
+  },
+  {
+    "nombre": "Soco"
+  },
+  {
+    "nombre": "Pappyer"
+  },
+  {
+    "nombre": "Super Care"
+  },
+  {
+    "nombre": "Altea Farmaceutica**"
+  },
+  {
+    "nombre": "Panamericana"
+  },
+  {
+    "nombre": "Standar"
+  },
+  {
+    "nombre": "Standar"
+  },
+  {
+    "nombre": "Quimiben"
+  },
+  {
+    "nombre": "Baby max"
+  },
+  {
+    "nombre": "Baby maxy"
+  },
+  {
+    "nombre": "Octa Pharma"
+  },
+  {
+    "nombre": "R&S Consumer"
+  },
+  {
+    "nombre": "Proval"
+  },
+  {
+    "nombre": "PROTEX"
+  },
+  {
+    "nombre": "Eurofarma"
+  },
+  {
+    "nombre": "NOVAMED"
+  },
+  {
+    "nombre": "Faesfarma"
+  },
+  {
+    "nombre": "WINTHROP FARMACEUTICALS  DE COLOMBIA S.A"
+  },
+  {
+    "nombre": "Profma"
+  },
+  {
+    "nombre": "ACULIFE"
+  },
+  {
+    "nombre": "Amgen"
+  },
+  {
+    "nombre": "Amgen Biotech"
+  },
+  {
+    "nombre": "Maxell"
+  },
+  {
+    "nombre": "Casio"
+  },
+  {
+    "nombre": "Hic Sas"
+  },
+  {
+    "nombre": "JAG"
+  },
+  {
+    "nombre": "Taydem"
+  },
+  {
+    "nombre": "Surgiplas"
+  },
+  {
+    "nombre": "Terumo"
+  },
+  {
+    "nombre": "IPC"
+  },
+  {
+    "nombre": "Medifarma"
+  },
+  {
+    "nombre": "Sanicol"
+  },
+  {
+    "nombre": "Biopas"
+  },
+  {
+    "nombre": "Quibi"
+  },
+  {
+    "nombre": "Farmaser"
+  },
+  {
+    "nombre": "Farmacol"
+  },
+  {
+    "nombre": "Vesalius Pharma"
+  },
+  {
+    "nombre": "Lm Instrumen"
+  },
+  {
+    "nombre": "HP"
+  },
+  {
+    "nombre": "Bactron"
+  },
+  {
+    "nombre": "Vera"
+  },
+  {
+    "nombre": "Fixser"
+  },
+  {
+    "nombre": "Red Line"
+  },
+  {
+    "nombre": "Nicholson"
+  },
+  {
+    "nombre": "Rimax"
+  },
+  {
+    "nombre": "Evriholder"
+  },
+  {
+    "nombre": "Riopaila"
+  },
+  {
+    "nombre": "Arbora"
+  },
+  {
+    "nombre": "Karluz"
+  },
+  {
+    "nombre": "JVC"
+  },
+  {
+    "nombre": "Instutito Nacional De Salud"
+  },
+  {
+    "nombre": "Meka"
+  },
+  {
+    "nombre": "Power Back"
+  },
+  {
+    "nombre": "Ethernet Terpelin"
+  },
+  {
+    "nombre": "COLOSTOL"
+  },
+  {
+    "nombre": "SURGICON"
+  },
+  {
+    "nombre": "ARIS PHARMA SAS"
+  },
+  {
+    "nombre": "HUMAX PHAR"
+  },
+  {
+    "nombre": "Biometrix"
+  },
+  {
+    "nombre": "PISA FARMACÉUTICA DE COLOMBIA"
+  },
+  {
+    "nombre": "Farmaceutica"
+  },
+  {
+    "nombre": "Bioline"
+  },
+  {
+    "nombre": "MQ"
+  },
+  {
+    "nombre": "Hollister"
+  },
+  {
+    "nombre": "Medical Nissi"
+  },
+  {
+    "nombre": "GALENICUM"
+  },
+  {
+    "nombre": "Tronex"
+  },
+  {
+    "nombre": "DL"
+  },
+  {
+    "nombre": "Kang"
+  },
+  {
+    "nombre": "Ingeseg"
+  },
+  {
+    "nombre": "Tante"
+  },
+  {
+    "nombre": "Welch Allyn"
+  },
+  {
+    "nombre": "(Sumiprod de la costa)"
+  },
+  {
+    "nombre": "Agente"
+  },
+  {
+    "nombre": "Agentex"
+  },
+  {
+    "nombre": "Aro"
+  },
+  {
+    "nombre": "Aromatical"
+  },
+  {
+    "nombre": "Azul"
+  },
+  {
+    "nombre": "Benssini"
+  },
+  {
+    "nombre": "Berol"
+  },
+  {
+    "nombre": "Bic"
+  },
+  {
+    "nombre": "Bicarbonato"
+  },
+  {
+    "nombre": "Boston"
+  },
+  {
+    "nombre": "Cellux"
+  },
+  {
+    "nombre": "Cencosud"
+  },
+  {
+    "nombre": "Color Negro"
+  },
+  {
+    "nombre": "Color rojo"
+  },
+  {
+    "nombre": "Copypac"
+  },
+  {
+    "nombre": "Dispapeles"
+  },
+  {
+    "nombre": "Diver Class"
+  },
+  {
+    "nombre": "Essanza"
+  },
+  {
+    "nombre": "Folder"
+  },
+  {
+    "nombre": "Frameco"
+  },
+  {
+    "nombre": "Gema"
+  },
+  {
+    "nombre": "Generico"
+  },
+  {
+    "nombre": "Giohonclick "
+  },
+  {
+    "nombre": "Gipao"
+  },
+  {
+    "nombre": "Glade"
+  },
+  {
+    "nombre": "Jumbo"
+  },
+  {
+    "nombre": "kitchen Scents"
+  },
+  {
+    "nombre": "Limpido"
+  },
+  {
+    "nombre": "Manigueta"
+  },
+  {
+    "nombre": "Marfil"
+  },
+  {
+    "nombre": "Mate"
+  },
+  {
+    "nombre": "Minerva"
+  },
+  {
+    "nombre": "Mix"
+  },
+  {
+    "nombre": "Mongol"
+  },
+  {
+    "nombre": "Monocromatico"
+  },
+  {
+    "nombre": "Natural"
+  },
+  {
+    "nombre": "Norma"
+  },
+  {
+    "nombre": "paquete x12"
+  },
+  {
+    "nombre": "Q-biz"
+  },
+  {
+    "nombre": "Rank"
+  },
+  {
+    "nombre": "Reprograf"
+  },
+  {
+    "nombre": "Rosal"
+  },
+  {
+    "nombre": "Scoot"
+  },
+  {
+    "nombre": "Segel"
+  },
+  {
+    "nombre": "Sharpie"
+  },
+  {
+    "nombre": "Sumiprod de la costa"
+  },
+  {
+    "nombre": "Tanque"
+  },
+  {
+    "nombre": "Task"
+  },
+  {
+    "nombre": "Tesa"
+  },
+  {
+    "nombre": "Triton"
+  },
+  {
+    "nombre": "Universal"
+  },
+  {
+    "nombre": "Varta"
+  },
+  {
+    "nombre": "Ferring Pharmaceuticals"
+  },
+  {
+    "nombre": "Fuller"
+  },
+  {
+    "nombre": "Imporclinicas"
+  },
+  {
+    "nombre": "Energizer"
+  },
+  {
+    "nombre": "Boston"
+  },
+  {
+    "nombre": "ALTEA FARMACEUTICA"
+  },
+  {
+    "nombre": "Margistral"
+  },
+  {
+    "nombre": "Esenses"
+  },
+  {
+    "nombre": "Centelsa"
+  },
+  {
+    "nombre": "Fullwat"
+  },
+  {
+    "nombre": "STERIS"
+  },
+  {
+    "nombre": "BROWNE"
+  },
+  {
+    "nombre": "Glaxosmithkline"
+  },
+  {
+    "nombre": "Varios"
+  },
+  {
+    "nombre": "Fabripor"
+  },
+  {
+    "nombre": "Diagnosticos Biomedicos"
+  },
+  {
+    "nombre": "Cardiomed"
+  },
+  {
+    "nombre": "HUMAX PHARMACEUTICAL"
+  },
+  {
+    "nombre": "Celltrion"
+  },
+  {
+    "nombre": "Halux"
+  },
+  {
+    "nombre": "Bauker"
+  },
+  {
+    "nombre": "Karson"
+  },
+  {
+    "nombre": "Ubermam"
+  },
+  {
+    "nombre": "Essenza"
+  },
+  {
+    "nombre": "Non Medical"
+  },
+  {
+    "nombre": "CMLAB"
+  },
+  {
+    "nombre": "Fabriport"
+  },
+  {
+    "nombre": "Riopaila"
+  },
+  {
+    "nombre": "Onix"
+  },
+  {
+    "nombre": "Nevox Farma"
+  }
+]
