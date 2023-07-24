@@ -219,6 +219,7 @@
                               <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                   <mat-label style="font-size: 16px;">Impuesto</mat-label>
                                   <mat-select formControlName="impuesto"   style="text-align: center;">
+                                    <mat-option [value]="null">Seleccionar</mat-option>
                                       <mat-option *ngFor="let data of impuestos" [value]="data.id">
                                           {{data.nombre}}
                                       </mat-option>
@@ -250,6 +251,18 @@
                             </mat-form-field>
                         </div>
                     </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Laboratorio</mat-label>
+                                <mat-select formControlName="laboratorio"  required style="text-align: center;">
+                                    <mat-option *ngFor="let item of laboratorios" [value]="item.nombre">{{item.nombre}}</mat-option>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
                     </div>
                     <div class="row">
 

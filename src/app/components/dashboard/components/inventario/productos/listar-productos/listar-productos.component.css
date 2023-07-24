@@ -10,6 +10,31 @@ th {
 }
 
 
+
+fieldset {
+    min-width: 0;
+    padding: 7px;
+    margin: 0;
+    border: solid #000 2px;
+    border-style: solid;
+    margin-bottom: 15px;
+}
+/* fieldset {
+    background-color: #F2F2F2;
+    
+} */
+
+legend {
+    display: block;
+    padding: 5px;
+    font-size: 14px;
+    line-height: inherit;
+    color: #6b6b6b;
+    font-weight: 500;
+    text-align: left;
+}
+
+
 ::ng-deep .page-item.active .page-link {
     z-index: 3;
     color: #fff;
@@ -45,5 +70,28 @@ th {
 
 ::ng-deep .swal2-styled.swal2-confirm {
     background-color: #41B6FF;
+}
+
+
+.search-btn{
+    background-color: #41B6FF;
+   
+    
+}
+
+
+.search-btn mat-icon{
+    
+    color: #fff;
+    
+}
+.search-btn:hover {
+    background-color: #fdfd;
+   
+}
+.search-btn:hover mat-icon {
+   
+    color: #000;
+    
 }
 

@@ -12,8 +12,16 @@ constructor( private http:HttpClient,private auth:SeguridadService) { }
 
 
 
-    getBalancePrueba(){
-        const  url = environment.BACKEND_DIR+'contabilidad/balancePrueba/?inicio=2022-1-1&final=2022-12-31';
+    getBalancePrueba(inicio,fin){
+        const  url = environment.BACKEND_DIR+'contabilidad/balancePrueba/?inicio='+inicio+'&final='+fin;
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+    
+        return this.http.get<any[]>(url,{headers: httpHeaders});
+    }
+
+    getEstadoFinanciero(inicio,fin){
+        const  url = environment.BACKEND_DIR+'contabilidad/estadoFinanciero/?inicio='+inicio+'&final='+fin;
         const token = this.auth.currentUser.getTokenUser();
         const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
     

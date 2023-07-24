@@ -1,14 +1,99 @@
 <div class="main-content">
 
     <div class="page-content">
-        <div class="row" style="margin:20px;">
+        <div class="container-fluid">
 
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">Parametros</h4>
 
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Settings</a></li>
+                                <li class="breadcrumb-item active">Parametros</li>
+                            </ol>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
 
+            <div class="d-xl-flex">
+                <div class="w-100">
+                    <div class="d-md-flex">
+                        <div class="card filemanager-sidebar me-md-3">
+                            <div class="card-body">
 
+                                <div class="d-flex flex-column h-100">
+                                    <div class="mb-4">
+                                        <ul class="list-unstyled categories-list">
+                                            <li>
+                                                <div class="custom-accordion">
+                                                    <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#usuarios-collapse" role="button" aria-expanded="false" aria-controls="categories-collapse">
+                                                        <i class="fas fa-user text-primary font-size-13 me-2"></i> Usuarios <i class="mdi mdi-chevron-up accor-down-icon ms-auto"></i>
+                                                    </a>
+                                                    <div class="collapse show" id="usuarios-collapse">
+                                                        <div class="card border-0 shadow-none ps-2 mb-0">
+                                                            <ul class="list-unstyled mb-0">
+                                                                <li routerLinkActive="active"><a [routerLink]="['crear-usuarios']" routerLinkActive="router-link-active"  class="d-flex align-items-center"><span class="me-auto">Crear</span></a></li>
+                                                                <li routerLinkActive="active"><a [routerLink]="['listado-usuarios']" class="d-flex align-items-center"><span class="me-auto">Listado</span></a></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!-- <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="fab fa-google-drive text-muted font-size-13 me-2"></i> <span class="me-auto">Google Drive</span> 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="fab fa-dropbox font-size-13 me-2 text-primary"></i> <span class="me-auto">Dropbox</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="fas fa-share-alt text-muted font-size-13 me-2"></i> <span class="me-auto">Shared</span> <i class="mdi mdi-circle-medium text-danger ms-2"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="far fa-star text-muted font-size-13 me-2"></i> <span class="me-auto">Starred</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="fas fa-trash-alt text-danger font-size-13 me-2"></i> <span class="me-auto">Trash</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript: void(0);" class="text-body d-flex align-items-center">
+                                                    <i class="fas fa-cog text-muted font-size-13 me-2"></i> <span class="me-auto">Setting</span><span class="badge bg-success rounded-pill ms-2">01</span>
+                                                </a>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+
+                                  
+                                </div>
+                            </div><!-- end cardbody-->
+                        </div><!-- end card -->
+                        <!-- filemanager-leftsidebar -->
+
+                        <div class="w-100">
+                           <router-outlet></router-outlet>
+                        </div><!-- end w-100 -->
+                    </div>
+                </div>
+
+              
+            </div><!-- end row -->   
         </div>
-
         <!-- container-fluid -->
     </div>
 

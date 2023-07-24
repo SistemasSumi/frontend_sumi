@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule}  from '@angular/common/http';
 import {ReactiveFormsModule,FormsModule } from '@angular/forms'
@@ -90,11 +90,37 @@ import { ListadoClientesComponent } from './components/dashboard/components/conf
 import { InformesContabilidadComponent } from './components/dashboard/components/Contabilidad/InformesContabilidad/InformesContabilidad.component';
 import { RegistrarIzquierdoComponent } from './components/auth/RegistrarIzquierdo/RegistrarIzquierdo.component';
 import { UpperCaseInputDirective } from './to-uppercase.directive';
-
-
-
-
-
+import { ProfileComponent } from './components/auth/Profile/Profile.component';
+import { ActualizarProfileComponent } from './components/auth/Profile/ActualizarProfile/ActualizarProfile.component';
+import { InputImageBaseComponent } from './components/dashboard/util/InputImageBase/InputImageBase.component';
+import { ListadoUsuariosComponent } from './components/auth/ListadoUsuarios/ListadoUsuarios.component';
+import { PermisosUsuariosComponent } from './components/auth/PermisosUsuarios/PermisosUsuarios.component';
+import { SameSizeDivDirective } from './SameSizeDiv.directive';
+import { ProductoDetalleComponent } from './components/dashboard/components/inventario/productos/ProductoDetalle/ProductoDetalle.component';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { httpInterceptorProviders } from './providers/http-interceptor.provider';
+import { AnimatedPriceDirective } from './AnimatedPrice.directive';
+import { Precios_bajos_modalComponent } from './components/dashboard/components/Facturacion/precios_bajos_modal/precios_bajos_modal.component';
+import { SkeletonComponent } from './components/dashboard/util/skeleton/skeleton.component';
+import { CuentasxCobrarComponent } from './components/dashboard/components/CuentasxCobrar/CuentasxCobrar.component';
+import { EstadoCarteraClienteComponent } from './components/dashboard/components/INFORMES/clientes/EstadoCarteraCliente/EstadoCarteraCliente.component';
+import { CarteraVencidaClientesComponent } from './components/dashboard/components/INFORMES/clientes/CarteraVencidaClientes/CarteraVencidaClientes.component';
+import { EstadoCarteraProveedorComponent } from './components/dashboard/components/INFORMES/proveedores/EstadoCarteraCliente/EstadoCarteraProveedor.component';
+import { BalanceDePruebaComponent } from './components/dashboard/components/INFORMES/contabilidad/BalanceDePrueba/BalanceDePrueba.component';
+import { EstadoSituacionFinancieraComponent } from './components/dashboard/components/INFORMES/contabilidad/EstadoSituacionFinanciera/EstadoSituacionFinanciera.component';
+import { CxcComponent } from './components/dashboard/components/INFORMES/contabilidad/cxc/cxc.component';
+import { CxpComponent } from './components/dashboard/components/INFORMES/contabilidad/cxp/cxp.component';
+import { AbonosRecibidosComponent } from './components/dashboard/components/INFORMES/contabilidad/AbonosRecibidos/AbonosRecibidos.component';
+import { IV_GENERALComponent } from './components/dashboard/components/INFORMES/inventario/IV_GENERAL/IV_GENERAL.component';
+import { IV_VENCIDOComponent } from './components/dashboard/components/INFORMES/inventario/IV_VENCIDO/IV_VENCIDO.component';
+import { RotacionComprasComponent } from './components/dashboard/components/INFORMES/inventario/RotacionCompras/RotacionCompras.component';
+import { RetencionesComprasComponent } from './components/dashboard/components/INFORMES/proveedores/RetencionesCompras/RetencionesCompras.component';
+import { ComprasDetalladasComponent } from './components/dashboard/components/INFORMES/inventario/ComprasDetalladas/ComprasDetalladas.component';
+import { DateRangeInputComponent } from './components/dashboard/util/DateRangeInput/DateRangeInput.component';
+import { RotacionVentasComponent } from './components/dashboard/components/INFORMES/inventario/RotacionVentas/RotacionVentas.component';
+import { VentasComponent } from './components/dashboard/components/INFORMES/ventas/Ventas/Ventas.component';
+import { VentasVendedorComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedor/VentasVendedor.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -163,8 +189,35 @@ import { UpperCaseInputDirective } from './to-uppercase.directive';
     ListadoClientesComponent,
     InformesContabilidadComponent,
     RegistrarIzquierdoComponent,
-    UpperCaseInputDirective
-
+    UpperCaseInputDirective,
+    ProfileComponent,
+    ActualizarProfileComponent,
+    InputImageBaseComponent,
+    ListadoUsuariosComponent,
+    PermisosUsuariosComponent,
+    SameSizeDivDirective,
+    ProductoDetalleComponent,
+    AnimatedPriceDirective,
+    Precios_bajos_modalComponent,
+    SkeletonComponent,
+    CuentasxCobrarComponent,
+    EstadoCarteraClienteComponent,
+    CarteraVencidaClientesComponent,
+    EstadoCarteraProveedorComponent,
+    BalanceDePruebaComponent,
+    EstadoSituacionFinancieraComponent,
+    CxcComponent,
+    CxpComponent,
+    AbonosRecibidosComponent,
+    IV_GENERALComponent,
+    IV_VENCIDOComponent,
+    RotacionComprasComponent,
+    RetencionesComprasComponent,
+    ComprasDetalladasComponent,
+    DateRangeInputComponent,
+    RotacionVentasComponent,
+    VentasComponent,
+    VentasVendedorComponent
 
 
 
@@ -180,16 +233,23 @@ import { UpperCaseInputDirective } from './to-uppercase.directive';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    AngularFireMessagingModule,
     FormsModule,
     HttpClientModule,
     DataTablesModule,
     PipesModule,
     TooltipModule,
+    NgbModule,
+   
 
    
     ToastrModule.forRoot()
   ],
-  providers: [DatePipe,CurrencyPipe,FiltroPipe,{provide : LocationStrategy , useClass: HashLocationStrategy}],
+  providers: [DatePipe,CurrencyPipe,FiltroPipe,
+    {provide : LocationStrategy , useClass: HashLocationStrategy},
+    // httpInterceptorProviders,
+    // { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

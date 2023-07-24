@@ -1,14 +1,21 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { ConfiguracionService } from '../configuracion/Configuracion.service';
+import { ModelFormasPago } from '../configuracion/models/ModelFormasPago';
+import { ModelTerceroCompleto } from '../configuracion/models/ModelTerceroCompleto';
+import { TablesBasicService } from '../configuracion/TablesBasic/tablesBasic.service';
 import { IngresoService } from '../inventario/ingresoCompras/Ingreso.service';
 import { PurchaseOrder } from '../inventario/ordenDeCompra/models/purchaseOrder';
 import { OrdenDeCompraService } from '../inventario/ordenDeCompra/ordenDeCompra.service';
 import { StockService } from '../inventario/stock/stock.service';
+import { CxpService } from './Cxp.service';
 declare var $;
 
 @Component({
@@ -17,14 +24,73 @@ declare var $;
   styleUrls: ['./CuentasxPagar.component.css']
 })
 export class CuentasxPagarComponent implements OnInit {
+  years: number[];
+  meses: any[];
+
+
+
 
   table:any = $('').DataTable({});
   txtbuscarCXP:string;
-  constructor(private route: ActivatedRoute,private ingresoService:IngresoService, private router: Router,private ordenService:OrdenDeCompraService, private auth:SeguridadService, private cp:CurrencyPipe, private stock:StockService) { }
+  busquedaAvanzada:boolean = false;
+
+  metodos:MetodosShared = new MetodosShared();
+
+  formasPago: ModelFormasPago[] = [];
+  proveedores: ModelTerceroCompleto[] = [];
+
+  public filtroProveedores: BehaviorSubject<ModelTerceroCompleto[]>;
+
+  
+  filtroAvanzado:filtroBusquedas = {
+    orden:null,
+    estado:null,
+    factura:null,
+    fechaInicial:null,
+    fechaFinal:null,
+    formaDePago:null,
+    proveedor:null,
+    year:null,
+    mes:null,
+  };
+
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private ingresoService:IngresoService,
+    private router: Router,
+    private ordenService:OrdenDeCompraService, 
+    private auth:SeguridadService, 
+    private cp:CurrencyPipe,
+    private tables:TablesBasicService,
+    private config:ConfiguracionService,
+    private cxp:CxpService) { 
+
+      this.setYearsDefault();
+      
+      
+
+  }
 
   ngOnInit() {
     this.llenarTableCxp();
+    this.obtenerFormaDepago();
+    this.obtenerProveedores();
   }
+
+
+
+  setYearsDefault(){
+    this.years = this.metodos.generateYears();
+  }
+
+  setMesesDefault(year:number){
+    this.filtroAvanzado.mes = null;
+    this.meses = this.metodos.generateMonths(year);
+  }
+
+
 
   llenarTable(idtable:string,data,columns,nameButton,cp:CurrencyPipe){
     
@@ -210,7 +276,10 @@ export class CuentasxPagarComponent implements OnInit {
               orderable: false,
               render: function(data,type,row){
                   
-
+                  let fini = '';
+                  if(!row.estado){
+                    fini = `<a class="dropdown-item fw-bold" style="font-size: 16px"  href="javascript:;" id="finiquitar"><i class="mdi mdi-check-circle-outline text-success " style="margin-right: 5px; font-size: 16px"></i> Finiquitar</a>`
+                  }
 
                   let acciones = `
                   
@@ -220,9 +289,10 @@ export class CuentasxPagarComponent implements OnInit {
                       </a>
                     
                       <div class="dropdown-menu dropdown-menu-end" data-popper-placement="top-end" style="position: absolute; inset: auto 0px 0px auto; margin: 0px; transform: translate(0px, -42px);">
-                          <a class="dropdown-item"  href="javascript:;" id="imprimirOrden"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i>  Imprimir Orden</a>`+
-                          `<a class="dropdown-item"  href="javascript:;" id="imprimirIngreso"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i>  Imprimir Ingreso</a>`+
-                          `<a class="dropdown-item" href="javascript:;" id="previewIngreso" style="margin-right: 5px;"><i class="fas fa-eye" style="margin-right: 5px;"></i>  INGRESO</a> 
+                          <a class="dropdown-item"  href="javascript:;" id="imprimirOrden"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i> Orden</a>`+
+                          `<a class="dropdown-item"  href="javascript:;" id="imprimirIngreso"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i> Ingreso</a>`+
+                          `<a class="dropdown-item" href="javascript:;" id="previewIngreso" style="margin-right: 5px;"><i class="fas fa-eye" style="margin-right: 5px;"></i> Ingreso</a> `+
+                          `<div  class="dropdown-divider"></div>`+fini+`
                           
                         
                      
@@ -322,6 +392,66 @@ export class CuentasxPagarComponent implements OnInit {
           
         });
 
+
+          /* BOTON previewIngreso  */
+        $('#finiquitar', row).off('click');
+        $('#finiquitar', row).on('click', () => {
+          new MetodosShared().AlertQuestion(
+            '¿ SEGURO DESEA FINIQUITAR LA DEUDA ?'
+          ).then((result) => {
+            if (result.isConfirmed) {
+      
+      
+               
+              Swal.fire({
+                allowOutsideClick: false,
+                icon: 'info',
+                title: 'Actualizando..',
+                text:'Espere por favor..'
+              });
+              Swal.showLoading();
+      
+              this.cxp.finiquitar(data.ingreso.id).subscribe((resp:any) => {
+                
+                Swal.close();
+                new MetodosShared().AlertOK('Cuenta por pagar, Actualizada!');
+                
+      
+               
+                this.cxp.actualizarCxp();
+      
+      
+                
+      
+              },(ex) => {
+                console.log(ex);
+                Swal.close();
+                
+                let errores ='';
+                for(let x of ex.error){
+              
+                    errores +=`
+                    <div class="alert alert-danger" role="alert" style="text-align: justify;">
+                      ${x}
+                    </div>
+                    `
+                  
+                  
+                }
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error al guardar.',
+                  html:errores,
+                  confirmButtonColor: '#4acf50',
+              
+                });
+              
+              });
+            } 
+          });
+          
+        });
+
        
         return row;
       }
@@ -329,7 +459,7 @@ export class CuentasxPagarComponent implements OnInit {
   }
 
   llenarTableCxp(){
-    return this.stock.getCxp().subscribe(resp => {
+    return this.cxp.SubjectdataCxp.subscribe(resp => {
       this.llenarTable(
         "cxp",
         resp,
@@ -368,5 +498,67 @@ export class CuentasxPagarComponent implements OnInit {
     // this.table.destroy();
     this.llenarTableCxp();
   }
+
+  obtenerFormaDepago(){
+    this.tables.SubjectdataFP.subscribe(resp => {
+      this.formasPago = resp;
+    });
+  }
+
+
+  obtenerProveedores(){
+    this.config.SubjectdataProveedorCompras.subscribe(resp => {
+      this.proveedores = resp;
+      this.filtroProveedores = new BehaviorSubject<ModelTerceroCompleto[]>(this.proveedores);
+    });
+  }
+
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.proveedores,'nombreComercial',busqueda);
+    this.filtroProveedores.next(filtro);
+  }
+
+
+  limpiarFiltro(){
+    this.filtroAvanzado = {
+      orden:null,
+      estado:null,
+      factura:null,
+      fechaInicial:null,
+      fechaFinal:null,
+      formaDePago:null,
+      proveedor:null,
+      year:null,
+      mes:null,
+    };
+  }
+
+  BusquedaAvanzada(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Buscando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.cxp.busquedaAvanzada(this.filtroAvanzado).subscribe(() => {
+      Swal.close();
+    });
+  }
+}
+
+
+interface filtroBusquedas {
+
+  orden:string,
+  proveedor:string,
+  factura:string,
+  estado:boolean,
+  formaDePago:string,
+  fechaInicial:string,
+  fechaFinal:string,
+  year:string,
+  mes:string,
+
 
 }

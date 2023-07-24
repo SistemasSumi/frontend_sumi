@@ -42,6 +42,7 @@ export class ModelTerceroCompleto {
     descuentoProveedor?: ModelPlazosProveedor[];
     retencionCliente  ?: ModelRetencionesTercero[];
     retencionProveedor?: ModelRetencionesTercero[];
+    datosBancarios?: any[];
     
     constructor(){}
 }

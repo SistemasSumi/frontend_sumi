@@ -25,9 +25,9 @@ export class NotaCreditoComprasReport {
               }
             },
             {
-              content: x.producto.nombreymarcaunico+'('+x.laboratorio+')',
+              content: x.producto.nombreymarcaunico,
               styles: {
-                cellWidth: 255
+                cellWidth: 240
               }
             },
             {

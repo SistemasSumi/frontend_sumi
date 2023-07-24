@@ -265,8 +265,8 @@
                                       <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                   </ngx-mat-select-search>
                               </mat-option>
-                              <mat-option *ngFor="let data of filtroProductos | async" [value]="data" (click)="seleccionarProducto(data)">
-                                  {{data.nombreymarcaunico}}
+                              <mat-option [tooltipProducto]="data" *ngFor="let data of filtroProductos | async" [value]="data" (click)="seleccionarProducto(data)">
+                                {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
                               </mat-option>
 
                            

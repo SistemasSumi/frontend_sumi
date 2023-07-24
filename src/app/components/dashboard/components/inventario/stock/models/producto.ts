@@ -24,6 +24,7 @@ export class Producto {
     habilitado       ?: boolean;
     codigoDeBarra    ?: string;
     unidad           ?: string;
+    laboratorio      ?: string;
     creado           ?: Date;
     modificado       ?: Date;
     nombreymarcaunico?: string;

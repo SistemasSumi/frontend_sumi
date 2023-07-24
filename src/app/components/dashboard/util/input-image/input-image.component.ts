@@ -65,7 +65,7 @@ export class InputImageComponent implements OnInit {
   }
   obtenerURL(nombre:String){
     if (this.urlDIR) {
-      return this.urlDIR+"AÑO_"+this.anio+"/"+"MES_"+this.mes+"/"+"DIA_"+this.dia+"/"+nombre;
+      return this.urlDIR;
     }else{
       return "AÑO_"+this.anio+"/"+"MES_"+this.mes+"/"+"DIA_"+this.dia+"/"+this.id;
     }
@@ -87,6 +87,14 @@ export class InputImageComponent implements OnInit {
      console.log(this.imagen);
 
     }
+  }
+
+  eliminarFoto(){
+    this.urlImage = null; 
+    this.showBar = false;
+    this.archivoSeleccionado.emit(this.urlImage);
+
+
   }
 
   @Output()

@@ -113,7 +113,7 @@ export class FormOrdenComponent implements OnInit {
       ]
     }],
     
-    fecha: ['',{
+    fecha: [new Date(),{
       validators:[
         
       ]
@@ -531,7 +531,26 @@ export class FormOrdenComponent implements OnInit {
   }
 
   resetformOrden(){
-     $("#formOrden").trigger("reset");
+    const valoresIniciales = {
+      subtotal: 0,
+      retencion: 0,
+      iva: 0,
+      descuento: 0,
+      total: 0,
+      usuario: '',
+      fecha: new Date()
+    };
+
+
+    //  $("#formOrden").trigger("reset");
+     // Restablecer los valores del formulario a los valores por defecto
+    this.formOrden.reset();
+
+    // Marcar el formulario como "pristine" (no modificado) y "untouched" (no tocado)
+    this.formOrden.markAsPristine();
+    this.formOrden.markAsUntouched();
+
+    this.formOrden.patchValue(valoresIniciales);
   }
   
 

@@ -5,6 +5,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { contabilidadPermisos, PermisosUsuario } from './components/auth/permisosUsuario';
 import { SeguridadService } from './components/auth/seguridad.service';
 import { DbService } from './components/auth/db.service';
+import { ConfiguracionService } from './components/dashboard/components/configuracion/Configuracion.service';
 declare var $;
 
 @Component({
@@ -23,11 +24,14 @@ export class AppComponent implements OnInit{
   
   loadAPI: Promise<any>;
 
-constructor(public overlay:OverlayContainer, public auth:SeguridadService, public db:DbService) {        
+constructor(private config:ConfiguracionService,public overlay:OverlayContainer, public auth:SeguridadService, public db:DbService) {        
     // this.loadAPI = new Promise((resolve) => {
     //     this.loadScript();
     //     resolve(true);
     // });
+
+    this.config.obtenerProveedores();
+    this.config.obtenerClientes();
 }
 
 public onSetTheme(e:boolean){

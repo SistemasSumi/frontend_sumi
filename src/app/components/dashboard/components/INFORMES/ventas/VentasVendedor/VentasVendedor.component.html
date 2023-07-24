@@ -1,0 +1,114 @@
+<div class="card card-h-100">
+    <div class="card-header">
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        
+        <div>
+
+          Por favor, tenga en cuenta que los vendedores cuya meta es igual a cero no serán considerados en el cálculo del porcentaje de cumplimiento. Es importante establecer metas válidas para todos los vendedores para obtener resultados precisos en el análisis. Asegúrese de revisar y ajustar las metas de los vendedores antes de realizar el cálculo.
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="card-body">
+      
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <mat-form-field class="example-chip-list" appearance="fill" style="width: 100%;">
+              <mat-label style="font-size: 18px;">Vendedores</mat-label>
+              <mat-chip-list #chipList aria-label="Vendedor" class="custom-chip-list">
+                <mat-chip
+                  *ngFor="let vendedor of Listvendedores"
+                  (click)="removeChip(vendedor)"
+                  class="custom-chip"
+                  
+                >
+                  {{vendedor}} 
+                  
+                </mat-chip>
+                <input
+                  [(ngModel)]="text"
+                  placeholder="nuevo vendedor..."
+                  #fruitInput
+                  (keyup)="filtrar($event)"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  class="custom-chip-input"
+                
+                >
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let fruit of autocompleteOptions" [value]="fruit.nombre">
+                  {{fruit.nombre}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <app-date-range-picker [(ngModel)]="dateRange" name="dateRange"></app-date-range-picker>
+
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row d-print-none mt-4" >
+        <div class="float-end">
+            
+          
+            <button  mat-raised-button (click)="null" type="button" style="width: auto; float: right ;margin-left: 5px;" class="btn btn-outline-primary mb-4">
+              <i class="squire ico-excel"></i>
+            </button>
+            <button  mat-raised-button (click)="generar()" class="btn btn-soft-primary btn-md" color="primary" style="margin-left: 5px; width: auto; float: right;"> GENERAR </button>
+            &nbsp;
+            &nbsp;
+        </div>
+        
+      </div>
+      <hr>
+      <div class="list-group list-group-flush mb-2" *ngIf="reporte.length > 0">
+          <span *ngFor="let item of reporte"  class="list-group-item list-group-item-action">
+              <div class="d-flex align-items-center">
+                <div class="avatar flex-shrink-0 me-3">
+                    <img style="width: 50px; height:50px;" [src]="item.avatar" alt="" class="rounded-circle img-thumbnail header-profile-user">
+                </div>
+                <div class="flex-grow-1">
+                      <div style="position: relative;">
+                        
+                        <div class="row mb-2" >
+                          <div class="skill-box">
+                  
+                              <div class="skill-bar">
+                                  
+                                  <span class="skill-per html" [style.width]="(item.porcentaje) + '%'" >
+                                   
+                                    <span class="tooltip-custom">{{item.porcentaje | number:'1.2-2' }}%</span>
+                                      
+                                  </span>
+                                 
+                              </div>
+                          </div>
+                  
+                        
+                        </div>
+                        <h5 class="font-size-14 "><b>{{item.cliente__vendedor__nombre}}</b></h5>
+                        <ul>
+                         
+                          <li><b>Balance:</b><span  class="font-size-13 text-muted fw-bold"> {{item.monto_total | currency}} ({{item.porcentaje| number:'1.2-2'  }}%)</span></li>
+                          <li><b>Meta:</b><span  class="font-size-13 text-muted fw-bold"> {{item.meta_vendedor | currency}}</span></li>
+                        </ul>
+                          
+
+                      </div>
+                  
+                        
+                </div>
+              </div>
+            </span>
+      </div>
+   
+      
+    </div>
+
+</div>

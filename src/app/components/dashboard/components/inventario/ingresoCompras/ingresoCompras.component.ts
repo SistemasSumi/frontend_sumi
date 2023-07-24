@@ -13,7 +13,7 @@ import { OrdenDeCompraService } from '../ordenDeCompra/ordenDeCompra.service';
 import { Producto } from '../stock/models/producto';
 import { StockService } from '../stock/stock.service';
 import { IngresoService } from './Ingreso.service';
-import marcas from './marcas.json';
+
 import * as moment from 'moment';
 import { InventoryEntry } from './models/inventoryEntry';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -44,7 +44,7 @@ export class IngresoComprasComponent implements OnInit {
 
   lote:string = "";
 
-  laboratorios:laboratorio[] = marcas;
+  // laboratorios:laboratorio[] = marcas;
 
 
 

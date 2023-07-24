@@ -1,0 +1,18 @@
+<div [ngClass]="getAlignmentClass()">
+  <div class="text-left">
+    <div [class]="'skeleton-row ' + animation"
+         [ngStyle]="{
+          'width': width,
+          'height': height,
+          'border-radius': borderRadius,
+          'border': borde,
+          'padding': padding,
+          'margin-top': marginTop,
+          'margin-right': marginRight,
+          'margin-left': marginLeft,
+          'margin-bottom': marginBottom
+        }">
+
+    </div>
+  </div>
+</div>

@@ -1,8 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
+import { ConfiguracionService } from '../../configuracion/Configuracion.service';
+import { ModelFormasPago } from '../../configuracion/models/ModelFormasPago';
+import { ModelTerceroCompleto } from '../../configuracion/models/ModelTerceroCompleto';
+import { ModelVendedor } from '../../configuracion/models/ModelVendedor';
+import { TablesBasicService } from '../../configuracion/TablesBasic/tablesBasic.service';
 import { FacturacionService } from '../facturacion.service';
 
 
@@ -13,7 +19,28 @@ import { FacturacionService } from '../facturacion.service';
   styleUrls: ['./proformas.component.css']
 })
 export class ProformasComponent implements OnInit {
+  busquedaAvanzada:boolean = false;
+  filtroAvanzado = {
+    prefijo:null,
+    numero:null,
+    cliente:null,
+    observacion:null,
+    formaPago:null,
+    vendedor:null,
+    valor:null,
+    fechaInicial:null,
+    fechaFinal:null
+  };
 
+
+  clientes:ModelTerceroCompleto[] = [];
+  vendedores:ModelVendedor[] = [];
+  formasPago:ModelFormasPago[] = [];
+  metodos:MetodosShared = new MetodosShared();
+  public filtroClientes: BehaviorSubject<ModelTerceroCompleto[]>;
+
+
+  isLoading:boolean = false;
 
   listado:Proformas[] = [];
 
@@ -27,22 +54,50 @@ export class ProformasComponent implements OnInit {
     private route: ActivatedRoute, 
     private router: Router,
     private invoceService:FacturacionService, 
+    private tables:TablesBasicService,
+    private config:ConfiguracionService
   ) { }
   
 
 
   ngOnInit() {
     
-    this.obtenerListado();
+    this.llenarTabla();
+    this.obtenerVendedores();
+    this.obtenerClientes();
+    // this.obtenerFormaDepago();
   }
 
-  obtenerListado(){
-    this.invoceService.obtenerProformas().subscribe((resp:Proformas[]) => {
-      this.listado = resp;
+
+  getRange(value: number): number[] {
+    return Array.from({ length: value }, (_, i) => i);
+  }
+
+    ActualizarProformas(){
+    this.isLoading = true;
+    this.invoceService.cargarProformas().subscribe((resp) => {
       console.log(resp);
+      if(resp != null){
+
+        this.isLoading = false;
+      }
+
+    });
+  }
+
+  llenarTabla(){
+    this.isLoading = true;
+    this.invoceService.SubjectdataProformas.subscribe((resp:Proformas[]) => {
+      console.log(resp);
+      if(resp != null){
+
+        this.isLoading = false;
+      }
+      this.listado = resp;
       
     });
   }
+
 
   seleccionar(index:number){
    
@@ -88,7 +143,7 @@ export class ProformasComponent implements OnInit {
             text: 'Proforma actualizada con exito'
           });
          
-          this.obtenerListado();
+          this.ActualizarProformas();
 
 
           
@@ -124,6 +179,67 @@ export class ProformasComponent implements OnInit {
   imprimir(id:number){
     this.invoceService.imprimirProforma(id);
   }
+
+
+  obtenerFormaDepago(){
+    this.tables.SubjectdataFP.subscribe(resp => {
+      this.formasPago = resp;
+    });
+  }
+
+
+  obtenerVendedores(){
+    this.config.SubjectdataVendedores.subscribe(resp => {
+      this.vendedores = resp;
+  
+    });
+  }
+
+  obtenerClientes(){
+    this.config.SubjectdataCliente.subscribe(resp => {
+      this.clientes = resp;
+      this.filtroClientes = new BehaviorSubject<ModelTerceroCompleto[]>(this.clientes);
+    });
+  }
+
+ 
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.clientes,'nombreComercial',busqueda);
+    this.filtroClientes.next(filtro);
+  }
+
+  
+  BusquedaAvanzada(){
+    this.isLoading = true;
+    this.invoceService.busquedaAvanzadaProformas(this.filtroAvanzado).subscribe(
+      () => {
+    
+        this.isLoading = false;
+      },
+      (error) => {
+        // Manejar el error aquí
+        
+        console.error(error);
+        Swal.close();
+        // Mostrar mensaje de error, realizar acciones adicionales, etc.
+      }
+    );
+  }
+
+  limpiarFiltro(){
+    this. filtroAvanzado = {
+      prefijo:null,
+      numero:null,
+      cliente:null,
+      observacion:null,
+      formaPago:null,
+      vendedor:null,
+      valor:null,
+      fechaInicial:null,
+      fechaFinal:null
+    };
+  }
+
 }
 
 interface Proformas {

@@ -1,0 +1,60 @@
+.loader-container {
+    position: fixed;
+   
+    width: 100%;
+   
+    z-index: 99;
+  }
+
+  @media (min-width: 600px) {
+    .dropdown-menu-xl {
+      width: 420px;
+    }
+  
+    .dropdown-menu-lg {
+      width: 420px;
+    }
+  
+    .dropdown-menu-md {
+      width: 240px;
+    }
+  }
+
+  @keyframes vibrate {
+    0% {
+      transform: rotate(0) scale(1);
+    }
+    25% {
+      transform: rotate(-5deg) scale(1.1);
+    }
+    50% {
+      transform: rotate(0) scale(1);
+    }
+    75% {
+      transform: rotate(5deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(0) scale(1);
+    }
+  }
+  
+  .vibrating {
+    animation: vibrate 0.5s linear infinite;
+    transform-origin: center;
+  }
+
+  .avatar-noti {
+    width: 40px; /* Ajusta el tamaño según tus necesidades */
+    height: 40px; /* Ajusta el tamaño según tus necesidades */
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-color: #41b6ff;
+    transition: all 0.3s ease;
+  }
+  
+  .avatar-noti:hover {
+    transform: scale(1.5); /* Ajusta el factor de escala según tus necesidades */
+    border-color: #41b6ff; /* Cambia el color del borde según tus necesidades */
+  }
+
+

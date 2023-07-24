@@ -3,17 +3,19 @@ import { Empresa } from "../components/dashboard/components/configuracion/interf
 
 
 export class UserModel{
-    private idUser:string;
-    private tokenUser:string;
-    private username:string;
-    private email:string;
-    private avatar:string;
-    private nombres:string;
-    private apellidos:string;
-    private genero:string;
-    private ultimoAcceso:string;
-    private empresa:Empresa;
-    private permisos?:PermisosUsuario;
+    idUser:string;
+    tokenUser:string;
+    username:string;
+    email:string;
+    avatar:string;
+    nombres:string;
+    apellidos:string;
+    genero:string;
+    grupo:string;
+    ultimoAcceso:string;
+    empresa:Empresa;
+    is_vendedor:boolean;
+    permisos?:PermisosUsuario;
 
 
     public getNombreCorto(){
@@ -32,6 +34,13 @@ export class UserModel{
     public setEmpresa(empresa:Empresa): any {
         this.empresa = empresa;
     }
+    
+    public getIsVendedor(): boolean {
+        return this.is_vendedor;
+    }
+    public setVendedor(is_vendedor:boolean): any {
+        this.is_vendedor = is_vendedor;
+    }
 
 
     public getIdUser(): string {
@@ -40,6 +49,13 @@ export class UserModel{
 
     public setIdUser(idUser: string): void {
         this.idUser = idUser;
+    }
+    public getGrupo(): string {
+        return this.grupo;
+    }
+
+    public setGrupo(grupo: string): void {
+        this.grupo = grupo;
     }
 
     public getTokenUser(): string {

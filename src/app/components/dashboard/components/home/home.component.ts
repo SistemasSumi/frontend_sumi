@@ -17,8 +17,16 @@ import { EstadoCarteraCliente } from '../../reportes/reportesContabilidad/Estado
 import { EstadoCarteraProveedor } from '../../reportes/reportesContabilidad/EstadoCarteraProveedor';
 import { CarteraVencidaEnGeneral } from '../../reportes/reportesContabilidad/CarteraVencidaEnGeneral';
 import { NotaCreditoComprasReport } from '../../reportes/reportesInventario/notaCreditoCompras';
+import { ActivatedRoute } from '@angular/router';
+import { RetencionEnLaFuenteGeneral } from '../../reportes/reportesContabilidad/RetencionEnLaFuenteGeneral';
+import { ComprobanteIngreso } from '../../reportes/reportesContabilidad/ComprobanteIngreso';
+import { ComprobanteCotizacion } from '../../reportes/reportesFacturacion/ComprobanteCotizacion';
 
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as moment from 'moment';
+// import { CurrencyPipe } from '@angular/common';
+// import { logoSumi } from '../logoSumi';
 
 @Component({
   selector: 'app-home',
@@ -53,68 +61,22 @@ export class HomeComponent implements OnInit {
 
   articulos:any
 
-  constructor(public reporte:ReportesService,public auth:SeguridadService, private home:HomeService,private cp:CurrencyPipe,public formBuilder:FormBuilder) { }
+  constructor( private route:ActivatedRoute, public reporte:ReportesService,public auth:SeguridadService, private home:HomeService,private cp:CurrencyPipe,public formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
-  
-    // this.home.getNoticias().subscribe((resp:any) => {
-    //     this.articulos = resp.articles;
-        
-    // });
-
-      
-    // this.initFormSemanaAnio();
-    // this.home.getReporte(null).subscribe((resp:any) => {
-    //   this.dataBarber = [];
-    //   this.dataEmpresa = [];
-    //   this.dataEmpresa = resp.dataEmp;
-      
-    //   console.log()
-    //   for (let x in resp.data){
- 
-        
-    //     let data = resp["data"]
-    //     console.log(data)
-        
-          
-    //       // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
-    //       data[x].totalBarbero = this.cp.transform(parseInt(data[x].totalBarbero));
-          
-          
-    //        console.log(data[x]);
-          
-    //       // data[j].totalBarbero = this.cp.transform(parseInt(data[j].totalBarbero));
-    //       this.dataBarber.push(data[x]);
-
-    //       console.log(this.dataBarber);
-        
-        
-        
-    //   }
-
-    //   console.log(this.dataBarber);
-      
-      
-       
-      
-    // })
-    // this.home.getReporteTotales(null).subscribe((resp:any) => {
-
-    //   resp.data.pcrServicio = resp.data.pcrServicio+'%'
-    //   resp.data.pcrProducto = resp.data.pcrProducto+'%'
-    //   console.log(resp.data.pcrServicio);
-      
-    //   this.dataTotales = resp.data;
-
- 
-      
-    // })
+    // let permisos = this.route.snapshot.data['permisos'];
+    // this.auth.setPermisosUser(permisos); 
+   
   }
 
   imprimir(){
-    let reporte:NotaCreditoComprasReport = new NotaCreditoComprasReport();
-    let report = reporte.reporteNotaCreditoCompras();
-    window.open(report.output('bloburl'), '_blank');
+    let reporte:RetencionEnLaFuenteGeneral = new RetencionEnLaFuenteGeneral();
+
+    this.home.getReportes().subscribe(resp => {
+
+      let report = reporte.ReporteRetencionEnLaFuenteGeneral(resp);
+      window.open(report.output('bloburl'), '_blank');
+    });
   }
 
   onchangeUser(user){
@@ -258,6 +220,130 @@ guardarPermisos(){
       
     });
    
+  }
+
+  imprimirNotaCredito(){
+    let reporte:NotaCreditoComprasReport = new NotaCreditoComprasReport();
+    let report = reporte.reporteNotaCreditoCompras();
+    window.open(report.output('bloburl'), '_blank');
+  }
+  
+  COTIZACION(){
+    let reporte:ComprobanteCotizacion = new ComprobanteCotizacion();
+    let report = reporte.ReporteComprobanteCotizacion(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+  carteraVencida(){
+    let reporte:CarteraVencidaEnGeneral = new CarteraVencidaEnGeneral();
+    let report = reporte.ReporteCarteraVencidaEnGeneral(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+
+  egreso(){
+    let reporte:ComprobanteEgreso = new ComprobanteEgreso();
+    let report = reporte.ReporteComprobanteEgreso(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+  ingreso(){
+    let reporte:ComprobanteIngreso = new ComprobanteIngreso();
+    let report = reporte.ReporteComprobanteIngreso(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+  carteraCliente(){
+    let reporte:EstadoCarteraCliente = new EstadoCarteraCliente();
+    let report = reporte.ReporteEstadoCarteraCliente(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+  carteraProveedor(){
+    let reporte:EstadoCarteraProveedor = new EstadoCarteraProveedor();
+    let report = reporte.ReporteEstadoCarteraProveedor(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+
+  aux(){
+    let reporte:LibroAuxiliarReporte = new LibroAuxiliarReporte();
+    let report = reporte.GenerarLibroAux(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+
+  movi(){
+    let reporte:MovimientoContable = new MovimientoContable();
+    let report = reporte.ReporteMovimientoContable(null);
+    window.open(report.output('bloburl'), '_blank');
+  }
+  salidaConsumo(){
+    var doc = new jsPDF();
+    
+    // Definir los datos del ticket
+    var productos = [
+      ["Producto 1", "$10.00"],
+      ["Producto 2", "$15.00"],
+      ["Producto 3", "$20.00"],
+      // ... agregar más productos según sea necesario
+    ];
+    
+    // Definir las opciones de la tabla
+  
+    var ancho = 80; // Ancho de 80 mm
+    var alturaInicial = doc.internal.pageSize.height;
+    
+    // Calcular la altura máxima del contenido
+   
+    
+    // Agregar la tabla al documento
+    autoTable(doc, {
+      head: [
+          [
+          {
+          content: "Descripción",
+          styles: {
+              halign: 'center'
+          }
+          },
+          {
+          content: 'precio',
+          styles: {
+              halign: 'center'
+          }
+
+          },
+         
+          ]],
+      body: productos,
+      horizontalPageBreak: true,
+      margin: {
+          top: 10,
+          bottom: 65,
+          left: 5,
+          right: 5,
+
+      },
+      // metodo que se repite en cad pagina
+      didDrawPage: ({ pageNumber, doc: jsPDF }) => {
+        
+      },
+      
+
+
+      theme: 'grid',
+      headStyles: {
+          fillColor: '#41B6FF',
+      },
+      
+      });
+    
+    // Obtener la altura de la tabla generada
+    // Calcular la altura necesaria para los productos
+    var alturaProductos = productos.length * 10; // 10 es un valor de ejemplo para la altura de cada producto
+
+    // Establecer el tamaño de página adecuado
+    doc.setPageSize(ancho, alturaInicial + alturaProductos);
+
+    // Guardar el documento PDF
+    doc.save('ticket.pdf');
+    // let reporte:SalidaConsumo = new SalidaConsumo();
+    // let report = reporte.ReporteSalidaConsumo(null);
+    // window.open(report.output('bloburl'), '_blank');
   }
 
 }

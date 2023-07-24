@@ -1,33 +1,50 @@
 <ng-container *ngIf="listado.length > 0">
 
-  <table class="table align-middle  table-hover mb-2">
-    <thead class="bg-light">
-        <tr>
-            <th style="width: auto;" class="text-center">FECHA</th>
-            <th style="width: auto;" class="text-left">DESCRIPCIÓN</th>
-            <th style="width: auto;" class="text-center">TIPO</th>
-            <th style="width: 20%;" class="text-left">EMPRESA</th>
-            <th style="width: auto;" class="text-center">BODEGA</th>
-            <th style="width: auto;" class="text-center">UNIDADES</th>
-            <th style="width: auto;" class="text-center">BALANCE</th>
-            <th style="width: auto;" class="text-center">PRECIO</th>
-        </tr><!-- end tr -->
-      </thead><!-- end thead -->
-      <tbody>
-  
-        <tr *ngFor="let item of listado">
-          <td class="text-center">{{item.fecha | date }}</td>
-          <td style="white-space: normal;" class="text-left">{{item.descripcion}}</td>
-          <td class="text-center">{{item.tipo}}</td>
-          <td style="white-space: normal;" class="text-left">{{item.tercero.nombreComercial}}</td>
-          <td class="text-center">{{item.bodega.nombre}}</td>
-          <td class="text-center" [ngClass]="{'text-red': item.unidades < 0, 'text-green' : item.unidades > 0 }">{{item.unidades}}</td>
-          <td class="text-center">{{item.balance}}</td>
-          <td class="text-center">{{item.precio   | currency}}</td>
-         
-        </tr>
-      </tbody><!-- end tbody -->
-  </table>
+
+  <div class="tabla-container">
+
+    <div class="table-scroll" #tablaScroll >
+    
+      <table class="table  align-middle  table-hover mb-2 mostrar-barra" >
+        <thead class="bg-light">
+            <tr>
+                <th style="width: auto;" class="text-center">FECHA</th>
+                <th style="width: auto;" class="text-left">DESCRIPCIÓN</th>
+                <th style="width: auto;" class="text-center">TIPO</th>
+                <th style="width: 20%;" class="text-left">EMPRESA</th>
+                <th style="width: auto;" class="text-center">BODEGA</th>
+                <th style="width: auto;" class="text-center">UNIDADES</th>
+                <th style="width: auto;" class="text-center">BALANCE</th>
+                <th style="width: auto;" class="text-center">PRECIO</th>
+            </tr><!-- end tr -->
+          </thead><!-- end thead -->
+          <tbody>
+      
+            <tr *ngFor="let item of listado">
+              <td class="text-center">{{item.fecha | date }}</td>
+              <td style="white-space: normal;" class="text-left">{{item.descripcion}}</td>
+              <td  style="font-weight: bold;" class="text-center">{{item.tipo}}</td>
+              <td style="white-space: normal;" class="text-left">{{item.tercero.nombreComercial}}</td>
+              <td class="text-center">{{item.bodega.nombre}}</td>
+              <td  style="font-weight: bold;" class="text-center" [ngClass]="{'text-red': item.unidades < 0, 'text-green' : item.unidades > 0 }">{{item.unidades}}</td>
+              <td  style="font-weight: bold;" class="text-center">{{item.balance}}</td>
+              <td  style="font-weight: bold;" class="text-center">{{item.precio   | currency}}</td>
+             
+            </tr>
+            
+          </tbody><!-- end tbody -->
+      </table>
+      
+      
+    
+    
+    </div>  
+    <div (click)="scrollToLastRow()" class="icono-flotante" *ngIf="mostrarIconoFlotante">
+      <button style="cursor:pointer;" mat-mini-fab disabled aria-label="Example icon button with a home icon">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+  </div>
 </ng-container>
 <ng-container *ngIf="listado.length == 0">
   <div class="row">

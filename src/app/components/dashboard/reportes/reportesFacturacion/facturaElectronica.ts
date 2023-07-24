@@ -27,15 +27,16 @@ export class facturaElectronicaReport {
         // for para recorrer productos y diseñar la tabla
         let i = 0;
         for (let x of data.productos){ 
+          i+=1;
           let p = [{
-            content: i + 1,
+            content: i,
             styles: {
               cellWidth: 20,
              
             }
           },
           {
-            content: x.producto.nombreymarcaunico+"("+x.laboratorio+")",
+            content: x.producto.nombreymarcaunico + ' Lote: '+x.lote,
             styles: {
               cellWidth: 260,
             
@@ -100,8 +101,8 @@ export class facturaElectronicaReport {
         // tabla productos
         autoTable(doc, {
          
-          tableLineWidth: 0.5,
-          tableLineColor: [0,0,0],
+          // tableLineWidth: 0.5,
+          // tableLineColor: [0,0,0],
           head: [
             [{
               content: '#',
@@ -139,7 +140,7 @@ export class facturaElectronicaReport {
               }
     
             }, {
-              content: 'TOTAL',
+              content: 'SUBTOTAL',
               styles: {
                 halign: 'right'
               }
@@ -150,7 +151,7 @@ export class facturaElectronicaReport {
           horizontalPageBreak: true,
           margin: {
             top: 250,
-            bottom: 205,
+            bottom: 245,
             left: 15,
             right: 15,
     
@@ -167,7 +168,7 @@ export class facturaElectronicaReport {
             doc.setFontSize(14)
     
             doc.setFont(undefined, 'bold');
-            doc.text('Sumiprod de la costa S.A.S.', 190, 30)
+            doc.text('SUMIPROD DE LA COSTA S.A.S.', 190, 30)
             doc.setFontSize(7)
             // doc.text('Enrique Rosado Navarro', 190, 40)
             doc.setFont(undefined, 'normal');
@@ -207,7 +208,7 @@ export class facturaElectronicaReport {
             // Datos de resolución de factura
             doc.setFontSize(9)
             doc.setFont(undefined, 'bold')
-            var textoResolucion = doc.splitTextToSize(data.numeracion.resolucion, 520);
+            var textoResolucion = doc.splitTextToSize(data.numeracion.textoResolucion, 520);
             doc.text(textoResolucion, 15, 125)
     
     
@@ -237,7 +238,7 @@ export class facturaElectronicaReport {
             doc.text(data.cliente.documento+'-'+data.cliente.dv, 70, 173)
             doc.text(data.cliente.direccion+','+data.cliente.municipio, 70, 184)
             doc.text(data.cliente.telefonoContacto, 70, 195)
-            doc.text(data.cliente.correoContacto, 70, 206)
+            doc.text(data.cliente.correoContacto || '', 70, 206)
             doc.text(data.productos.length+'', 70, 220)
             doc.text(data.vendedor.nombre.toString().toUpperCase(), 70, 231)
     
@@ -292,7 +293,7 @@ export class facturaElectronicaReport {
     
     
     
-            doc.roundedRect(15, 590, 580, 195, 3, 3);
+            doc.roundedRect(15, 550, 580, 235, 3, 3);
     
     
             // imagen de la nota
@@ -304,39 +305,39 @@ export class facturaElectronicaReport {
             // doc.roundedRect(40, 610, 530, 70, 3, 3);
     
             //LINEAS HORIZONTALES DE LOS TOTALES
-            doc.line(400, 607, 595, 607, 's')
-            doc.line(400, 622, 595, 622, 's')
-            doc.line(400, 637, 595, 637, 's')
-            doc.line(400, 652, 595, 652, 's')
-            doc.line(400, 667, 595, 667, 's')
+            doc.line(400, 567, 595, 567, 's')
+            doc.line(400, 582, 595, 582, 's')
+            doc.line(400, 597, 595, 597, 's')
+            doc.line(400, 612, 595, 612, 's')
+            doc.line(400, 627, 595, 627, 's')
             // doc.line(400, 682, 595, 682, 's')
             // doc.line(400, 670, 595, 670, 's')
             // doc.line(400, 680, 595, 680, 's')
     
             // LINEAS VERTICALES DE LOS TOTALES
-            doc.line(400, 590, 400, 667, 's')
-            doc.line(485, 590, 485, 667, 's')
+            doc.line(400, 550, 400, 627, 's')
+            doc.line(485, 550, 485, 627, 's')
     
             // TEXO DE LOS TOTALES
             doc.setFont(undefined, 'bold');
             doc.setFontSize(9)
-            doc.text("Subtotal:", 402, 605)
-            doc.text("Descuento:", 402, 620)
-            doc.text("IVA:", 402, 635)
-            doc.text("RETENCIONES:", 402, 650)
-            doc.text("TOTAL FACTURA:", 402, 665)
+            doc.text("Subtotal:", 402, 565)
+            doc.text("Descuento:", 402, 580)
+            doc.text("IVA:", 402, 595)
+            doc.text("RETENCIONES:", 402, 610)
+            doc.text("TOTAL FACTURA:", 402, 625)
         
     
             // totales en numeros
             doc.setFont(undefined, 'normal');
             doc.setFontSize(9)
-            doc.text(this.cp.transform(data.subtotal), 590, 605, "right")
-            doc.text(this.cp.transform(data.descuento), 590, 620, "right")
-            doc.text(this.cp.transform(data.valorIva), 590, 635, "right")
-            doc.text(this.cp.transform(data.valorReteFuente), 590, 650, "right")
+            doc.text(this.cp.transform(data.subtotal), 590, 565, "right")
+            doc.text(this.cp.transform(data.descuento), 590, 580, "right")
+            doc.text(this.cp.transform(data.valorIva), 590, 595, "right")
+            doc.text(this.cp.transform(data.valorReteFuente), 590, 610, "right")
             doc.setFont(undefined, 'bold');
             doc.setFontSize(10)
-            doc.text(this.cp.transform(data.valor), 590, 664, "right")
+            doc.text(this.cp.transform(data.valor), 590, 625, "right")
           
     
     
@@ -344,21 +345,21 @@ export class facturaElectronicaReport {
             // NOTAS 
             doc.setFont(undefined, 'bold');
             doc.setFontSize(7)
-            doc.text("NOTAS:", 25, 610)
-            doc.text("       \tSOLO SE ACEPTAN RECLAMOS DURANTE LAS 36 HORAS SIGUIENTES AL RECIBO DE ESTA MERCANCÍA - PRODUCTOS REFRIGERADOS NO SE ACEPTA DEVOLUCIÓN.", 25, 610,{maxWidth: 385})
+            doc.text("NOTAS:", 25, 570)
+            doc.text("       \tSOLO SE ACEPTAN RECLAMOS DURANTE LAS 36 HORAS SIGUIENTES AL RECIBO DE ESTA MERCANCÍA - PRODUCTOS REFRIGERADOS NO SE ACEPTA DEVOLUCIÓN.", 25, 570,{maxWidth: 385})
     
     
     
             // LINEA DIVISORA DE NOTAS 
-            doc.line(15, 622, 400, 622, 's')
+            doc.line(15, 582, 400, 582, 's')
     
             // TEXTO DEBAJO DE LA LINEA DIVISORA DE NOTAS
-            doc.text("Declaro haber recibido real y materialmente las mercancía antes descritas y por lo tanto aceptamos y nos obligamos a pagar el valor total de la misma a SUMIPROD DE LA COSTA  S.A.S. en las fechas indicadas arriba.", 25, 630,{maxWidth: 385})
+            doc.text("Declaro haber recibido real y materialmente las mercancía antes descritas y por lo tanto aceptamos y nos obligamos a pagar el valor total de la misma a SUMIPROD DE LA COSTA  S.A.S. en las fechas indicadas arriba.", 25, 590,{maxWidth: 385})
             doc.setFontSize(6)
-            doc.text("Esta factura de venta se asimila en todos sus efectos legales a la letra de cambio según articulo 774 del codigo de comercio", 25, 647,{maxWidth: 385})
+            doc.text("Esta factura de venta se asimila en todos sus efectos legales a la letra de cambio según articulo 774 del codigo de comercio", 25, 607,{maxWidth: 385})
             doc.setFontSize(7)
             // LINEA DIVISORA DE OBSERVACIONES 
-            doc.line(15, 652, 400, 652, 's')
+            doc.line(15, 612, 400, 612, 's')
 
             // MODULO DE RETENCIONES FACTURACIÓN ELECTRONICA 
             
@@ -366,32 +367,32 @@ export class facturaElectronicaReport {
 
            
               doc.setFillColor("#41B6FF");
-              doc.rect(30,660,270,15,'FD');
-              doc.rect(30,675,270,15);
+              doc.rect(30,620,270,15,'FD');
+              doc.rect(30,635,270,15);
 
             
 
               doc.setFontSize(9)
               doc.setTextColor("#FFF");
-              doc.text("RETENCIÓNES", 165, 671,{align:'center'})
+              doc.text("RETENCIÓNES", 165, 631,{align:'center'})
 
 
               doc.setFontSize(8)
               
               doc.setTextColor("#000");
-              doc.text("RETENCIÓN", 75, 686,{align:'center'})
-              doc.text("BASE", 160, 686,{align:'center'})
-              doc.text("%", 210, 686,{align:'center'})
-              doc.text("TOTAL", 260, 686,{align:'center'})
+              doc.text("RETENCIÓN", 75, 646,{align:'center'})
+              doc.text("BASE", 160, 646,{align:'center'})
+              doc.text("%", 210, 646,{align:'center'})
+              doc.text("TOTAL", 260, 646,{align:'center'})
 
 
-              doc.line(120,675,120,675+15);
-              doc.line(200,675,200,675+15);
-              doc.line(220,675,220,675+15);
+              doc.line(120,635,120,635+15);
+              doc.line(200,635,200,635+15);
+              doc.line(220,635,220,635+15);
 
       
-              let startY = 675;
-              let startYText = 686;
+              let startY = 635;
+              let startYText = 646;
               doc.setTextColor("#1E1D1D");
               for(let x of data.retenciones){
                 startY+=15
@@ -411,10 +412,22 @@ export class facturaElectronicaReport {
 
               }
             }
+
+            // Zona de firmas
+            doc.line(25, 710, 190, 710)
+            doc.setFontSize(9)
+            doc.text("Empresa - Firma y Sello", 110, 725, "center")
+    
+            doc.line(400, 710, 585, 710)
+            doc.text("Cliente - Firma y Sello", 490, 725, "center")
         
             // TOTAL EN LETRAS
             doc.setFont(undefined, 'bold');
             doc.setFontSize(6)
+            doc.text("OBSERVACIÓN:", 25, 740)
+            doc.setFont(undefined, 'normal');
+            doc.text("\t\t\t     "+data.observacion, 25, 740,{'width':560})
+            doc.setFont(undefined, 'bold');
             doc.text("SON:", 25, 750)
             doc.setFont(undefined, 'normal');
             var splitTitle2 = doc.splitTextToSize("(" + this.numeroALetras(data.valor, '') + ")", 560)
@@ -509,15 +522,16 @@ export class facturaElectronicaReport {
       // for para recorrer productos y diseñar la tabla
       let i = 0;
       for (let x of data.productos){ 
+        i += 1;
         let p = [{
-          content: i + 1,
+          content: i,
           styles: {
             cellWidth: 20,
            
           }
         },
         {
-          content: x.producto.nombreymarcaunico+"("+x.laboratorio+")",
+          content: x.producto.nombreymarcaunico + ' Lote: '+x.lote,
           styles: {
             cellWidth: 260,
           
@@ -577,6 +591,7 @@ export class facturaElectronicaReport {
         ]
   
         productos.push(p);
+        
       }
   
       // tabla productos
@@ -621,7 +636,7 @@ export class facturaElectronicaReport {
             }
   
           }, {
-            content: 'TOTAL',
+            content: 'SUBTOTAL',
             styles: {
               halign: 'right'
             }
@@ -689,7 +704,7 @@ export class facturaElectronicaReport {
           // Datos de resolución de factura
           doc.setFontSize(9)
           doc.setFont(undefined, 'bold')
-          var textoResolucion = doc.splitTextToSize(data.numeracion.resolucion, 520);
+          var textoResolucion = doc.splitTextToSize(data.numeracion.textoResolucion, 520);
           doc.text(textoResolucion, 15, 125)
   
   
@@ -719,7 +734,7 @@ export class facturaElectronicaReport {
           doc.text(data.cliente.documento+'-'+data.cliente.dv, 70, 173)
           doc.text(data.cliente.direccion+','+data.cliente.municipio, 70, 184)
           doc.text(data.cliente.telefonoContacto, 70, 195)
-          doc.text(data.cliente.correoContacto, 70, 206)
+          doc.text(data.cliente.correoContacto  || '', 70, 206)
           doc.text(data.productos.length+'', 70, 220)
           doc.text(data.vendedor.nombre.toString().toUpperCase(), 70, 231)
   

@@ -5,3 +5,88 @@
 .text-green{
     color: green;
 }
+
+
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    /* height: 350px; */
+    table-layout: fixed;
+    max-height: 350px;
+  }
+
+
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  /* border: none; */
+ background:white; 
+  color: #000;
+  z-index:4;
+}
+
+.tabla-container {
+    position: relative;
+  }
+
+.icono-flotante {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3; /* Asegúrate de que el z-index sea mayor que el de las filas */
+    pointer-events: auto; /* Permite la interacción con el icono */
+    /* Cambia el color de fondo del icono según tus necesidades */
+ /* Aplica un borde redondeado al icono si es necesario */
+ /* Ajusta el espaciado interno del icono según tus necesidades */
+  
+}
+
+.redondo{
+    display: block;
+  width: 50px;
+  background-color: #41B6FF;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+.example-right-align {
+    text-align: right;
+  }
+  
+
+
+.table-scroll tbody,
+.table-scroll tbody th,
+.table-scroll tbody td {
+  height: auto;
+  
+}
+
+
+
+.table-scroll thead,
+.table-scroll thead th,
+.table-scroll thead td {
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  
+    color: #fff;
+    z-index:4;
+
+    color: #fff;
+
+    background-color: #41B6FF; 
+}
+

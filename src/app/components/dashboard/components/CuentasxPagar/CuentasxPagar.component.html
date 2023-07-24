@@ -9,13 +9,13 @@
 
               <div class="page-title-right">
                   <ol class="breadcrumb m-0">
-                      <li class="breadcrumb-item"><a href="javascript: void(0);">Facturación</a></li>
+                      <li class="breadcrumb-item"><a href="javascript: void(0);">CXP</a></li>
                       <li class="breadcrumb-item active">listado</li>
                   </ol>
               </div>
 
           </div>
-      </div>
+        </div>
 
 
         <div class="row">
@@ -23,13 +23,15 @@
               <div class="card">
                   <div class="card-header">
                     <div class="row align-items-end">
-                      <div class="col-sm">
+                      <div class="col-12">
                           <div style="float: right;" class="botones-header">
-                              
-                              <button type="button"  class="btn btn-outline-primary mb-4">
+                            <button type="button"  class="btn btn-outline-primary mb-4">
                                 <i class="squire ico-excel"></i>&nbsp; Exportar excel
-                              </button>
-                             
+                            </button>
+                            <button type="button" (click)="busquedaAvanzada = !busquedaAvanzada" class="btn btn-outline-primary mb-4">
+                                <i class="fas fa-search-plus"></i>&nbsp; Busqueda avanzada
+                            </button>
+                            
                            
                           </div>
                       </div>
@@ -40,6 +42,128 @@
                   </div>
                   <div class="card-body">
                    
+
+                    <div class="row" *ngIf="busquedaAvanzada">
+                        <fieldset class="rounded-3 p-3">
+                            <legend class="float-none w-auto">FILTROS DE BÚSQUEDA</legend>
+                            <div class="row">
+                                <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                                    <mat-form-field appearance="outline"  style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">N° ORDEN</mat-label>
+                                        <input [(ngModel)]="filtroAvanzado.orden" matInput type="text">
+                                        
+                                    </mat-form-field>
+                                    
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                                    <mat-form-field appearance="outline"  style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">N° FACTURA</mat-label>
+                                        <input [(ngModel)]="filtroAvanzado.factura" matInput type="text">
+                                        
+                                    </mat-form-field>
+                                    
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">Forma de pago</mat-label>
+                                            <mat-select   style="text-align: center;" [(ngModel)]="this.filtroAvanzado.formaDePago">
+                                                <mat-option *ngFor="let item of formasPago" [value]="item.id">{{item.nombre}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">ESTADO</mat-label>
+                                            <mat-select   style="text-align: center;" [(ngModel)]="this.filtroAvanzado.estado">
+                                                <mat-option  [value]="true">PAGADA</mat-option>
+                                                <mat-option  [value]="false">PENDIENTE</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-8 col-sm-3 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <mat-form-field style="width: 100%;" class="example-form-field" appearance="fill">
+                                        <!-- <mat-label>Fechas</mat-label> -->
+                                        <mat-date-range-input
+                                        
+                                            [rangePicker]="estadoFinancieroPicker">
+                                            <input matStartDate placeholder="FECHA INICIAL" [(ngModel)]="filtroAvanzado.fechaInicial">
+                                            <input matEndDate placeholder="FECHA FINAL"     [(ngModel)]="filtroAvanzado.fechaFinal">
+                                        </mat-date-range-input>
+                                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                        <a matSuffix mat-icon-button aria-label="Clear"  (click)="estadoFinancieroPicker.open()">
+                                            <mat-icon color="primary">calendar_month</mat-icon>
+                                            <!-- <i class="fas fa-calendar"></i> -->
+                                        </a>
+                                        <mat-date-range-picker #estadoFinancieroPicker></mat-date-range-picker>
+                                        </mat-form-field>
+                        
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">AÑO</mat-label>
+                                            <mat-select  (ngModelChange)="setMesesDefault($event)"  style="text-align: center;" [(ngModel)]="this.filtroAvanzado.year">
+                                                <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                        
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">MES</mat-label>
+                                            <mat-select   style="text-align: center;" [(ngModel)]="this.filtroAvanzado.mes">
+                                                <mat-option  *ngFor="let mes of meses" [value]="mes.id">{{ mes.mes }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-5">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                                            <mat-label style="font-size: 18px;">Proveedores</mat-label>
+                                            <mat-select  placeholder="Seleccionar proveedor" [(ngModel)]="filtroAvanzado.proveedor" >
+                                                <mat-option>
+                                                    <ngx-mat-select-search ngModel (ngModelChange)="filtraTerceros($event)" #filtroTercero 
+                                                        placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                                                        <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let proveedor of filtroProveedores | async" [value]="proveedor.id">
+                                                    {{proveedor.nombreComercial}}
+                                                </mat-option>
+            
+                                                
+                                            </mat-select>
+                                    
+                                        </mat-form-field>
+                                    
+        
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <hr>
+                            <div class="d-flex flex-wrap gap-2 float-end">
+                                <button (click)="limpiarFiltro()" type="button" class="btn btn-danger float-right"><i class="uil uil-trash-alt"></i></button>
+                                <button (click)="BusquedaAvanzada()" type="button" class="btn btn-success float-right"><i class="uil uil-search me-2"></i> BUSCAR</button>
+                            </div>
+        
+                        </fieldset>
+                    </div> 
+
+
                       <div class="row">
                         <div class="col-md-12" >
                                 <table id="Tablecxp" style="width:100%" class="table table-striped table-bordered table-responsive" >

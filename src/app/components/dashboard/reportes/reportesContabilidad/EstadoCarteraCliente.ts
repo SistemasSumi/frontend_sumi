@@ -13,81 +13,74 @@ export class EstadoCarteraCliente{
     public ReporteEstadoCarteraCliente(data:any){
         const doc = new jsPDF('l', 'pt', 'letter');
 
-        let cliente = "JOSE MIGUEL ESCUDERO BUSTAMANTE"; 
+      
         doc.setProperties({
-            title: 'JOSE MIGUEL ESCUDERO BUSTAMANTE - '+moment(new Date()).format("DD/MM/YYYY"),
-            subject: 'JOSE MIGUEL ESCUDERO BUSTAMANTE - '+moment(new Date()).format("DD/MM/YYYY"),		
+            title: 'ESTADO DE CARTERA CLIENTE - '+moment(new Date()).format("DD/MM/YYYY"),
+            subject: data.cliente+' - '+moment(new Date()).format("DD/MM/YYYY"),		
             author: 'Sarp Soft Nube',
             keywords: '',
             creator: 'Sarp Soft'
         });
-        let factura = []
-        for (let x = 0; x < 22; x++) {
-    
+        let facturas = [];
+        for (let x of data.facturas) {
           let f = [{
-            content: "SUM-00112",
+            content: x.factura,
             styles: {
              
             }
           },
           {
-            content: `${moment(new Date()).format("DD/MM/YYYY").toUpperCase()}`,
+            content: `${moment(x.fecha).format("DD/MM/YYYY").toUpperCase()}`,
             styles: {
             
             }
           },
           {
-            content: `${moment(new Date()).format("DD/MM/YYYY").toUpperCase()}`,
+            content: `${moment(x.fechaVencimiento).format("DD/MM/YYYY").toUpperCase()}`,
             styles: {
     
             }
           },
           {
-            content: "13",
+            content: x.dias_factura,
             styles: {
     
             }
           },
           {
-            content:  this.cp.transform(3850604),
+            content:  this.cp.transform(x.totales_x_rango['0_30']),
             styles: {
             }
           },
           {
-            content:  this.cp.transform(2871832),
+            content:  this.cp.transform(x.totales_x_rango['31_60']),
             styles: {
             }
           },
           {
-            content: this.cp.transform(22000000),
+            content: this.cp.transform(x.totales_x_rango['61_90']),
           
           },
           {
-            content: this.cp.transform(11014),
+            content: this.cp.transform(x.totales_x_rango['91_120']),
           
           },
           {
-            content: this.cp.transform(38000000),
+            content: this.cp.transform(x.totales_x_rango['121_150']),
           },
           {
-            content:  this.cp.transform(45000000),
+            content:  this.cp.transform(x.totales_x_rango['151_180']),
             styles: {
             }
           },
           {
-            content:  this.cp.transform(12000000),
+            content:  this.cp.transform(x.totales_x_rango['181++']),
             styles: {
-            }
-          },
-          {
-            content:  this.cp.transform(18880000),
-            styles: {
-
             }
           }
           ]
     
-          factura.push(f);
+          facturas.push(f);
         }
         let totalpage = 1
         autoTable(doc, {
@@ -161,11 +154,11 @@ export class EstadoCarteraCliente{
                   halign: 'right'
                 }}
             ]],
-          body: factura,
+          body: facturas,
           horizontalPageBreak: true,
     
           margin: {
-            top: 125,
+            top: 150,
             bottom: 65,
             left: 15,
             right: 15,
@@ -176,7 +169,7 @@ export class EstadoCarteraCliente{
             totalpage++;
 
             // imagen logo empresa
-            doc.addImage(logoSumi, 'PNG', 20, 20,100, 50)
+            doc.addImage(logoSumi, 'PNG', 20, 20,150, 80 )
 
             // elaborado
             doc.setFontSize(6)
@@ -193,14 +186,18 @@ export class EstadoCarteraCliente{
 
 
             // Datos de la Empresa
-            doc.setFontSize(12);
+            doc.setFontSize(13);
             doc.setFont(undefined, 'bold');
-            doc.text('SUMIPROD DE LA COSTA S.A.S.', 396, 38, { align: "center" });
+            doc.text('SUMIPROD DE LA COSTA S.A.S.', 396, 30, { align: "center" });
             doc.setFontSize(7);
             
             doc.setFont(undefined, 'normal');
-            doc.text('NIT: 901648084-9', 396, 50, { align: "center" });
-            doc.text('Régimen: Responsable de IVA', 396, 60, { align: "center" });
+            doc.text('NIT: 901648084-9', 396, 42, { align: "center" });
+            doc.text('Régimen: Responsable de IVA', 396, 52, { align: "center" });
+            doc.text('Persona Judírica', 396, 62, { align: "center" });
+            doc.text('Calle 44B #21G-11 Urb Santa Cruz, Santa Marta', 396, 72, { align: "center" });
+            doc.text('Tel. (5) 432-7722 - Cel: (301) 302-2986', 396, 82, { align: "center" });
+            doc.text('Email. sumiprodelacosta@gmail.com', 396, 92, { align: "center" });
             
 
             doc.setFont(undefined, 'bold');
@@ -210,38 +207,38 @@ export class EstadoCarteraCliente{
             doc.setFontSize(8);
             doc.text(moment(new Date()).format("DD/MM/YYYY"), 707, 53, { align: "center" });
             
-            doc.setDrawColor('#000000');
-            doc.line(15, 103, 777, 103,);
+            
 
 
             // Titulo
             doc.setFont(undefined, 'bold');
-            doc.setFontSize(14);
-            doc.text('ESTADO DE CARTERA A LA FECHA', 396, 85, { align: "center" });
+            doc.setFontSize(12);
+            doc.text('ESTADO DE CARTERA A CORTE DE '+moment(data.fecha_corte).format("DD MMMM YYYY").toUpperCase(), 396, 117, { align: "center" });
             
             
     
             
     
-            
+            doc.setDrawColor('#000000');
+            doc.line(15, 128, 777, 128,);
     
             doc.setFontSize(9);
             // // Cuenta y Saldo
-            doc.text("Referencia:",15, 118);
-            doc.text("1221981200-5", 65, 118);
-            doc.text("Cliente:",130,118)
-            doc.text("ARMONIA MEDICAL S.A.S",170,118)
-            doc.text("Forma de pago:",550,118)
-            doc.text("Credito 30 Dias",620,118)
+            doc.text("Referencia:",15, 143);
+            doc.text(data.documento, 65, 143);
+            doc.text("Cliente:",130,143)
+            doc.text(data.cliente,170,143)
+            doc.text("Forma de pago:",550,143)
+            doc.text(data.formaPago,620,143)
   
             
     
           },
           foot: [
-            ['', '','','', { content: this.cp.transform(5860630), styles: {  halign: 'right' } }, { content: this.cp.transform(6138210), styles: {  halign: 'right' } }
-            , { content: this.cp.transform(45000000), styles: {  halign: 'right' } }, { content: this.cp.transform(1101994), styles: {  halign: 'right' } }
-            , { content: this.cp.transform(25000000), styles: {  halign: 'right' } }, { content: this.cp.transform(22200000), styles: {  halign: 'right' } }
-            , { content: this.cp.transform(38800000), styles: {  halign: 'right' } }]
+            ['', '','','', { content: this.cp.transform(data.totales_por_rango['0_30']), styles: {  halign: 'right' } }, { content: this.cp.transform(data.totales_por_rango['31_60']), styles: {  halign: 'right' } }
+            , { content: this.cp.transform(data.totales_por_rango['61_90']), styles: {  halign: 'right' } }, { content: this.cp.transform(data.totales_por_rango['91_120']), styles: {  halign: 'right' } }
+            , { content: this.cp.transform(data.totales_por_rango['121_150']), styles: {  halign: 'right' } }, { content: this.cp.transform(data.totales_por_rango['151_180']), styles: {  halign: 'right' } }
+            , { content: this.cp.transform(data.totales_por_rango['181++']), styles: {  halign: 'right' } }]
     
     
           ],
@@ -317,9 +314,9 @@ export class EstadoCarteraCliente{
         doc.setFont(undefined, 'bold')
         doc.line(15, FinalY, 777, FinalY,);
         doc.text("Total Facturas:   ",15, FinalY+15);
-        doc.text("7",88, FinalY+15);
+        doc.text(data.total_facturas+"",88, FinalY+15);
         doc.text("Total Saldo:",125, FinalY+15);
-        doc.text(this.cp.transform(12000000),185,FinalY+15);
+        doc.text(this.cp.transform(data.saldo_total),185,FinalY+15);
         
 
 

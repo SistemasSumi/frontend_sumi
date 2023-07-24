@@ -20,6 +20,7 @@ import { InvoceReport } from './models/InvoceReport';
 })
 export class FacturacionService {
   SubjectdataFacturas:BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
+  SubjectdataProformas:BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
 
 constructor(
 
@@ -29,6 +30,7 @@ constructor(
   private settings:ConfiguracionService
 ) {
   this.cargarFacturas();
+  this.cargarProformas().subscribe();
  }
 
 cargarNumeracion(){
@@ -53,6 +55,28 @@ saveFactura(form:FormGroup,detalle:any[]): Observable<any>{
   
 
 }
+
+
+saveFacturaPermitida(factura,detalle:any[]): Observable<any>{
+  const  url = environment.BACKEND_DIR+'facturacion/facturas/';
+  const token = this.auth.currentUser.getTokenUser();
+  const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+ 
+  let data = {
+      "cxc":factura,
+      "detalle":detalle
+  }
+
+
+
+  return this.http.post<any>(url,data,{headers: httpHeaders});
+  
+  
+
+}
+
+
+
 
 updateFactura(form:FormGroup): Observable<any>{
   const  url = environment.BACKEND_DIR+'facturacion/facturas/';
@@ -107,11 +131,36 @@ obtenerProformas(){
   const token = this.auth.currentUser.getTokenUser();
   const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
 
-  return this.http.get<any>(url,{headers: httpHeaders}); 
+  return this.http.get<any>(url,{headers: httpHeaders}).pipe(
+    
+    map(resp =>  {this.SubjectdataProformas.next(resp),console.log("respondio",resp);})
+  ) 
 }
 
 cargarFacturas(){
-  this.obtenerFacturas().subscribe();
+
+  this.obtenerFacturas().subscribe(() => {
+   
+  });
+}
+cargarProformas(){
+
+  return this.obtenerProformas();
+}
+
+
+actualizarListadoFacturas(){
+  Swal.fire({
+    allowOutsideClick: false,
+    icon: 'info',
+    title: 'Consultando..',
+    text:'Espere por favor..'
+  });
+  Swal.showLoading();
+
+  this.obtenerFacturas().subscribe(() => {
+    Swal.close();
+  });
 }
 
 obtenerFacturas(){
@@ -347,5 +396,68 @@ imprimirPagos(numero){
   return this.http.get<any[]>(url,{headers: httpHeaders});
 }
 
+obtenerContabilidadAsiento(numero:string,tipo:string){
+  const  url = environment.BACKEND_DIR+'contabilidad/asiento/?numero='+numero+'&tipo='+tipo;
+  const token = this.auth.currentUser.getTokenUser();
+  const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+  return this.http.get<any>(url,{headers: httpHeaders}); 
+}
+
+
+busquedaAvanzada(data:any){
+  const  url = environment.BACKEND_DIR+'facturacion/facturas/busqueda/';
+  const token = this.auth.currentUser.getTokenUser();
+  const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+  let datos = data;
+
+  
+  
+
+
+  
+
+  return this.http.post<any[]>(url,datos,{headers: httpHeaders}).pipe(
+      map(resp =>  this.SubjectdataFacturas.next(resp))
+  )
+
+}
+
+
+proformaAFactura(data:any){
+  const  url = environment.BACKEND_DIR+'facturacion/proforma/a/factura/';
+  const token = this.auth.currentUser.getTokenUser();
+  const httpHeaders = new HttpHeaders()
+                          .set('Authorization', 'Token '+token)
+                          .set('Content-Type', 'application/json');
+  
+
+  return this.http.post<any[]>(url,data,{headers: httpHeaders}).pipe(
+      map(resp =>  console.log(resp))
+  )
+
+}
+
+
+busquedaAvanzadaProformas(data:any){
+  const  url = environment.BACKEND_DIR+'facturacion/proforma/busqueda/';
+  const token = this.auth.currentUser.getTokenUser();
+  const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+  let datos = data;
+
+  
+  
+
+
+  
+
+  return this.http.post<any[]>(url,datos,{headers: httpHeaders}).pipe(
+    map(resp =>  this.SubjectdataProformas.next(resp))
+  )
+
+
+}
 
 }

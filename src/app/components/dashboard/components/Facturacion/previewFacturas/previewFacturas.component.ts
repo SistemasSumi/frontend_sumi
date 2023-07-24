@@ -66,7 +66,7 @@ export class PreviewFacturasComponent implements OnInit {
   }
 
   obtenerAsiento(numero:string){
-    this.ingresoService.obtenerContabilidadAsiento(numero).subscribe((resp:any)=> {
+    this.invoceService.obtenerContabilidadAsiento(numero,'FAC').subscribe((resp:any)=> {
         this.contaAsiento = resp;
         this.contaAsientoTotalDebito  = 0;
         this.contaAsientoTotalCredito = 0;

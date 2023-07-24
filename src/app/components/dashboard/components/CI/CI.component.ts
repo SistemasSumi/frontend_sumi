@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
@@ -29,7 +30,7 @@ export class CIComponent implements OnInit {
   reteica:boolean = false;
   rtf:boolean = false;
 
-
+  fecha:Date =  new Date();
   terceroSeleccionado:ModelTerceroCompleto;
 
 
@@ -76,7 +77,7 @@ export class CIComponent implements OnInit {
 
   @ViewChild('InputSaldoAFavor') InputSaldoAFavor: ElementRef;
 
-  constructor(private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private cxc:FacturacionService) { }
+  constructor(private toastr:ToastrService,private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private cxc:FacturacionService) { }
 
   ngOnInit() {
     this.puc.getEfectivo().subscribe(resp => {
@@ -139,6 +140,7 @@ export class CIComponent implements OnInit {
       "numeracion":this.GlobalNumeracion,
       "observacion":this.GlobalObservacion,
       "diferencia":this.GlobalDiferencia,
+      "fecha":this.fecha,
       "totalAbono":this.totalAbono,
       "totalSaldoAFavor":this.totalSaldoAFavor,
       "totalRetefuente":this.totalRetefuente,
@@ -179,7 +181,7 @@ export class CIComponent implements OnInit {
             let report = reporte.ReporteComprobanteIngreso(resp);
             window.open(report.output('bloburl'), '_blank');
     
-    
+            this.cargarNumeracion();
             this.getFacturas(this.terceroSeleccionado);
         });
        
@@ -213,17 +215,55 @@ export class CIComponent implements OnInit {
 
 
   validarRTF(){
+    // RETEFUENTE = '06'
+    // ICA = '07
+    let COD_RETEFUENTE = '06';
+  
+    
     if(this.rtf){
         let retenciones = this.terceroSeleccionado.retencionCliente;
-        let r  = retenciones.filter((rt) => rt.retencion.nombre == 'RETEFUENTE (2.5%)')[0];
-        this.dRetefuente = (this.detalle[this.filaAEditar].base - this.detalle[this.filaAEditar].descuentoTotal) * r.retencion.porcentaje / 100;
+
+        if(retenciones.length > 0){
+
+          let r  = retenciones.filter((rt) => rt.retencion.tipoRetencion == COD_RETEFUENTE)[0];
+          if(r){
+            
+            this.dRetefuente = (this.detalle[this.filaAEditar].base - this.detalle[this.filaAEditar].descuentoTotal ) * r.retencion.porcentaje / 100;
+          }else{
+         
+            this.toastr.error("Para poder aplicar Retención en la fuente (RETEFUENTE). Primero debe registrarle dicha retención al tercero seleccionado.","Sarp Soft")
+          }
+        }else{
+          this.toastr.warning("Para poder aplicar Retención en la fuente (RETEFUENTE). Primero debe registrarle dicha retención al tercero seleccionado.","Sarp Soft")
+        }
     }
    
   }
 
   validarRETEICA(){
+    // RETEFUENTE = '06'
+    // ICA = '07
+ 
+    let COD_ICA = '07';
+    
     if(this.reteica){
-        
+        let retenciones = this.terceroSeleccionado.retencionCliente;
+
+        if(retenciones.length > 0){
+
+          let r  = retenciones.filter((rt) => rt.retencion.tipoRetencion == COD_ICA)[0];
+          if(r){
+            
+            this.dReteica = (this.detalle[this.filaAEditar].base - this.detalle[this.filaAEditar].descuentoTotal ) * r.retencion.porcentaje / 100;
+          }else{
+         
+            this.toastr.error("Para poder aplicar Impuesto de Industria y Comercio (ICA). Primero debe registrarle dicha retención al tercero seleccionado.","Sarp Soft")
+          }
+
+
+        }else{
+          this.toastr.warning("Para poder aplicar Impuesto de Industria y Comercio (ICA). Primero debe registrarle dicha retención al tercero seleccionado.","Sarp Soft")
+        }
     }
    
   }
@@ -237,50 +277,62 @@ export class CIComponent implements OnInit {
 
   getFacturas(tercero:ModelTerceroCompleto){
       this.terceroSeleccionado = tercero;
+
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'info',
+        title: 'Consultando..',
+        text:'Espere por favor..'
+      });
+      Swal.showLoading();
+
       this.cxc.getFacturasXCliente(tercero.id).subscribe(resp => {
-      this.saldoAFavor = 0;
+        Swal.close();
+        this.saldoAFavor = 0;
 
-      this.totalAbono       = 0;
-      this.totalDescuento   = 0;
-      this.totalSaldoAFavor = 0;
-      this.totalSaldo       = 0;
-
-
-
-      this.detalle = [];
-      for(let x of resp.facturas){
-        console.log(x)
-        let d:detalle = {
-          cxc: x.id,
-          factura:x.numero,
-          fecha:x.fecha,
-          vence:x.fechaVencimiento,
-          formaPago:x.formaPago,
-          descuento:0,
-          descuentoTotal:x.descuento,
-          saldoFavor:0,
-          valorAbono:0,
-          base:x.subtotal,
-          iva:x.valorIva,
-          valorFactura:x.valor,
-          saldo:x.valor-x.abono,
-          saldoTotal:x.valor-x.abono,
-          retefuente:0,
-          reteica:0,
-          retencionTotal:x.valorReteFuente
-          
-
-          
-        };
-        this.totalAbono       += d.valorAbono
-        this.totalDescuento   += d.descuento
-        this.totalSaldoAFavor += d.saldoFavor
-        this.totalSaldo       += d.valorFactura-d.valorAbono
+        this.totalAbono       = 0;
+        this.totalDescuento   = 0;
+        this.totalSaldoAFavor = 0;
+        this.totalSaldo       = 0;
 
 
-        console.log(d)
 
-        this.detalle.push(d);
+        this.detalle = [];
+        for(let x of resp.facturas){
+          console.log(x)
+          let d:detalle = {
+            cxc: x.id,
+            factura:x.factura,
+            fecha:x.fecha,
+            vence:x.fechaVencimiento,
+            formaPago:x.formaPago,
+            
+            descuento:0,
+            descuentoTotal:x.valorDescuento,
+            saldoFavor:0,
+            valorAbono:0,
+            base:x.base,
+            iva:x.iva,
+            valorFactura:x.valorTotal,
+            saldo:x.valorTotal-x.valorAbono,
+            saldoTotal:x.valorTotal-x.valorAbono,
+            retefuente:0,
+            reteica:0,
+            RTFTotal:x.reteFuente,
+            RTITotal:x.reteIca
+            
+
+            
+          };
+          this.totalAbono       += d.valorAbono
+          this.totalDescuento   += d.descuento
+          this.totalSaldoAFavor += d.saldoFavor
+          this.totalSaldo       += d.valorFactura-d.valorAbono
+
+
+          console.log(d)
+
+          this.detalle.push(d);
         
       }
       this.saldoAFavor = resp.afavor.saldoAFavor;
@@ -481,7 +533,8 @@ interface detalle {
   descuento     : number;
   retefuente    : number;
   reteica       : number;
-  retencionTotal: number;
+  RTFTotal      : number;
+  RTITotal      : number;
   descuentoTotal: number;
   saldo         : number;
   saldoTotal    : number;

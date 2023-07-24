@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
@@ -18,6 +18,10 @@ import { StockService } from '../../inventario/stock/stock.service';
 import { FacturacionService } from '../facturacion.service';
 
 import * as moment from 'moment';
+import { DbService } from 'src/app/components/auth/db.service';
+import { SeguridadService } from 'src/app/components/auth/seguridad.service';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
+import { Notificaciones } from 'src/app/components/auth/permisosUsuario';
 
 
 @Component({
@@ -158,12 +162,12 @@ export class CrearFacturaVentaComponent implements OnInit {
   constructor(
               // private rutaActiva    : ActivatedRoute,
               private modalService  : NgbModal,
-              
+              private auth:SeguridadService,
               // private route         : Router,
               private formBuilder      : FormBuilder,
-           
+              private toastr: ToastrService,
               private invoceService:FacturacionService,
-              
+              private fire_db:DbService,
            
               private stock:StockService,
            
@@ -173,7 +177,9 @@ export class CrearFacturaVentaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    }
     this.obtenerNumeraciones();
     this.obtenerFormaDepago();
     
@@ -203,6 +209,12 @@ export class CrearFacturaVentaComponent implements OnInit {
   }
   obtenerClientesElectronicos(){
     this.config.SubjectdataClienteElectronicos.subscribe(resp => {
+      this.clientes = resp;
+      this.filtroClientes = new BehaviorSubject<ModelTerceroCompleto[]>(this.clientes);
+    });
+  }
+  obtenerClientes(){
+    this.config.SubjectdataCliente.subscribe(resp => {
       this.clientes = resp;
       this.filtroClientes = new BehaviorSubject<ModelTerceroCompleto[]>(this.clientes);
     });
@@ -279,8 +291,32 @@ export class CrearFacturaVentaComponent implements OnInit {
   }
 
 
+
+
+  obtenerExistencias(data:InventarioProducto){
+      let unidades = data.unidades
+      let cantidadUsada = 0;
+      if(this.listadoDetalleFactura.filter(d => d.producto.id === data.idProducto.id && d.lote === data.lote)[0]){
+        let detalle = this.listadoDetalleFactura.filter(
+          d => d.producto.id === data.idProducto.id
+          && d.lote === data.lote
+        )[0]
+        cantidadUsada = detalle.cantidad;
+    }
+
+
+    unidades  -= cantidadUsada;
+    return unidades
+
+  }
+
+
   seleccionarInventario(data:InventarioProducto){
     this.listaPrecios = [];
+
+    if(!data.estado){
+      return;
+    }
 
     this.lote        = data.lote;
 
@@ -294,8 +330,14 @@ export class CrearFacturaVentaComponent implements OnInit {
         cantidadUsada = detalle.cantidad;
     }
 
+    if(!data.estado){
+      return;
+    }
+
 
     this.existencia  = data.unidades-cantidadUsada;
+
+    
 
     if(this.producto.regulado){
       let p:precios = {
@@ -346,9 +388,14 @@ export class CrearFacturaVentaComponent implements OnInit {
     if(data.tipoDocumento == "2"){
       this.domicilio = true
       this.obtenerClientesPos();
-    }else{
+    }else if(data.tipoDocumento == "1"){
       this.domicilio = false;
       this.obtenerClientesElectronicos();
+      this.formfacturacion.get('valorDomicilio').setValue(0);
+    }else{
+      this.domicilio = false;
+      this.obtenerClientes();
+      this.domicilio = true
       this.formfacturacion.get('valorDomicilio').setValue(0);
     }
     
@@ -563,7 +610,7 @@ export class CrearFacturaVentaComponent implements OnInit {
 
 
     if(this.formfacturacion.value.valorDomicilio > 0){
-        if(this.totalFactura < 50000){
+        if(this.totalFactura < 50000   && !this.clienteSeleccionado.isElectronico){
           this.domicilioFactura = this.formfacturacion.value.valorDomicilio;
         }else{
           this.formfacturacion.get('valorDomicilio').setValue(0);
@@ -571,7 +618,7 @@ export class CrearFacturaVentaComponent implements OnInit {
         }
     }else{
       if(this.domicilio){
-        if(this.totalFactura < 50000){
+        if(this.totalFactura < 50000 && !this.clienteSeleccionado.isElectronico){
           this.formfacturacion.get('valorDomicilio').setValue(5000);
           this.domicilioFactura = 5000;
         }else{
@@ -640,57 +687,127 @@ export class CrearFacturaVentaComponent implements OnInit {
         }
 
 
-         
-        Swal.fire({
-          allowOutsideClick: false,
-          icon: 'info',
-          title: 'Guardando..',
-          text:'Espere por favor..'
-        });
-        Swal.showLoading();
+        // Verificar si al menos un elemento necesita permiso
+        const necesitaPermiso = this.listadoDetalleFactura.some(item => item.estado === false);
 
-        this.invoceService.saveFactura(this.formfacturacion,this.listadoDetalleFactura).subscribe((resp:any) => {
 
-          Swal.close();
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Sarp Soft',
-            text: 'Factura registrada con exito'
-          });
-          this.obtenerNumeraciones();
-          this.resetformFactura();
-          this.resetTable();
-
+        if (necesitaPermiso) {
         
+          new MetodosShared().AlertQuestion('Lo sentimos, pero para acceder a los precios bajos y poder facturar, se requieren permisos adicionales. ¿Desea solicitar el permiso?').then((result) => {
+            if (result.isConfirmed) {
+              let id = this.fire_db.getId();
+
+              let data = {
+                id:id,
+                estado: false,
+                cliente: this.clienteSeleccionado.nombreComercial,
+                factura:this.formfacturacion.value,
+                detalle:this.listadoDetalleFactura,
+                usuario:{avatar:this.auth.currentUser.getAvatar(),nombre:this.auth.currentUser.getNombreCorto(),username:this.auth.currentUser.getUsername()},
+                autorizado:''
+
+                
+              }
+
+             
+
+              this.fire_db.createDoc(data,'autorizacionFacturas/',id).then(() =>{
+                new MetodosShared().permisoPreciosBajos(
+                  this.generarMensajePermisosHTML(this.listadoDetalleFactura,id),
+                  this.generarMensajePermisos(this.listadoDetalleFactura,id,this.auth.currentUser.getUsername(),this.clienteSeleccionado.nombreComercial),
+                id);
+                
 
 
+                
 
+                let notify:Notificaciones = {
+                  id:'',
+                  usuario:{avatar:this.auth.currentUser.getAvatar(),nombre:this.auth.currentUser.getNombreCorto(),username:this.auth.currentUser.getUsername()},
+                  mensaje:`<p>Solicito permiso para facturar a precios bajos a: 
+                  ${this.clienteSeleccionado.nombreComercial} \n codigo: <span class="badge badge-soft-success">${id}</span></p>`,
+                  fecha:new Date().getTime(),
+                  sender_user:this.auth.currentUser.getUsername(),
+                  data:{'codigo':id},
+                  receiver_users:[],
+                  tipo:'PRECIOS_BAJOS',
+                  grupo:'CONTABILIDAD',
+                  vistas:[]
+                }
+                
+                this.fire_db.crearNotificacion(notify);
+
+
+                let msj = `Solicito permiso para facturar a precios bajos a: ${this.clienteSeleccionado.nombreComercial}`
+                this.fire_db.crearNotificacionPush(msj,this.auth.currentUser,"CONTABILIDAD");
+
+                this.obtenerNumeraciones();
+                this.resetformFactura();
+                this.resetTable();
+
+              });
+            }
+          });
+
+
+        } else {
           
-
-        },(ex) => {
-          console.log(ex);
-          Swal.close();
-          let errores ='';
-          for(let x of ex.error){
-       
-              errores +=`
-              <div class="alert alert-danger" role="alert" style="text-align: left;">
-                ${x}
-              </div>
-              `
-            
-            
-          }
+          
           Swal.fire({
-            icon: 'error',
-            title: 'Error al guardar.',
-            html:errores,
-            confirmButtonColor: '#4acf50',
-        
+            allowOutsideClick: false,
+            icon: 'info',
+            title: 'Guardando..',
+            text:'Espere por favor..'
+          });
+          Swal.showLoading();
+    
+          this.invoceService.saveFactura(this.formfacturacion,this.listadoDetalleFactura).subscribe((resp:any) => {
+            
+            console.log(resp);
+            Swal.close();
+    
+            Swal.fire({
+              icon: 'success',
+              title: 'Sarp Soft',
+              text: `Factura ${resp} registrada con exito`
+            });
+            this.obtenerNumeraciones();
+            this.resetformFactura();
+            this.resetTable();
+    
+          
+    
+    
+    
+            
+    
+          },(ex) => {
+            console.log(ex);
+            Swal.close();
+            let errores ='';
+            for(let x of ex.error){
+          
+                errores +=`
+                <div class="alert alert-danger" role="alert" style="text-align: left;">
+                  ${x}
+                </div>
+                `
+              
+              
+            }
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al guardar.',
+              html:errores,
+              confirmButtonColor: '#4acf50',
+          
+            });
+          
           });
         
-        });
+        }
+
+
       } 
     })
   }
@@ -708,6 +825,327 @@ export class CrearFacturaVentaComponent implements OnInit {
     }
     this.calcular();
   }
+
+  generarMensajePermisos(detalleFacturas: DetalleFactura[], id: string,usuario:string,cliente:string): string {
+    
+    let currency = new CurrencyPipe('en-US');
+    let mensaje = `El usuario *${usuario}* requiere permiso para poder facturar a precios bajos al cliente *${cliente}* los siguientes productos:\n\n`;
+  
+    detalleFacturas.forEach(detalle => {
+      if (detalle.estado === false) {
+        mensaje += `• COD: *${detalle.producto.codigoDeBarra}*\n`;
+        mensaje += `  Producto: *${detalle.producto.nombre}*\n`;
+        mensaje += `  Laboratorio: *${detalle.producto.laboratorio}*\n`;
+        mensaje += `  Lote: *${detalle.lote}*\n`;
+        mensaje += `  Cantidad: *${detalle.cantidad}*\n`;
+        mensaje += `  Valor de Compra: *${currency.transform(detalle.valorCompra)}*\n`;
+        mensaje += `  Valor de Venta: *${currency.transform(detalle.valor)}*\n\n`;
+      }
+    });
+  
+    mensaje += "Codigo para autorizar: *" + id + "*";
+  
+    return mensaje;
+  }
+  generarMensajePermisosHTML(detalleFacturas: DetalleFactura[], id: string): string {
+    let mensaje = '<div class="container">';
+    let currency = new CurrencyPipe('en-US');
+    mensaje += '<div class="alert alert-info" role="alert">Se requiere permiso para poder facturar a precios bajos los siguientes productos:</div>';
+    
+    mensaje += '<table class="table table-bordered">';
+    mensaje += '<thead class="thead-dark">';
+    mensaje += '<tr>';
+    mensaje += '<th scope="col">COD</th>';
+    mensaje += '<th scope="col">Valor de Compra</th>';
+    mensaje += '<th scope="col">Valor de Venta</th>';
+    mensaje += '</tr>';
+    mensaje += '</thead>';
+    mensaje += '<tbody>';
+    detalleFacturas.forEach(detalle => {
+      if (detalle.estado === false) {
+        mensaje += '<tr>';
+        mensaje += `<td>${detalle.producto.codigoDeBarra}</td>`;
+        mensaje += `<td>${currency.transform(detalle.valorCompra)}</td>`;
+        mensaje += `<td>${currency.transform(detalle.valor)}</td>`;
+        mensaje += '</tr>';
+      }
+    });
+    mensaje += '</tbody>';
+    mensaje += '</table>';
+    
+    mensaje += `<div style="text-aling: left;" class="alert alert-primary" role="alert">Código para autorizar: ${id}</div>`;
+    mensaje += '</div>';
+  
+    return mensaje;
+  }
+
+  // facturarFacturaAprobada(){
+//     this.toastr.show(`
+   
+//     <a href="" class="text-reset notification-item">
+//     <div class="d-flex  align-items-start" style="background-color: white;" >
+//         <div class="flex-shrink-0">
+//             <img src="assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-md" alt="user-pic">
+//         </div>
+//         <div class="flex-grow-1">
+//             <h6 class="mb-1">Justin Verduzco</h6>
+//             <div class="text-muted">
+//                 <p  style ="max-width: 200px" class="mb-1 font-size-13">Your task changed an issue from "In Progress" Your task changed an issue from "In Progress" to <span class="badge badge-soft-success">Review</span></p>
+//                 <p class="mb-0 font-size-10 text-uppercase fw-bold"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
+//             </div>
+//         </div>
+//     </div>
+// </a>`, '', {
+      
+//       enableHtml: true,
+//       positionClass: 'toast-top-right',
+//       toastClass: 'toast-custom',
+//       titleClass: 'toast-title',
+//       messageClass: 'toast-message'
+//     });
+    
+
+   
+  // }
+  facturarFacturaAprobada(){
+    Swal.fire({
+      icon:'warning',
+      title: 'Ingrese el codigo',
+      input: 'text',
+      inputPlaceholder: 'Escribe aquí...',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const textoIngresado = result.value;
+        if(textoIngresado == undefined || textoIngresado == ''){
+          Swal.fire('Cancelado', 'No se ingresó ningún texto', 'error');
+        }else{
+          const condiciones = [
+            { parametro: 'id', condicion: '==', busqueda: textoIngresado },
+            { parametro: 'estado', condicion: '==', busqueda: true }
+          ];
+          
+
+          let collectionSubscription: Subscription = this.fire_db.getCollectionQueryVariosParametros<any>('autorizacionFacturas',condiciones).subscribe( resp => {
+            
+            if(resp.length > 0){
+
+              let obj = resp[0];
+
+              Swal.fire({
+                allowOutsideClick: false,
+                icon: 'info',
+                title: 'Guardando..',
+                text:'Espere por favor..'
+              });
+              Swal.showLoading();
+        
+              this.invoceService.saveFacturaPermitida(obj.factura,obj.detalle).subscribe((resp:any) => {
+        
+                Swal.close();
+               
+        
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Sarp Soft',
+                  text: `Factura ${resp} registrada con exito`
+                });
+                this.obtenerNumeraciones();
+                this.resetformFactura();
+                this.resetTable();
+        
+              
+        
+        
+        
+                
+        
+              },(ex) => {
+                console.log(ex);
+                Swal.close();
+                let errores ='';
+                for(let x of ex.error){
+              
+                    errores +=`
+                    <div class="alert alert-danger" role="alert" style="text-align: left;">
+                      ${x}
+                    </div>
+                    `
+                  
+                  
+                }
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error al guardar.',
+                  html:errores,
+                  confirmButtonColor: '#4acf50',
+              
+                });
+              
+              });
+            
+
+            }else{
+              new MetodosShared().AlertError('Lo sentimos, no se encontró ningún documento con el código proporcionado o aún no ha sido aprobado.');
+            }
+            collectionSubscription.unsubscribe();
+          });
+
+          
+        }
+        
+      } else {
+        Swal.fire('Cancelado', 'No se ingresó ningún texto', 'error');
+      }
+    });
+  }
+
+  facturarProforma(){
+    Swal.fire({
+      icon:'info',
+      title: 'FACTURAR PROFORMAS',
+      html: `
+      
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <i class="fas fa-info me-2"></i>
+          ESCRIBA EL NÚMERO DE PROFORMA Y PRESIONE LA TECLA ENTER.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="swal-input-container">
+        <input type="text" id="input" class="swal2-input mb-3" placeholder="AÑADE UN NUMERO DE PROFORMA" />
+      </div>
+      <div class="swal-radios-container">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="type" id="radioElectronica" value="ELECTRONICA" checked>
+          <label class="form-check-label" for="radioElectronica">
+            Electrónica
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="type" id="radioPOS" value="POS">
+          <label class="form-check-label" for="radioPOS">
+            POS
+          </label>
+        </div>
+      </div>
+      <div id="words" class="swal-words-container"></div>
+    
+      `,
+      showCancelButton: true,
+      preConfirm: () => {
+        const values = Array.from(document.getElementsByClassName('swal-word')).map(el => el.textContent.trim());
+        const typeElement = document.querySelector('input[name="type"]:checked') as HTMLInputElement;
+        const type = typeElement.value;
+
+        if (values.length === 0) {
+          Swal.showValidationMessage('Ingrese al menos un numero de proforma');
+          return false; // Evita que se cierre la alerta si no hay palabras ingresadas
+        }
+
+        console.log("valores:", values);
+        console.log("Tipo seleccionado:", type);
+
+
+        const data = {
+          values: values,
+          type: type
+        };
+        
+        const jsonData = JSON.stringify(data);
+        
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: 'info',
+          title:'Espere por favor..'
+        
+        });
+        Swal.showLoading();
+        this.invoceService.proformaAFactura(jsonData).subscribe(
+          (resp) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Sarp Soft',
+              text: `Factura ${resp} registrada con exito`
+            });
+            Swal.close();
+
+          },
+          (ex) => {
+            let error = "";
+            for(let x of ex.error){
+              error += x;
+            }
+            Swal.close();
+            new MetodosShared().AlertError(error,'left');
+            
+          }
+        )
+      },
+      didOpen: () => {
+        const input = document.getElementById('input') as HTMLInputElement;
+        const wordsContainer = document.getElementById('words');
+        
+        
+
+        input.addEventListener('input', () => {
+          const word = input.value.trim().toUpperCase(); // Convierte el valor a mayúsculas
+          input.value = word; // Asigna el valor en mayúsculas de vuelta al input
+        });
+    
+        input.addEventListener('keydown', event => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            
+
+  
+            const word = input.value.trim();
+            if (word !== '') {
+              
+                
+              Swal.resetValidationMessage();
+                
+               
+             
+
+
+              const wordElement = document.createElement('span');
+              wordElement.classList.add('swal-word', 'badge', 'rounded-pill', 'badge-outline-primary', 'mr-3');
+              wordElement.textContent = word;
+              wordElement.style.marginRight = '5px'; // Aplica el margen derecho de 3px
+              wordElement.style.marginBottom = '5px'; // Aplica el margen derecho de 3px
+  
+              
+  
+              const deleteIcon = document.createElement('span');
+              deleteIcon.classList.add('swal-word-delete','mr-3');
+              deleteIcon.style.marginLeft = '5px';
+              deleteIcon.style.cursor = 'pointer'; // Aplica el cursor pointer a la etiqueta <i>
+              deleteIcon.innerHTML = '<i class="fas fa-trash-can text-danger"></i>';
+              deleteIcon.addEventListener('click', () => {
+                wordsContainer.removeChild(wordElement);
+              });
+  
+              // wordElement.appendChild(separator);
+              wordElement.appendChild(deleteIcon);
+              wordsContainer.appendChild(wordElement);
+  
+              input.value = '';
+            }
+          }
+        });
+      },
+    });
+  }
+
+
+
+  
+
+
+
 
 }
 

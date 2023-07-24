@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { CurrencyPipe } from '@angular/common';
 import { logoSumi } from '../logoSumi';
 import { AcortarTextPipe } from 'src/app/pipes/acortarText.pipe';
+import { NumeroALetrasPipe } from 'src/app/pipes/NumeroALetras.pipe';
 
 export class ComprobanteEgreso {
 
@@ -219,7 +220,7 @@ export class ComprobanteEgreso {
 
             doc.setFillColor("#41B6FF");
             doc.rect(15,startY,68,18,'FD');
-            doc.rect(83,startY,277,18);
+            doc.rect(83,startY,160,18);
             doc.setTextColor("#FFF");
             doc.setFont(undefined, 'bold')
             doc.text("REALIZADO:",17, startYText);
@@ -230,14 +231,34 @@ export class ComprobanteEgreso {
 
 
             doc.setFillColor("#41B6FF");
-            doc.rect(360,startY,55.25,18,'FD');
-            doc.rect(415.25,startY,180.25,18);
+            doc.rect(210,startY,55.25,18,'FD');
+            doc.rect(265.25,startY,115.25,18);
             doc.setTextColor("#FFF");
             doc.setFont(undefined, 'bold')
-            doc.text("TELEFONO:",362, startYText);
+            doc.text("   BANCO",212, startYText);
             doc.setTextColor("#000");
             doc.setFont(undefined, 'normal')
-            doc.text(data.pago.proveedor.telefonoContacto || '',417.25, startYText);
+
+
+            const datosBancarios = data.pago.proveedor.datosBancarios;
+            const filtroBanco = datosBancarios.filter(bancario => bancario.banco === 'BANCOLOMBIA');
+
+            const resultado = filtroBanco.length > 0 ? filtroBanco[0] : datosBancarios[0];
+
+            doc.text(resultado?.banco || '',269.25, startYText);
+
+
+
+            doc.setFillColor("#41B6FF");
+            doc.rect(378.5,startY,65.25,18,'FD');
+            doc.rect(443.75,startY,151.93,18);
+            doc.setTextColor("#FFF");
+            doc.setFont(undefined, 'bold')
+            doc.text("  N° CUENTA",380.5, startYText);
+            doc.setTextColor("#000");
+            doc.setFont(undefined, 'normal')
+            doc.text(resultado?.cuenta || '',447.75, startYText);
+
             // doc.setFillColor("#41B6FF");
             // doc.rect(15,181,68,18,'FD');
             // doc.rect(83,181,69.25,18);
@@ -428,10 +449,25 @@ export class ComprobanteEgreso {
           }
         });
     
+
+        let numeroALetras:NumeroALetrasPipe = new NumeroALetrasPipe();
+
         doc.line(15, doc.lastAutoTable.finalY + 10, 595, doc.lastAutoTable.finalY + 10)
         doc.setFont(undefined, 'bold')
         doc.setFontSize(10)
-        doc.text(data.pago.concepto, 15, doc.lastAutoTable.finalY + 30)
+        doc.setFont(undefined, 'bold')
+        doc.text("TOTAL A PAGAR: "+this.cp.transform(data.pago.total), 595.68, doc.lastAutoTable.finalY + 25,{ align: "right" })
+        doc.setFont(undefined, 'bold')
+        doc.setFontSize(8)
+        doc.setFont(undefined, 'bold')
+        doc.text('SON: ', 15, doc.lastAutoTable.finalY + 25)
+        doc.setFont(undefined, 'normal')
+        doc.text('          '+numeroALetras.transform(data.pago.total), 15, doc.lastAutoTable.finalY + 25,{maxWidth: 380})
+        
+        doc.setFont(undefined, 'bold')
+        doc.text("POR CONCEPTO DE: ", 15, doc.lastAutoTable.finalY + 47)
+        doc.setFont(undefined, 'normal')
+        doc.text('\t\t\t\t     '+data.pago.concepto, 15, doc.lastAutoTable.finalY + 47,{maxWidth: 550})
         return doc
 
     }

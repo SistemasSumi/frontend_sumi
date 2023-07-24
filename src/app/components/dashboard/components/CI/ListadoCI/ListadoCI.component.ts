@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { DatePipe } from 'src/app/pipes/date.pipe';
@@ -105,6 +106,15 @@ export class ListadoCIComponent implements OnInit {
               return data;
             }
           },
+          {
+            targets:[6],
+        
+            orderable: true,
+            render: function(data,type,row){
+              return new CurrencyPipe('en_US').transform(data)
+               
+            }
+          },
           
           {
               targets:[-1],
@@ -202,8 +212,10 @@ export class ListadoCIComponent implements OnInit {
         {"data":"cuenta.nombre"},
         {"data":"fecha"},
         {"data":"usuario.username"},
+        {"data":"total"},
       
         
+      
         {"data":"concepto"},
         {"data":"observacion"},
         

@@ -273,6 +273,7 @@ export class ListarProductosComponent implements OnInit {
 
         $('#editar', row).off('click');
         $('#editar', row).on('click', () => {
+          this.route.navigateByUrl('productos/editar/'+data.id) 
           // this.router.navigateByUrl('terceros/'+data.id) 
           // this.router.navigateByUrl("purchaseOrder/EditPurchaseOrder/"+data.id);
           

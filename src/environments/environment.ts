@@ -13,7 +13,7 @@ export const environment = {
     appId: "1:878300652896:web:3bb912009ac802ea53aa05"
   },
   languageDataTable: {
-    "sProcessing": "Procesando...",
+    "sProcessing":  "<span class='fa-stack fa-lg'><i class='fa fa-spinner fa-spin fa-stack-2x fa-fw'></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...",
     "sLengthMenu": "Mostrar _MENU_ ",
     "sZeroRecords": "No se encontraron resultados",
     "sEmptyTable": "Ningún dato disponible en esta tabla",
@@ -39,7 +39,7 @@ export const environment = {
     }
   
   },
-  // BACKEND_DIR:"http://backend.sumiprodelacosta.com:8000/"
+  // BACKEND_DIR:"https://backend.sumiprodelacosta.com/"
   BACKEND_DIR:"http://localhost:8000/"
 
 };

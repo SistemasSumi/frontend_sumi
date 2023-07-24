@@ -58,9 +58,12 @@
                         <a href="javascript: void(0);" class="has-arrow">
                             <i class="icon  nav-icon" data-feather="codepen"></i>
 
-                            <span class="menu-item" data-key="t-contacts">Inventario</span>
+                            <span class="menu-item" data-key="t-contacts">Stock </span>
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['inventario']" routerLinkActive="active" >Inventario</a>
+                            </li>
                             <li routerLinkActive="mm-active">
                                 <a [routerLink]="['stock']" routerLinkActive="active" >Bodegas</a>
                             </li>
@@ -163,23 +166,12 @@
                         </ul>
                     </li>
                     <li routerLinkActive="mm-active">
-                        <a href="javascript: void(0);" class="has-arrow">
+                        <a href="javascript: void(0);"  [routerLink]="['informes']" routerLinkActive="active">
                             <i class="icon  nav-icon" data-feather="file-text"></i>
                             <span class="menu-item" data-key="t-chat">Informes</span>
 
                         </a>
-                        <ul class="sub-menu" aria-expanded="true">
-                            <li routerLinkActive="mm-active">
-                                <a [routerLink]="['informes']" routerLinkActive="active" data-key="t-user-grid">Informes
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-                               
-
-
-                            </li>
-
-
-                        </ul>
+                        
                     </li>
                     <li routerLinkActive="mm-active">
                         <a href="javascript: void(0);" class="has-arrow">
@@ -395,6 +387,15 @@ s
 
                         </ul>
                     </li> 
+
+                    <li routerLinkActive="mm-active">
+                        <a href="javascript: void(0);" [routerLink]="['settings']" routerLinkActive="active">
+                            <i class="icon  nav-icon" data-feather="settings"></i>
+                            <span class="menu-item" data-key="t-chat">Configuración</span>
+
+                        </a>
+                        
+                    </li>
                     
 
 

@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -14,7 +14,9 @@ import { ModelTerceroCompleto } from '../configuracion/models/ModelTerceroComple
 import { ModelPuc } from '../Contabilidad/models/ModelPuc';
 import { PucService } from '../Contabilidad/puc/puc.service';
 import { StockService } from '../inventario/stock/stock.service';
-
+import * as moment from 'moment';
+moment.locale('es')
+import { ViewportScroller } from '@angular/common';
 @Component({
   selector: 'app-CE',
   templateUrl: './CE.component.html',
@@ -35,6 +37,7 @@ export class CEComponent implements OnInit {
   GlobalNumeracion:number;
   GlobalObservacion:string = '';
   GlobalDiferencia:number = 0;
+  fecha:Date =  new Date();
 
 
   listaDeGrupos:grupos[] = [];
@@ -67,10 +70,17 @@ export class CEComponent implements OnInit {
   metodos:MetodosShared = new MetodosShared();
   public filtroProveedores: BehaviorSubject<ModelTerceroCompleto[]>;
 
-  @ViewChild('InputSaldoAFavor') InputSaldoAFavor: ElementRef;
 
-  constructor(private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private stock:StockService) { }
+  constructor(private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private stock:StockService,public currency:CurrencyPipe ) {
 
+    this.totalAbono = 0;
+   }
+
+   
+
+
+   
+  
   ngOnInit() {
     this.puc.getEfectivo().subscribe(resp => {
       console.log(resp);
@@ -131,10 +141,11 @@ export class CEComponent implements OnInit {
       "formaPago":this.GlobalFormaDePago,
       "numeracion":this.GlobalNumeracion,
       "observacion":this.GlobalObservacion,
-      "diferencia":this.GlobalDiferencia,
-      "totalAbono":this.totalAbono,
-      "totalSaldoAFavor":this.totalSaldoAFavor,
-      "totalDescuento":this.totalDescuento,
+      "diferencia":Number(this.GlobalDiferencia),
+      "totalAbono":Number(this.totalAbono),
+      "totalSaldoAFavor":Number(this.totalSaldoAFavor),
+      "totalDescuento":Number(this.totalDescuento),
+      "fecha":moment(this.fecha).format('YYYY-MM-DD'),
       "usuario":this.auth.currentUser.getIdUser()
     }
 
@@ -167,8 +178,8 @@ export class CEComponent implements OnInit {
       
           let report = reporte.ReporteComprobanteEgreso(resp);
           window.open(report.output('bloburl'), '_blank');
-          
           this.getFacturas(this.terceroSeleccionado);
+          this.limpiarFormulario();
         });
        
       } 
@@ -203,9 +214,21 @@ export class CEComponent implements OnInit {
 
   getFacturas(tercero:ModelTerceroCompleto){
       this.terceroSeleccionado = tercero;
-      this.stock.getFacturasXProveedor(tercero.id).subscribe(resp => {
-      this.saldoAFavor = 0;
 
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'info',
+        title: 'Consultando..',
+        text:'Espere por favor..'
+      });
+      Swal.showLoading();
+
+      this.stock.getFacturasXProveedor(tercero.id).subscribe(resp => {
+        Swal.close();
+
+        
+      this.saldoAFavor = 0;
+      
       this.totalAbono       = 0;
       this.totalDescuento   = 0;
       this.totalSaldoAFavor = 0;
@@ -229,15 +252,15 @@ export class CEComponent implements OnInit {
           iva:x.iva,
           valorFactura:x.valorTotal,
           saldo:x.valorTotal-x.valorAbono,
-          saldoTotal:x.valorTotal-x.valorAbono
-          
+          saldoTotal:x.valorTotal-x.valorAbono,
+    
 
           
         };
         this.totalAbono       += d.valorAbono
         this.totalDescuento   += d.descuento
         this.totalSaldoAFavor += d.saldoFavor
-        this.totalSaldo       += d.valorFactura-d.valorAbono
+        this.totalSaldo       += d.saldoTotal
 
 
         console.log(d)
@@ -245,12 +268,24 @@ export class CEComponent implements OnInit {
         this.detalle.push(d);
         
       }
+     
       this.saldoAFavor = resp.afavor.saldoAFavor;
-      this.InputSaldoAFavor.nativeElement.focus();
+      // this.InputSaldoAFavor.nativeElement.focus();
       console.log(resp);
     });
   }
 
+
+  limpiarFormulario(){
+    this.GlobalFormaDePago  = undefined;
+    this.GlobalObservacion  = undefined;
+    this.GlobalDiferencia   = undefined;
+    this.totalAbono         = undefined;
+    this.totalSaldoAFavor   = undefined;
+    this.totalDescuento     = undefined;
+    this.fecha = new Date(),
+    this.auth.currentUser.getIdUser()
+  }
 
   obtenerProveedores(){
     this.config.SubjectdataProveedorCompras.subscribe(resp => {
@@ -274,7 +309,7 @@ export class CEComponent implements OnInit {
 
   openModalADDAbono(content,fila) {
     this.filaAEditar = fila;
-    this.dTotalAbono = this.detalle[this.filaAEditar].valorFactura;
+    this.dTotalAbono = this.detalle[this.filaAEditar].saldo;
 
     let d = this.detalle[this.filaAEditar];
     let descuentos = this.terceroSeleccionado.descuentoProveedor;
@@ -297,6 +332,7 @@ export class CEComponent implements OnInit {
   cargarNumeracion(){
     this.stock.cargarNumeracion().subscribe(resp => {
       this.numeraciones = resp;
+      this.GlobalNumeracion = resp[0]?.id;
     });
   }
 
@@ -315,7 +351,7 @@ export class CEComponent implements OnInit {
     let descuento = 0;
 
 
-    let totalAbono:number = (this.dTotalAbono + this.dTotalSaldo);
+    let totalAbono:number = (Number(this.dTotalAbono) + Number(this.dTotalSaldo));
     console.log("total Abono  " + totalAbono)
     let calculoPorPago = totalAbono * 100 / d.valorFactura;
     console.log("calculoPorPago"+calculoPorPago)
@@ -334,14 +370,16 @@ export class CEComponent implements OnInit {
 
     if (totalAbono > d.valorFactura || totalAbono <= 0) {
       new MetodosShared().AlertError('El valor del pago debe ser igual o menor al Valor de la Factura!');
-      this.dTotalAbono =- this.dTotalSaldo;
+      this.dTotalAbono = Number(this.dTotalAbono) - Number(this.dTotalSaldo);
       return;
     }
     
-    d.valorAbono = this.dTotalAbono - descuento;
-    d.saldoFavor = this.dTotalSaldo;
-    d.saldo      = d.saldo - (d.valorAbono+descuento+d.saldoFavor)
-    d.descuento  = descuento;
+    d.valorAbono = Number(this.dTotalAbono) - Number(descuento);
+    d.saldoFavor = Number(this.dTotalSaldo);
+
+
+    d.saldo      = Number(d.saldo) - (Number(d.valorAbono)+Number(descuento)+Number(d.saldoFavor))
+    d.descuento  = Number(descuento);
     console.log(d)
     // this.detalle[this.filaAEditar]  = d;
     this.calcularTotales(this.detalle);

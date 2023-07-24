@@ -13,7 +13,7 @@
             </div>
             <div class="row justify-content-center">
                 <img src="./assets/theme/img/input-file.png" class="well drop-zone" alt="foto" matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()" style="width: 170px; height: 200px">
-                <input type="file" hidden #fileInput (change)="change($event)" accept=".png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br>
+                <input type="file" hidden #fileInput (change)="change($event)" accept=".jpeg,.png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br>
                 <!-- <div class="progess">
                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) +'%'">
 
@@ -123,7 +123,7 @@
         </div>
         <div class="col-md-2">
             <div class="row text-center">
-                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar Archvio" matTooltipPosition="right" (click)="urlImage = null; showBar = false;">
+                <button type="button" class="btn btn-outline-danger" mat-raised-button matTooltip="Eliminar Archvio" matTooltipPosition="right" (click)="eliminarFoto()">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>

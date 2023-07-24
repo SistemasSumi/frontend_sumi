@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-lg-12">
+      <div class="card" >
+          <div  class="card-body">
+              <div class="invoice-title">
+                  <h4 class="float-end font-size-15">Solicitud # <span class="badge font-size-15 " [ngClass]="{
+                    'badge-outline-success': venta?.autorizado && venta?.estado,
+                    'badge-outline-danger': venta?.autorizado && !venta?.estado,
+                    'badge-outline-warning': !venta?.autorizado}">
+
+
+                    {{ venta?.autorizado && venta?.estado ? 'APROBADA' : (venta?.autorizado && !venta?.estado ? 'RECHAZADA' : 'PENDIENTE') }}
+                    </span>
+                  </h4>
+                  <div class="mb-2">
+                      <img [src]="venta?.usuario.avatar" class="avatar-noti avatar-md rounded-circle" alt="logo" height="28">
+                  </div>
+                  <div class="text-muted">
+                      <p class="mb-1 fw-bold"><i class="uil uil-user-md me-1 text-primary"></i>{{venta?.usuario.nombre}}</p>
+                      <p class="mb-1"><span [innerHTML]="notificacion.mensaje"></span></p>
+                  </div>
+              </div>
+
+              <hr class="my-4">
+
+              <div class="row">
+                  <div class="col-12">
+                      <div class="text-muted">
+                          
+                          <h5 class="font-size-15 mb-2">CLIENTE:</h5>
+                          <p class="mb-1 fw-bold"><i class="uil uil-user-md me-1 text-primary"></i>{{cliente?.nombreComercial}}</p>
+                          <p class="mb-1"><i class="uil uil-envelope me-1 text-primary"></i>{{cliente?.correoContacto}}</p>
+                          <p><i class="uil uil-phone-alt me-1 text-primary"></i>{{cliente?.telefonoContacto}}</p>
+                      </div>
+                  </div>
+                  <!-- end col -->
+                  
+                  <!-- end col -->
+              </div>
+              <!-- end row -->
+              
+              <div class="py-2">
+               
+
+                  <div class="table-scroll h-100">
+                    <div class="table-container">
+                      <table class="table align-middle table-nowrap table-centered mb-0">
+                          <thead>
+                              <tr>
+                                  <th>COD.</th>
+                                  <th style="width: 70px;">PRODUCTO</th>
+                                  <th class="text-center">LOTE</th>
+                                  <th class="text-end">VALOR COMPRA</th>
+                                  <th class="text-end">PRECIO 2</th>
+                                  <th class="text-end">PRECIO 3</th>
+                                  <th class="text-end">PRECIO VENTA</th>
+                                  
+                              </tr>
+                          </thead><!-- end thead -->
+                          <tbody>
+                            <tr *ngFor="let item of venta?.detalle">
+                              <td >{{item.producto.codigoDeBarra}}</td>
+                              <td  class="text-nowrap" style="width: 70px;">{{item.producto.nombre}}</td>
+                              <td class="text-center text-nowrap">{{item.lote}}</td>
+                              <td class="text-end text-nowrap">{{item.valorCompra  | currency}}</td>
+                              <td class="text-end text-nowrap">{{item.valorCompra / 0.75 | currency}}</td>
+                              <td class="text-end text-nowrap">{{item.valorCompra / 0.80 | currency}}</td>
+                              <td class="text-end text-nowrap">{{item.valor  | currency}}</td>
+                              
+                          </tr>
+                          </tbody><!-- end tbody -->
+                      </table><!-- end table -->
+
+                    </div>
+                  </div><!-- end table responsive -->
+                  <div class="d-print-none mt-4">
+                      <div class="float-end">
+                          <a (click)="rechazar()" href="javascript:" class="btn btn-danger me-1">RECHAZAR</a>
+                          <a (click)="aprobar()" href="javascript:;" class="btn btn-success w-md">APROBAR</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div><!-- end col -->
+</div>

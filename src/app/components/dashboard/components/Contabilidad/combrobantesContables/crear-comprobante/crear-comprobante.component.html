@@ -1,283 +1,338 @@
-<div class="row">
-  <div class="col-lg-12">
-      <div class="card">
-          <div class="card-body">
-              <div class="invoice-title">
-                  
-                  <div class="mb-4">
-                      <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
-                  </div>
-                  <!-- <div class="text-muted">
-                      <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
-                      <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
-                      <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
-                  </div> -->
-              </div>
-
-              
-              <div class="row">
-                <p-divider [text]="'DATOS DEL MOVIMIENTO'" [align]="'left'"></p-divider>
-              </div>
-
-              <div class="row">
-                <div class="col-md-2">
-                  <div class="form-group">
-                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                          <mat-label style="font-size: 16px;">Numeración</mat-label>
-                          <mat-select [(ngModel)]="numeracion"  required  style="text-align: center;">
-                            <mat-option *ngFor="let data of numeraciones" [value]="data.id" >
-                                {{data.numero}}
-                            </mat-option>
-                          </mat-select>
-                      </mat-form-field>
-                  </div>
-              </div>
-              <div class="col-md-2">
-                    <mat-form-field appearance="fill" style="width: 100%;">
-                        <mat-label>Fecha registro</mat-label>
-                        <input [(ngModel)]="fechaRegistro" matInput [matDatepicker]="picker" >
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
-                        <mat-icon color="primary">calendar_month</mat-icon>
-                        </a>
-                    
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
+<div class="main-content">
+    <div class="page-content">
+        <!-- <a class="btn btn-primary btn-sm"  (click)="imprimir()" href="javascript:;" role="button">Descargar </a> -->
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">Crear comprobante</h4>
+        
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Contabilidad</a></li>
+                        <li class="breadcrumb-item active">Nuevo comprobante</li>
+                    </ol>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                          <mat-label style="font-size: 16px;">Tipo de movimiento</mat-label>
-                          <mat-select [(ngModel)]="tipoMovimiento"  required  style="text-align: center;">
-                            <mat-option  value="MC" >
-                                Movimiento contable
-                            </mat-option>
-                            <mat-option  value="NTC" >
-                                Nota contable
-                            </mat-option>
-                          </mat-select>
-                      </mat-form-field>
-                  </div>
-                </div>
-              <div class="col-md-5">
-                <div class="form-group">
-                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                        <mat-label style="font-size: 16px;">CUENTA</mat-label>
-                        <mat-select [(ngModel)]="cuentaID" required   style="text-align: center;">
-
-                            <mat-option>
-                                <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
-                                    placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
-                                    <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
-                                </ngx-mat-select-search>
-                            </mat-option>
-
-                            <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
-                                <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
-                                   {{c.codigo }} - {{ c.nombre}}
-                                </mat-option>
-                            </mat-optgroup>
-                         
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+        
             </div>
-            <div class="col-md-7">
-                <div class="form-group d-flex aling-items-center">
-                    <!-- <mat-form-field appearance="outline" style="width:100%; height: auto; ">
-                        <mat-label style="font-size: 18px;">Proveedores</mat-label>
-                        <mat-select [(ngModel)]="GlobalTerceroSeleccionado"  placeholder="Seleccionar proveedor">
-                            <mat-option>
-                                <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
-                                    placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
-                                    <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
-                                </ngx-mat-select-search>
-                            </mat-option>
-                            <mat-option *ngFor="let proveedor of filtroProveedores | async" [value]="proveedor.id" (click)="getFacturas(proveedor)">
-                                {{proveedor.nombreComercial}}
-                            </mat-option>
+        </div>
 
-                            
-                        </mat-select>
-                 
-                    </mat-form-field> -->
-                    
-
-                </div>
-               
-            </div>
-              </div>
-              <div class="row">
-
-                <div class="col-md-2">
-                    <mat-form-field appearance="fill" style="width: 100%;">
-                        <mat-label>Fecha Movimiento</mat-label>
-                        <input [(ngModel)]="fechaMovimiento" matInput [matDatepicker]="picker2" >
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker2.open()">
-                        <mat-icon color="primary">calendar_month</mat-icon>
-                        </a>
-                    
-                        <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                         <div class="form-group">
-                             <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                 <mat-label style="font-size: 16px;">Doc referencia</mat-label>
-                                 <input [(ngModel)]="docReferencia" class="example-right-align" #InputSaldoAFavor matInput type="text" id="" />
-                             </mat-form-field>
-                         </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                            <mat-label style="font-size: 16px;">Naturaleza</mat-label>
-                            <mat-select   [(ngModel)]="naturaleza" required  style="text-align: center;">
-                                <mat-option  value="D" >
-                                    Débito
-                                </mat-option>
-                                <mat-option  value="C" >
-                                    Crédito
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                  </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                         <div class="form-group">
-                             <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                 <mat-label style="font-size: 16px;">Valor</mat-label>
-                                 <input [(ngModel)]="valor"  class="example-right-align" #InputSaldoAFavor matInput type="number" id="" />
-                             </mat-form-field>
-                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group d-flex aling-items-center">
-                        <mat-form-field appearance="outline" style="width:100%; height: auto; ">
-                            <mat-label style="font-size: 18px;">Tercero</mat-label>
-                            <mat-select  [(ngModel)]="terceroID" placeholder="Seleccionar tercero">
-                                <mat-option>
-                                    <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
-                                        placeholderLabel="Buscar tercero" noEntriesFoundLabel="No hay resultados">
-                                        <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
-                                    </ngx-mat-select-search>
-                                </mat-option>
-                                <mat-option *ngFor="let t of filtroTerceros | async" [value]="t.id"  (click)="tercero = t" >
-                                    {{t.nombreComercial}}
-                                </mat-option>
-
-                                
-                            </mat-select>
-                     
-                        </mat-form-field>
-                        
-
-                    </div>
-                   
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <mat-form-field appearance="outline" style=" width:100%; height: auto;">
-                            <mat-label style="font-size: 16px;">Concepto</mat-label>
-                            <textarea [(ngModel)]="concepto"  matInput placeholder=""></textarea>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="mb-4">
-                        <a href="javascript:;" (click)="capturarDetalle()" class="btn btn-primary btn-md"> <i style="font-size: 30px;" class="fa fas fa-download"></i></a>
-                    </div>
-                </div>
-              </div>
-           
+        <div class="container-fluid">
             <div class="row">
-              <p-divider [text]="'DETALLE DEL MOVIMIENTO'"></p-divider>
-            </div>
-              <div class="py-2">
-                <div  class="d-flex float-end">
-                    <a  href="javascript:;" (click)="limpiarFormulario()" class="btn btn-soft-danger btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-cancel ms-1"></i> Cancelar</a>
-                    &nbsp;
-                    <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
-
-                </div>
-                <br>
-                <br>
-
-                  <div class="table-scroll">
-                      <table class="table table-responsive table-nowrap   table-centered mb-0">
-                          <thead>
-                              <tr>
-                                  <th width="auto" class="text-center">Doc Ref.</th>
-                                  <th width="auto" class="text-center">Naturaleza</th>
-                                  <th width="auto" class="text-center">Fecha</th>
-                                  <th width="auto" class="text-center">Cuenta</th>
-                                  <th width="auto" class="text-center">Tercero</th>
-                                  <th width="auto" class="text-center">Débito</th>
-                                  <th width="auto" class="text-center">Crédito</th>
-                                  <th style="white-space: normal; width:  10%;" class="text-center">Concepto</th>
-                                 
-                                  <th width="auto" class="text-center"></th>
-                                  
-                              </tr>
-                          </thead><!-- end thead -->
-                          <tbody >
-                              <tr *ngFor="let item of detalleComprobante; let i = index"  style="cursor: pointer;" (click)="editarlinea(item,i)">
-                                    
-
-                                  <td class="text-center font-weight-bold">{{item.docReferencia}}</td>
-                                  <td class="text-center font-weight-bold">{{item.naturaleza}}</td>
-                                  <td class="text-center font-weight-bold">{{item.fechaMovimiento | date}}</td>
-                                  <td class="text-center font-weight-bold">{{item.cuenta.nombre}}</td>
-                                  <td class="text-center">{{item.tercero.nombreComercial }}</td>
-                                  <td class="text-end  text-primary">{{item.debito   | currency}}</td>
-                                  <td class="text-end  text-primary">{{item.credito   | currency}}</td>
-                                  <td style="width:  10%;" class="text-center">{{item.concepto  | acortarText:'30' }}</td>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="invoice-title">
                                 
-                                  <td class="text-center">
-                                    <a type="button" (click)="Delete(i)" class="btn btn-soft-primary"><i style="color: red;" class="fas fa-trash"></i></a>
-                                  </td>
+                                <div class="mb-4">
+                                    <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                                </div>
+                                <!-- <div class="text-muted">
+                                    <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
+                                    <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                                    <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                                </div> -->
+                            </div>
+              
+                            
+                            <div class="row">
+                              <p-divider [text]="'DATOS DEL MOVIMIENTO'" [align]="'left'"></p-divider>
+                            </div>
+              
+                            <div class="row">
+                              <div class="col-md-2">
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Numeración</mat-label>
+                                        <mat-select  [(ngModel)]="numeracion"  required  style="text-align: center;">
+                                          <mat-option *ngFor="let data of numeraciones" [value]="data.id"  >
+                                              {{data.numero}}
+                                          </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                  <mat-form-field appearance="fill" style="width: 100%;">
+                                      <mat-label>Fecha registro</mat-label>
+                                      <input [(ngModel)]="fechaRegistro" matInput [matDatepicker]="picker" >
+                                      <mat-hint>MM/DD/YYYY</mat-hint>
+                                      <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                                      <mat-icon color="primary">calendar_month</mat-icon>
+                                      </a>
                                   
-                              </tr>
-                            
-                            
-                              <!-- end tr -->
-                          </tbody><!-- end tbody -->
-                          <tfoot >
-                            <tr>
-                                <th width="auto" colspan="5" class="text-center font-weight-bold font-size-18" style="background-color: rgb(175, 174, 174); color: white;">TOTAL MOVIMIENTO</th>
-                              
-                                <th class="text-end  text-primary">{{this.totalDebito   | currency}}</th>
-                                <th class="text-end  text-primary">{{this.totalCredito  | currency}}</th>
+                                      <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Tipo de movimiento</mat-label>
+                                        <mat-select [(ngModel)]="tipoMovimiento"  required  style="text-align: center;">
+                                          <mat-option  value="MC" >
+                                              Movimiento contable
+                                          </mat-option>
+                                          <mat-option  value="NTC" >
+                                              Nota contable
+                                          </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                              </div>
+                            <div class="col-md-5">
+                              <div class="form-group">
+                                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                      <mat-label style="font-size: 16px;">CUENTA</mat-label>
+                                      <mat-select [(ngModel)]="cuentaID" required   style="text-align: center;">
+              
+                                          <mat-option>
+                                              <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                  placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                  <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                              </ngx-mat-select-search>
+                                          </mat-option>
+              
+                                          <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                              <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
+                                                 {{c.codigo }} - {{ c.nombre}}
+                                              </mat-option>
+                                          </mat-optgroup>
+                                       
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="col-md-7">
+                              <div class="form-group d-flex aling-items-center">
+                                  <!-- <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                                      <mat-label style="font-size: 18px;">Proveedores</mat-label>
+                                      <mat-select [(ngModel)]="GlobalTerceroSeleccionado"  placeholder="Seleccionar proveedor">
+                                          <mat-option>
+                                              <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                                  placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                                                  <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                              </ngx-mat-select-search>
+                                          </mat-option>
+                                          <mat-option *ngFor="let proveedor of filtroProveedores | async" [value]="proveedor.id" (click)="getFacturas(proveedor)">
+                                              {{proveedor.nombreComercial}}
+                                          </mat-option>
+              
+                                          
+                                      </mat-select>
                                
-                                <th class="text-end  text-primary"></th>
-                                <th class="text-end  text-primary"></th>
+                                  </mat-form-field> -->
+                                  
+              
+                              </div>
+                             
+                          </div>
+                            </div>
+                            <div class="row">
+              
+                              <div class="col-md-2">
+                                  <mat-form-field appearance="fill" style="width: 100%;">
+                                      <mat-label>Fecha Movimiento</mat-label>
+                                      <input [(ngModel)]="fechaMovimiento" matInput [matDatepicker]="picker2" >
+                                      <mat-hint>MM/DD/YYYY</mat-hint>
+                                      <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker2.open()">
+                                      <mat-icon color="primary">calendar_month</mat-icon>
+                                      </a>
+                                  
+                                      <mat-datepicker #picker2></mat-datepicker>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                  <div class="form-group">
+                                       <div class="form-group">
+                                           <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                               <mat-label style="font-size: 16px;">Doc referencia</mat-label>
+                                               <input [(ngModel)]="docReferencia" class="example-right-align" #InputSaldoAFavor matInput type="text" id="" />
+                                           </mat-form-field>
+                                       </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-2">
+                                  <div class="form-group">
+                                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                          <mat-label style="font-size: 16px;">Naturaleza</mat-label>
+                                          <mat-select   [(ngModel)]="naturaleza" required  style="text-align: center;">
+                                              <mat-option  value="D" >
+                                                  Débito
+                                              </mat-option>
+                                              <mat-option  value="C" >
+                                                  Crédito
+                                              </mat-option>
+                                          </mat-select>
+                                      </mat-form-field>
+                                  </div>
+                                </div>
+                              <div class="col-md-2">
+                                  <div class="form-group">
+                                       <div class="form-group">
+                                           <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                               <mat-label style="font-size: 16px;">Valor</mat-label>
+                                               <input (ngModelChange)="formatNumber($event)" [(ngModel)]="valor"  class="example-right-align" #InputSaldoAFavor matInput type="number" id="" />
+                                             
+                                              </mat-form-field>
+                                       </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group d-flex aling-items-center">
+                                      <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                                          <mat-label style="font-size: 18px;">Tercero</mat-label>
+                                          <mat-select  [(ngModel)]="terceroID" placeholder="Seleccionar tercero">
+                                              <mat-option>
+                                                  <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                                      placeholderLabel="Buscar tercero" noEntriesFoundLabel="No hay resultados">
+                                                      <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                  </ngx-mat-select-search>
+                                              </mat-option>
+                                              <mat-option *ngFor="let t of filtroTerceros | async" [value]="t.id"  (click)="tercero = t" >
+                                                  {{t.nombreComercial}}
+                                              </mat-option>
+              
+                                              
+                                          </mat-select>
+                                   
+                                      </mat-form-field>
+                                      
+              
+                                  </div>
+                                 
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <mat-form-field appearance="outline" style=" width:100%; height: auto;">
+                                          <mat-label style="font-size: 16px;">Concepto</mat-label>
+                                          <textarea [(ngModel)]="concepto"  matInput placeholder=""></textarea>
+                                      </mat-form-field>
+                                  </div>
+                              </div>
+                              <div class="col-md-2">
+                                  <div class="mb-4">
+                                      <a href="javascript:;" (click)="capturarDetalle()" class="btn btn-primary btn-md"> <i style="font-size: 30px;" class="fa fas fa-download"></i></a>
+                                  </div>
+                              </div>
+                            </div>
+                         
+                          <div class="row">
+                            <p-divider [text]="'DETALLE DEL MOVIMIENTO'"></p-divider>
+                          </div>
+                            <div class="py-2">
+                         
+              
+                                <div class="table-scroll">
+                                    <table class="table table-responsive table-nowrap   table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th width="auto" class="text-center">Doc Ref.</th>
+                                                <th width="auto" class="text-center">Naturaleza</th>
+                                                <th width="auto" class="text-center">Fecha</th>
+                                                <th width="auto" class="text-center">Cuenta</th>
+                                                <th width="auto" class="text-center">Tercero</th>
+                                                <th width="auto" class="text-center">Débito</th>
+                                                <th width="auto" class="text-center">Crédito</th>
+                                                <th style="white-space: normal; width:  10%;" class="text-center">Concepto</th>
+                                               
+                                                <th width="auto" class="text-center"></th>
+                                                
+                                            </tr>
+                                        </thead><!-- end thead -->
+                                        <tbody >
+                                            <tr *ngFor="let item of detalleComprobante; let i = index"  style="cursor: pointer;" (click)="editarlinea(item,i)">
+                                                  
+              
+                                                <td class="text-center font-weight-bold">{{item.docReferencia}}</td>
+                                                <td class="text-center font-weight-bold">{{item.naturaleza}}</td>
+                                                <td class="text-center font-weight-bold">{{item.fechaMovimiento | date}}</td>
+                                                <td class="text-center font-weight-bold">{{item.cuenta.nombre}}</td>
+                                                <td class="text-center">{{item.tercero.nombreComercial }}</td>
+                                                <td class="text-end  text-primary">{{item.debito   | currency}}</td>
+                                                <td class="text-end  text-primary">{{item.credito   | currency}}</td>
+                                                <td style="width:  10%;" class="text-center">{{item.concepto  | acortarText:'30' }}</td>
+                                              
+                                                <td class="text-center">
+                                                  <a type="button" (click)="Delete(i)" class="btn btn-soft-primary"><i style="color: red;" class="fas fa-trash"></i></a>
+                                                </td>
+                                                
+                                            </tr>
+                                          
+                                          
+                                            <!-- end tr -->
+                                        </tbody><!-- end tbody -->
+                                        
+                                      </table><!-- end table -->
+                                </div><!-- end table responsive -->
+                                <div class="table-footer">
+              
+                                  <table   class="float-end table-balance">
+                                     
+                                      <tr>
+                                          <th class="th-title text-end" scope="row" colspan="8" class="text-end">DÉBITO :</th>
+                                          <td class=" text-end" [appAnimatedPrice]="this.totalDebito">  {{this.totalDebito   | currency}}</td>
+                                         
+                                      </tr>
+                                      <!-- end tr -->
+                                      <tr>
+                                          <th scope="row" colspan="8" class=" th-title text-end">
+                                              CRÉDITO :</th>
+                                          <td class=" text-end" [appAnimatedPrice]="totalCredito"> {{totalCredito   | currency}}</td>
+                                         
+                                          
+                                      </tr>
+                                     
+                                      <!-- end tr -->
+                                  
+                                      <!-- end tr -->
+                                      <tr #tablaRef style="font-size: 20px; text-transform: uppercase;">
+                                          <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h4>DIFERENCIA </h4></th>
+                                          <td  class="t-total border-0  text-end"><h4  [ngClass]="{'text-danger': (this.totalDebito - this.totalCredito) != 0, 'text-success':(this.totalDebito - this.totalCredito) == 0}"  [appAnimatedPrice]="obtenerDiferencia()" class="fw-semibold">  {{obtenerDiferencia()  | currency}}</h4></td>
+                                         
+                                          
+                                      </tr>
+                                  </table>
+              
                                 
-                            </tr>
-                          </tfoot>
-                        </table><!-- end table -->
-                        </div><!-- end table responsive -->
-                 
-                  <div class="d-print-none mt-4">
-                      <div class="float-end">
-                          <!-- <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>  -->
-                          <!-- <button class="btn btn-primary w-md" type="submit" [disabled]="formIngreso.invalid">Guardar </button> -->
+                              </div>
+                              <div style="clear: both;"></div>
+                              <hr>
+                              <div  class="d-flex float-end">
+                                  <a  href="javascript:;" (click)="limpiarFormulario()" class="btn btn-soft-danger btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-cancel ms-1"></i> Cancelar</a>
+                                  &nbsp;
+                                  <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
+              
+                              </div>
+                            </div>
+                         
+                        </div>
+              
                         
-                      </div>
-                  </div>
+                    </div>
+                </div><!-- end col -->
               </div>
-           
-          </div>
+              
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
 
-          
-      </div>
-  </div><!-- end col -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
+
+
 
  

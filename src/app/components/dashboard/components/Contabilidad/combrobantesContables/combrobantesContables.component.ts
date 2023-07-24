@@ -1,10 +1,19 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Toast, ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { MovimientoContable } from '../../../reportes/reportesContabilidad/MovimientoContable';
+import { ConfiguracionService } from '../../configuracion/Configuracion.service';
+import { ModelTerceroCompleto } from '../../configuracion/models/ModelTerceroCompleto';
+import { ModelPuc } from '../models/ModelPuc';
 import { PucService } from '../puc/puc.service';
 declare var $;
 @Component({
@@ -13,19 +22,120 @@ declare var $;
   styleUrls: ['./combrobantesContables.component.css']
 })
 export class CombrobantesContablesComponent implements OnInit {
+
+  years: number[];
+  meses: any[];
+  busquedaAvanzada:boolean = false;
+
+
+  terceros: ModelTerceroCompleto[] = [];
+  
+  metodos:MetodosShared = new MetodosShared();
+  public filtroCuentasControl: FormControl = new FormControl('');
+  protected _onDestroy = new Subject<void>();
+
+  
+  public filtroCuentas: BehaviorSubject<ModelPuc[]> = new BehaviorSubject<ModelPuc[]>([]) ;
+  public filtroTerceros: BehaviorSubject<ModelTerceroCompleto[]>;
+
+
+  listCuentas:ModelPuc[] = [];
+  listaDeGrupos:grupos[] = [];
+
+  filtroAvanzado:filtroBusquedas = {
+    numero:null,
+    estado:null,
+    consecutivo:null,
+    fechaInicial:null,
+    fechaFinal:null,
+    tipoMovimiento:null,
+    tercero:null,
+    year:null,
+    mes:null,
+    cuenta:null,
+    concepto:null,
+    docReferencia:null,
+  };
+
+
   table:any = $('').DataTable({});
   txtBuscarMovi:string;
   numeroEdit:string = '';
   duplicado:string = '';
-
+  toastr_options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": 3000,
+    "hideDuration": 1000,
+    "timeOut": 50000,
+    "extendedTimeOut": 1000,
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
 
   nuevoComprobante:boolean = false;
-  constructor(private auth:SeguridadService,private pucService:PucService) { }
+  constructor( 
+    
+    private config:ConfiguracionService,private router:Router, private toast:ToastrService, private auth:SeguridadService,private pucService:PucService) { 
+    this.setYearsDefault();
+  }
 
   ngOnInit() {
     this.llenarTablePagos();
+    this.obtenerTerceros();
+    this.pucService.getCuentas().subscribe((resp:ModelPuc[])=>{
+      this.listCuentas = resp;
+
+      this.filtroCuentas.next(resp);
+
+    
+    });
+
+    this.InitFiltroPuc();
+    this.filtroCuentas.subscribe(resp => {
+      this.listaDeGrupos = [];
+
+      for(let x of resp){
+        if(x.codigo.toString().length < 6 && x.codigo.toString().length >= 4 ){
+          let c:cuentas[] = [];
+          for(let j of resp){
+            if(x.codigo.toString() == j.codigo.toString().substring(0, 4) && j.codigo.toString().length >= 6){
+              c.push(j)
+            }
+          }
+
+          let g:grupos = {
+            codigo: x.codigo,
+            nombre:x.nombre,
+            cuentas:c
+          }
+
+          this.listaDeGrupos.push(g);
+        }
+      }
+   
+    });
   }
 
+
+  obtenerTerceros(){
+    this.config.SubjectdataTerceros.subscribe(resp => {
+      this.terceros = resp;
+      this.filtroTerceros = new BehaviorSubject<ModelTerceroCompleto[]>(this.terceros);
+    });
+  }
+
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = new MetodosShared().filtrarArray<ModelTerceroCompleto>(this.terceros,'nombreComercial',busqueda);
+    this.filtroTerceros.next(filtro);
+  }
 
   llenarTable(idtable:string,data,columns,nameButton){
     
@@ -189,8 +299,10 @@ export class CombrobantesContablesComponent implements OnInit {
           
 
           
-          this.numeroEdit = data.numero.toString();
-          this.nuevoComprobante = true;
+       
+          const numeroEditParam =  data.numero.toString();
+          this.router.navigate(['/comprobantes-contables-crear'], { queryParams: { numeroEdit: numeroEditParam } });
+          
 
 
           
@@ -198,10 +310,10 @@ export class CombrobantesContablesComponent implements OnInit {
         $('#duplicar', row).off('click');
         $('#duplicar', row).on('click', () => {
           
-
+          const numeroDuplicadoParam =  data.numero.toString();
+          this.router.navigate(['/comprobantes-contables-crear'], { queryParams: { duplicar: numeroDuplicadoParam } });
           
-          this.duplicado = data.numero.toString();
-          this.nuevoComprobante = true;
+         
 
 
           
@@ -215,7 +327,10 @@ export class CombrobantesContablesComponent implements OnInit {
   }
 
   llenarTablePagos(){
-    return this.pucService.getMovimientos().subscribe(resp => {
+    
+    let t = this.toast.info('Cargando movimientos..','SarpSoft',this.toastr_options )
+
+    this.pucService.SubjectdataMovimientos.subscribe(resp => {
       
       this.llenarTable(
         "Movi",
@@ -240,10 +355,96 @@ export class CombrobantesContablesComponent implements OnInit {
         this.table.columns.adjust();
         $('#TableMovi_filter').html(``);
 
-        
+        this.toast.clear();
         
     });
     
   }
 
+  setYearsDefault(){
+    this.years = new MetodosShared().generateYears();
+  }
+
+  setMesesDefault(year:number){
+    this.filtroAvanzado.mes = null;
+    this.meses = new MetodosShared().generateMonths(year);
+  }
+
+
+  limpiarFiltro(){
+    this.filtroAvanzado = {
+      numero:null,
+      estado:null,
+      consecutivo:null,
+      fechaInicial:null,
+      fechaFinal:null,
+      tipoMovimiento:null,
+      tercero:null,
+      year:null,
+      mes:null,
+      cuenta:null,
+      concepto:null,
+      docReferencia:null,
+    };
+  
+  }
+
+
+  BusquedaAvanzada(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Buscando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.pucService.busquedaAvanzadaComprobantes(this.filtroAvanzado).subscribe(() => {
+      Swal.close();
+
+
+    });
+  }
+
+  InitFiltroPuc(){
+    this.filtroCuentasControl.valueChanges
+      .pipe(takeUntil (this._onDestroy))
+      .subscribe(() => {
+        this.filtrarPuc(this.filtroCuentasControl.value);
+      });
+  }
+
+  filtrarPuc(busqueda:string){
+    let filtro:ModelPuc[] = this.metodos.filtrarArrayPuc<ModelPuc>(this.listCuentas,'codigo',busqueda);
+    this.filtroCuentas.next(filtro);
+  }
+
+}
+interface filtroBusquedas {
+
+  numero:string,
+  tercero:string,
+  consecutivo:string,
+  estado:boolean,
+  tipoMovimiento:string,
+  fechaInicial:string,
+  fechaFinal:string,
+  year:string,
+  mes:string,
+  cuenta:string,
+  concepto:string,
+  docReferencia:string,
+
+}
+
+interface grupos {
+  nombre: string;
+  codigo: string;
+  cuentas: cuentas[];
+}
+
+interface cuentas {
+  id: number
+  codigo: string;
+  nombre: string;
+  
 }

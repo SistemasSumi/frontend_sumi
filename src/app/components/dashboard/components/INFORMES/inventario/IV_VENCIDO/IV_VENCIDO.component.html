@@ -1,0 +1,70 @@
+
+  <div class="card">
+    <div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <div class="avatar-sm">
+                            <div class="avatar-title rounded-circle font-size-16">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-left mb-1 mb-2"><strong>INVENTARIO VENCIDO O POR VENCER </strong></p>
+                        <div class="row">
+                          <div class="col-md-6">
+                       
+                           <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Bodega</mat-label>
+                                <mat-select [(ngModel)]="bodega_id"  style="text-align: center;">
+                                  
+                                    <mat-option [value]="0" >TODAS LAS BODEGAS</mat-option>
+                                    <mat-option (click)="SeleccionarBodega(item)" *ngFor="let item of bodegas | async" [value]="item.id" >{{item.nombre}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                           </div>
+                             
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 16px;">Tipo de producto</mat-label>
+                                <mat-select [(ngModel)]="tipo_id"  style="text-align: center;">
+                                  
+                                    <mat-option [value]="0" >TODOS LOS TIPOS</mat-option>
+                                    <mat-option  *ngFor="let item of bodega?.tiposDeProducto" [value]="item.id" >{{item.nombre}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                           </div>
+                          </div>
+                          
+                        
+                         
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 align-self-end">
+                        <div class="ms-2">
+                          <button id="btn-report" (click)="null" style="margin-right: 10px;" type="button" class="btn btn-outline-danger mb-4" (click)="null">
+                            <i class="squire ico-pdf"></i> 
+                          </button>
+                          <button  id="btn-report" (click)="generarExcel()" type="button"  class="btn btn-outline-primary mb-4">
+                            <i class="squire ico-excel"></i>
+                          </button>
+                          
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            
+         
+        </ul>
+    </div>
+</div>
+<!-- end card -->
+
+
+<!-- end card -->

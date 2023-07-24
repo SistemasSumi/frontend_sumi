@@ -1,13 +1,21 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { OrdenCompraExcel } from 'src/app/components/dashboard/reportes/reportesInventario/excel/OrdenCompraExcel';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { ConfiguracionService } from '../../../configuracion/Configuracion.service';
+import { ModelFormasPago } from '../../../configuracion/models/ModelFormasPago';
+import { ModelTerceroCompleto } from '../../../configuracion/models/ModelTerceroCompleto';
+import { TablesBasicService } from '../../../configuracion/TablesBasic/tablesBasic.service';
 import { BasicPurchaseOrder } from '../models/BasicPurchaseOrder';
 import { PurchaseOrder } from '../models/purchaseOrder';
 import { OrdenDeCompraService } from '../ordenDeCompra.service';
@@ -21,8 +29,29 @@ declare var $;
 })
 export class ListOrderComponent implements OnInit {
 
+  busquedaAvanzada:boolean = false;
+
   table:any = $('').DataTable({});
   txtbuscarOrden:string;
+
+  
+  metodos:MetodosShared = new MetodosShared();
+
+  formasPago: ModelFormasPago[] = [];
+  proveedores: ModelTerceroCompleto[] = [];
+
+  public filtroProveedores: BehaviorSubject<ModelTerceroCompleto[]>;
+
+ 
+
+
+  filtroAvanzado:filtroBusquedas = {
+    orden:null,
+    fechaInicial:null,
+    fechaFinal:null,
+    formaDePago:null,
+    proveedor:null
+  };
 
 
   @ViewChild('content') myModal: any;
@@ -37,12 +66,65 @@ export class ListOrderComponent implements OnInit {
 
   datetime = new DatetimePipe();
 
-  constructor(private modalService: NgbModal,private route: ActivatedRoute, private router: Router,private ordenService:OrdenDeCompraService, private auth:SeguridadService, private cp:CurrencyPipe) { }
+  constructor(
+    private modalService: NgbModal,
+    private route: ActivatedRoute,
+    private router: Router,
+    private ordenService:OrdenDeCompraService,
+    private auth:SeguridadService,
+    private cp:CurrencyPipe,
+    private tables:TablesBasicService,
+    private config:ConfiguracionService) { }
 
   ngOnInit() {
     this.llenarTableOrdenes();
+    this.obtenerFormaDepago();
+    this.obtenerProveedores();
   }
 
+  obtenerFormaDepago(){
+    this.tables.SubjectdataFP.subscribe(resp => {
+      this.formasPago = resp;
+    });
+  }
+
+  obtenerProveedores(){
+    this.config.SubjectdataProveedorCompras.subscribe(resp => {
+      this.proveedores = resp;
+      this.filtroProveedores = new BehaviorSubject<ModelTerceroCompleto[]>(this.proveedores);
+    });
+  }
+
+ 
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.proveedores,'nombreComercial',busqueda);
+    this.filtroProveedores.next(filtro);
+  }
+
+  BusquedaAvanzada(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Buscando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.ordenService.busquedaAvanzada(this.filtroAvanzado).subscribe(() => {
+      Swal.close();
+    });
+  }
+
+  
+  limpiarFiltro(){
+    this.filtroAvanzado = {
+      orden:null,
+      fechaInicial:null,
+      fechaFinal:null,
+      formaDePago:null,
+      proveedor:null
+    };
+  
+  }
 
   newPucharseOrder(){
     this.router.navigate(['addPurchaseOrder'], {relativeTo:this.route});
@@ -64,6 +146,7 @@ export class ListOrderComponent implements OnInit {
       retrieve: true,
       responsive: true,
       autoWidth: true,
+      processing: true,
       pageLength: 5,   
       lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
       language: environment.languageDataTable,
@@ -301,6 +384,7 @@ export class ListOrderComponent implements OnInit {
 
 
   llenarTableOrdenes(){
+   
     return this.ordenService.SubjectdataOrdenes.subscribe(resp => {
       this.llenarTable(
         "Ordenes",
@@ -324,6 +408,7 @@ export class ListOrderComponent implements OnInit {
 
         this.table.columns.adjust();
         $('#TableOrdenes_filter').html(``);
+        
 
         
         
@@ -335,6 +420,7 @@ export class ListOrderComponent implements OnInit {
     // this.table.destroy();
     this.llenarTableOrdenes();
   }
+
 
 
   openModalCorreo(content, orden:BasicPurchaseOrder) {
@@ -423,4 +509,16 @@ export class ListOrderComponent implements OnInit {
    
 
   }
+}
+
+
+ interface filtroBusquedas {
+
+  orden:string,
+  proveedor:string,
+  formaDePago:string,
+  fechaInicial:string,
+  fechaFinal:string,
+
+
 }

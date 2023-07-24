@@ -107,7 +107,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                <div class="form-group">
                                     <div class="form-group">
                                         <mat-form-field appearance="outline" style="width:100%; height: auto;">
@@ -116,7 +116,7 @@
                                         </mat-form-field>
                                     </div>
                                </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6">
                                <div class="form-group">
                                     <div class="form-group">
@@ -127,21 +127,29 @@
                                     </div>
                                </div>
                             </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Fecha</mat-label>
+                                    <input matInput [matDatepicker]="picker" [(ngModel)]="fecha">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                                      <mat-icon color="primary">calendar_month</mat-icon>
+                                    </a>
+                                  
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
 
                         </div>
                       </div>
                       </div>
                    
                     <div class="row">
-                      <p-divider [text]="'TOTAL FACTURAS '+ '('+this.detalle.length+')'"></p-divider>
+                      <p-divider [text]="'DETALLE DEL INGRESO '"></p-divider>
                     </div>
                       <div class="py-2">
-                        <div  class="d-flex float-end">
-                            <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
-
-                        </div>
-                        <br>
-                        <br>
+                        
+                        
 
                           <div class="table-scroll">
                               <table class="table table-responsive table-nowrap table-centered mb-0">
@@ -186,29 +194,112 @@
                                     
                                       <!-- end tr -->
                                   </tbody><!-- end tbody -->
-                                  <tfoot >
-                                    <tr>
-                                        <th width="auto" colspan="4" class="text-center font-weight-bold font-size-18" style="background-color: rgb(207, 205, 205); color: white;">TOTAL INGRESO</th>
-                                      
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalAbono   | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalRetefuente   | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalReteica   | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalSaldoAFavor  | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalDescuento   | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary">{{this.totalSaldo  | currency}}</th>
-                                        <th style="background-color: rgb(207, 205, 205);" class="text-end  text-primary"></th>
-                                        
-                                    </tr>
-                                  </tfoot>
+                                  
                                 </table><!-- end table -->
-                                </div><!-- end table responsive -->
-                         
-                          <div class="d-print-none mt-4">
-                              <div class="float-end">
-                                  <!-- <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>  -->
-                                  <!-- <button class="btn btn-primary w-md" type="submit" [disabled]="formIngreso.invalid">Guardar </button> -->
                                 
-                              </div>
+                          </div><!-- end table responsive -->
+                          <div class="table-footer">
+
+                            <table   class="float-end table-balance">
+                               
+                                <tr>
+                                    <th class="th-title text-end" scope="row" colspan="8" class="text-end">Subtotal :</th>
+                                    <td class=" text-end" [appAnimatedPrice]="totalAbono + totalDescuento + totalSaldoAFavor">  {{this.totalAbono + this.totalDescuento + this.totalSaldoAFavor   | currency}}</td>
+                                   
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="8" class=" th-title text-end">
+                                        Descuento :</th>
+                                    <td class=" text-end text-danger" [appAnimatedPrice]="totalDescuento">  - {{totalDescuento   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="8" class="th-title text-end">
+                                        Saldo a favor :</th>
+                                    <td class="text-end text-danger" [appAnimatedPrice]="totalSaldoAFavor">  - {{totalSaldoAFavor   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                            
+                                <!-- end tr -->
+                                <tr #tablaRef style="font-size: 20px; text-transform: uppercase;">
+                                    <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h4>Total </h4></th>
+                                    <td  class="t-total border-0  text-end "><h4 [appAnimatedPrice]="totalAbono" class="fw-semibold">  {{totalAbono   | currency}}</h4></td>
+                                   
+                                    
+                                </tr>
+                            </table>
+
+                            <div class="mt-2 d-flex float-end me-2">
+                                <div class="row">
+                                   <div class="col-xl-3 col-sm-3" style="min-width: 200px;">
+                                    <!-- Card -->
+                                    <div class="card" style="border: #70C8FF 1px solid;">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="fw-bold font-size-xs text-uppercase">TOTAL FACTURAS</h6>
+                                                    <h4 class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                         {{this.detalle.length}}
+                                                    </h4>
+                                                 
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                                    <!-- Card -->
+                                    <div class="card" style="border: #70C8FF 1px solid;">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="fw-bold font-size-xs text-uppercase">SALDO A FAVOR</h6>
+                                                    <h4 [appAnimatedPrice]="saldoAFavor"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                         {{saldoAFavor | currency}}
+                                                    </h4>
+                                                 
+                                                </div>
+                                                
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                                    <!-- Card -->
+                                    <div class="card" style="border: #70C8FF 1px solid;">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="fw-bold font-size-xs text-uppercase">TOTAL CARTERA</h6>
+                                                    <h4 [appAnimatedPrice]="totalSaldo"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                         {{totalSaldo | currency}}
+                                                    </h4>
+                                                 
+                                                </div>
+                                                
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div> 
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div style="clear: both;"></div>
+                          <div class="d-print-none mt-4">
+                            <div  class="d-flex float-end">
+                                <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
+    
+                            </div>
                           </div>
                       </div>
                    
@@ -290,9 +381,9 @@
               <div class="form-group">
                   <mat-form-field appearance="outline" style="width:100%; height: auto;">
                       <mat-label style="font-size: 16px;">Retefuente</mat-label>
-                      <input [onblur]="transform" [readonly]="this.detalle[this.filaAEditar]?.retencionTotal == 0"  class="example-right-align"   [(ngModel)]="dRetefuente" matInput type="text" id="descuento" />
-                      <mat-checkbox  (change)="validarRTF()" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal > 0" [(ngModel)]="rtf" matPrefix > </mat-checkbox>
-                      <mat-hint style="font-weight: bold;" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal > 0">{{this.detalle[this.filaAEditar]?.retencionTotal  | currency }}</mat-hint>
+                      <input [onblur]="transform" [readonly]="this.detalle[this.filaAEditar]?.RTFTotal > 0"  class="example-right-align"   [(ngModel)]="dRetefuente" matInput type="text" id="descuento" />
+                      <mat-checkbox  (change)="validarRTF()" *ngIf="this.detalle[this.filaAEditar]?.RTFTotal == 0" [(ngModel)]="rtf" matPrefix > </mat-checkbox>
+                      <mat-hint style="font-weight: bold;" *ngIf="this.detalle[this.filaAEditar]?.RTFTotal > 0">{{this.detalle[this.filaAEditar]?.RTFTotal  | currency }}</mat-hint>
                   </mat-form-field>
               </div>
             </div>
@@ -300,8 +391,9 @@
               <div class="form-group">
                   <mat-form-field appearance="outline" style="width:100%; height: auto;">
                       <mat-label style="font-size: 16px;">Reteica</mat-label>
-                      <input [onblur]="transform"  class="example-right-align"   [(ngModel)]="dReteica" matInput type="text" id="descuento" />
-                      <!-- <mat-checkbox  (change)="validarDescuento()" *ngIf="this.detalle[this.filaAEditar]?.retencionTotal <=  0" [(ngModel)]="descuentoPorcentaje" matPrefix > </mat-checkbox> -->
+                      <input [onblur]="transform"  [readonly]="this.detalle[this.filaAEditar]?.RTITotal > 0" class="example-right-align"   [(ngModel)]="dReteica" matInput type="text" id="descuento" />
+                      <mat-checkbox  (change)="validarRETEICA()" *ngIf="this.detalle[this.filaAEditar]?.RTITotal == 0" [(ngModel)]="reteica" matPrefix > </mat-checkbox>
+                      <mat-hint style="font-weight: bold;" *ngIf="this.detalle[this.filaAEditar]?.RTITotal > 0">{{this.detalle[this.filaAEditar]?.RTITotal  | currency }}</mat-hint>
                   </mat-form-field>
               </div>
             </div>
@@ -310,7 +402,7 @@
   
     </div>
     <div class="modal-footer">
-        <button type="button" (click)="limpiar()" [disabled]="false" class="btn btn-secundary">Limpiar</button>
+        <a href="javascript:;" class="btn btn-danger me-1" (click)="limpiar()"><i class="fa fa-ban"></i></a> 
         <button type="button" (click)="agregar()" [disabled]="this.detalle[this.filaAEditar]?.valorAbono > 0" class="btn btn-primary">Agregar</button>
         
     </div>

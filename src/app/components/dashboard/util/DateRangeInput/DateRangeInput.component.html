@@ -1,0 +1,23 @@
+<mat-form-field style="width: 100%;" class="example-form-field" appearance="outline">
+  
+  <mat-date-range-input [rangePicker]="estadoFinancieroPicker">
+    <input (click)="estadoFinancieroPicker.open()"  matStartDate placeholder="FECHA INICIAL" [(ngModel)]="startDate" (ngModelChange)="updateModel()">
+    <input (click)="estadoFinancieroPicker.open()" matEndDate placeholder="FECHA FINAL" [(ngModel)]="endDate" (ngModelChange)="updateModel()">
+  </mat-date-range-input>
+
+  <a matSuffix  [matMenuTriggerFor]="menu" mat-icon-button aria-label="Clear">
+    <mat-icon color="primary">calendar_month</mat-icon>
+  </a>
+
+  
+  <mat-menu #menu="matMenu">
+    <button (click)="semanaActual()" mat-menu-item>Semana actual</button>
+    <button (click)="loQueVaDelMes()" mat-menu-item>Mes actual</button>
+    <button (click)="yearActual()" mat-menu-item>Año actual</button>
+    <hr>
+    <button (click)="semanaAnterior()" mat-menu-item>Semana anterior</button>
+    <button (click)="mesAnterior()" mat-menu-item>Mes anterior</button>
+    <button (click)="yearAnterior()" mat-menu-item>Año anterior</button>
+  </mat-menu>
+  <mat-date-range-picker #estadoFinancieroPicker></mat-date-range-picker>
+</mat-form-field>

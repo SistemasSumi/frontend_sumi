@@ -168,7 +168,7 @@ export class MovimientoContable {
             doc.text('Tipo:', 15, 140)
             doc.setFont(undefined, 'normal')
             doc.text(data.tipo.nombre.toUpperCase(), 50, 140)
-            doc.line(15, 145, 595, 140, 'F')
+            doc.line(15, 145, 595, 145, 'F')
 
             // Datos adicionales de Mov.Contable
 

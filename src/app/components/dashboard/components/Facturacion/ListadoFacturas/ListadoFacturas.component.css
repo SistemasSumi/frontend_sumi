@@ -46,6 +46,18 @@ th {
 ::ng-deep .swal2-styled.swal2-confirm {
     background-color: #41B6FF;
 }
+/* ::ng-deep .text-wrap{
+    white-space: nowrap
+} */
+th.text-cliente {
+    max-width: 50px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 
-
+.plus-info{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}

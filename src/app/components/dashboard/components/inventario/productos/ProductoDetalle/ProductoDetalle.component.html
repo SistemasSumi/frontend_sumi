@@ -1,0 +1,169 @@
+<div class="main-content">
+    <div class="page-content">
+      <div class="row">
+         <div class="col-12">
+           <div class="page-title-box d-flex align-items-center justify-content-between">
+               <h4 class="mb-0">Inventario</h4>
+       
+               <div class="page-title-right">
+                   <ol class="breadcrumb m-0">
+                       <li class="breadcrumb-item"><a href="javascript: void(0);">Stock</a></li>
+                       <li class="breadcrumb-item active">Inventario</li>
+                   </ol>
+               </div>
+       
+           </div>
+       </div>
+       <div class="w-100">
+            <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Codigo</mat-label>
+                                        <input toUppercase (keydown)="buscarProducto($event)" [(ngModel)]="codigo" matInput type="text" id="" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-8 ">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 18px;">Productos</mat-label>
+                                    <mat-select (ngModelChange)="changeProducto($event)"   placeholder="Buscar productos" [(ngModel)]="producto">
+                                        <mat-option>
+                                            <ngx-mat-select-search ngModel (ngModelChange)="filtrarProductos($event)"   #filtroDeProducto
+                                                placeholderLabel="Buscar productos" noEntriesFoundLabel="No hay resultados">
+                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                            </ngx-mat-select-search>
+                                        </mat-option>
+                                        <mat-option [tooltipProducto]="data"  *ngFor="let data of filtroProductos | async" [value]="data.id">
+                                            {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
+                                        </mat-option>
+        
+                                    
+                                    </mat-select>
+                                    
+                                </mat-form-field>
+                            </div> 
+                            <div class="col-4 col-md-2"> 
+                                <div class="mb-2 me-2">
+                                    <div class="form-group">
+                                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Buscar por</mat-label>
+                                        <mat-select [(ngModel)]="columnFiltroProducto" style="text-align: center;">
+                                            <mat-option  value="codigoDeBarra">Codigo</mat-option>
+                                            <mat-option value="nombreymarcaunico">Nombre</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                      
+                    </div>
+                  </div>
+                  <div class="row mb-2" *ngIf="producto" >
+                    <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                        <li  (click)="showInventario(producto)" class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#home1" role="tab" aria-selected="false">
+                                <span class="d-block d-sm-none"><i class="mdi mdi-text-box-check"></i></span>
+                                <span class="d-none d-sm-block"><i class="mdi mdi-text-box-check me-2"> </i>LOTES</span> 
+                            </a>
+                        </li>
+                        <li (click)="showKardex(producto)" class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#kardex" role="tab" aria-selected="false" tabindex="-1">
+                                <span class="d-block d-sm-none"><i class="mdi mdi-timeline-help"></i></span>
+                                <span class="d-none d-sm-block"><i class="mdi mdi-timeline-help me-2"></i> KARDEX</span> 
+                            </a>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  <div class="tab-content p-3 text-muted">
+                    <div class="tab-pane" id="home1" role="tabpanel">
+                        <div class="row">
+                            <div class="center-table">
+                                <div class="col-12 col-sm-8">
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap table-bordered mb-0">
+        
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th class="text-center">LOTE</th>
+                                                <th class="text-center">UNIDADES</th>
+                                                <th class="text-end">VALOR DE COMPRA</th>
+                                                <th class="text-center">VENCIMIENTO</th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of inventario">
+                                                <th class="text-center" scope="row">1</th>
+                                                <td class="text-center">{{item.lote}}</td>
+                                                <td class="text-center">{{item.unidades}}</td>
+                                                <td class="text-end">{{item.valorCompra    | currency}}</td>
+                                                <td class="text-center">{{item.vencimiento  | date}}</td>
+        
+                                                <td *ngIf="item.estado" class="text-center">
+                                                    <div class="badge bg-success font-size-16">
+                                                        DISPONIBLE
+                                                    </div>
+                                                </td>
+                                                <td *ngIf="!item.estado" class="text-center">
+                                                    <div class="badge bg-danger font-size-16">
+                                                        BLOQUEADO
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+                                </div>
+
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="kardex" role="tabpanel">
+                        <div *ngIf="loading" class="center-table">
+                            <mat-spinner></mat-spinner>
+                        </div>
+                        <ng-container *ngIf="mostrarKardex == true">
+                            <app-kardex [listado]="kardex"></app-kardex>
+                        </ng-container>
+                    </div>
+                   
+                </div>
+                
+
+                    
+                </div><!-- end cardbody-->
+            </div><!-- end card -->
+        </div>
+
+      </div>
+      
+
+
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                  {{ 'currentYear' | currentYear }}   &copy; SarpSoft.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

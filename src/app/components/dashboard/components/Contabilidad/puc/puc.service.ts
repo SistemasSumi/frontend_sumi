@@ -19,12 +19,14 @@ export class PucService {
 httpOptions    : any;
 PUC:ModelPuc[] = [];
 SubjectdataPuc   : BehaviorSubject<ModelPuc[]>    = new BehaviorSubject<ModelPuc[]>(null);
+SubjectdataMovimientos  : BehaviorSubject<any[]>    = new BehaviorSubject<any[]>(null);
 
 constructor(public settings:ConfiguracionService, public router:Router, private http:HttpClient, private auth:SeguridadService) {
     this.getCuentas().subscribe((resp:ModelPuc[]) => {
         this.PUC  = resp;
         this.SubjectdataPuc.next(this.PUC)
     });
+    this.getMovimientos().subscribe();
 
 }
 
@@ -112,13 +114,22 @@ constructor(public settings:ConfiguracionService, public router:Router, private 
         
         return this.http.get<any>(url,{headers: httpHeaders});
     }
+
+
     getMovimientos(){
         const  url = environment.BACKEND_DIR+'contabilidad/saveMovimiento/';
         const token = this.auth.currentUser.getTokenUser();
         const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
         
-        return this.http.get<any>(url,{headers: httpHeaders});
+        return this.http.get<any>(url,{headers: httpHeaders}).pipe(
+            map(resp =>  {
+                
+                this.SubjectdataMovimientos.next(resp);
+            })
+        );
     }
+
+
     saveMovimiento(datos){
         const  url = environment.BACKEND_DIR+'contabilidad/saveMovimiento/';
         const token = this.auth.currentUser.getTokenUser();
@@ -127,6 +138,21 @@ constructor(public settings:ConfiguracionService, public router:Router, private 
         const data = datos;
         
         return this.http.post<any>(url,data,{headers: httpHeaders});
+    }
+
+    busquedaAvanzadaComprobantes(datos){
+        const  url = environment.BACKEND_DIR+'contabilidad/busquedaAvanzadaCXPM/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+        
+      
+        
+        return this.http.post<any>(url,datos,{headers: httpHeaders}).pipe(
+            map(resp =>  {
+                
+                this.SubjectdataMovimientos.next(resp);
+            })
+        );
     }
 
     updateMovimiento(datos){

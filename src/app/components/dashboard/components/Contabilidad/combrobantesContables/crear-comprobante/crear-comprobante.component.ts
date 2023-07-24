@@ -13,6 +13,9 @@ import { ModelTerceroCompleto } from '../../../configuracion/models/ModelTercero
 import { ModelPuc } from '../../models/ModelPuc';
 import { PucService } from '../../puc/puc.service';
 import { MovimientoContable } from 'src/app/components/dashboard/reportes/reportesContabilidad/MovimientoContable';
+import { CombrobantesContablesComponent } from '../combrobantesContables.component';
+import { CurrencyPipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-crear-comprobante',
@@ -20,13 +23,12 @@ import { MovimientoContable } from 'src/app/components/dashboard/reportes/report
   styleUrls: ['./crear-comprobante.component.css']
 })
 export class CrearComprobanteComponent implements OnInit {
-
-  @Input()  
-  numeroEdit?: string = ''; 
+  formattedValue: string;
 
 
-  @Input()  
-  duplicar?: string = ''; 
+  numeroEdit: string  = '';
+  instancia : string  = '';
+  duplicar  : string  = '';
 
 
   Edit?: boolean = false; 
@@ -75,12 +77,17 @@ export class CrearComprobanteComponent implements OnInit {
 
   listaDeGrupos:grupos[] = [];
 
-  constructor(private reporte:ReportesService, private config:ConfiguracionService,private pucService:PucService,private modalService: NgbModal) { }
+  constructor(private route: ActivatedRoute,private currencyPipe: CurrencyPipe,private reporte:ReportesService, private config:ConfiguracionService,private pucService:PucService,private modalService: NgbModal) { }
 
   ngOnInit() {
 
     
+    this.route.queryParamMap.subscribe(params => {
+      this.numeroEdit = params.get('numeroEdit');
+      this.duplicar = params.get('duplicar');
 
+      // Realiza cualquier acción adicional basada en el parámetro capturado
+    });
 
 
     this.config.SubjectdataTerceros.subscribe(resp => {
@@ -137,8 +144,8 @@ export class CrearComprobanteComponent implements OnInit {
         resp.numeracion.numero = resp.numero
         this.numeracion = resp.numeracion.id
         this.numeraciones.push(resp.numeracion);
-
-        this.fechaRegistro = resp.fechaRegistro;
+        console.log(parseDateWithoutTimezone(resp.fechaRegistro));
+        this.fechaRegistro = parseDateWithoutTimezone(resp.fechaRegistro);
         this.tipoMovimiento = resp.tipo.valor;
 
         for(let x of resp.detalle){
@@ -156,7 +163,7 @@ export class CrearComprobanteComponent implements OnInit {
 
         
 
-          d.fechaMovimiento = moment( x.fechaMovi).format("YYYY-MM-DD");
+          d.fechaMovimiento = moment(x.fechaMovi).format("YYYY-MM-DD");
           d.concepto = x.concepto;
           d.docReferencia = x.docReferencia;
 
@@ -310,7 +317,7 @@ export class CrearComprobanteComponent implements OnInit {
 
     }
 
-    d.fechaMovimiento = moment( this.fechaMovimiento).format("YYYY-MM-DD");
+    d.fechaMovimiento = moment(this.fechaMovimiento).format("YYYY-MM-DD");
     d.concepto = this.concepto;
     d.docReferencia = this.docReferencia;
 
@@ -356,6 +363,9 @@ export class CrearComprobanteComponent implements OnInit {
         this.totalCredito += x.credito;
         this.totalDebito += x.debito;
     }
+
+ 
+
   
     
     
@@ -376,7 +386,12 @@ export class CrearComprobanteComponent implements OnInit {
     this.docReferencia =item.docReferencia;
     this.naturaleza = item.naturaleza;
     this.concepto = item.concepto;
-    this.fechaMovimiento = item.fechaMovimiento+1;
+ 
+    let partesFecha = item.fechaMovimiento.split("-"); // Separar la cadena de fecha en partes
+
+    this.fechaMovimiento  = new Date(partesFecha[0], partesFecha[1] - 1, partesFecha[2]); // Restar 1 al mes, ya que en JavaScript los meses se indexan desde 0
+
+  
 
     this.detalleComprobante.splice(index, 1);
   }
@@ -385,6 +400,9 @@ export class CrearComprobanteComponent implements OnInit {
   cargarNumeracion(){
     this.pucService.cargarNumeracion().subscribe(resp => {
       this.numeraciones = resp;
+      console.log("Holaa")
+      console.log(resp[0]?.id);
+      this.numeracion = resp[0]?.id;
     })
   }
 
@@ -452,6 +470,7 @@ export class CrearComprobanteComponent implements OnInit {
       
             let report = reporte.ReporteMovimientoContable(resp);
             window.open(report.output('bloburl'), '_blank');
+          
           });
          
         } 
@@ -482,6 +501,8 @@ export class CrearComprobanteComponent implements OnInit {
             let reporte = new MovimientoContable();
             let report = reporte.ReporteMovimientoContable(resp);
             window.open(report.output('bloburl'), '_blank');
+
+           
           });
         } 
       });
@@ -508,6 +529,18 @@ export class CrearComprobanteComponent implements OnInit {
         this.totalCredito += x.credito;
         this.totalDebito += x.debito;
     }
+  }
+
+  formatNumber(event: any): void {
+    const value = event.target.value;
+    const parsedValue = parseFloat(value.replace(/\./g, '').replace(/,/g, ''));
+    this.formattedValue = parsedValue.toLocaleString('es');
+    this.valor = parsedValue;
+  }
+
+
+  obtenerDiferencia(){
+   return Math.abs(this.totalDebito - this.totalCredito);
   }
 
 }
@@ -541,3 +574,19 @@ interface cuentas {
   nombre: string;
   
 }
+
+
+function parseDateWithoutTimezone(dateString) {
+  var parts = dateString.split("-");
+  var year = parseInt(parts[0]);
+  var month = parseInt(parts[1]) - 1; // Restamos 1 porque los meses en JavaScript van de 0 a 11
+  var day = parseInt(parts[2]);
+
+  var date = new Date();
+  date.setFullYear(year, month, day);
+  date.setHours(0, 0, 0, 0);
+
+  return date;
+}
+
+

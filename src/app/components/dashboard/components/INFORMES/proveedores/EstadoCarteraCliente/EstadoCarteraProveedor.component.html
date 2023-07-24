@@ -1,0 +1,77 @@
+
+  <div class="card">
+      <div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0 me-3">
+                          <div class="avatar-sm">
+                              <div class="avatar-title rounded-circle font-size-16">
+                                  <i class="fas fa-chart-line"></i>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="flex-grow-1">
+                          <p class="text-left mb-1 mb-2"><strong>ESTADO DE CARTERA PROVEEDOR </strong></p>
+                          <div class="row">
+                            <div class="col-md-9">
+                         
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label style="font-size: 18px;">Proveedor</mat-label>
+                                <mat-select  placeholder="Seleccionar cliente"  [(ngModel)]="cliente_id" >
+                                    <mat-option>
+                                        <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                            placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                                            <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                        </ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let cliente of filtroClientes | async" [value]="cliente.id" >
+                                        {{cliente.nombreComercial}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                               
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                  <mat-label>Fecha de corte</mat-label>
+                                  <input  matInput [matDatepicker]="picker" [(ngModel)]="fechaCorte">
+                                  <mat-hint>MM/DD/YYYY</mat-hint>
+                                  <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                                    <mat-icon color="primary">calendar_month</mat-icon>
+                                  </a>
+                              
+                                  <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                
+                              </div>
+                            </div>
+                            
+                          
+                           
+                          </div>
+                      </div>
+                      <div class="flex-shrink-0 align-self-end">
+                          <div class="ms-2">
+                            <button id="btn-report" (click)="generarPDF()" style="margin-right: 10px;" type="button" class="btn btn-outline-danger mb-4" (click)="null">
+                              <i class="squire ico-pdf"></i> 
+                            </button>
+                            <button  id="btn-report" (click)="generarExcel()" type="button"  class="btn btn-outline-primary mb-4">
+                              <i class="squire ico-excel"></i>
+                            </button>
+                            
+                          </div>
+                      </div>
+                  </div>
+              </li>
+
+              
+           
+          </ul>
+      </div>
+  </div>
+  <!-- end card -->
+
+  
+  <!-- end card -->

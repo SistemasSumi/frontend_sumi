@@ -1,53 +1,68 @@
-<div class="main-content">
 
-  <div class="page-content">
+      <!-- end page title -->
+
       <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <mat-form-field appearance="outline" style="width:100%; height: auto;">
-              <mat-label style="font-size: 16px;">Username</mat-label>
-              <input [(ngModel)]="username" matInput type="text" id="" />
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <mat-form-field appearance="outline" style="width:100%; height: auto;">
-              <mat-label style="font-size: 16px;">email</mat-label>
-              <input [(ngModel)]="email" matInput type="text" id="" />
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <mat-form-field appearance="outline" style="width:100%; height: auto;">
-              <mat-label style="font-size: 16px;">password</mat-label>
-              <input [(ngModel)]="password" matInput type="text" id="" />
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-          <button (click)="guardar()" class="btn btn-primary">Guardar</button>
-      </div>
+          <div class="col-xl-12">
+              <div class="card">
+                  <div class="card-header justify-content-between d-flex align-items-center">
+                      <h4 class="card-title">Datos del usuario</h4>
+                  </div><!-- end card header -->
+                  <div class="card-body">
+                       
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="mb-3">
+                                     
+                                     <div class="form-group">
+                                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Username</mat-label>
+                                        <input  required  [(ngModel)]="username" matInput type="text" id="" />
+                                      </mat-form-field>
+                                     </div>
+                                     
+                                      
+                                    
+                                  </div>
+                              </div><!-- end col -->
+                              <div class="col-md-4">
+                                  <div class="mb-3">
+                                      
+                                      <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                          <mat-label style="font-size: 16px;">Email</mat-label>
+                                          <input  required [(ngModel)]="email" matInput type="email" id="" />
+                                        </mat-form-field>
+                                      </div>
+                                      
+                                     
+                                      
+                                  </div>
+                              </div><!-- end col -->
+                              <div class="col-md-4">
+                                <div class="mb-3">
+                                    
+                                    <div class="form-group">
+                                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                        <mat-label style="font-size: 16px;">Password</mat-label>
+                                        <input  required [(ngModel)]="password" matInput type="text" id="" />
+                                      </mat-form-field>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                          </div><!-- end row -->
+                     
+                         <!-- end row -->
+                          <button (click)="guardar()" class="btn btn-primary" >Registrar usuario</button>
+                      <!-- end form -->
+                  </div><!-- end card body -->
+              </div><!-- end card -->
+          </div> <!-- end col -->
 
-  </div>
-  <!-- End Page-content -->
+          <!-- end col -->
+      </div><!-- end row -->
 
-  <footer class="footer">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-sm-6">
-                  <script>
-                      document.write(new Date().getFullYear())
-                  </script> &copy; SarpSoft.
-              </div>
-              <div class="col-sm-6">
-                  <div class="text-sm-end d-none d-sm-block">
-                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-</div>
+     
+    
+      
+  

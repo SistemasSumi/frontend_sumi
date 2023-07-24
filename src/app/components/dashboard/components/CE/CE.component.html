@@ -48,7 +48,7 @@
                           <div class="form-group">
                               <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                   <mat-label style="font-size: 16px;">Numeración</mat-label>
-                                  <mat-select [(ngModel)]="GlobalNumeracion"  required  style="text-align: center;">
+                                  <mat-select  [(ngModel)]="GlobalNumeracion"  required  style="text-align: center;">
                                       <mat-option *ngFor="let data of numeraciones" [value]="data.id" >
                                           {{data.numero}}
                                       </mat-option>
@@ -107,16 +107,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-6">
-                               <div class="form-group">
-                                    <div class="form-group">
-                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                            <mat-label style="font-size: 16px;">Saldo a favor</mat-label>
-                                            <input readonly class="example-right-align" #InputSaldoAFavor [onblur]="transform" [(ngModel)]="saldoAFavor"  matInput type="text" id="" />
-                                        </mat-form-field>
-                                    </div>
-                               </div>
-                            </div>
+                            
                             <div class="col-md-6">
                                <div class="form-group">
                                     <div class="form-group">
@@ -127,83 +118,189 @@
                                     </div>
                                </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Fecha</mat-label>
+                                    <input matInput [matDatepicker]="picker" [(ngModel)]="fecha">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                                      <mat-icon color="primary">calendar_month</mat-icon>
+                                    </a>
+                                  
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
                         </div>
                       </div>
                       </div>
                    
                     <div class="row">
-                      <p-divider [text]="'TOTAL FACTURAS '+ '('+this.detalle.length+')'"></p-divider>
+                      <p-divider [text]="'DATOS DEL EGRESO'"></p-divider>
                     </div>
                       <div class="py-2">
-                        <div  class="d-flex float-end">
-                            <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
 
-                        </div>
-                        <br>
-                        <br>
+                            <div class="table-scroll">
+                                    <table  style="border-collapse: collapse;" class="table table-responsive  table-centered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th width="auto" class="text-center">ORDEN.</th>
+                                                <th width="auto" class="text-center">FACTURA</th>
+                                                <th width="auto" class="text-center">FECHA</th>
+                                                <th width="auto" class="text-center">VENCE</th>
+                                                <th width="auto" class="text-center">VALOR FACTURA</th>
+                                                <th width="auto" class="text-center">VALOR ABONO</th>
+                                                <th width="auto" class="text-center">A FAVOR</th>
+                                                <th width="auto" class="text-center">DESCUENTO %</th>
+                                                <th width="auto" class="text-center">SALDO</th>
+                                                <th width="auto" class="text-center"></th>
+                                                
+                                            </tr>
+                                        </thead><!-- end thead -->
+                                        <tbody >
 
-                          <div class="table-scroll">
-                              <table class="table table-responsive  table-centered mb-0">
-                                  <thead>
-                                      <tr>
-                                          <th width="auto" class="text-center">ORDEN.</th>
-                                          <th width="auto" class="text-center">FACTURA</th>
-                                          <th width="auto" class="text-center">FECHA</th>
-                                          <th width="auto" class="text-center">VENCE</th>
-                                          <th width="auto" class="text-center">VALOR FACTURA</th>
-                                          <th width="auto" class="text-center">VALOR ABONO</th>
-                                          <th width="auto" class="text-center">A FAVOR</th>
-                                          <th width="auto" class="text-center">DESCUENTO %</th>
-                                          <th width="auto" class="text-center">SALDO</th>
-                                          <th width="auto" class="text-center"></th>
-                                          
-                                      </tr>
-                                  </thead><!-- end thead -->
-                                  <tbody >
-                                      <tr *ngFor="let item of detalle; let i = index"  style="cursor: pointer;">
+                                            <ng-container *ngIf="detalle.length > 0">
+                                                <tr *ngFor="let item of detalle; let i = index"  style="cursor: pointer;">
+                                                        
+
+                                                    <td class=" text-center font-weight-bold">{{item.orden}}</td>
+                                                    <td class=" text-center font-weight-bold">{{item.factura}}</td>
+                                                    <td class=" text-center font-weight-bold">{{item.fecha}}</td>
+                                                    <td class="fw-bold text-center font-weight-bold" [innerHTML]="item.vence | FechaVencimiento"></td>
+                                                    <td class="fw-bold text-end">{{item.valorFactura | currency}}</td>
+                                                    <td class="fw-bold text-end  text-primary">{{item.valorAbono   | currency}}</td>
+                                                    <td class="fw-bold text-end  text-primary">{{item.saldoFavor   | currency}}</td>
+                                                    <td class="fw-bold text-end  text-primary">{{item.descuento   | currency}}</td>
+                                                    <td class="fw-bold text-end  text-primary">{{item.saldo   | currency}}</td>
+                                                    <td class="fw-bold text-center">
+                                                        <a type="button" (click)="openModalADDAbono(content,i)" class="btn btn-soft-primary"><i class="fas fa-download"></i></a   >
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </ng-container>
+                                            <ng-container *ngIf="detalle.length === 0 && GlobalTerceroSeleccionado != undefined">
+                                                <td style="background-color: gainsboro;" colspan="10" class="text-center fw-bold">NO HAY FACTURAS PENDIENTES POR PAGAR</td>
+                                            </ng-container>
                                             
+                                            
+                                            
+                                            <!-- end tr -->
+                                        </tbody><!-- end tbody -->
 
-                                          <td class="text-center font-weight-bold">{{item.orden}}</td>
-                                          <td class="text-center font-weight-bold">{{item.factura}}</td>
-                                          <td class="text-center font-weight-bold">{{item.fecha}}</td>
-                                          <td class="text-center font-weight-bold">{{item.vence}}</td>
-                                          <td class="text-end">{{item.valorFactura | currency}}</td>
-                                          <td class="text-end  text-primary">{{item.valorAbono   | currency}}</td>
-                                          <td class="text-end  text-primary">{{item.saldoFavor   | currency}}</td>
-                                          <td class="text-end  text-primary">{{item.descuento   | currency}}</td>
-                                          <td class="text-end  text-primary">{{item.saldo   | currency}}</td>
-                                          <td class="text-center">
-                                            <a type="button" (click)="openModalADDAbono(content,i)" class="btn btn-soft-primary"><i class="fas fa-download"></i></a   >
-                                        </td>
-                                          
-                                      </tr>
+                                        
+                                
+                                        
+
+                    
+                                        </table><!-- end table -->
                                     
+                                        
+                            </div><!-- end table responsive -->
+                            
+                            <div class="table-footer">
+
+                                <table   class="float-end table-balance">
                                     
-                                      <!-- end tr -->
-                                  </tbody><!-- end tbody -->
-                                  <tfoot >
                                     <tr>
-                                        <th width="auto" colspan="5" class="text-center font-weight-bold font-size-18" style="background-color: rgb(175, 174, 174); color: white;">TOTAL EGRESO</th>
-                                      
-                                        <th class="text-end  text-primary">{{this.totalAbono   | currency}}</th>
-                                        <th class="text-end  text-primary">{{this.totalSaldoAFavor  | currency}}</th>
-                                        <th class="text-end  text-primary">{{this.totalDescuento   | currency}}</th>
-                                        <th class="text-end  text-primary">{{this.totalSaldo  | currency}}</th>
-                                        <th class="text-end  text-primary"></th>
+                                        <th class="th-title text-end" scope="row" colspan="8" class="text-end">Subtotal :</th>
+                                        <td class=" text-end" [appAnimatedPrice]="totalAbono + totalDescuento + totalSaldoAFavor">  {{this.totalAbono + this.totalDescuento + this.totalSaldoAFavor   | currency}}</td>
                                         
                                     </tr>
-                                  </tfoot>
-                                </table><!-- end table -->
-                                </div><!-- end table responsive -->
-                         
-                          <div class="d-print-none mt-4">
-                              <div class="float-end">
-                                  <!-- <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>  -->
-                                  <!-- <button class="btn btn-primary w-md" type="submit" [disabled]="formIngreso.invalid">Guardar </button> -->
+                                    <!-- end tr -->
+                                    <tr>
+                                        <th scope="row" colspan="8" class=" th-title text-end">
+                                            Descuento :</th>
+                                        <td class=" text-end text-danger" [appAnimatedPrice]="totalDescuento">  - {{totalDescuento   | currency}}</td>
+                                        
+                                        
+                                    </tr>
+                                    <!-- end tr -->
+                                    <tr>
+                                        <th scope="row" colspan="8" class="th-title text-end">
+                                            Saldo a favor :</th>
+                                        <td class="text-end text-danger" [appAnimatedPrice]="totalSaldoAFavor">  - {{totalSaldoAFavor   | currency}}</td>
+                                        
+                                        
+                                    </tr>
+                                    <!-- end tr -->
                                 
-                              </div>
-                          </div>
+                                    <!-- end tr -->
+                                    <tr #tablaRef style="font-size: 20px; text-transform: uppercase;">
+                                        <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h4>Total </h4></th>
+                                        <td  class="t-total border-0  text-end "><h4 [appAnimatedPrice]="totalAbono" class="fw-semibold">  {{totalAbono   | currency}}</h4></td>
+                                        
+                                        
+                                    </tr>
+                                </table>
+
+                                <div class="mt-2 d-flex float-end me-2">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-sm-3" style="min-width: 200px;">
+                                        <!-- Card -->
+                                        <div class="card" style="border: #70C8FF 1px solid;">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <h6 class="fw-bold font-size-xs text-uppercase">TOTAL FACTURAS</h6>
+                                                        <h4 class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                                {{this.detalle.length}}
+                                                        </h4>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                                        <!-- Card -->
+                                        <div class="card" style="border: #70C8FF 1px solid;">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <h6 class="fw-bold font-size-xs text-uppercase">SALDO A FAVOR</h6>
+                                                        <h4 [appAnimatedPrice]="saldoAFavor"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                                {{saldoAFavor | currency}}
+                                                        </h4>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                                        <!-- Card -->
+                                        <div class="card" style="border: #70C8FF 1px solid;">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <h6 class="fw-bold font-size-xs text-uppercase">TOTAL CARTERA</h6>
+                                                        <h4 [appAnimatedPrice]="totalSaldo"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                                                {{totalSaldo | currency}}
+                                                        </h4>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div style="clear: both;"></div>
+                            <hr>
+                            <div class="row d-print-none mt-4" >
+                                <div class="float-end">
+                                    <!-- <a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"></i></a> -->
+                                    <!-- <a href="javascript:;" (click)="guardar()" class="btn btn-info btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i>  Guardar</a> -->
+                                    <a  href="javascript:;" (click)="guardar()" class="btn btn-soft-primary btn-md" style="width: auto; float: right;"> <i  class="mdi mdi-content-save-all-outline ms-1"></i> GUARDAR</a>
+                                </div>
+                            </div>
                       </div>
                    
                   </div>
@@ -283,7 +380,9 @@
   
     </div>
     <div class="modal-footer">
-        <button type="button" (click)="limpiar()" [disabled]="false" class="btn btn-secundary">Limpiar</button>
+
+        <a href="javascript:;" class="btn btn-danger me-1" (click)="limpiar()"><i class="fa fa-ban"></i></a> 
+
         <button type="button" (click)="agregar()" [disabled]="this.detalle[this.filaAEditar]?.valorAbono > 0" class="btn btn-primary">Agregar</button>
         
     </div>

@@ -10,6 +10,9 @@ import { ReportPurchaseOrder } from '../../../reportes/reportesInventario/report
 import { ConfiguracionService } from '../../configuracion/Configuracion.service';
 import { BasicPurchaseOrder } from './models/BasicPurchaseOrder';
 import { PurchaseOrder } from './models/purchaseOrder';
+import * as moment from 'moment';
+
+
 
 @Injectable({
     providedIn: 'root'
@@ -138,5 +141,36 @@ export class OrdenDeCompraService {
         
 
     }
+
+    busquedaAvanzada(data:any){
+        const  url = environment.BACKEND_DIR+'inventario/ordenCompra/busqueda/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+        let datos = {
+            fechaInicial:data.fechaInicial,
+            fechaFinal:data.fechaFinal,
+            proveedor:data.proveedor,
+            orden:data.orden,
+            formaDePago:data.formaDePago
+        } 
+
+        
+        if(data.fechaInicial){
+            datos.fechaInicial = moment(datos.fechaInicial).format("YYYY-MM-DD")
+        }
+        if(data.fechaFinal){
+            datos.fechaFinal = moment(datos.fechaFinal).format("YYYY-MM-DD")
+        }
+
+
+        
+
+        return this.http.post<BasicPurchaseOrder[]>(url,datos,{headers: httpHeaders}).pipe(
+            map(resp =>  this.SubjectdataOrdenes.next(resp))
+        )
+
+    }
+
 
 }

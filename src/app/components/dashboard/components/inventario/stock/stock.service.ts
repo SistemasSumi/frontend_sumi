@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { environment } from 'src/environments/environment';
 import { ConfiguracionService } from '../../configuracion/Configuracion.service';
@@ -17,6 +18,8 @@ import { Producto } from './models/producto';
 export class StockService {
 
 
+    SubjectdataCxp    : BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
+    SubjectdataCE   : BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
     SubjectdataProductosVenta    : BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(null);
     SubjectdataProductos         : BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(null);
    
@@ -24,6 +27,8 @@ export class StockService {
 constructor(private settings:ConfiguracionService,public router:Router, private http:HttpClient, private auth:SeguridadService) {
     this.actualizarProductosVentas();
     this.actualizarProductos();
+    this.getPagos().subscribe();
+   
 }
 
 actualizarProductosVentas(){
@@ -37,6 +42,12 @@ actualizarProductos(){
     this.productosFull().subscribe(resp => {
         this.SubjectdataProductos.next(resp);
       
+    });
+}
+
+actualizarCxp(){
+    this.getCxp().subscribe(resp => {
+        this.SubjectdataCxp.next(resp);
     });
 }
 
@@ -60,6 +71,18 @@ productosFull(){
     return this.http.get<Producto[]>(url,{headers: httpHeaders});
   
 }
+
+
+
+getProducto(id:number){
+    const  url = environment.BACKEND_DIR+'inventario/getProductos/?producto='+id;
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+  
+    return this.http.get<Producto>(url,{headers: httpHeaders});
+  
+}
+
 
 productosInventario(id){
     const  url = environment.BACKEND_DIR+'inventario/getProductos/?id='+id;
@@ -125,7 +148,9 @@ getPagos(){
     const token = this.auth.currentUser.getTokenUser();
     const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
   
-    return this.http.get<any[]>(url,{headers: httpHeaders});
+    return this.http.get<any[]>(url,{headers: httpHeaders}).pipe(
+        map(resp =>  this.SubjectdataCE.next(resp))
+    );
 }
 
 imprimirPagos(numero){
@@ -145,22 +170,39 @@ getFacturasXProveedor(tercero:number){
     return this.http.get<any>(url,{headers: httpHeaders});
 }
 
-saveProducto(form:FormGroup){
-    const  url = environment.BACKEND_DIR+'inventario/productos/';
-    const token = this.auth.currentUser.getTokenUser();
-    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+    saveProducto(form:FormGroup){
+        const  url = environment.BACKEND_DIR+'inventario/productos/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
 
 
-    form.get('usuario').setValue(this.auth.currentUser.getIdUser())
+        form.get('usuario').setValue(this.auth.currentUser.getIdUser())
 
-    let data = form.value;
+        let data = form.value;
 
 
-    return this.http.post<any>(url,data,{headers: httpHeaders});
-   
+        return this.http.post<any>(url,data,{headers: httpHeaders});
     
+        
 
-}
+    }
+
+    updateProducto(form:FormGroup){
+        const  url = environment.BACKEND_DIR+'inventario/productos/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+
+        form.get('usuario').setValue(this.auth.currentUser.getIdUser())
+
+        let data = form.value;
+
+
+        return this.http.put<any>(url,data,{headers: httpHeaders});
+    
+        
+
+    }
 
     cargarNumeracion(){
         return this.settings.getNumeraciones('ce');
@@ -176,6 +218,19 @@ saveProducto(form:FormGroup){
 
         return this.http.post<any>(url,data,{headers: httpHeaders});
     
+    }
+
+    busquedaAvanzadaCE(datos){
+        const  url = environment.BACKEND_DIR+'inventario/egreso/busqueda/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+      
+
+
+        return this.http.post<any>(url,datos,{headers: httpHeaders}).pipe(
+            map(resp =>  this.SubjectdataCE.next(resp))
+        );
     }
 
 }

@@ -1,0 +1,101 @@
+.card {
+    position: relative;
+    width: 380px;
+    height: min-content;
+    padding: 25px;
+    background: #ffffff;
+    border: 2px solid #e1e3e6;
+    border-radius: 20px;
+    transition: .4s;
+}
+
+
+
+.card .card-header h3 {
+    /* color: #404d61; */
+    font-size: 22px;
+    /* text-decoration: underline; */
+}
+
+.card .card-header p {
+    color: #757d8a;
+    font-size: 14px;
+}
+
+.card .card-header .bag {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    background: #41B6FF;;
+    right: 25px;
+    top: 25px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+
+
+.card .card-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card .card-header .price p {
+    color: #757d8a;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.card .card-header .price strong {
+   
+    font-size: 13px;
+}
+
+
+
+
+
+.card-body ul{
+
+    font-size: 0.9rem;
+}
+
+
+.card-body  li{
+
+    list-style: none;
+
+
+    /* font-weight: 600; */
+    opacity: 0.9;
+}
+
+
+.card-body ul li .fas{
+    font-size: 7px;
+}
+
+
+.card-body ul li span{
+    font-weight: normal;
+    
+}
+
+
+
+
+
+
+.card .card-footer button {
+    cursor: pointer;
+    width: 100%;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(#6787fd, #3f66f5);
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: .5px;
+}

@@ -10,13 +10,19 @@ import { TrimPipe } from './trim.pipe';
 import { BooleanPipe } from './Boolean.pipe';
 import { AcortarTextPipe } from './acortarText.pipe';
 import { DatePipe } from './date.pipe';
-;
+import { CurrentYearPipe } from './CurrentYear.pipe';
+import { NumeroALetrasPipe } from './NumeroALetras.pipe';
+import { FechaVencimientoPipe } from './FechaVencimiento.pipe';
+import { SafeHtmlPipe } from './safeHtml.pipe';
+import { FechaRelativaPipe } from './fechaRelativa.pipe';
+import { ParseFloatPipe } from './parseFloat.pipe';
+
 
 
 
 
 @NgModule({
-  declarations: [										
+  declarations: [																
     FiltroPipe,
     CerosPipe,
       DatetimePipe,
@@ -26,7 +32,13 @@ import { DatePipe } from './date.pipe';
       TrimPipe,
       BooleanPipe,
       AcortarTextPipe,
-      DatePipe
+      DatePipe,
+      CurrentYearPipe,
+      NumeroALetrasPipe,
+      FechaVencimientoPipe,
+      SafeHtmlPipe,
+      FechaRelativaPipe,
+      ParseFloatPipe
    ],
   exports: [
     FiltroPipe,
@@ -36,7 +48,14 @@ import { DatePipe } from './date.pipe';
     PagPipe,
     TrimPipe,
     BooleanPipe,
-    AcortarTextPipe
+    AcortarTextPipe,
+    CurrentYearPipe,
+    NumeroALetrasPipe,
+    FechaVencimientoPipe,
+    SafeHtmlPipe,
+    FechaRelativaPipe,
+    ParseFloatPipe
+
 
   ]
 })

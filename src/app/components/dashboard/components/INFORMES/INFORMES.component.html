@@ -1,78 +1,273 @@
+
+
 <div class="main-content">
+    <div class="page-content">
+        <!-- <a class="btn btn-primary btn-sm"  (click)="imprimir()" href="javascript:;" role="button">Descargar </a> -->
 
-  <div class="page-content">
+        <!-- container-fluid -->
+        <div class="container-fluid">
 
-    <div class="row">
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="imprimirNotaCredito()">
-          <i class="squire ico-pdf"></i>&nbsp; NOTA CREDITO
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="COTIZACION()">
-          <i class="squire ico-pdf"></i>&nbsp; COTIZACIÓN
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraVencida()">
-          <i class="squire ico-pdf"></i>&nbsp; Cartera Vencida
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="egreso()">
-          <i class="squire ico-pdf"></i>&nbsp; Egreso
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="ingreso()">
-          <i class="squire ico-pdf"></i>&nbsp; ingreso
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraCliente()">
-          <i class="squire ico-pdf"></i>&nbsp; Cartera Cliente
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraProveedor()">
-          <i class="squire ico-pdf"></i>&nbsp; cartera Proveedor
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="aux()">
-          <i class="squire ico-pdf"></i>&nbsp; AUXILIAR
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="movi()">
-          <i class="squire ico-pdf"></i>&nbsp; Movimiento Contable
-      </button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-outline-danger mb-4" (click)="salidaConsumo()">
-          <i class="squire ico-pdf"></i>&nbsp; Salida consumo
-      </button>
-      </div>
-    </div>
-     
-      <!-- container-fluid -->
-  </div>
-  <!-- End Page-content -->
-
-  <footer class="footer">
-      <div class="container-fluid">
+          <!-- start page title -->
           <div class="row">
-              <div class="col-sm-6">
-                  <script>
-                      document.write(new Date().getFullYear())
-                  </script> &copy; SarpSoft.
-              </div>
-              <div class="col-sm-6">
-                  <div class="text-sm-end d-none d-sm-block">
-                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+              <div class="col-12">
+                  <div class="page-title-box d-flex align-items-center justify-content-between">
+                      <h4 class="mb-0">Informes</h4>
+
+                      <div class="page-title-right">
+                          <ol class="breadcrumb m-0">
+                              <li class="breadcrumb-item"><a href="javascript: void(0);">Informes</a></li>
+                              <li class="breadcrumb-item active">Generales</li>
+                          </ol>
+                      </div>
+
                   </div>
               </div>
           </div>
+          <!-- end page title -->
+
+          <div class="d-xl-flex">
+              <div class="w-100">
+                  <div class="d-md-flex">
+                      <div class="card filemanager-sidebar me-md-3">
+                          <div class="card-body">
+
+                              <div class="d-flex flex-column h-100">
+                                  <div class="mb-4">
+                                      <ul class="list-unstyled categories-list">
+                                          <li>
+                                              <div class="custom-accordion">
+                                                  <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#inventario-collapse" role="button" aria-expanded="false" aria-controls="inventario-collapse">
+                                                      <i class="fas fa-shop text-primary font-size-13 me-2"></i> Inventario <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                  </a>
+                                                  <div class="collapse" id="inventario-collapse">
+                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                          <ul class="list-unstyled mb-0">
+                                                              
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['inventario','general']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Inventario (General)</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['inventario','vencido']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Inventario vencido - vencer</span>
+                                                                </a>
+                                                              </li>
+                                                              
+                                                              
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="custom-accordion">
+                                                  <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#compras-collapse" role="button" aria-expanded="false" aria-controls="compras-collapse">
+                                                      <i class="fas fa-shopping-cart text-primary font-size-13 me-2"></i> Compras <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                  </a>
+                                                  <div class="collapse" id="compras-collapse">
+                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                          <ul class="list-unstyled mb-0">
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['compras','rotacion']" routerLinkActive="router-link-active"  class="d-flex align-items-center">
+                                                                  <span class="me-auto">Rotación productos</span>
+                                                                </a>
+                                                              </li>
+                                                              
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['compras','detalladas']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Compras Detallada</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['compras','retencion']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Retenciones</span>
+                                                                </a>
+                                                              </li>
+                                                              
+                                                              
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="custom-accordion">
+                                                  <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#ventas-collapse" role="button" aria-expanded="false" aria-controls="ventas-collapse">
+                                                    <i class="fas fa-ranking-star  text-primary font-size-13 me-2"></i> Ventas <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                  </a>
+                                                  <div class="collapse" id="ventas-collapse">
+                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                          <ul class="list-unstyled mb-0">
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['ventas','rotacion']" routerLinkActive="router-link-active"  class="d-flex align-items-center">
+                                                                  <span class="me-auto">Rotación productos</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['ventas','detalladas']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Ventas (Detalladas)</span>
+                                                                </a>
+                                                              </li>
+                                                             
+                                                             
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['ventas','vendedor']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Ventas x vendedor</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Retenciones</span>
+                                                                </a>
+                                                              </li>
+                                                              
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="custom-accordion">
+                                                  <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#contabilidad-collapse" role="button" aria-expanded="false" aria-controls="contabilidad-collapse">
+                                                    <i class="fas fa-chart-pie  text-primary font-size-13 me-2"></i> Contabilidad <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                  </a>
+                                                  <div class="collapse" id="contabilidad-collapse">
+                                                      <div class="card border-0 shadow-none ps-2 mb-0">
+                                                          <ul class="list-unstyled mb-0">
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['contabilidad','BalanceDePrueba']" routerLinkActive="router-link-active"  class="d-flex align-items-center">
+                                                                  <span class="me-auto">Balance de prueba</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['contabilidad','EstadoSituacionFinanciera']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Estado de situación Financiera</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Estado de resultados </span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Libro auxiliar</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['contabilidad','cxp']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Cuentas x pagar</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                  <span class="me-auto">Cuentas x cobrar</span>
+                                                                </a>
+                                                              </li>
+                                                              <li routerLinkActive="active">
+                                                                <a [routerLink]="['contabilidad','abonos']"  class="d-flex align-items-center">
+                                                                  <span class="me-auto">Abonos recibidos</span>
+                                                                </a>
+                                                              </li>
+                                                              
+                                                              
+                                                              
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </li>
+                                          <li>
+                                            <div class="custom-accordion">
+                                                <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#clientes-collapse" role="button" aria-expanded="false" aria-controls="clientes-collapse">
+                                                    <i class="fas fa-person-arrow-up-from-line text-primary font-size-13 me-2"></i> Clientes <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                </a>
+                                                <div class="collapse" id="clientes-collapse">
+                                                    <div class="card border-0 shadow-none ps-2 mb-0">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li routerLinkActive="active">
+                                                              <a [routerLink]="['cliente','estadoCartera']" routerLinkActive="router-link-active"  class="d-flex align-items-center">
+                                                                <span class="me-auto">Estado de cartera</span>
+                                                              </a>
+                                                            </li>
+                                                          
+                                                            <li routerLinkActive="active">
+                                                              <a [routerLink]="['cliente','CarteraVencida']" class="d-flex align-items-center">
+                                                                <span class="me-auto">Cartera vencida</span>
+                                                              </a>
+                                                            </li>
+                                                            <li routerLinkActive="active">
+                                                              <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                <span class="me-auto">Listado</span>
+                                                              </a>
+                                                            </li>
+                                                            
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                          <li>
+                                            <div class="custom-accordion">
+                                                <a class="text-body fw-medium py-1 d-flex align-items-center" data-bs-toggle="collapse" href="#proveedor-collapse" role="button" aria-expanded="false" aria-controls="proveedor-collapse">
+                                                    <i class="fas fa-person-arrow-down-to-line text-primary font-size-13 me-2"></i> Proveedores <i class="mdi mdi-chevron-down accor-down-icon ms-auto"></i>
+                                                </a>
+                                                <div class="collapse" id="proveedor-collapse">
+                                                    <div class="card border-0 shadow-none ps-2 mb-0">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li routerLinkActive="active">
+                                                              <a [routerLink]="['proveedor','EstadoCartera']" routerLinkActive="router-link-active"  class="d-flex align-items-center">
+                                                                <span class="me-auto">Estado de cartera</span>
+                                                              </a>
+                                                            </li>
+                                                          
+                                                            <li routerLinkActive="active">
+                                                              <a [routerLink]="['listado-usuarios']" class="d-flex align-items-center">
+                                                                <span class="me-auto">Listado</span>
+                                                              </a>
+                                                            </li>
+                                                            
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                      </ul>
+                                  </div>
+
+                                
+                              </div>
+                          </div><!-- end cardbody-->
+                      </div><!-- end card -->
+                      <!-- filemanager-leftsidebar -->
+
+                      <div class="w-100">
+                         <router-outlet></router-outlet>
+                      </div><!-- end w-100 -->
+                  </div>
+              </div>
+
+            
+          </div><!-- end row -->   
       </div>
-  </footer>
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>

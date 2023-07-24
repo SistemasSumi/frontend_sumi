@@ -44,75 +44,160 @@ import { ListadoCIComponent } from './components/dashboard/components/CI/Listado
 import { ListadoClientesComponent } from './components/dashboard/components/configuracion/terceros/ListadoClientes/ListadoClientes.component';
 import { InformesContabilidadComponent } from './components/dashboard/components/Contabilidad/InformesContabilidad/InformesContabilidad.component';
 import { RegistrarIzquierdoComponent } from './components/auth/RegistrarIzquierdo/RegistrarIzquierdo.component';
-import { ContaGuard } from './guards/conta.guard';
+import { PucGuard } from './guards/contabilidad/Puc.guard';
+import { SecurityGuard } from './guards/security.guard';
+import { PermisosResolveService } from './components/auth/permisos.resolve.service';
+import { ProfileComponent } from './components/auth/Profile/Profile.component';
+import { ListadoUsuariosComponent } from './components/auth/ListadoUsuarios/ListadoUsuarios.component';
+import { PermisosUsuariosComponent } from './components/auth/PermisosUsuarios/PermisosUsuarios.component';
+import { SameSizeDivDirective } from './SameSizeDiv.directive';
+import { OrdenCompraGuard } from './guards/inventario/ordenCompra.guard';
+import { CrearProductosGuard } from './guards/inventario/CrearProductos.guard';
+import { VerProductosGuard } from './guards/inventario/VerProductos.guard';
+import { KardexGuard } from './guards/inventario/Kardex.guard';
+import { BodegasGuard } from './guards/inventario/Bodegas.guard';
+import { CrearOrdenCompraGuard } from './guards/inventario/CrearOrden.guard';
+import { IngresarGuard } from './guards/inventario/Ingresar.guard';
+import { NotasCreditoCGuard } from './guards/inventario/VerNotasCreditoC.guard';
+import { CrearNotaCreditoCGuard } from './guards/inventario/CrearNotaCreditoC.guard';
+import { LibroAuxGuard } from './guards/contabilidad/LibroAuxiliar.guard';
+import { InformesCGuard } from './guards/contabilidad/InformesC.guard';
+import { MovimientosCGuard } from './guards/contabilidad/MovimientosC.guard';
+import { ProductoDetalleComponent } from './components/dashboard/components/inventario/productos/ProductoDetalle/ProductoDetalle.component';
+import { AnimatedPriceDirective } from './AnimatedPrice.directive';
+import { CrearComprobanteComponent } from './components/dashboard/components/Contabilidad/combrobantesContables/crear-comprobante/crear-comprobante.component';
+import { CuentasxCobrarComponent } from './components/dashboard/components/CuentasxCobrar/CuentasxCobrar.component';
+import { EstadoCarteraCliente } from './components/dashboard/reportes/reportesContabilidad/EstadoCarteraCliente';
+import { EstadoCarteraClienteComponent } from './components/dashboard/components/INFORMES/clientes/EstadoCarteraCliente/EstadoCarteraCliente.component';
+import { CarteraVencidaClientesComponent } from './components/dashboard/components/INFORMES/clientes/CarteraVencidaClientes/CarteraVencidaClientes.component';
+import { EstadoCarteraProveedorComponent } from './components/dashboard/components/INFORMES/proveedores/EstadoCarteraCliente/EstadoCarteraProveedor.component';
+import { BalanceDePruebaComponent } from './components/dashboard/components/INFORMES/contabilidad/BalanceDePrueba/BalanceDePrueba.component';
+import { EstadoSituacionFinancieraComponent } from './components/dashboard/components/INFORMES/contabilidad/EstadoSituacionFinanciera/EstadoSituacionFinanciera.component';
+import { CxpComponent } from './components/dashboard/components/INFORMES/contabilidad/cxp/cxp.component';
+import { AbonosRecibidosComponent } from './components/dashboard/components/INFORMES/contabilidad/AbonosRecibidos/AbonosRecibidos.component';
+import { IV_GENERALComponent } from './components/dashboard/components/INFORMES/inventario/IV_GENERAL/IV_GENERAL.component';
+import { IV_VENCIDOComponent } from './components/dashboard/components/INFORMES/inventario/IV_VENCIDO/IV_VENCIDO.component';
+import { RotacionComprasComponent } from './components/dashboard/components/INFORMES/inventario/RotacionCompras/RotacionCompras.component';
+import { RetencionesComponent } from './components/dashboard/components/configuracion/TablesBasic/modales/Retenciones/Retenciones.component';
+import { RetencionesComprasComponent } from './components/dashboard/components/INFORMES/proveedores/RetencionesCompras/RetencionesCompras.component';
+import { ComprasDetalladasComponent } from './components/dashboard/components/INFORMES/inventario/ComprasDetalladas/ComprasDetalladas.component';
+import { RotacionVentasComponent } from './components/dashboard/components/INFORMES/inventario/RotacionVentas/RotacionVentas.component';
+import { VentasComponent } from './components/dashboard/components/INFORMES/ventas/Ventas/Ventas.component';
+import { VentasVendedorComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedor/VentasVendedor.component';
 
 
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent,canActivate:[AuthGuard]},
-    { path: 'crear-usuario', component: RegistrarIzquierdoComponent,canActivate:[AuthGuard]},
-    // {
-    //   path: 'configuracion', 
-    //   component: ConfiguracionComponent,
-    //   children: [
-    //       { path: 'empresa',component:EmpresaComponent,},
-    //       { path: '**',component:ConfiguracionComponent, }
-    //   ],
-    //   canActivate:[AuthGuard]
-    // },
+    { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
+    // { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve: {permisos:PermisosResolveService}},
+    { path: 'crear-usuario', component: RegistrarIzquierdoComponent},
+    {
+      path: 'settings', 
+      component: ConfiguracionComponent,
+      children: [
+          { path: 'crear-usuarios',component:RegistrarIzquierdoComponent,},
+          { path: 'listado-usuarios',component:ListadoUsuariosComponent,},
+          { path: 'permisos-usuarios',component:PermisosUsuariosComponent,},
+          // { path: '**',component:ConfiguracionComponent, }
+      ],
+      canActivate:[AuthGuard]
+    },
 
     
     { path: 'configuracion', component: ConfiguracionComponent,canActivate:[AuthGuard]},
     { path: 'tablas-Basicas', component: TablesBasicComponent,canActivate:[AuthGuard]},
-    { path: 'puc', component: PucComponent,canActivate:[AuthGuard,ContaGuard]},
-    { path: 'libroAux', component: LibroAuxiliarComponent,canActivate:[AuthGuard]},
-    { path: 'reportes-contables', component: InformesContabilidadComponent,canActivate:[AuthGuard]},
-    { path: 'comprobantes-contables', component: CombrobantesContablesComponent,canActivate:[AuthGuard]},
+    { path: 'puc', component: PucComponent,canActivate:[AuthGuard,PucGuard]},
+    { path: 'libroAux', component: LibroAuxiliarComponent,canActivate:[AuthGuard,LibroAuxGuard]},
+    { path: 'reportes-contables', component: InformesContabilidadComponent,canActivate:[AuthGuard,InformesCGuard]},
+    { path: 'comprobantes-contables', component: CombrobantesContablesComponent,canActivate:[AuthGuard,MovimientosCGuard]},
+    { path: 'comprobantes-contables-crear', component: CrearComprobanteComponent,canActivate:[AuthGuard,MovimientosCGuard]},
     { path: 'configuracion/empresa', component: EmpresaComponent,canActivate:[AuthGuard]},
     { path: 'crear-productos', component: ProductosComponent,canActivate:[AuthGuard]},
     { path: 'cxp', component: CuentasxPagarComponent,canActivate:[AuthGuard]},
+    { path: 'cxc', component: CuentasxCobrarComponent,canActivate:[AuthGuard]},
     { path: 'ce', component: CEComponent,canActivate:[AuthGuard]},
     { path: 'ci', component: CIComponent,canActivate:[AuthGuard]},
     { path: 'listado_ce', component: ListadoCEComponent,canActivate:[AuthGuard]},
     { path: 'listado_ci', component: ListadoCIComponent,canActivate:[AuthGuard]},
-    { path: 'informes', component: INFORMESComponent,canActivate:[AuthGuard]},
+    { 
+      path: 'informes', 
+      component: INFORMESComponent,
+      children: [
+        { path: 'cliente/estadoCartera',component:EstadoCarteraClienteComponent,canActivate:[CrearProductosGuard]},
+        { path: 'cliente/CarteraVencida',component:CarteraVencidaClientesComponent,canActivate:[VerProductosGuard]},
+        
+        
+        { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[KardexGuard]},
+        
+        
+        { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[KardexGuard]},
+        { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[KardexGuard]},
+        
+        { path: 'compras/rotacion',component:RotacionComprasComponent,canActivate:[KardexGuard]},
+        { path: 'compras/retencion',component:RetencionesComprasComponent,canActivate:[KardexGuard]},
+        { path: 'compras/detalladas',component:ComprasDetalladasComponent,canActivate:[KardexGuard]},
+
+
+        { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[KardexGuard]},
+        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[KardexGuard]},
+        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[KardexGuard]},
+        
+        { path: 'contabilidad/abonos',component:AbonosRecibidosComponent,canActivate:[KardexGuard]},
+        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[KardexGuard]},
+        { path: 'contabilidad/BalanceDePrueba',component:BalanceDePruebaComponent,canActivate:[CrearProductosGuard]},
+        { path: 'contabilidad/EstadoSituacionFinanciera',component:EstadoSituacionFinancieraComponent,canActivate:[CrearProductosGuard]},
+        
+    ],
+      canActivate:[AuthGuard]
+    },
     { path: 'configuracion_nomina', component: NConfigComponent,canActivate:[AuthGuard]},
     { 
       path: 'productos', 
-      component: FacturacionComponent,
+      component: ProductosComponent,
         children: [
-          { path: 'add',component:CrearProductoComponent,},
-          { path: 'listado',component:ListarProductosComponent,},
-          { path: 'kardex/:id',component:PreviewKardexComponent,},
+          { path: 'add',component:CrearProductoComponent,canActivate:[CrearProductosGuard]},
+          { path: 'listado',component:ListarProductosComponent,canActivate:[VerProductosGuard]},
+          { path: 'kardex/:id',component:PreviewKardexComponent,canActivate:[KardexGuard]},
           
-          { path: 'editar/:id',component:ProductosComponent,},
-          { path: '**',component:ProductosComponent, }
+          { path: 'editar/:id',component:CrearProductoComponent,canActivate:[CrearProductosGuard]},
+          { path: '**',component:ListarProductosComponent,canActivate:[VerProductosGuard] }
       ],
       canActivate:[AuthGuard]
     },
-    { path: 'stock', component: StockComponent,canActivate:[AuthGuard]},
+    { 
+      path: 'inventario', 
+      component: ProductoDetalleComponent,
+        children: [
+          { path: 'lotes/:id',component:ListarProductosComponent,canActivate:[VerProductosGuard]},
+          { path: 'kardex/:id',component:PreviewKardexComponent,canActivate:[KardexGuard]},
+          // { path: '**',component:ProductoDetalleComponent,canActivate:[VerProductosGuard] }
+      ],
+      canActivate:[AuthGuard]
+    },
+    { path: 'stock', component: StockComponent,canActivate:[AuthGuard,BodegasGuard],},
     
     { 
       path: 'purchaseOrder', 
       component: OrdenDeCompraComponent,
         children: [
-          { path: 'addPurchaseOrder',component:FormOrdenComponent,},
-          { path: 'inventoryEntry/:id',component:IngresoComprasComponent,},
+          { path: 'addPurchaseOrder',component:FormOrdenComponent,canActivate:[CrearOrdenCompraGuard]},
+          { path: 'inventoryEntry/:id',component:IngresoComprasComponent,canActivate:[IngresarGuard]},
           { path: 'inventoryEntryPreview/:id',component:IngresoPreviewComponent,},
-          { path: 'EditPurchaseOrder/:id',component:FormOrdenComponent,},
+          { path: 'EditPurchaseOrder/:id',component:FormOrdenComponent,canActivate:[CrearOrdenCompraGuard]},
           { path: '**',component:ListOrderComponent, }
       ],
-      canActivate:[AuthGuard]
+      canActivate:[AuthGuard,OrdenCompraGuard]
     },
     { 
       path: 'nota-credito', 
       component: NotaCreditoComponent,
         children: [
-          { path: 'addNotaCompras',component:FormNotaCreditoComprasComponent,},
-          { path: 'listado-nota-credito-compras',component:FormOrdenComponent,},
-          { path: '**',component:ListadoNotaCreditoComponent, }
+          { path: 'addNotaCompras',component:FormNotaCreditoComprasComponent,canActivate:[CrearNotaCreditoCGuard]},
+          { path: 'listado-nota-credito-compras',component:FormOrdenComponent,canActivate:[NotasCreditoCGuard]},
+          { path: '**',component:ListadoNotaCreditoComponent,canActivate:[NotasCreditoCGuard] }
       ],
-      canActivate:[AuthGuard]
+      canActivate:[AuthGuard,NotasCreditoCGuard]
     },
     { 
       path: 'facturacion', 
@@ -156,7 +241,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
    declarations: [
-    
-  ]
+   
+  ],
+ 
 })
 export class AppRoutingModule { }

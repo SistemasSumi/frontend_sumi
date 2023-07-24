@@ -136,6 +136,7 @@ interface Numeracion {
     desde:             number;
     hasta:             number;
     resolucion:        string;
+    textoResolucion:        string;
     fecha_vencimiento: Date;
     estado:            boolean;
     empresa:           number;

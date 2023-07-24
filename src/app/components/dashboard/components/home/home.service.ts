@@ -115,6 +115,28 @@ getPermisos(user:number){
 }
 
 
+getReportes(){
+  const  url = environment.BACKEND_DIR+'inventario/reporte/RetencionGeneral/';
+  const token = this.auth.currentUser.getTokenUser();
+  this.httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Token '+token
+   })
+  };
+  
+  
+  return this.http.get<any>(url,this.httpOptions).pipe(
+    map(resp => {
+ 
+      console.log(resp);
+     
+      return resp;
+    })
+  )
+
+}
+
+
 getNoticias(){
   const  url = 'https://newsapi.org/v2/top-headlines?country=co&category=health&apiKey=a8817be3eb924028a56f0539c5a81085';
   // const token = this.auth.currentUser.getTokenUser();

@@ -12,12 +12,12 @@ export class CarteraVencidaEnGeneral {
 
     public ReporteCarteraVencidaEnGeneral(data:any){
         let doc = new jsPDF('p', 'pt', 'letter');
-
+        console.log(data)
         let currentPage = 0;
         let startY     = 116;
         let startYText = 128;
-        for(let x of clientes){
-            
+        for(let x of data){
+            console.log(x)
             let facturas = x.facturas;
 
 
@@ -29,7 +29,7 @@ export class CarteraVencidaEnGeneral {
 
             doc.setDrawColor('#000000');
             
-            this.setEncabezadoCliente(doc,startY,startYText,x.nombre,x.formaPago);
+            this.setEncabezadoCliente(doc,startY,startYText,x.cliente,x.formaPago);
 
             startY+=18;
             startYText+=18
@@ -48,7 +48,7 @@ export class CarteraVencidaEnGeneral {
                     startY     = 116;
                     startYText = 128;
                 
-                    this.setEncabezadoCliente(doc,startY,startYText,x.nombre,x.formaPago);
+                    this.setEncabezadoCliente(doc,startY,startYText,x.cliente,x.formaPago);
                     startY+=18;
                     startYText+=18
                     this.setEncabezadoTabla(doc,startY,startYText);
@@ -66,8 +66,8 @@ export class CarteraVencidaEnGeneral {
             doc.setFontSize(8);
             doc.setFont(undefined,'bold');
             doc.text("N° Facturas:",19, finalY+12);
-            doc.text("17", 67, finalY+12);
-            doc.text(this.cp.transform(120000000),402,finalY+12,{align:'right'});
+            doc.text(x.total_facturas+"", 67, finalY+12);
+            doc.text(this.cp.transform(x.saldo),402,finalY+12,{align:'right'});
 
             startY+=56
             startYText+= 56;
@@ -157,6 +157,7 @@ export class CarteraVencidaEnGeneral {
     }
 
     setEncabezadoCliente(doc:jsPDF, startY:number, startYText:number, nombre:string,formaPago:string){
+        console.log(nombre)
         doc.rect(15,startY,581,18);
 
         doc.setFontSize(8);
@@ -210,11 +211,11 @@ export class CarteraVencidaEnGeneral {
         doc.setFontSize(8);
         doc.setFont(undefined,'bold');
 
-        doc.text(factura.noFactura,52.5, startYText,{align:"center"});
+        doc.text(factura.factura,52.5, startYText,{align:"center"});
         doc.text(factura.fecha,125, startYText,{align:"center"});
-        doc.text(factura.vence,195, startYText,{align:"center"});
+        doc.text(factura.fechaVencimiento,195, startYText,{align:"center"});
         doc.text(factura.estado,265, startYText,{align:"center"});
-        doc.text(factura.dias,317.5, startYText,{align:"center"});
+        doc.text(factura.dias+"",317.5, startYText,{align:"center"});
         doc.text(this.cp.transform(factura.saldo),402, startYText,{align:"right"});
 
       

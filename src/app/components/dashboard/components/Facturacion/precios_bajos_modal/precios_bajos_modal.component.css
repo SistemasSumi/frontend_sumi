@@ -1,0 +1,141 @@
+.avatar-noti {
+    
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-color: #41b6ff;
+    transition: all 0.3s ease;
+  }
+  
+  .avatar-noti:hover {
+    transform: scale(1.5); /* Ajusta el factor de escala según tus necesidades */
+    border-color: #41b6ff; /* Cambia el color del borde según tus necesidades */
+  }
+  .table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    /* height: 350px; */
+    white-space: nowrap;
+    table-layout: fixed;
+    max-height: 350px;
+  }
+
+
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  /* border: none; */
+ background:white; 
+  color: #000;
+  z-index:4;
+}
+
+
+
+
+.table-detalle td {
+  border: 0.2px solid rgb(202, 200, 200);
+  padding: 8px;
+}
+
+
+
+.example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+
+.table-scroll tbody,
+.table-scroll tbody th,
+.table-scroll tbody td {
+  height: auto;
+  
+}
+
+
+
+.table-scroll thead,
+.table-scroll thead th,
+.table-scroll thead td {
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  
+    color: #fff;
+    z-index:4;
+
+    color: #fff;
+
+    background-color: #41B6FF; 
+}
+
+
+
+
+.table-footer{
+  border: #41B6FF solid 1px;
+ 
+}
+
+.table-balance{
+  border-collapse: collapse;
+  /* margin-right: 2px;  */
+  margin-top: 2px;
+  font-size: 18px;
+}
+
+
+
+.table-balance th,
+.table-balance td{
+  border: 0.2px solid rgb(202, 200, 200);
+  padding : 8px;
+}
+
+
+.t-total{
+  background-color: rgb(202, 200, 200);
+}
+
+
+.table-footer tr td{
+    min-width: 150px;
+}
+
+
+.table-footer tr .th-title{
+    background-color: #41B6FF;
+    color: white;
+}
+
+.table-container {
+    max-height: 300px; /* Altura máxima del contenedor de la tabla */
+    overflow-y: auto; /* Habilitar desplazamiento vertical */
+    scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
+    scrollbar-color: #f5f5f5 #888; /* Color de la barra de desplazamiento */
+  }
+  
+  .table-container::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    background-color: #f5f5f5; /* Color de fondo de la barra de desplazamiento */
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 4px; /* Borde redondeado del pulgar */
+  }
+  
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color del pulgar de la barra de desplazamiento al pasar el cursor */
+  }

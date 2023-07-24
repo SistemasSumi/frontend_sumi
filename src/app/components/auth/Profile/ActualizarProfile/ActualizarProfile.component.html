@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="row">
+    <div class="col-md-4" style="margin-left: 35%;">
+      <app-InputImageBase (archivoSeleccionado)="user.avatar = $event" [imagen]="user.avatar" [urlDIR]="'perfiles/'+user.username" [tituloFoto]="'FOTO DE PERFIL'"></app-InputImageBase>
+    </div>
+  </div>
+  <div class="row">
+     
+      <div class="col-md-4">
+        <div class="form-group">
+          <mat-form-field appearance="outline" style="width:100%; height: auto;">
+            <mat-label style="font-size: 16px;">Username</mat-label>
+            <input readonly [(ngModel)]="user.username" matInput type="text" id="" />
+          </mat-form-field>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Correo</mat-label>
+          <input  required [(ngModel)]="user.email" matInput type="email" id="" />
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Nombres</mat-label>
+          <input  required [(ngModel)]="user.nombres" matInput type="text" id="" />
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Apellidos</mat-label>
+          <input  required [(ngModel)]="user.apellidos" matInput type="text" id="" />
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+
+      <div class="form-group">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">Genero</mat-label>
+          <mat-select [(ngModel)]="user.genero" style="text-align: center;">
+            <mat-option value="M"> Masculino</mat-option>
+            <mat-option value="F"> Femenino</mat-option>
+            <mat-option value="O"> Otros</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+ 
+
+
+</div>
+<div class="row">
+  <div class="d-flex flex-wrap gap-2">
+   
+    <button (click)="guardar()" style="margin-left: 87%;" type="button" class="btn btn-soft-success"><i class="uil uil-check me-2"></i>Guardar</button>
+    
+</div>
+</div>

@@ -1,0 +1,141 @@
+<div class="main-content">
+
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <div class="mx-n4 mt-n4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-0">
+                        <div class="card-body p-0">
+                            <div class="profile-bg position-relative overflow-hidden">
+                                <div class="bg-overlay bg-dark bg-gradient"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+            </div>  
+            <!-- end row -->
+        </div>
+
+        <div class="row">
+            <div class="col-xl-3">
+                <div class="card mt-n5">
+                    <div class="card-body text-center">
+                     
+                        <div class="mx-auto mb-4">
+                            <img  [src]="this.user.getAvatar()" alt="" class="avatar-xl rounded-circle img-thumbnail">
+                        </div>
+                        <h5 class="mb-1">{{this.user.getNombreCorto()}}</h5>
+                        <p class="text-muted">{{this.user.getEmail()}}</p>
+
+                        <div *ngIf="this.auth.currentUser.is_vendedor">
+                            <i class="mdi mdi-wallet stext-muted font-size-16 align-middle me-1"></i> 
+                            <span class="align-middle">Balance : 
+                                <b class="fw-semibold font-size-16">{{this.auth.balance | currency}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- end card -->
+
+                
+                <!-- end card -->
+
+                
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-9">
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                  <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#informacion" role="tab" aria-selected="true">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">INFORMACIÓN BÁSICA</span> 
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#seguridad" role="tab" aria-selected="false" tabindex="-1">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">SEGURIDAD</span> 
+                                        </a>
+                                    </li>
+                                    <li *ngIf="this.auth.currentUser.is_vendedor" class="nav-item" role="presentation">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ventas" role="tab" aria-selected="false" tabindex="-1">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">VENTAS</span>   
+                                        </a>
+                                    </li>
+                                    
+                                </ul>  
+
+                                <div class="tab-content p-3 text-muted">
+                                  <div class="tab-pane active" id="informacion" role="tabpanel">
+                                      <p class="mb-0">
+                                           <app-ActualizarProfile  [user]="this.user"></app-ActualizarProfile>
+                                      </p>
+                                    </div>
+                                    <div class="tab-pane" id="seguridad" role="tabpanel">
+                                        <p class="mb-0">
+                                            
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane" id="ventas" role="tabpanel">
+                                        <p class="mb-0">
+                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                            sold out mcsweeney's organic lomo retro fanny pack lo-fi
+                                            farm-to-table readymade. Messenger bag gentrify pitchfork
+                                            tattooed craft beer, iphone skateboard locavore carles etsy
+                                            salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                                            Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
+                                            mi whatever gluten-free carles.
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+
+                                   
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+
+                          
+                            <!-- end card -->
+                        </div>
+
+                     
+                    </div><!-- end row -->
+                </div>
+            </div><!-- end col -->
+        </div><!-- end row -->
+        
+    </div>
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  <script>
+                      document.write(new Date().getFullYear())
+                  </script> &copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted by <a href="https://Pichforest.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>

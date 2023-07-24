@@ -1,7 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject } from 'rxjs';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { AcortarTextPipe } from 'src/app/pipes/acortarText.pipe';
@@ -9,6 +10,11 @@ import { DatePipe } from 'src/app/pipes/date.pipe';
 import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { ConfiguracionService } from '../../configuracion/Configuracion.service';
+import { ModelFormasPago } from '../../configuracion/models/ModelFormasPago';
+import { ModelTerceroCompleto } from '../../configuracion/models/ModelTerceroCompleto';
+import { ModelVendedor } from '../../configuracion/models/ModelVendedor';
+import { TablesBasicService } from '../../configuracion/TablesBasic/tablesBasic.service';
 import { FacturacionService } from '../facturacion.service';
 declare var $;
 
@@ -17,21 +23,60 @@ declare var $;
   templateUrl: './ListadoFacturas.component.html',
   styleUrls: ['./ListadoFacturas.component.css']
 })
-export class ListadoFacturasComponent implements OnInit {
+export class ListadoFacturasComponent implements OnInit  {
+  isLoading:boolean = true;
+  busquedaAvanzada:boolean = false;
+
+  contador:number = 0;
+
+  clientes:ModelTerceroCompleto[] = [];
+  vendedores:ModelVendedor[] = [];
+  formasPago:ModelFormasPago[] = [];
+  metodos:MetodosShared = new MetodosShared();
+  public filtroClientes: BehaviorSubject<ModelTerceroCompleto[]>;
 
 
+  filtroAvanzado = {
+    prefijo:null,
+    numero:null,
+    cliente:null,
+    observacion:null,
+    formaPago:null,
+    vendedor:null,
+    valor:null,
+    fechaInicial:null,
+    fechaFinal:null
+  };
+  @ViewChild('dataTableEl') dataTableEl: ElementRef;
 
   facturaAImprimir:any;
-  table:any = $('').DataTable({});
+  table:any = $('#TableFacturas').DataTable({});
   txtbuscarFactura:string;
   // @ViewChild('content') myModal: any;
   @ViewChild('imprimir') imprimir: any;
   modalImprimir: NgbModalRef;
   datetime = new DatetimePipe();
-  constructor(private modalService: NgbModal,private route: ActivatedRoute, private router: Router,private invoceService:FacturacionService, private auth:SeguridadService, private cp:CurrencyPipe) { }
+  constructor(
+    private modalService: NgbModal,
+    private route: ActivatedRoute, 
+    private router: Router,
+    private invoceService:FacturacionService, 
+    private auth:SeguridadService, 
+    private cp:CurrencyPipe,
+    private tables:TablesBasicService,
+    private config:ConfiguracionService) { }
 
   ngOnInit() {
     this.llenarTableFacturas();
+    this.obtenerVendedores();
+    this.obtenerClientes();
+    this.obtenerFormaDepago();
+  }
+
+
+
+  getRange(value: number): number[] {
+    return Array.from({ length: value }, (_, i) => i);
   }
 
   newFactura(){
@@ -39,7 +84,7 @@ export class ListadoFacturasComponent implements OnInit {
   }
 
   updateListado(){
-    this.invoceService.cargarFacturas();
+    this.invoceService.actualizarListadoFacturas();
   }
 
   llenarTable(idtable:string,data,columns,nameButton,cp:CurrencyPipe){
@@ -56,6 +101,7 @@ export class ListadoFacturasComponent implements OnInit {
     this.table =  $('#Table'+idtable).DataTable({
       retrieve: true,
       responsive: true,
+      scrollX: false,
       autoWidth: true,
       pageLength: 5,   
       lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
@@ -63,25 +109,17 @@ export class ListadoFacturasComponent implements OnInit {
       data:data,
       columns:columns,
       columnDefs:[
-          // { responsivePriority: 1, targets: 0 },
-          // { responsivePriority: 2, targets: 1 },
-          // { responsivePriority: 3, targets: -1 },
-          // { responsivePriority: 4, targets: 2 },
-          // { responsivePriority: 5, targets: -3 },
-          // { responsivePriority: 6, targets: 3 },
-          // { responsivePriority: 7, targets: 4},
-          // { responsivePriority: 8, targets: 5},
-          // { responsivePriority: 9, targets: 6},
-          // { responsivePriority: 10, targets: 7},
-          // { responsivePriority: 11, targets: 8},
-          // { responsivePriority: 12, targets: 9},
-          // { responsivePriority: 12, targets: 11},
+         
           
           { responsivePriority: 1, targets: 0 },
           { responsivePriority: 2, targets: 1 },
           { responsivePriority: 3, targets: -1 },
           { responsivePriority: 4, targets: -3 },
           { responsivePriority: 5, targets: 2 },
+          { responsivePriority: 6, targets: 5 },
+          { responsivePriority: 7, targets: 3 },
+          { responsivePriority: 8, targets: 6 },
+          { responsivePriority: 9, targets: 8 },
           
           // { "white-space": "nowrap", "targets": 1 },
           // { "width": "100%", "targets": 1 },
@@ -101,8 +139,9 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[1],
-            class:'text-center',
+            class:'text-center text-nowrap',
             orderable: true,
+      
             render: function(data,type,row){
               let result = '';
               
@@ -110,7 +149,7 @@ export class ListadoFacturasComponent implements OnInit {
                 if(row.enviadaDian){
                   result = `<span style="color:green;">`+data+`</span>`;
                 }else{
-                  result = `<span style="color:red;">`+data+`</span>`;
+                  result = `<span style="color:red;" class="fw-bold fade-out">`+data+`</span>`;
                 }
               }else{
                 result = data
@@ -121,18 +160,18 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[2],
-   
+            class:'fw-semibold',
             orderable: true,
             render: function(data,type,row){
-                let cortar = new AcortarTextPipe()
+                // let cortar = new AcortarTextPipe()
                  
-                return cortar.transform(data, "45");
+                return data;
             }
           },
       
           {
             targets:[3],
-            
+            class: 'text-nowrap',
             orderable: true,
             render: function(data,type,row){
                
@@ -141,7 +180,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[4],
-          
+            class: 'text-nowrap',
             orderable: true,
             render: function(data,type,row){
               let datetime = new DatePipe();
@@ -151,7 +190,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[5],
-            class:'text-center',
+            class:'text-center text-nowrap',
             render: function(data,type,row){
               if(data){
                 // fas fa-truck-moving 
@@ -159,13 +198,13 @@ export class ListadoFacturasComponent implements OnInit {
           
               }else{
 
-                return ` <i class="fas fa-ban text-danger" style="font-size: 22px;"></i>`
+                return ` <i class="fas fa-ban text-danger pulse rotate" style="font-size: 22px;"></i>`
               }
             }
           },
           {
             targets:[6],
-        
+            class:'text-end text-nowrap  fw-semibold',
             orderable: true,
             render: function(data,type,row){
                 let iva = cp.transform(data);
@@ -174,7 +213,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[7],
-        
+            class:'text-end text-nowrap  fw-semibold',
             orderable: true,
             render: function(data,type,row){
                 let iva = cp.transform(data);
@@ -183,7 +222,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[8],
-        
+            class:'text-end text-nowrap  fw-semibold',
             orderable: true,
             render: function(data,type,row){
                 let iva = cp.transform(data);
@@ -192,7 +231,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[9],
-         
+            class:'text-end text-nowrap  fw-semibold',
             orderable: true,
             render: function(data,type,row){
               let total = cp.transform(data);
@@ -201,7 +240,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[10],
-        
+            class:'text-end text-nowrap  fw-semibold',
             orderable: true,
             render: function(data,type,row){
                 
@@ -211,7 +250,7 @@ export class ListadoFacturasComponent implements OnInit {
           },
           {
             targets:[11],
-        
+            class: 'text-nowrap',
             orderable: true,
             render: function(data,type,row){
                 
@@ -274,6 +313,7 @@ export class ListadoFacturasComponent implements OnInit {
               }
           },
       ],
+      
       rowCallback: (row: Node, data: any, index: number) => {
         const self = this;
         // Unbind first in order to avoid any duplicate handler
@@ -349,13 +389,21 @@ export class ListadoFacturasComponent implements OnInit {
           
         });
         return row;
-      }
+      },
+      
     });
+   
+    
+
+   
   }
 
 
   llenarTableFacturas(){
+   
     return this.invoceService.SubjectdataFacturas.subscribe(resp => {
+      
+      
       this.llenarTable(
         "Facturas",
         resp,
@@ -379,8 +427,9 @@ export class ListadoFacturasComponent implements OnInit {
 
         this.table.columns.adjust();
         $('#TableFacturas_filter').html(``);
-       
         
+   
+       
         
     });
     
@@ -515,4 +564,70 @@ export class ListadoFacturasComponent implements OnInit {
    
     this.invoceService.cargarFacturas();
   }
+
+  obtenerFormaDepago(){
+    this.tables.SubjectdataFP.subscribe(resp => {
+      this.formasPago = resp;
+    });
+  }
+
+
+  obtenerVendedores(){
+    this.config.SubjectdataVendedores.subscribe(resp => {
+      this.vendedores = resp;
+  
+    });
+  }
+
+  obtenerClientes(){
+    this.config.SubjectdataCliente.subscribe(resp => {
+      this.clientes = resp;
+      this.filtroClientes = new BehaviorSubject<ModelTerceroCompleto[]>(this.clientes);
+    });
+  }
+
+ 
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.clientes,'nombreComercial',busqueda);
+    this.filtroClientes.next(filtro);
+  }
+
+  
+  BusquedaAvanzada(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Buscando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.invoceService.busquedaAvanzada(this.filtroAvanzado).subscribe(
+      () => {
+        Swal.close();
+      },
+      (error) => {
+        // Manejar el error aquí
+        
+        console.error(error);
+        Swal.close();
+        // Mostrar mensaje de error, realizar acciones adicionales, etc.
+      }
+    );
+  }
+
+  
+  limpiarFiltro(){
+    this. filtroAvanzado = {
+      prefijo:null,
+      numero:null,
+      cliente:null,
+      observacion:null,
+      formaPago:null,
+      vendedor:null,
+      valor:null,
+      fechaInicial:null,
+      fechaFinal:null
+    };
+  }
+
 }

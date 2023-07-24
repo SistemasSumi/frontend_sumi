@@ -1,0 +1,15 @@
+thead {
+    background-color: var(--color-primario);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+th {
+    border: none;
+}
+
+
+.center-table {
+    display: flex;
+    justify-content: center;
+  }

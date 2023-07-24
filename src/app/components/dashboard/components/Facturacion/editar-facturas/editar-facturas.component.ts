@@ -194,6 +194,12 @@ export class EditarFacturasComponent implements OnInit {
     });
   }
 
+  obtenerTodos(){
+    this.config.SubjectdataCliente.subscribe(resp => {
+      this.clientes = resp;
+      this.filtroClientes = new BehaviorSubject<ModelTerceroCompleto[]>(this.clientes);
+    });
+  }
   obtenerClientesPos(){
     this.config.SubjectdataClientePos.subscribe(resp => {
       this.clientes = resp;
@@ -253,14 +259,8 @@ export class EditarFacturasComponent implements OnInit {
   }
   
   seleccionarTercero(data:ModelTerceroCompleto){
-    
     this.clienteSeleccionado = data;
-    this.listadoDetalleFactura = [];
     this.calcularTotales(this.listadoDetalleFactura);
-
-
-    console.log(data.listaPrecios);
-    
     this.formfacturacion.get('formaPago').setValue(data.formaPago.id); 
     // this.formfacturacion.get('vendedor').setValue(data.vendedor.id); 
   }
@@ -787,7 +787,7 @@ export class EditarFacturasComponent implements OnInit {
         this.obtenerClientesPos();
         this.domicilio = true;
       }else{
-
+        this.obtenerTodos()
       }
 
       this.formfacturacion.get('id').setValue(this.facturaSeleccionada.id);

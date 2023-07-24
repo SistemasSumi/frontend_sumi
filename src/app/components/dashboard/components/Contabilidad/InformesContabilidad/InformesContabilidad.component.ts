@@ -3,6 +3,8 @@ import Swal from 'sweetalert2';
 import { BalanceDePruebaPDF } from '../../../reportes/reportesContabilidad/balanceDePrueba';
 import { LibroAuxiliarReporte } from '../../../reportes/reportesContabilidad/libroAuxiliarReporte';
 import { InformesContabilidadService } from './InformesContabilidad.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-InformesContabilidad',
@@ -19,8 +21,12 @@ export class InformesContabilidadComponent implements OnInit {
   }
 
   fechaInicialBalancePrueba;
-  fechaFinalalBalancePrueba;
+  fechaFinalBalancePrueba;
 
+  fechaInicialEstadoFinanciero;
+  fechaFinalEstadoFinanciero;
+
+  
   imprimirBalance(){
 
     Swal.fire({
@@ -30,7 +36,11 @@ export class InformesContabilidadComponent implements OnInit {
           text:'Espere por favor..'
         });
     Swal.showLoading()
-    this.informeService.getBalancePrueba().subscribe(resp => {
+    this.informeService.getBalancePrueba(
+      moment(this.fechaInicialBalancePrueba).format("YYYY-MM-DD"),
+      moment(this.fechaFinalBalancePrueba).format("YYYY-MM-DD")
+
+    ).subscribe(resp => {
       Swal.close();
       console.log(resp)
       let reporte = new BalanceDePruebaPDF();
@@ -42,10 +52,26 @@ export class InformesContabilidadComponent implements OnInit {
   }
 
   imprimirEstadoFinanciero(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'CONSULTANDO..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading()
+    this.informeService.getEstadoFinanciero(
+      moment(this.fechaInicialEstadoFinanciero).format("YYYY-MM-DD"),
+      moment(this.fechaFinalEstadoFinanciero).format("YYYY-MM-DD")
+
+    ).subscribe(resp => {
+      Swal.close();
+      console.log(resp)
       let reporte = new BalanceDePruebaPDF();
-      console.log("hola")
-      let report = reporte.GenerarEstadoFinanciero();
+
+      let report = reporte.GenerarEstadoFinanciero(resp);
       window.open(report.output('bloburl'), '_blank')
+
+    });
   }
 
 }

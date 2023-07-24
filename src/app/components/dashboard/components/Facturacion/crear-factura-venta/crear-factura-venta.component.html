@@ -27,7 +27,21 @@
               <div class="card">
                   <div class="card-body">
                       <div class="invoice-title">
-                          <!-- <h4 class="float-end font-size-15">Invoice #DS0204 </h4> -->
+                      
+                            <div class="float-end">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle btn btn-warning btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><span style="color:white">Procesos<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                    </a>
+
+                                    <div class="dropdown-menu" style="position: absolute; inset: auto 0px 0px auto; margin: 0px; transform: translate(0px, -32px);" data-popper-placement="top-end">
+                                        <a class="dropdown-item" href="javascript:;" (click)="facturarFacturaAprobada()"> <i class="fas fa-dollar-sign   text-primary"></i> Precios bajos</a>
+                                        <a class="dropdown-item" href="javascript:;" (click)="facturarProforma()"> <i class="fas fa-cash-register   text-primary"></i> Proformas</a>
+                                        <a class="dropdown-item" href="javascript:;" (click)="facturarProforma()"> <i class="fas fa-circle-dollar-to-slot   text-primary"></i> Cotizaciones</a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                          
                           <div class="mb-4">
                               <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
                           </div>
@@ -56,7 +70,7 @@
                                 <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                     <mat-label style="font-size: 16px;">Numeración</mat-label>
                                     <mat-select formControlName="numeracion" required  style="text-align: center;">
-                                        <mat-option *ngFor="let data of numeraciones " [value]="data.id" (click)="changeNumeracion(data)">
+                                        <mat-option   [matTooltip]="data.nombre"  *ngFor="let data of numeraciones " [value]="data.id" (click)="changeNumeracion(data)">
                                             {{data.numero}}
                                         </mat-option>
                                     </mat-select>
@@ -151,10 +165,10 @@
                       </div>
                       
                       <div class="py-2">
-                          <h5 class="font-size-15">Detalle de la venta </h5>
+                      
 
-                          <div class="table-responsive">
-                              <table class="table table-responsive align-middle table-normal table-centered mb-0">
+                          <div class="table-scroll">
+                              <table style="border-collapse: collapse;" class="table table-responsive align-middle table-normal table-centered mb-0 table-detalle">
                                   <thead>
                                       <tr>
                                           <th width="auto" class="text-center">COD.</th>
@@ -193,44 +207,64 @@
                                           <td class="text-end">{{item.total | currency}}</td>
                                       </tr>
                                     
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="text-end">Subtotal:</th>
-                                          <td class="text-end">{{this.subtotalFactura | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              Descuento :</th>
-                                          <td class="border-0 text-end" style="color: red;">- {{this.descuentoFactura | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              IVA :</th>
-                                          <td class="border-0 text-end">{{this.ivaFactura | currency}}</td>
-                                         
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              Retención:</th>
-                                          <td class="border-0 text-end" style="color: red;">- {{this.retencionFactura | currency}}</td>
-                                      </tr>
-                                      <tr *ngIf="domicilio">
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              Domicilio:</th>
-                                          <td class="border-0 text-end" style="color: green;">+ {{this.domicilioFactura | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">Total:</th>
-                                          <td class="border-0 text-end"><h4 class="m-0 fw-semibold">{{this.totalFactura + this.domicilioFactura | currency}}</h4></td>
-                                      </tr>
+                                   
                                       <!-- end tr -->
                                   </tbody><!-- end tbody -->
                               </table><!-- end table -->
                           </div><!-- end table responsive -->
+                         
+                          <div class="table-footer">
+
+                            <table   class="float-end table-balance">
+                               
+                                <tr>
+                                    <th class="th-title text-end" scope="row" colspan="8" >Subtotal :</th>
+                                    <td class=" text-end" [appAnimatedPrice]="subtotalFactura">  {{subtotalFactura   | currency}}</td>
+                                   
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="8" class="th-title text-end">
+                                        Descuento :</th>
+                                    <td class=" text-end text-danger" [appAnimatedPrice]="descuentoFactura">  - {{descuentoFactura   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="8" class="th-title text-end">
+                                    IVA :</th>
+                                    <td class="text-end" [appAnimatedPrice]="ivaFactura">  + {{ivaFactura   | currency}}</td>
+                                    
+                                    
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="8" class="th-title text-end">
+                                        Retención :</th>
+                                    <td class="text-end text-danger" [appAnimatedPrice]="retencionFactura">  - {{retencionFactura   | currency}}</td>
+                                    
+                                    
+                                </tr>
+                                <tr *ngIf="domicilio">
+                                    <th scope="row" colspan="8" class="th-title text-end">
+                                        Domicilio:</th>
+                                    <td class="text-end" style="color: green;">+ {{this.domicilioFactura | currency}}</td>
+                                </tr>
+                                <!-- end tr -->
+                            
+                                <!-- end tr -->
+                                <tr #tablaRef style="font-size: 20px; text-transform: uppercase;">
+                                    <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h4>Total </h4></th>
+                                    <td  class="t-total border-0  text-end "><h4 [appAnimatedPrice]="this.totalFactura + this.domicilioFactura" class="fw-semibold">  {{this.totalFactura + this.domicilioFactura   | currency}}</h4></td>
+                                   
+                                    
+                                </tr>
+                            </table>
+
+                           
+                        </div>
+                        <div style="clear: both;"></div>
+                        <hr>    
                           <div class="d-print-none mt-4">
                               <div class="float-end">
                                   <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a> 
@@ -289,8 +323,8 @@
                                       <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                   </ngx-mat-select-search>
                               </mat-option>
-                              <mat-option *ngFor="let data of filtroProductos | async" [value]="data" (click)="seleccionarProducto(data)">
-                                  {{data.nombreymarcaunico}}
+                              <mat-option [tooltipProducto]="data" *ngFor="let data of filtroProductos | async" [value]="data" (click)="seleccionarProducto(data)">
+                                {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
                               </mat-option>
 
                            
@@ -327,8 +361,12 @@
                <div class="form-group">
                 <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center;">
                   <mat-label style="font-size: 16px;">Lote</mat-label>
-                  <mat-select required [(ngModel)]="inventario"  style="text-align: center;">
-                    <mat-option *ngFor="let item of inventarioProducto" [value]="item.id" (click)="seleccionarInventario(item)">{{item.lote}}</mat-option>
+                  <mat-select required [(ngModel)]="inventario"  style="text-align: center;" (ngModelChange)="seleccionarInventario($event)">
+                    <ng-container *ngFor="let item of inventarioProducto">
+                        <mat-option *ngIf="obtenerExistencias(item) > 0" [value]="item"  [disabled]="!item.estado">
+                            {{ item.lote }}
+                        </mat-option>
+                    </ng-container>
                   </mat-select>
                 </mat-form-field>
                </div>
@@ -398,6 +436,7 @@
   </div>
 </ng-template>
 
+<div id="toast-icon-container"></div>
 
 
 

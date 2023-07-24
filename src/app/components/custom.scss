@@ -30,6 +30,10 @@ $my-theme-dark: mat-dark-theme(( color: ( primary: $my-palette-primary, accent: 
     color: #41B6FF;
 }
 
+.text-black{
+  color:#000000
+}
+
 .btn-primary{
     background-color: #41B6FF;
     color: white;

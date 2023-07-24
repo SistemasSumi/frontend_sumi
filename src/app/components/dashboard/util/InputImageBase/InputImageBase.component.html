@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <ng-container *ngIf="!urlImage">
+
+      <!-- animated -->
+      <div class="col-md-12 mb-4">
+       
+        <div class="profilepic">
+            <img class="profilepic__image well drop-zone avatar-xl rounded-circle img-thumbnail" src="./assets/theme/img/input-file.png"  matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()"   alt="Profibild" />
+            <div class="profilepic__content" (click)="fileInput.click()">
+              <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+              <span class="profilepic__text">SUBIR FOTO</span>
+            </div>
+            <input type="file" hidden #fileInput (change)="onFileSelected($event)"  accept=".jpeg,.png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br>
+        </div>
+      
+        <!-- <div class="row justify-content-center">
+            <img  src="./assets/theme/img/input-file.png"  matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()"  class="well drop-zone avatar-xl rounded-circle img-thumbnail"> -->
+
+              <!-- <img src="" class="well drop-zone" alt="foto" matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()" style="width: 170px; height: 200px"> -->
+              <!-- <div class="progess">
+                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) +'%'">
+
+                  </div>
+              </div> -->
+
+          <!-- </div> -->
+
+
+      </div>
+      <br>
+      <div class="col-md-12">
+          <div class="row text-center">
+              <!-- animated -->
+             
+
+          </div>
+
+
+      </div>
+
+
+
+  </ng-container>
+
+  <ng-container *ngIf="urlImage">
+      <div class="col-md-12 mb-4">
+        <div class="profilepic text-center">
+            <img class="profilepic__image well drop-zone avatar-xl rounded-circle img-thumbnail" [src]="urlImage"  matTooltip="{{obtenerTooltipFoto()}}" matTooltipPosition="below" (click)="fileInput.click()"   alt="Profibild" />
+            <div class="profilepic__content" (click)="fileInput.click()">
+              <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+              <span class="profilepic__text">SUBIR FOTO</span>
+            </div>
+            <input type="file" hidden #fileInput (change)="onFileSelected($event)"  accept=".jpeg,.png,.jpg,jpeg,.xlsx,.pdf,.docx" /> <br>
+        </div>
+      </div>
+     
+  </ng-container>
+
+</div>
+<input #imageUser type="text" id="imageUser" style="display: none;">
