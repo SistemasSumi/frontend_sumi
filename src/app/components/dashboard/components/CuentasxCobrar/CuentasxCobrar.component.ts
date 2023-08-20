@@ -99,21 +99,15 @@ export class CuentasxCobrarComponent implements OnInit {
       data:data,
       columns:columns,
       columnDefs:[
-          { responsivePriority: 1, targets: 0 },
-          { responsivePriority: 2, targets: 1 },
-          { responsivePriority: 4, targets: 2 },
-          { responsivePriority: 5, targets: -3 },
-          { responsivePriority: 3, targets: -1 },
-          { responsivePriority: 6, targets: 3},
-          { responsivePriority: 7, targets: 4},
-          { responsivePriority: 8, targets: 5},
-          { responsivePriority: 9, targets: 6},
-          { responsivePriority: 10, targets: 7},
-          { responsivePriority: 11, targets: 8},
-          { responsivePriority: 12, targets: 9},
-          { responsivePriority: 13, targets: 10},
-          { responsivePriority: 14, targets: 11},
-          
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2, targets: 1 },
+        { responsivePriority: 3, targets: -1 },
+        { responsivePriority: 4, targets: 2 },
+        { responsivePriority: 5, targets: -3 },
+        { responsivePriority: 6, targets: 6},
+        { responsivePriority: 7, targets: 12},
+        { responsivePriority: 8, targets: 11},
+        { responsivePriority: 9, targets: 13},
        
           { "width": "80%", "targets": 2 },
         
@@ -257,6 +251,15 @@ export class CuentasxCobrarComponent implements OnInit {
             }
           },
           {
+            targets:[13],
+        
+            orderable: true,
+            render: function(data,type,row){
+              let saldo = cp.transform(row.valorTotal - row.valorAbono);
+                return saldo;
+            }
+          },
+          {
               targets:[-1],
               class:'text-center',
               orderable: false,
@@ -264,10 +267,10 @@ export class CuentasxCobrarComponent implements OnInit {
                   
                   let notaCredito = '';
                   let notaDebito = '';
-                  if(row.notaCredito){
+                  if(row.notacredito){
                     notaCredito = `<a class="dropdown-item"  href="javascript:;" id="notaCredito"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i> Nota crédito</a>`
                   }
-                  if(row.notaDebito){
+                  if(row.notadebito){
                     notaDebito = `<a class="dropdown-item"  href="javascript:;" id="notaDebito"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i> Nota débito</a>`
                   }
 
@@ -451,6 +454,7 @@ export class CuentasxCobrarComponent implements OnInit {
         {"data":"reteFuente"},
         
         {"data":"valorTotal"},
+        {"data":"valorAbono"},
         {"data":"valorAbono"},
         {"data":"valorAbono"},
     

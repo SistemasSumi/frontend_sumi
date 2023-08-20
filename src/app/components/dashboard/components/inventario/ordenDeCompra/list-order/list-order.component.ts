@@ -362,7 +362,7 @@ export class ListOrderComponent implements OnInit {
         $('#previewIngreso', row).off('click');
         $('#previewIngreso', row).on('click', () => {
           // this.router.navigateByUrl('terceros/'+data.id) 
-          this.router.navigateByUrl("purchaseOrder/inventoryEntryPreview/"+data.id);
+          this.router.navigateByUrl("purchaseOrder/inventoryEntryPreview/"+data.numero);
           
         });
 

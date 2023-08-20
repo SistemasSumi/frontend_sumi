@@ -1,3 +1,63 @@
-<div class="row">
-  <p-divider [text]="'LISTADO DE EMPLEADOS'" [align]="''"></p-divider>
+<div class="page">
+
+  <div class="row">
+    <p-divider [text]="'LISTADO DE EMPLEADOS'" [align]="''"></p-divider>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+
+        <table id="TableEmpleados" style="width:100%" class="table  table-striped table-bordered">
+                <thead>
+                    <tr>
+                      <th class="text-nowrap"></th>
+                      <th class="text-nowrap">FOTO</th>
+                      <th class="text-nowrap">NOMBRES</th>
+                      <th class="text-nowrap">APELLIDOS</th>
+                      <th class="text-nowrap">DOCUMENTO</th>
+                      <th class="text-nowrap">FECHA NACIMIENTO</th>
+                      <th class="text-nowrap">CORREO</th>
+                      <th class="text-nowrap">TELÉFONO</th>
+                      <th class="text-nowrap">DIRECCIÓN</th>
+                      <th class="text-nowrap">CARGO</th>
+                      <th class="text-nowrap">FORMA DE PAGO</th>
+                      <th class="text-nowrap">BANCO</th>
+                      <th class="text-nowrap">N° CUENTA</th>
+                      <th class="text-nowrap">SALARIO BASE</th>
+                      <th class="text-nowrap">EPS</th>
+                      <th class="text-nowrap">ARL</th>
+                      <th class="text-nowrap">FONDO PENSIÓN</th>
+                      <th class="text-nowrap">FONDO CESANTÍAS</th>
+                      <th class="text-nowrap">CAJA COMPENSACIÓN</th>
+                      <th class="text-nowrap">RIESGO</th>
+                      <th class="text-nowrap">TIPO TRABAJADOR</th>
+                      <th class="text-nowrap">FECHA INICIO CONTRATO</th>
+                      <th class="text-nowrap">FECHA FINAL CONTRATO</th>
+                      <th class="text-nowrap">TIPO CONTRATO</th>
+                      <th class="text-nowrap">N° CONTRATO</th>
+                        <th style="width: 8%;">
+                            <a type="button" class="btn position-relative" style="padding: 0; color: #fff; font-size: 16px; font-weight: bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search"></i>
+                            </a>
+                            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu">
+                                <div class="input-group">
+                                    <input type="search" placeholder="Buscar " aria-describedby="button-addon1" class="form-control border-0 bg-light" >
+                                    <div class="input-group-append">
+                                        <a id="button-addon1" type="button" class="btn btn-link text-primary"><i class="fa fa-search color-primary"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+  
+                </tbody>
+        </table>
+      </div>
+    </div>
+     
+  </div>
 </div>
+

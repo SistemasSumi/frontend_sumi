@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { DbService } from '../db.service';
-import { cobrosPermisos, contabilidadPermisos, empleadosPermisos, facturacionPermisos, inventarioPermisos, pagosPermisos, PermisosUsuario } from '../permisosUsuario';
+import { cobrosPermisos, contabilidadPermisos, empleadosPermisos, facturacionPermisos, informesPermisos, inventarioPermisos, pagosPermisos, PermisosUsuario, settingsPermisos } from '../permisosUsuario';
 import { SeguridadService } from '../seguridad.service';
 
 @Component({
@@ -24,6 +24,8 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
   cobros      : cobrosPermisos;
   pagos       : pagosPermisos;
   empleados   : empleadosPermisos;
+  settings    : settingsPermisos;
+  informes    : informesPermisos
 
 
 
@@ -71,6 +73,36 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
 
   initPermisosDefault(){
 
+
+    this.settings = {
+      crearUser             : false,
+      verUser               : false,
+    }
+
+    this.informes = {
+      inv_inventario         : false,
+      inv_inventarioVencido  : false,
+      oc_comprasDetalladas   : false,
+      oc_rotacionProductos   : false,
+      oc_retenciones         : false,
+      fac_rotacionProductos  : false,
+      fac_ventasDetalladas   : false,
+      fac_ventasXVendedor    : false,
+      fac_retenciones        : false,
+      conta_balancePrueba    : false,
+      conta_EstadoFinanciero : false,
+      conta_EstadoResultado  : false,
+      conta_libroAux         : false,
+      conta_cxc              : false,
+      conta_cxp              : false,
+      conta_abonosRecibidos  : false,
+      cliente_estadoCartera  : false,
+      cliente_carteraVencida : false,
+      cliente_listado        : false,
+      proveedor_estadoCartera: false,
+      proveedor_listado      : false,
+    }
+
     this.contabilidad = {
       puc                  : false,
       comprobantesContables: false,
@@ -88,6 +120,8 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
       proforma    : false,
       notaDebitoV : false,
       notaCreditoV: false,
+      darDeAltaFactura:false,
+      firmarFactura:false,
 
     }
 
@@ -103,26 +137,27 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
       ajuste           : false,
       consumo          : false,
       kardex           : false,
-  } 
-  this.pagos = {
-      cxp    : false,
-      egresos: false,
-      crear  : false,   
-  } 
-  this.cobros = {
-      cxc    : false,
-      ingreso: false,
-      crear  : false,   
-  } 
-  this.empleados = {
-      crear  : false,
-      listado: false,
-    
-  } 
+    } 
+    this.pagos = {
+        cxp    : false,
+        egresos: false,
+        crear  : false,   
+        pagos:false,
+    } 
+    this.cobros = {
+        cxc    : false,
+        ingreso: false,
+        crear  : false,   
+    } 
+    this.empleados = {
+        crear  : false,
+        listado: false,
+      
+    } 
 
 
 
-    let permisos = {
+    let permisos:PermisosUsuario = {
       superusuario:false,
       wtablas:false,
       contabilidad:this.contabilidad,
@@ -130,7 +165,9 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
       inventario:this.inventario,
       pagos:this.pagos,
       cobros:this.cobros,
-      empleados:this.empleados
+      empleados:this.empleados,
+      informes:this.informes,
+      settings:this.settings,
 
     }
 

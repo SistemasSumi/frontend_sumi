@@ -1,6 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -15,6 +16,8 @@ import { ModelTerceroCompleto } from '../configuracion/models/ModelTerceroComple
 import { ModelPuc } from '../Contabilidad/models/ModelPuc';
 import { PucService } from '../Contabilidad/puc/puc.service';
 import { FacturacionService } from '../Facturacion/facturacion.service';
+import { ModalPreviewFacturaComponent } from '../Facturacion/previewFacturas/ModalPreviewFactura/ModalPreviewFactura.component';
+import { PreviewFacturasComponent } from '../Facturacion/previewFacturas/previewFacturas.component';
 import { StockService } from '../inventario/stock/stock.service';
 
 @Component({
@@ -77,7 +80,7 @@ export class CIComponent implements OnInit {
 
   @ViewChild('InputSaldoAFavor') InputSaldoAFavor: ElementRef;
 
-  constructor(private toastr:ToastrService,private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private cxc:FacturacionService) { }
+  constructor(private router:Router,private toastr:ToastrService,private auth:SeguridadService,private modalService  : NgbModal,private puc:PucService,private config:ConfiguracionService, private cxc:FacturacionService) { }
 
   ngOnInit() {
     this.puc.getEfectivo().subscribe(resp => {
@@ -301,6 +304,8 @@ export class CIComponent implements OnInit {
         for(let x of resp.facturas){
           console.log(x)
           let d:detalle = {
+            idfactura:x.cxc.id,
+            isElectronica:x.cxc.isElectronica,
             cxc: x.id,
             factura:x.factura,
             fecha:x.fecha,
@@ -327,7 +332,7 @@ export class CIComponent implements OnInit {
           this.totalAbono       += d.valorAbono
           this.totalDescuento   += d.descuento
           this.totalSaldoAFavor += d.saldoFavor
-          this.totalSaldo       += d.valorFactura-d.valorAbono
+          this.totalSaldo       += d.saldo
 
 
           console.log(d)
@@ -336,11 +341,16 @@ export class CIComponent implements OnInit {
         
       }
       this.saldoAFavor = resp.afavor.saldoAFavor;
-      this.InputSaldoAFavor.nativeElement.focus();
       console.log(resp);
     });
   }
 
+
+
+  imprimirFactura(factura:detalle){
+    const modalRef: NgbModalRef = this.modalService.open(ModalPreviewFacturaComponent,{ size: 'xl',centered: true });
+    modalRef.componentInstance.id = factura.idfactura; // Pasa el valor de idFactura al componente del modal
+  }
 
   obtenerClientes(){
     this.config.SubjectdataCliente.subscribe(resp => {
@@ -364,16 +374,8 @@ export class CIComponent implements OnInit {
 
   openModalADDAbono(content,fila) {
     this.filaAEditar = fila;
-    this.dTotalAbono = this.detalle[this.filaAEditar].valorFactura;
+    this.dTotalAbono = this.detalle[this.filaAEditar].saldo;
 
-    // let d = this.detalle[this.filaAEditar];
-    // let descuentos = this.terceroSeleccionado.descuentoProveedor;
-    // let dias = new MetodosShared().DiasEntreFechaActualYOTRA(d.vence);
-    
-    // this.dTotalDescuento = this.calcularDescuento(descuentos[0],dias);
-    // if(this.dTotalDescuento > 0){
-    //   this.descuentoPorcentaje = true;
-    // }
 
 		this.modalAbono = this.modalService.open(content, { size: 'xs',centered: true });
   }
@@ -521,6 +523,8 @@ interface cuentas {
 
 
 interface detalle {
+  idfactura: string;
+  isElectronica:boolean;
   cxc           : string;
   factura       : string;
   fecha         : string;

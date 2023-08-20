@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
+import { PermisosUsuario } from 'src/app/components/auth/permisosUsuario';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { AcortarTextPipe } from 'src/app/pipes/acortarText.pipe';
@@ -24,6 +25,8 @@ declare var $;
   styleUrls: ['./ListadoFacturas.component.css']
 })
 export class ListadoFacturasComponent implements OnInit  {
+  permisos:PermisosUsuario;
+
   isLoading:boolean = true;
   busquedaAvanzada:boolean = false;
 
@@ -67,6 +70,7 @@ export class ListadoFacturasComponent implements OnInit  {
     private config:ConfiguracionService) { }
 
   ngOnInit() {
+    this.permisos = this.auth.currentUser.getPermisos()
     this.llenarTableFacturas();
     this.obtenerVendedores();
     this.obtenerClientes();
@@ -437,106 +441,128 @@ export class ListadoFacturasComponent implements OnInit  {
 
 
   Despachar(numero:string){
-    new MetodosShared().AlertQuestion(' ¿ ESTA SEGURO ?').then((result) => {
-      if (result.isConfirmed) {
 
-
-         
-        Swal.fire({
-          allowOutsideClick: false,
-          icon: 'info',
-          title: 'Guardando..',
-          text:'Espere por favor..'
-        });
-        Swal.showLoading();
-
-        this.invoceService.Despachos(numero).subscribe((resp:any) => {
-          
-          Swal.close();
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Sarp Soft',
-            text: 'Factura actualizada con exito'
-          });
-         
-          this.resetTable();
-
-
-
-          
-
-        },(ex) => {
-          console.log(ex);
-          Swal.close();
-          
-          let errores ='';
-          for(let x in ex.error){
-            for(let j of ex.error[x]){
-              errores +=`
-              <div class="alert alert-danger" role="alert" style="text-align: justify;">
-                ${j}
-              </div>
-              `
-            }
+    if(this.permisos){
+      if(this.permisos.facturacion.despachos || this.permisos.superusuario){
+        new MetodosShared().AlertQuestion(' ¿ ESTA SEGURO ?').then((result) => {
+          if (result.isConfirmed) {
+    
+    
+             
+            Swal.fire({
+              allowOutsideClick: false,
+              icon: 'info',
+              title: 'Guardando..',
+              text:'Espere por favor..'
+            });
+            Swal.showLoading();
+    
+            this.invoceService.Despachos(numero).subscribe((resp:any) => {
+              
+              Swal.close();
+    
+              Swal.fire({
+                icon: 'success',
+                title: 'Sarp Soft',
+                text: 'Factura actualizada con exito'
+              });
+             
+              this.resetTable();
+    
+    
+    
+              
+    
+            },(ex) => {
+              console.log(ex);
+              Swal.close();
+              
+              let errores ='';
+              for(let x in ex.error){
+                for(let j of ex.error[x]){
+                  errores +=`
+                  <div class="alert alert-danger" role="alert" style="text-align: justify;">
+                    ${j}
+                  </div>
+                  `
+                }
+                
+              }
+              Swal.fire({
+                icon: 'error',
+                title: 'Error al guardar.',
+                html:errores,
+                confirmButtonColor: '#4acf50',
             
-          }
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al guardar.',
-            html:errores,
-            confirmButtonColor: '#4acf50',
-        
-          });
-        
+              });
+            
+            });
+          } 
         });
-      } 
-    });
+      }else{
+        this.metodos.AlertDenegado('NO TIENE LOS PERMISOS ADECUADOS');
+        return false;
+    
+      }
+  
+    }
+
+    
   }
   
 
 
   FirmarFactura(numero:string){
-    new MetodosShared().AlertQuestion('ESTA SEGURO DE ENVIAR ESTA FACTURA A LA DIAN ?').then((result) => {
-      if (result.isConfirmed) {
-
-
-         
-        Swal.fire({
-          allowOutsideClick: false,
-          icon: 'info',
-          title: 'ENVIANDO..',
-          text:'Espere por favor..'
-        });
-        Swal.showLoading();
-
-        this.invoceService.FirmarInvoce(numero).subscribe((resp:any) => {
-          
-          Swal.close();
-
-
-          new MetodosShared().AlertOK('FACTURA FIRMADA CON ÉXITO!');
-         
-         
-          this.resetTable();
-
-
-          
-
-        },(ex) => {
-          console.log(ex);
-          Swal.close();
-          
-          let errores ='';
-          for(let x of ex.error){
-         
-            new MetodosShared().AlertError(x,'text-left')
+    if(this.permisos){
+      if(this.permisos.facturacion.firmarFactura || this.permisos.superusuario){
+        new MetodosShared().AlertQuestion('ESTA SEGURO DE ENVIAR ESTA FACTURA A LA DIAN ?').then((result) => {
+          if (result.isConfirmed) {
+    
+    
+             
+            Swal.fire({
+              allowOutsideClick: false,
+              icon: 'info',
+              title: 'ENVIANDO..',
+              text:'Espere por favor..'
+            });
+            Swal.showLoading();
+    
+            this.invoceService.FirmarInvoce(numero).subscribe((resp:any) => {
+              
+              Swal.close();
+    
+    
+              new MetodosShared().AlertOK('FACTURA FIRMADA CON ÉXITO!');
+             
+             
+              this.resetTable();
+    
+    
+              
+    
+            },(ex) => {
+              console.log(ex);
+              Swal.close();
+              
+              let errores ='';
+              for(let x of ex.error){
+             
+                new MetodosShared().AlertError(x,'text-left')
+                
+              }
             
-          }
-        
+            });
+          } 
         });
-      } 
-    });
+      }else{
+        this.metodos.AlertDenegado('NO TIENE LOS PERMISOS ADECUADOS');
+        return false;
+    
+      }
+  
+    }
+   
   }
 
 

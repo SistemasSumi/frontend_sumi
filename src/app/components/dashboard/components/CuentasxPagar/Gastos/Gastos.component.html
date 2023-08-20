@@ -1,0 +1,274 @@
+<div class="main-content">
+    <div class="page-content">
+      <div class="col-12">
+          <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h4 class="mb-0">Gastos (Caja menor)</h4>
+      
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="javascript: void(0);">Pagos</a></li>
+                      <li class="breadcrumb-item active">Gastos</li>
+                  </ol>
+              </div>
+      
+          </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="invoice-title">
+                
+                <div class="mb-4">
+                  <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                </div>
+                <div class="text-end">
+                  <button  (click)="AbrirCaja()"  *ngIf="!cajaActual?.numero" mat-raised-button color="primary">ABRIR NUEVA CAJA</button>
+                  <button   *ngIf="cajaActual?.numero" mat-raised-button color="accent">CERRAR CAJA</button>
+                  <!-- <a class="btn btn-primary btn-sm"  (click)="null" href="javascript:;" role="button"> </a> -->
+
+                </div>
+                <!-- <div class="text-muted">
+                  <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
+                  <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                  <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                </div> -->
+                  </div>
+                  
+                  
+                  <div class="row">
+                    <p-divider [text]="'DATOS DE LA CAJA MENOR'" [align]="'left'"></p-divider>
+                  </div>
+
+
+                  <div class="row" *ngIf="cajaActual?.numero">
+                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                      <!-- Card -->
+                      <div class="card" style="border: #70C8FF 1px solid;">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="fw-bold font-size-xs text-uppercase">CAJA N°</h6>
+                                     
+                                      <h4   class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                        {{cajaActual.numero_str}}
+                                      </h4>
+                                      
+                                  </div>
+                                  
+                              </div>
+                              
+                          </div>
+                      </div>
+                    </div> 
+                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                      <!-- Card -->
+                      <div class="card" style="border: #70C8FF 1px solid;">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="fw-bold font-size-xs text-uppercase">FONDO INICIAL</h6>
+                                      <h4 [appAnimatedPrice]="0"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                              {{cajaActual.saldo_inicial | currency}}
+                                      </h4>
+                                      
+                                  </div>
+                                  
+                              </div>
+                              
+                          </div>
+                      </div>
+                    </div> 
+                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                      <!-- Card -->
+                      <div class="card" style="border: #70C8FF 1px solid;">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="fw-bold font-size-xs text-uppercase">TOTAL GASTOS</h6>
+                                      <h4 [appAnimatedPrice]="0"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                              {{cajaActual.total_gastos | currency}}
+                                      </h4>
+                                      
+                                  </div>
+                                  
+                              </div>
+                              
+                          </div>
+                      </div>
+                    </div> 
+                    <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                      <!-- Card -->
+                      <div class="card" style="border: #70C8FF 1px solid;">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="fw-bold font-size-xs text-uppercase">FONDO DISPONIBLE</h6>
+                                      <h4 [appAnimatedPrice]="0"  class="fw-bold mt-4 font-weight-bold mb-2 d-flex align-items-center">
+                                              {{fondoDisponible | currency}}
+                                      </h4>
+                                      
+                                  </div>
+                                  
+                              </div>
+                              
+                          </div>
+                      </div>
+                    </div> 
+                  </div>
+
+                  <div class="row" *ngIf="cajaActual?.numero">
+                    <fieldset class="rounded-3 p-3">
+                      <legend class="float-none w-auto">SALIDA DE CAJA MENOR</legend>
+                      
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                              <mat-label style="font-size: 16px;">TIPO DE GASTO</mat-label>
+                              <mat-select [(ngModel)]="currentPago.tipo_gasto" required  style="text-align: center;">
+                                <mat-option *ngFor="let opcion of opciones" [value]="opcion.cuenta">
+                                  {{ opcion.parametro }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Fecha</mat-label>
+                            <input  [(ngModel)]="currentPago.fecha"  matInput [matDatepicker]="picker" >
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                              <mat-icon color="primary">calendar_month</mat-icon>
+                            </a>
+                        
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                              <mat-label style="font-size: 16px;">N° FACTURA</mat-label>
+                              <input [(ngModel)]="currentPago.docReferencia"  required  matInput type="text"  />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                              <mat-label style="font-size: 16px;">VALOR</mat-label>
+                              <input [(ngModel)]="currentPago.valor" class="text-end" required  matInput type="number"  />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field appearance="outline" style="width:100%; height: auto; ">
+                            <mat-label style="font-size: 18px;">Pagado A</mat-label>
+                            <mat-select  placeholder="Seleccionar proveedor" [(ngModel)]="currentPago.tercero" >
+                                <mat-option>
+                                    <ngx-mat-select-search ngModel (ngModelChange)="filtraTerceros($event)" #filtroTercero 
+                                        placeholderLabel="Buscar proveedor" noEntriesFoundLabel="No hay resultados">
+                                        <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                    </ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let proveedor of filtroTerceros | async" [value]="proveedor.id">
+                                    {{proveedor.nombreComercial}}
+                                </mat-option>
+
+                                
+                            </mat-select>
+                    
+                          </mat-form-field>
+                    
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                <mat-label  style="font-size: 16px;">CONCEPTO</mat-label>
+                                <textarea  [(ngModel)]="currentPago.concepto" matInput placeholder=""></textarea>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        
+                      </div>
+                      <div class="text-end">
+                          <button (click)="limpiar()" mat-raised-button color="warn">Cancelar</button>
+                            &nbsp;
+                          <button (click)="guardar()" mat-raised-button color="primary">Registrar gasto</button>
+
+                      </div>
+                  </fieldset>
+                
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12" >
+                        <table id="TablePagos" style="width:100%" class="table table-nowrap table-striped table-bordered table-responsive" >
+                                <thead>
+                                    <tr>
+                                        <th style="width: 3%;text-align: center; justify-content: center; justify-items: center;">
+                                     
+                                        </th>
+                                    
+                                        <th style="white-space: nowrap">PAGO N°</th>
+                                        <th style="white-space: nowrap">FECHA</th>
+                                       
+                                        <th style="white-space: normal;">PAGADO A</th>
+                                        <th style="white-space: nowrap">FACTURA N°</th>
+                                        <th style="white-space: nowrap">VALOR</th>
+                                
+                                        <th style="white-space: normal; width: 40%;">CONCEPTO</th>
+                                       
+                                        <th style="width: 8%;">
+                                            <a type="button" class="btn position-relative" style="padding: 0; color: #fff; font-size: 16px; font-weight: bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-search"></i>
+                                            </a>
+                                            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu">
+                                                <div class="input-group">
+                                                    <input type="search" placeholder="Buscar " aria-describedby="button-addon1" class="form-control border-0 bg-light" >
+                                                    <div class="input-group-append">
+                                                        <a id="button-addon1" type="button" class="btn btn-link text-primary"><i class="fa fa-search color-primary"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                        </table>
+                    </div>
+                     
+                  </div>
+
+                  
+              </div>
+          </div><!-- end col -->
+      </div><!-- end row -->
+      
+
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

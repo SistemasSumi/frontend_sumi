@@ -115,18 +115,14 @@ export class CuentasxPagarComponent implements OnInit {
       columnDefs:[
           { responsivePriority: 1, targets: 0 },
           { responsivePriority: 2, targets: 1 },
+          { responsivePriority: 3, targets: -1 },
           { responsivePriority: 4, targets: 2 },
           { responsivePriority: 5, targets: -3 },
-          { responsivePriority: 3, targets: -1 },
           { responsivePriority: 6, targets: 3},
-          { responsivePriority: 7, targets: 4},
-          { responsivePriority: 8, targets: 5},
-          { responsivePriority: 9, targets: 6},
-          { responsivePriority: 10, targets: 7},
-          { responsivePriority: 11, targets: 8},
-          { responsivePriority: 12, targets: 9},
-          { responsivePriority: 13, targets: 10},
-          { responsivePriority: 14, targets: 11},
+          { responsivePriority: 7, targets: 8},
+          { responsivePriority: 8, targets: 7},
+          { responsivePriority: 9, targets: 14},
+         
           
        
           { "width": "80%", "targets": 2 },
@@ -153,6 +149,15 @@ export class CuentasxPagarComponent implements OnInit {
           },
           
           {
+            targets:[3],
+            class:'text-proveedor',
+            orderable: true,
+            render: function(data,type,row){
+               return data;
+            }
+          },
+          
+          {
             targets:[4],
          
             orderable: true,
@@ -162,7 +167,7 @@ export class CuentasxPagarComponent implements OnInit {
           },
           {
             targets:[5],
-     
+            class:'text-nowrap',
             orderable: true,
             render: function(data,type,row){
               let datetime = new DatePipe();
@@ -172,7 +177,7 @@ export class CuentasxPagarComponent implements OnInit {
           },
           {
             targets:[6],
-        
+            class:'text-nowrap',
             orderable: true,
             render: function(data,type,row){
               let datetime = new DatePipe();
@@ -271,6 +276,15 @@ export class CuentasxPagarComponent implements OnInit {
             }
           },
           {
+            targets:[14],
+        
+            orderable: true,
+            render: function(data,type,row){
+              let saldo = cp.transform(row.valorTotal - row.valorAbono);
+                return saldo;
+            }
+          },
+          {
               targets:[-1],
               class:'text-center',
               orderable: false,
@@ -278,7 +292,7 @@ export class CuentasxPagarComponent implements OnInit {
                   
                   let fini = '';
                   if(!row.estado){
-                    fini = `<a class="dropdown-item fw-bold" style="font-size: 16px"  href="javascript:;" id="finiquitar"><i class="mdi mdi-check-circle-outline text-success " style="margin-right: 5px; font-size: 16px"></i> Finiquitar</a>`
+                    fini = `<a class="dropdown-item" style="font-size: 16px"  href="javascript:;" id="finiquitar"><i class="fas fa-flag text-success " style="margin-right: 5px; font-size: 16px"></i> dar de alta</a>`
                   }
 
                   let acciones = `
@@ -480,6 +494,7 @@ export class CuentasxPagarComponent implements OnInit {
         
         {"data":"valorTotal"},
         {"data":"valorAbono"},
+        {"data":"valorAbono"}, // saldo
         {"data":"valorAbono"},
     
         ],

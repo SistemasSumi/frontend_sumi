@@ -449,7 +449,11 @@ export class CrearFacturaVentaComponent implements OnInit {
     let estado:boolean = true;
 
 
-    let precioMinimo = this.valorCompra / this.clienteSeleccionado.listaPrecios.precioMinimo;     
+    let precioMinimo = 0.75;     
+    if(this.clienteSeleccionado.listaPrecios){
+      precioMinimo = this.valorCompra / this.clienteSeleccionado.listaPrecios.precioMinimo;     
+    }
+
     if((this.valor-descuento) < precioMinimo){
       estado=false;
     }

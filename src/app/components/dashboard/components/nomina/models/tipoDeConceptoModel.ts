@@ -1,3 +1,5 @@
+import { ModelPuc } from "../../Contabilidad/models/ModelPuc";
+
 export class TipoDeConceptoModel {
     id       : number;
     conceptos: Concepto[];
@@ -12,8 +14,8 @@ interface Concepto {
     valor        : number;
     empleado     : number;
     empleador    : number;
-    cuenta       : any;
-    contrapartida: any;
+    cuenta       : ModelPuc;
+    contrapartida: ModelPuc;
     tipo         : number;
     isEdit?      : boolean;
 }

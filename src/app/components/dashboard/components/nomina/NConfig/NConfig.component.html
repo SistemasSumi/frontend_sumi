@@ -60,14 +60,14 @@
 
                                                                   <mat-form-field appearance="outline" style="width:70%; height: auto;">
                                                                     <mat-label style="font-size: 18px;">Cuentas contables</mat-label>
-                                                                    <mat-select  placeholder="Buscar cuenta" [(ngModel)]="x.cuenta">
+                                                                    <mat-select  placeholder="Buscar cuenta" [(ngModel)]="x.cuenta.id">
                                                                         <mat-option>
                                                                             <ngx-mat-select-search [formControl]="filtroPucCuentaControl"  #FiltroDeCuentas
                                                                                 placeholderLabel="Buscar Cuentas" noEntriesFoundLabel="No hay resultados">
                                                                                 <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                                                             </ngx-mat-select-search>
                                                                         </mat-option>
-                                                                        <mat-option *ngFor="let data of filtroPucCuenta | async" [value]="data" (click)="x.cuenta = data">
+                                                                        <mat-option *ngFor="let data of filtroPucCuenta | async" [value]="data.id">
                                                                             {{data.codigo}} - {{data.nombre}}
                                                                         </mat-option>
                                         
@@ -87,14 +87,14 @@
 
                                                                   <mat-form-field appearance="outline" style="width:70%; height: auto;">
                                                                     <mat-label style="font-size: 18px;">Contrapartida</mat-label>
-                                                                    <mat-select  placeholder="Buscar cuenta" [(ngModel)]="x.contrapartida">
+                                                                    <mat-select  placeholder="Buscar cuenta" [(ngModel)]="x.contrapartida.id">
                                                                         <mat-option>
                                                                             <ngx-mat-select-search [formControl]="filtroPucCuentaControl"  #FiltroDeCuentas
                                                                                 placeholderLabel="Buscar Cuentas" noEntriesFoundLabel="No hay resultados">
                                                                                 <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                                                             </ngx-mat-select-search>
                                                                         </mat-option>
-                                                                        <mat-option *ngFor="let data of filtroPucCuenta | async" [value]="data" (click)="x.contrapartida = data">
+                                                                        <mat-option *ngFor="let data of filtroPucCuenta | async" [value]="data.id" >
                                                                             {{data.codigo}} - {{data.nombre}}
                                                                         </mat-option>
                                         
@@ -112,9 +112,6 @@
                                                               <td class="text-center" *ngIf="!x.isEdit">
                                                                
                                                                   <button *ngIf="!this.edicionEnProceso" type="button" class="btn btn-primary" (click)="onEdit(item,x)"><i class="fas fa-pen"></i></button>
-                                                                  <!-- &nbsp;
-                                                                  <button type="button" class="btn btn-success"><i class="uil uil-check-circle"></i></button>
-                                                                  <button type="button" class="btn btn-warning"><i class="uil uil-exclamation-triangle"></i></button> -->
                                                                   
                                                             
                                                                

@@ -2,9 +2,10 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as moment from 'moment';
 import { CurrencyPipe } from '@angular/common';
-import { logoSumi } from '../logoSumi';
+import { logoDream, logoSumi, waterMake } from '../logoSumi';
 import { CxcMoviModels } from '../../components/Facturacion/models/CxcMoviModels';
 import { InvoceReport } from '../../components/Facturacion/models/InvoceReport';
+import { AcortarTextPipe } from 'src/app/pipes/acortarText.pipe';
 
 export class facturaElectronicaReport {
 
@@ -13,6 +14,680 @@ export class facturaElectronicaReport {
 
 
     private cp:CurrencyPipe = new CurrencyPipe('en-US');
+
+    public geerarPDFFacturaSumisx(datos:InvoceReport) {
+
+        const data = datos;
+        const doc = new jsPDF('p', 'pt', 'letter');
+        
+    
+        const topTableLeft = this.setEncabezadoTableLeft(doc,15,145,'DATOS DEL CLIENTE',data);
+        const topTableRight = this.setEncabezadoTableRigth(doc,310,145,'PRE FACTURA ELECTRÓNICA DE VENTA',data);
+
+        const topTable =  Math.max(topTableLeft, topTableRight);
+
+        // variable productos a recorrer en el pdf
+        let productos = [];
+     
+    
+        // for para recorrer productos y diseñar la tabla
+        let i = 0;
+        for (let x of data.productos){ 
+          i+=1;
+          let p = [{
+            content: i,
+            styles: {
+              cellWidth: 20,
+             
+            }
+          },
+          {
+            content: x.producto.nombreymarcaunico + ' Lote: '+x.lote,
+            styles: {
+              cellWidth: 260,
+            
+
+            }
+          },
+          {
+            content:x.cantidad,
+            styles: {
+    
+              cellWidth: 30,
+             
+    
+    
+            }
+          },
+          {
+            content: this.cp.transform(x.valor),
+            styles: {
+    
+              cellWidth: 60,
+              halign: 'right',
+            
+
+    
+    
+            }
+          },
+          {
+            content: this.cp.transform((x.iva*x.cantidad) / x.subtotal * 100),
+            styles: {
+    
+              cellWidth: 60,
+            
+
+    
+    
+            }
+          },
+          {
+            content:  this.cp.transform((x.descuento*x.cantidad) / x.subtotal * 100),
+            styles: {
+    
+              cellWidth: 60,
+             
+
+    
+    
+            }
+          },
+          {
+            content: this.cp.transform(x.subtotal),
+            cellWidth: 110,
+           
+
+          },
+          ]
+    
+          productos.push(p);
+        }
+        
+        let currentPage = 0;
+        // tabla productos
+        autoTable(doc, {
+         
+          // tableLineWidth: 0.5,
+          // tableLineColor: [0,0,0],
+          head: [
+            [{
+              content: '#',
+              styles: {
+                halign: 'center'
+              }
+    
+            },
+              'PRODUCTO',
+            {
+              content: 'CANT.',
+              styles: {
+                halign: 'center',
+                
+              }
+    
+            }, {
+              content: 'VALOR UND',
+              styles: {
+                halign: 'right'
+              }
+    
+            },
+            {
+              content: 'IVA %',
+              styles: {
+                halign: 'right'
+              }
+    
+            },
+            {
+              content: 'DTO %',
+              styles: {
+                halign: 'right'
+              }
+    
+            }, {
+              content: 'SUBTOTAL',
+              styles: {
+                halign: 'right'
+              }
+    
+            }
+            ]],
+          body: productos,
+          horizontalPageBreak: true,
+          margin: {
+            top: topTable+15,
+            bottom: 245,
+            left: 15,
+            right: 15,
+    
+          },
+          
+          // metodo que se repite en cad pagina
+          didDrawPage: ({ pageNumber, doc: jsPDF }) => {
+    
+          
+    
+            // imagen logo empresa
+            doc.addImage(logoDream, 'PNG', 490, 10,100, 100)
+
+            doc.setFontSize(14)
+    
+            doc.setFont(undefined, 'bold');
+            doc.text('SUMIPROD DE LA COSTA S.A.S.', 15, 30)
+            doc.setFontSize(8)
+            // doc.text('Enrique Rosado Navarro', 190, 40)
+            doc.setFont(undefined, 'normal');
+            doc.text('NIT: 901648084-9', 15, 40)
+            doc.text('Régimen: Responsable de IVA', 15, 50)
+            doc.text('Persona Judírica', 15, 60)
+            doc.text('Dirección: Calle 44B #21G-11 Urb Santa Cruz', 15, 70)
+            doc.text('Tel. (5) 432-7722 -  Cel: (301) 302-2986', 15, 80)
+            doc.text('Email. sumiprodelacosta@gmail.com', 15, 90)
+            doc.setFontSize(7)
+    
+    
+            // Fecha y realizado
+            doc.text("Realizado Por:", 15, 115)
+            doc.setFont(undefined, 'bold')
+            doc.text(data.usuario, 64, 115)
+            doc.setFont(undefined, 'normal')
+    
+            doc.text("Impreso:", 135, 115)
+            doc.setFont(undefined, 'bold')
+            doc.text(moment(new Date()).format("MMMM DD YYYY - h:mm:ss a").toLocaleUpperCase(), 270, 115,"right")
+            doc.setFont(undefined, 'normal')
+            // Fin de Fecha y realizado
+    
+    
+            // elaborado
+            doc.setFontSize(6)
+            doc.setFont(undefined, 'bold')
+            doc.text("Elaborado, impreso y enviado electrónicamente por Sumiprod de la Costa S.A.S. NIT: 901648084-9", 10, 560, { angle: 90 })
+            // fin elaborado
+    
+            // tabla encabezado consecutivo y fecha
+            doc.setFont(undefined, 'normal')
+            // linea principal
+            doc.line(15, 120, 595, 120, 'F')
+    
+            // Datos de resolución de factura
+            doc.setFontSize(9)
+            doc.setFont(undefined, 'bold')
+            var textoResolucion = doc.splitTextToSize(data.numeracion.textoResolucion, 520);
+            doc.text(textoResolucion, 15, 130)
+    
+    
+            doc.setFontSize(7)
+            doc.setFont(undefined, 'normal')
+            
+
+
+         
+
+
+            
+            if(currentPage != 0){
+              this.setEncabezadoTableLeft(doc,15,145,'DATOS DEL CLIENTE',data);
+              this.setEncabezadoTableRigth(doc,310,145,'PRE FACTURA ELECTRÓNICA DE VENTA',data);
+            }
+
+
+
+    
+
+    
+           
+    
+            
+            doc.setDrawColor(0);
+            doc.rect(15, 550, 580, 235);
+    
+            this.tableImpuestos(doc,550,data);
+            doc.setFontSize(10)
+
+            const subtotalY     =  this.RectTotalesTitleValor(doc,402,550,'Subtotal',this.cp.transform(data.subtotal),80,113)
+            const descuentoY    =  this.RectTotalesTitleValor(doc,402,subtotalY,'Descuento',this.cp.transform(data.descuento),80,113)
+            const retencionesY  =  this.RectTotalesTitleValor(doc,402,descuentoY,'Retenciones',this.cp.transform(data.valorReteFuente),80,113)
+            const cargosY       =  this.RectTotalesTitleValor(doc,402,retencionesY,'Cargos',this.cp.transform(data.valorIva),80,113)
+            const totalY        =  this.RectTotalesTitleValor(doc,402,cargosY,'TOTAL FACTURA',this.cp.transform(data.valor),80,113)
+            
+            
+            const observacionY    =  this.RectTitleValor(doc,15,totalY,'OBSERVACIONES',data.observacion,100,480)
+            const totalEnLetrasY  =  this.RectTitleValor(doc,15,observacionY,'TOTAL EN LETRAS',this.numeroALetras(data.valor, ''),100,480,7)
+            
+            const notasY =  this.RectTitle(doc,15,totalEnLetrasY,'NOTAS',null,580);
+            doc.setTextColor('#000')
+            let textNotas = 'INFORMACIÓN PARA PAGOS POR CONSIGNACIÓN O TRANSFERENCIAS:\nA/C NOMBRE: JAILIN ALEJANDRA FERRER MARQUEZ\n- BANCOLOMBIA: CUENTA DE AHORROS N° 51735172135\n- BANCO DAVIVIENDA: CUENTA DE AHORROS N° 488407690467\n- BANCO DE BOGOTÁ: CUENTA DE AHORROS N° 564792745';
+            textNotas = doc.splitTextToSize(textNotas,565);
+            doc.text(textNotas,20,notasY+15)
+            
+            // Obtener el tamaño de la página
+            const pageSize = doc.internal.pageSize;
+
+            // Agregar la imagen de marca de agua al final del PDF
+            const watermarkWidth = 400; // Ancho de la imagen de marca de agua
+            const watermarkHeight = 400; // Alto de la imagen de marca de agua
+            const watermarkX = (pageSize.width - watermarkWidth) / 2; // Centrar horizontalmente
+            const watermarkY = (pageSize.height - watermarkHeight) / 2; // Centrar verticalmente
+
+
+            // Agregar la imagen de marca de agua con las coordenadas calculadas
+            doc.addImage(waterMake, 'PNG', watermarkX, watermarkY, watermarkWidth, watermarkHeight);
+
+         
+
+           
+       
+    
+            doc.setFont(undefined, 'bold');
+            doc.setFontSize(8)
+            currentPage+=1;
+           
+          },
+    
+          
+          theme: 'grid',
+          headStyles: {
+            fillColor: '#41B6FF',
+    
+    
+    
+          },
+          columnStyles: {
+            0: { halign: 'center' },
+            2: { halign: 'center' },
+            3: { halign: 'center' },
+            4: { halign: 'right' },
+            5: { halign: 'right' },
+            6: { halign: 'right' },
+            7: { halign: 'right' },
+            8: { halign: 'right' },
+          },
+          styles: {
+            fontSize: 7,
+            fontStyle: 'bold',
+           
+          },
+          bodyStyles: {
+           
+          },
+          footStyles: {
+    
+            fillColor: '#ffffff',
+            textColor: '#000000',
+    
+    
+          },
+          alternateRowStyles: {
+         
+    
+          },
+    
+    
+        });
+    
+    
+        const pageCount = (doc as any).internal.getNumberOfPages(); //was doc.internal.getNumberOfPages(); 
+        // For each page, print the page number and the total pages
+        for (let i = 1; i <= pageCount; i++) {
+    
+          console.log(pageCount);
+    
+          doc.setFontSize(8);
+          // Go to page i
+          doc.setPage(i);
+          var pageSize = doc.internal.pageSize;
+          var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+          doc.text('Pagina ' + String(i) + ' De ' + String(pageCount), 593, 141,"right"); //data.settings.margin.left if you want it on the left
+        }
+    
+    
+    
+        return doc;
+    
+    
+    }
+
+
+
+    setEncabezadoTableLeft(doc: jsPDF,x,y,titulo:string,data:any){
+      doc.setDrawColor('#000000');
+      const rectTop =  this.RectTitle(doc,x,y,titulo,data);
+
+      // Contenidos de texto para los rectángulos
+        
+      const rectLeftWidth = 70;
+      const rectRightWidth = 215;
+
+
+
+    
+
+
+      let documento =  data.cliente.documento;
+      if(data.cliente.tipoDocumento == 'NIT'){
+        documento = documento+'-'+data.cliente.dv
+      }
+
+      const nitLineHeight = this.RectTitleValor(doc, x, rectTop, data.cliente.tipoDocumento.toUpperCase(), documento, rectLeftWidth, rectRightWidth);
+      const clienteLineHeight = this.RectTitleValor(doc, x, nitLineHeight, 'CLIENTE', data.cliente.nombreComercial, rectLeftWidth, rectRightWidth);
+      const direccionLineHeight = this.RectTitleValor(doc, x, clienteLineHeight, 'DIRECCIÓN', data.cliente.direccion, rectLeftWidth, rectRightWidth);
+      const telefonoLineHeight = this.RectTitleValor(doc, x, direccionLineHeight, 'TELEFONO', data.cliente.telefonoContacto, rectLeftWidth, rectRightWidth);
+      const emailLineHeight = this.RectTitleValor(doc, x, telefonoLineHeight, 'EMAIL', data.cliente.correoContacto || '', rectLeftWidth, rectRightWidth);
+
+      
+      doc.setTextColor("#000");
+
+
+
+
+      doc.setFontSize(7)
+      doc.setFont(undefined, 'normal');
+
+      return emailLineHeight;
+    }
+
+    setEncabezadoTableRigth(doc: jsPDF,x,y,titulo:string,data:any){
+      doc.setDrawColor('#000000');
+      const rectTop =  this.RectTitle(doc,x,y,titulo,data);
+        // Contenidos de texto para los rectángulos
+      
+      const rectLeftWidth = 85;
+      const rectRightWidth = 200;
+
+
+      doc.setFont(undefined, 'bold');
+    
+      
+
+
+      const numeroFacturaLineHeight = this.RectTitleValor(doc, x, rectTop, 'FACTURA N°', data.numero + "", rectLeftWidth, rectRightWidth);
+      const emisionLineHeight = this.RectTitleValor(doc, x, numeroFacturaLineHeight, 'FECHA EMISIÓN',moment(data.fecha).format('MMMM DD YYYY').toUpperCase(), rectLeftWidth, rectRightWidth);
+      const vencimientoLineHeight = this.RectTitleValor(doc, x, emisionLineHeight, 'VENCIMIENTO ', moment(data.fechaVencimiento).format('MMMM DD YYYY').toUpperCase(), rectLeftWidth, rectRightWidth);
+      const formaPagoLineHeight = this.RectTitleValor(doc, x, vencimientoLineHeight, 'FORMA DE PAGO', data.formaPago.nombre, rectLeftWidth, rectRightWidth);
+      const totalLineasLineHeight = this.RectTitleValor(doc, x, formaPagoLineHeight, 'TOTAL DE LINEAS', data.productos.length+"", rectLeftWidth, rectRightWidth);
+
+      
+      doc.setTextColor("#000");
+
+
+
+
+      doc.setFontSize(7)
+      doc.setFont(undefined, 'normal');
+
+      
+      return totalLineasLineHeight;
+    }
+
+    RectTitle(doc: jsPDF, x: number, y: number,titulo:string,data?:any,rectWidth:number = 285) {
+
+      
+
+        doc.setTextColor("#FFF");
+        doc.setFillColor("#41B6FF");
+        // const rectWidth = 285;
+        const rectHeight = 16;
+        const margin = 5;
+
+        
+
+        // Primer rectángulo con el texto "Datos del cliente"
+        doc.rect(x, y, rectWidth, rectHeight, 'FD');
+        doc.setFontSize(8);
+        doc.setFont(undefined, 'bold');
+        doc.text(titulo, x + rectWidth / 2, y + rectHeight / 2, { align: 'center', baseline: 'middle' });
+        doc.setFont(undefined, 'normal');
+        // Dibujar la segunda línea con los dos rectángulos
+        const rectTop = y + rectHeight;
+
+      
+
+        return rectTop;
+    }
+
+
+    RectTitleValor(doc: jsPDF, x: number, y: number, rectLeftContent: string, rectRightContent: string, rectLeftWidth: number, rectRightWidth: number,RightFontSize:number = 8): number {
+      doc.setFillColor("#41B6FF");
+      doc.setTextColor("#FFF");
+      const rectHeight = 16;
+      const margin = 5;
+    
+      
+  
+    
+      // Obtener altura necesaria para el texto del rectángulo derecho
+      const rectRightLines = doc.splitTextToSize(rectRightContent, (rectRightWidth - 15));
+      console.log('N° lineas:',rectRightLines)
+      let numLines = rectHeight;
+      if(rectRightLines.length > 1){
+        numLines = Math.ceil(rectRightLines.length * rectHeight);
+        
+      }
+
+      const adjustedRectRightHeight = numLines;
+    
+      // Rectángulo derecho con texto ajustado
+      const rectRightX = x + rectLeftWidth;
+      const rectRightY = y;
+      const textOffset = (adjustedRectRightHeight - rectRightLines.length * 8) / 2;
+
+
+      // Rectángulo izquierdo con el texto "NIT"
+      doc.rect(x, y, rectLeftWidth, adjustedRectRightHeight, 'FD');
+      doc.setFontSize(8);
+      
+      
+      
+
+
+      doc.rect(rectRightX, rectRightY, rectRightWidth, adjustedRectRightHeight, 'S');
+      doc.setFontSize(8);
+      doc.setTextColor("#000");     
+
+      if(rectRightLines.length > 1){
+        doc.setTextColor("#FFF");
+        doc.setFont(undefined, 'bold');
+        doc.text(rectLeftContent, x + margin,  rectRightY + adjustedRectRightHeight / 2 + (textOffset / rectRightLines.length ));
+        doc.setTextColor("#000");
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(RightFontSize);
+        doc.text(rectRightLines, rectRightX + margin, rectRightY + adjustedRectRightHeight / 2 - (textOffset / rectRightLines.length));
+        doc.setFontSize(8);
+      }else{
+        doc.setTextColor("#FFF");
+        doc.setFont(undefined, 'bold');
+        doc.text(rectLeftContent, x + margin,  rectRightY + adjustedRectRightHeight / 2 + textOffset);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor("#000");
+        doc.setFontSize(RightFontSize);
+        doc.text(rectRightLines, rectRightX + margin, rectRightY + adjustedRectRightHeight / 2  + textOffset);
+        doc.setFontSize(8);
+      }
+  
+      return y+adjustedRectRightHeight;
+  
+    }
+    RectTotalesTitleValor(doc: jsPDF, x: number, y: number, rectLeftContent: string, rectRightContent: string, rectLeftWidth: number, rectRightWidth: number): number {
+      doc.setFillColor("#41B6FF");
+      doc.setTextColor("#FFF");
+      const rectHeight = 15;
+      const margin = 5;
+    
+      
+  
+    
+      // Obtener altura necesaria para el texto del rectángulo derecho
+      const rectRightLines = doc.splitTextToSize(rectRightContent, (rectRightWidth - 15));
+      console.log('N° lineas:',rectRightLines)
+      let numLines = rectHeight;
+      if(rectRightLines.length > 1){
+        numLines = Math.ceil(rectRightLines.length * rectHeight);
+        
+      }
+
+      const adjustedRectRightHeight = numLines;
+    
+      // Rectángulo derecho con texto ajustado
+      const rectRightX = x + rectLeftWidth;
+      const rectRightY = y;
+      const textOffset = (adjustedRectRightHeight - rectRightLines.length * 8) / 2;
+
+
+      // Rectángulo izquierdo con el texto "NIT"
+      doc.rect(x, y, rectLeftWidth, adjustedRectRightHeight, 'FD');
+      doc.setFontSize(8);
+      
+      
+      
+
+
+      doc.rect(rectRightX, rectRightY, rectRightWidth, adjustedRectRightHeight, 'S');
+      doc.setFontSize(8);
+      doc.setTextColor("#000");     
+
+      if(rectRightLines.length > 1){
+        doc.setTextColor("#FFF");
+        doc.setFont(undefined, 'bold');
+        doc.text(rectLeftContent,  x + margin,  rectRightY + adjustedRectRightHeight / 2 + (textOffset / rectRightLines.length ));
+        doc.setTextColor("#000");
+        doc.setFont(undefined, 'normal');
+        doc.text(rectRightLines, rectRightX+rectRightWidth - margin, rectRightY + adjustedRectRightHeight / 2 + (textOffset / rectRightLines.length ),{ align: 'right'});
+      }else{
+        doc.setTextColor("#FFF");
+        doc.setFont(undefined, 'bold');
+        doc.text(rectLeftContent, x + margin,  rectRightY + adjustedRectRightHeight / 2 + textOffset);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor("#000");
+        doc.text(rectRightLines,rectRightX+ rectRightWidth - margin,  rectRightY + adjustedRectRightHeight / 2 + textOffset,{ align: 'right' });
+
+      }
+  
+      return y+adjustedRectRightHeight;
+  
+    }
+
+    tableImpuestos(doc: jsPDF,firstY:number,data:any,rectWidth:number = 385,rectHeight:number = 15){
+    
+      doc.setFontSize(9)
+      doc.setFillColor('#41b6ff')
+      const firstDivisionWidth = 150;
+      const remainingDivisionsWidth = (rectWidth - firstDivisionWidth) / 3;
+      
+      // Dibujar el rectángulo principal
+      doc.rect(15, firstY, rectWidth, rectHeight,'FD');
+      
+      // Textos en las divisiones
+      const divisions = ['IMPUESTO', 'BASE', 'TARIFA', 'VALOR'];
+     
+      // Dibujar las divisiones y los textos en el rectángulo
+      for (let i = 0; i < 4; i++) {
+          let divisionX;
+          if (i === 0) {
+            divisionX = 15 + firstDivisionWidth / 2;
+          } else {
+            divisionX = 15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth + remainingDivisionsWidth / 2;
+          }
+
+          const divisionText = divisions[i];
+          doc.setTextColor("#FFF");
+          doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'center', baseline: 'middle' });
+          doc.setTextColor("#000");
+      }
+
+
+      for(let x of data.impuestos){
+        
+        firstY+= 15;
+        // Dibujar el rectángulo principal
+        doc.rect(15, firstY, rectWidth, rectHeight,'S');
+      
+        // Textos en las divisiones
+        const valores = [x.impuesto.nombre, x.base, x.procentaje, x.total];
+  
+        // Dibujar las divisiones y los textos en el rectángulo
+  
+        doc.setFontSize(8)
+        for (let i = 0; i < 4; i++) {
+            let divisionX;
+            if (i === 0) {
+              divisionX = 20;
+              const divisionText = valores[i];
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'left', baseline: 'middle' });
+            }else if(i === 2){
+              divisionX = 15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth + remainingDivisionsWidth / 2;
+              const divisionText = this.cp.transform(( parseFloat(valores[i].toString())))+'%';
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'center', baseline: 'middle' });
+            }else {
+              divisionX = 15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth + remainingDivisionsWidth - 3;
+              const divisionText = this.cp.transform(( parseFloat(valores[i].toString())));
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'right', baseline: 'middle' });
+            }
+  
+  
+            if (i !== 0) {
+              // Dibujar las líneas divisorias entre las divisiones
+              doc.line(
+                15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth,
+                firstY,
+                15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth,
+                firstY + rectHeight
+              );
+            }
+        }
+      }
+
+
+      for(let x of data.retenciones){
+        
+        firstY+= 15;
+        // Dibujar el rectángulo principal
+        doc.rect(15, firstY, rectWidth, rectHeight,'S');
+      
+        // Textos en las divisiones
+        const valores = [x.retencion.nombre, x.base, x.procentaje, x.total];
+  
+        // Dibujar las divisiones y los textos en el rectángulo
+  
+        doc.setFontSize(8)
+        for (let i = 0; i < 4; i++) {
+            let divisionX;
+            if (i === 0) {
+              divisionX = 20;
+              const divisionText = valores[i];
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'left', baseline: 'middle' });
+            }else if(i === 2){
+              divisionX = 15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth + remainingDivisionsWidth / 2;
+              const divisionText = this.cp.transform(( parseFloat(valores[i].toString())))+'%';
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'center', baseline: 'middle' });
+            }else {
+              divisionX = 15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth + remainingDivisionsWidth - 3;
+              const divisionText = this.cp.transform(( parseFloat(valores[i].toString())));
+              doc.text(divisionText, divisionX, firstY + rectHeight / 2, { align: 'right', baseline: 'middle' });
+            }
+  
+  
+            if (i !== 0) {
+              // Dibujar las líneas divisorias entre las divisiones
+              doc.line(
+                15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth,
+                firstY,
+                15 + firstDivisionWidth + (i - 1) * remainingDivisionsWidth,
+                firstY + rectHeight
+              );
+            }
+        }
+      }
+      
+
+
+    }
+
+
+
+
 
     public geerarPDFFacturaSumi(data:InvoceReport) {
 
@@ -234,7 +909,7 @@ export class facturaElectronicaReport {
     
             // Variables del adquiriente (Variables quemadas)
             doc.setFont(undefined, 'normal');
-            doc.text(data.cliente.nombreComercial, 70, 162)
+            doc.text(new AcortarTextPipe().transform(data.cliente.nombreComercial,'56'), 70, 162)
             doc.text(data.cliente.documento+'-'+data.cliente.dv, 70, 173)
             doc.text(data.cliente.direccion+','+data.cliente.municipio, 70, 184)
             doc.text(data.cliente.telefonoContacto, 70, 195)
@@ -1120,7 +1795,7 @@ export class facturaElectronicaReport {
         let cientos = Math.floor(num / divisor)
         let resto = num - (cientos * divisor)
       
-        let strMillones = this.Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+        let strMillones = this.Seccion(num, divisor, 'UN MILLON', 'MILLONES');
         let strMiles = this.Miles(resto);
       
         if(strMillones == '')

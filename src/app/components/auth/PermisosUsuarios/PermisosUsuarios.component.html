@@ -53,6 +53,12 @@
                       <div class="ccol-4 col-md-6 mb-2">
                         <mat-slide-toggle color="primary" [(ngModel)]="permisos.facturacion.notaDebitoV">NOTA DÉBITO </mat-slide-toggle>
                       </div> 
+                      <div class="ccol-4 col-md-6 mb-2">
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.facturacion.firmarFactura">FIRMAR</mat-slide-toggle>
+                      </div> 
+                      <div class="ccol-4 col-md-6 mb-2">
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.facturacion.darDeAltaFactura">DAR DE ALTA</mat-slide-toggle>
+                      </div> 
                     </div>
 
                   </fieldset>
@@ -79,7 +85,7 @@
                         <mat-slide-toggle color="primary" [(ngModel)]="permisos.contabilidad.libroAux">LIBRO AUXILIAR </mat-slide-toggle>
                       </div>
                       <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.contabilidad.traslados">Traslados </mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.contabilidad.traslados">TRASLADOS </mat-slide-toggle>
                       </div>
                        
                     
@@ -139,46 +145,79 @@
                   </fieldset>
                 </div>
                 <div class="col-12 col-sm-6">
-                
-                  <fieldset class="rounded-3 p-3">
-                    <legend class="float-none w-auto">PAGOS (EGRESOS)</legend>
-
-                    <div class="row mb-2">
-                      <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.crear">CREAR EGRESO </mat-slide-toggle>
+                  <div class="col-12">
+                  
+                    <fieldset class="rounded-3 p-3">
+                      <legend class="float-none w-auto">PAGOS (EGRESOS)</legend>
+  
+                      <div class="row mb-2">
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.crear">CREAR EGRESO </mat-slide-toggle>
+                        </div>
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.cxp">CUENTAS X PAGAR </mat-slide-toggle>
+                        </div>
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.egresos">LISTADO</mat-slide-toggle>
+                        </div>
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.pagos">CAJA MENOR</mat-slide-toggle>
+                        </div>
                       </div>
-                      <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.cxp">CUENTAS X PAGAR </mat-slide-toggle>
+                    </fieldset>
+            
+  
+  
+                  </div>
+  
+                  <div class="col-12">
+                    
+                    <fieldset class="rounded-3 p-3">
+                      <legend class="float-none w-auto">COBROS (INGRESOS)</legend>
+  
+                      <div class="row mb-2">
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.crear">CREAR INGRESO </mat-slide-toggle>
+                        </div>
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.cxc">CUENTAS X COBRAR </mat-slide-toggle>
+                        </div>
+                        <div class="col-4 col-md-6 mb-2">
+                          <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.ingreso">LISTADO</mat-slide-toggle>
+                        </div>
                       </div>
-                      <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.pagos.egresos">LISTADO</mat-slide-toggle>
-                      </div>
-                    </div>
-                  </fieldset>
-          
-
-
+                    </fieldset>
+                    
+  
+  
+                  </div>
+                  
                 </div>
+                
               </div>
+            
               <div class="row mb-2">
                 <div class="col-12 col-sm-6">
-                  
+                 
                   <fieldset class="rounded-3 p-3">
-                    <legend class="float-none w-auto">COBROS (INGRESOS)</legend>
+                    <legend class="float-none w-auto">PERMISOS ESPECIALES</legend>
 
                     <div class="row mb-2">
                       <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.crear">CREAR INGRESO </mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.wtablas">TABLAS BÁSICAS </mat-slide-toggle>
                       </div>
                       <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.cxc">CUENTAS X COBRAR </mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.superusuario">SUPER USUARIO </mat-slide-toggle>
                       </div>
                       <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.ingreso">LISTADO</mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.settings.crearUser">CREAR USUARIO</mat-slide-toggle>
+                      </div>
+                      <div class="col-4 col-md-6 mb-2">
+                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.settings.verUser">LISTADO(USER)</mat-slide-toggle>
                       </div>
                     </div>
+                    
                   </fieldset>
-                  
 
 
                 </div>
@@ -205,24 +244,156 @@
                 </div>
               </div>
               <div class="row mb-2">
-                <div class="col-12 col-sm-6">
-                 
+                <div class="col-12">
+                
                   <fieldset class="rounded-3 p-3">
-                    <legend class="float-none w-auto">PERMISOS ESPECIALES</legend>
+                    <legend class="float-none w-auto">INFORMES</legend>
 
                     <div class="row mb-2">
-                      <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.wtablas">TABLAS BÁSICAS </mat-slide-toggle>
+
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">INVENTARIO</legend>
+
+                          <div class="row mb-2">
+
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.inv_inventario">INVENTARIO</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.inv_inventarioVencido">INVENTARIO VENCIDO</mat-slide-toggle>
+                            </div>
+                          </div>
+                        </fieldset>
                       </div>
-                      <div class="col-4 col-md-6 mb-2">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.superusuario">SUPER USUARIO </mat-slide-toggle>
+
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">INVENTARIO</legend>
+
+                          <div class="row mb-2">
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.oc_comprasDetalladas">COMPRAS DETALLADAS</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.oc_rotacionProductos">ROTACIÓN X COMPRAS</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.oc_retenciones">RETENCIONES</mat-slide-toggle>
+                            </div>
+                          </div>
+                        </fieldset>
                       </div>
-                      <!-- <div class="col-md-4">
-                        <mat-slide-toggle color="primary" [(ngModel)]="permisos.cobros.ingreso">LISTADO</mat-slide-toggle>
-                      </div> -->
-                    </div>
+
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">FACTURACIÓN</legend>
+
+                          <div class="row mb-2">
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.fac_rotacionProductos">ROTACIÓN X VENTAS</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.fac_ventasDetalladas">VENTAS DETALLADAS</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.fac_ventasXVendedor">VENTAS X VENDEDOR</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.fac_retenciones">RETENCIONES</mat-slide-toggle>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">CLIENTES</legend>
+
+                          <div class="row mb-2">
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.cliente_estadoCartera">CARTERA</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.cliente_carteraVencida">CARTERA VENCIDA</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.cliente_listado">LISTADO</mat-slide-toggle>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
                     
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">PROVEEDORES</legend>
+
+                          <div class="row mb-2">
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.proveedor_estadoCartera">CARTERA</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.proveedor_listado">LISTADO</mat-slide-toggle>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    
+                      <div class="col-12 col-sm-6 mb-2">
+                        <fieldset class="rounded-3 p-3">
+                          <legend class="float-none w-auto">CONTABILIDAD</legend>
+
+                          <div class="row mb-2">
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_balancePrueba">BALANCE DE PRUEBA</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_EstadoFinanciero">ESTADO FINANCIERO</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_EstadoResultado">ESTADO RESULTADOS</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_libroAux">LIBRO AUX</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_cxc">CUENTAS X COBRAR</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_cxp">CUENTAS X PAGAR</mat-slide-toggle>
+                            </div>
+                            
+                            <div class="col-4 col-md-6 mb-2">
+                              <mat-slide-toggle color="primary" [(ngModel)]="informes.conta_abonosRecibidos">ABONOS RECIBIDOS</mat-slide-toggle>
+                            </div>
+                            
+                           
+                          </div>
+                        </fieldset>
+                      </div>
+                    
+                      
+                     
+                      
+                    
+                      
+                    </div>
                   </fieldset>
+          
 
 
                 </div>

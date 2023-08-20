@@ -15,120 +15,30 @@ import { InvoceReport } from '../models/InvoceReport';
 })
 export class PreviewFacturasComponent implements OnInit {
 
-  factura:InvoceReport
 
-  // VARIABLES DE LA CONTABILIDAD 
-
-  contaAsiento            : ModelAsiento;
-  contaAsientoTotalDebito : number = 0;
-  contaAsientoTotalCredito: number = 0;
+  id:number;
+ 
   constructor(
     private rutaActiva    : ActivatedRoute,
-    private invoceService: FacturacionService,
-    private ingresoService: IngresoService,
+   
 
   ) { 
     
   }
 
   ngOnInit() {
+    
     this.cargarFactura();
   }
 
   cargarFactura(){
-    if(this.rutaActiva.snapshot.params.id){
-      let id = this.rutaActiva.snapshot.params.id;
-      Swal.fire({
-        allowOutsideClick: false,
-        icon: 'info',
-        title: 'Cargando..',
-        text:'Espere por favor..'
-      });
-      Swal.showLoading();
-      this.invoceService.obtenerFactura(id).subscribe(resp => {
 
-        console.log(resp);
-                
-        this.factura = resp;
-
-        this.obtenerAsiento(resp.numero);
-
-        Swal.close();
-      
-       
-     
-
-      });
-  }
-
- 
-
-  }
-
-  obtenerAsiento(numero:string){
-    this.invoceService.obtenerContabilidadAsiento(numero,'FAC').subscribe((resp:any)=> {
-        this.contaAsiento = resp;
-        this.contaAsientoTotalDebito  = 0;
-        this.contaAsientoTotalCredito = 0;
-
-        for(let x of this.contaAsiento.detalle){
-            if(x.debito > 0){
-              this.contaAsientoTotalDebito += x.debito;
-            }
-            if(x.credito > 0){
-              this.contaAsientoTotalCredito += x.credito;
-  
-            }
-        }
+      if(this.rutaActiva.snapshot.params.id){
+        this.id = this.rutaActiva.snapshot.params.id;
         
-    });
-  }
-
-
-  reContabilizar(){
-    new MetodosShared().AlertQuestion(
-      '¿ SEGURO DESEA VOLVER A CONTABILIZAR LA FACTURA ?'
-    ).then((result) => {
-
-
-
-      if (result.isConfirmed) {
-
-    
-            
-            Swal.fire({
-              allowOutsideClick: false,
-              icon: 'info',
-              title: 'Contabilizando..',
-              text:'Espere por favor..'
-            });
-            Swal.showLoading();
-
-            this.invoceService.Recontabilizar(this.factura.numero).subscribe(resp => {
-              Swal.close();
-
-              new MetodosShared().AlertOK('CONTABILIZADO CON EXITO!');
-              this.obtenerAsiento(this.factura.numero);
-            });
-        
-      
-
       }
 
-
-    });
   }
 
-
-
-  imprimir(){
-    if(this.factura.numeracion.tipoDocumento != "9"){
-
-      this.invoceService.imprimirFactura(this.factura.id);
-    }else{
-      this.invoceService.imprimirProforma(this.factura.id);
-
-    }
-  }
-
+  
 }

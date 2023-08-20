@@ -1,0 +1,258 @@
+<div class="row">
+  <div class="col-lg-12">
+      
+          
+      <div class="invoice-title">
+          <!-- <h4 class="float-end font-size-15">Invoice #DS0204 </h4> -->
+          <div class="mb-4">
+              <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+          </div>
+          <!-- <div class="text-muted">
+              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>Sumiprod de la costa S.A.S. </strong> </p>
+              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+          </div> -->
+      </div>
+
+
+
+      <div class="row">
+        <p-divider [text]="'DATOS DE LA NOTA'" [align]="'left'"></p-divider>
+      </div>
+      <!-- end row -->
+        
+      <form (submit)="guardarNota()" [formGroup]="formNota" #formDirective="" id="formNota">
+
+
+
+      
+      <div class="row">
+
+
+          <div class="col-md-2">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Numeración</mat-label>
+                      <mat-select formControlName="numeracion" required  style="text-align: center;">
+                          <mat-option *ngFor="let data of numeraciones" [value]="data.id">
+                              {{data.numero}}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <div class="col-md-8">
+            
+              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                  <mat-label style="font-size: 18px;">Clientes</mat-label>
+                  <mat-select  placeholder="Seleccionar cliente" formControlName="cliente" >
+                      <mat-option>
+                          <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                              placeholderLabel="Buscar cliente" noEntriesFoundLabel="No hay resultados">
+                              <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                          </ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let proveedor of filtroClientes | async" [value]="proveedor.id" (click)="obtenerFacturas(proveedor.id,proveedor)">
+                          {{proveedor.nombreComercial}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              
+          </div>
+
+          <div class="col-md-2">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Facturas</mat-label>
+                      <mat-select required  style="text-align: center;" formControlName="factura">
+                          <mat-option *ngFor="let item of facturas" [value]="item.id" (click)="obtenerProductos(item.id, item)">{{item.numero}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+          </div>
+          
+
+      </div>
+      <div class="mb-4 row">
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                <mat-label style="font-size: 16px;">Tipo de nota</mat-label>
+                <mat-select required #tipoNota style="text-align: center;" formControlName="tipoNota">
+                    <mat-option  value="1">DEVOLUCIÓN</mat-option>
+                    <mat-option  value="2">REBAJA O DISMINUCIÓN</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Observaciones</mat-label>
+                      <textarea  formControlName="observacion" matInput placeholder=""></textarea>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-md-2">
+              <mat-form-field appearance="fill" style="width: 100%;">
+                  <mat-label>Fecha</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="fecha">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                    <mat-icon color="primary">calendar_month</mat-icon>
+                  </a>
+                
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+          </div>
+          <div class="col-md-3">
+              <div class="float-right">
+                  <a href="javascript:;" (click)="openModalProductos(content)" class="btn btn-soft-primary btn-md " >Seleccionar producto <i class="mdi mdi-plus-circle-outline ms-1"></i></a>
+              </div> 
+          </div>
+      </div>
+      <div class="row">
+
+      </div>
+      
+      
+
+        <div class="row">
+          <p-divider [text]="'DETALLE DE LA NOTA'"></p-divider>
+        </div>
+        
+        <div class="py-2">
+
+            <div class="table-responsive">
+                <table class="table align-middle table-nowrap table-centered mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-center">COD.</th>
+                            <th>PRODUCTO</th>
+                            <th class="text-center">LOTE</th>
+                            
+                            <th class="text-center">CANT</th>
+                            <th class="text-end">VALOR UND</th>
+                            <th class="text-end">IVA</th>
+                            <th class="text-end">Total</th>
+                        </tr>
+                    </thead><!-- end thead -->
+                    <tbody>
+                        <tr *ngFor="let item of detalleNota; let i = index"  style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                              <mat-menu #menu="matMenu">
+                                  
+                                  <button mat-menu-item (click)="eliminarProducto(i)"><mat-icon style="color:red;">delete</mat-icon>Eliminar</button>
+                              </mat-menu>
+
+                            <th class="text-center">{{item.codigoDeBarra}}</th>
+                            <td style="word-wrap: break-word;" class="text-truncate font-size-14 mb-1">
+                              
+                              {{item.nombreymarcaunico | acortarText:50}}
+                              
+                          </td>
+                          <td class="text-center">{{item.lote }}</td>
+                          
+                          <td class="text-center">{{item.cantidad}}</td>
+                          <td class="text-end">{{item.valor | currency }}</td>
+                          <td class="text-end">{{item.iva | currency}}</td>
+                          <td class="text-end">{{item.subtotal | currency}}</td>
+                        </tr>
+                      
+                        <!-- end tr -->
+                        <tr>
+                            <th scope="row" colspan="6" class="text-end fw-semibold">Subtotal:</th>
+                            <td class="text-end fw-semibold">{{this.subtotalNota | currency}}</td>
+                        </tr>
+                  
+                        <!-- end tr -->
+                        <tr>
+                            <th scope="row" colspan="6" class="border-0 text-end fw-semibold">
+                                IVA :</th>
+                            <td class="border-0 text-end fw-semibold">{{this.ivaNota| currency}}</td>
+                        </tr>
+                        <!-- end tr -->
+                        <tr>
+                            <th scope="row" colspan="6" class="border-0 text-end fw-semibold">
+                                Retención:</th>
+                            <td class="border-0 text-end fw-semibold" style="color: red;">- {{this.retencionNota | currency}}</td>
+                        </tr>
+                        <!-- end tr -->
+                        <tr>
+                            <th scope="row" colspan="6" class="border-0 text-end">Total:</th>
+                            <td class="border-0 text-end"><h4 class="m-0 fw-semibold">{{this.totalNota | currency}}</h4></td>
+                        </tr>
+                        <!-- end tr -->
+                    </tbody><!-- end tbody -->
+                </table><!-- end table -->
+            </div><!-- end table responsive -->
+            <div class="d-print-none mt-4">
+                <div class="float-end">
+                    <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a>
+                    
+                    <button class="btn btn-primary w-md" type="submit" [disabled]="formNota.invalid">Guardar </button>
+                  
+                </div>
+            </div>
+        </div>
+      </form>
+         
+      
+  </div><!-- end col -->
+</div><!-- end row -->
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="modalMarca">Agregar producto a la nota</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalPRoducto()" aria-label="Close"></button>
+  </div>
+  
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                          <mat-label style="font-size: 18px;"> Productos </mat-label>
+                          <mat-select [(ngModel)]="producto" >
+                              
+                              <mat-option *ngFor="let data of Productos" [value]="data.producto" (click)="seleciconarProducto(data)">
+                                {{data.codigoDeBarra}} - {{data.nombreymarcaunico}} LOTE: - {{data.lote}}
+                              </mat-option>
+
+                           
+                          </mat-select>
+                          
+                      </mat-form-field>
+                  </div> 
+          
+              </div>
+             
+          </div>
+          
+          <div class="col-md-3">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Cantidad Vendida</mat-label>
+                      <input  [disabled]="true" [(ngModel)]="cantidadVendida" matInput type="number" id="valor" />
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Cantidad Devolución</mat-label>
+                      <input (keyup)="validarCant()" [(ngModel)]="cantidadDevolucion" matInput type="number" id="valor" />
+                  </mat-form-field>
+              </div>
+          </div>
+         
+          
+      </div>
+    
+
+  </div>
+  <div class="modal-footer">
+      
+      <button type="button" (click)="agregarProducto()"  class="btn btn-primary">Agregar</button>
+  </div>
+</ng-template>

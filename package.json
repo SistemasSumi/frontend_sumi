@@ -38,6 +38,7 @@
     "angularfire2": "^5.4.2",
     "bootstrap": "^4.6.0",
     "clipboard": "^2.0.11",
+    "crypto-js": "^4.1.1",
     "datatables.net": "^1.10.24",
     "datatables.net-bs4": "^1.10.24",
     "datatables.net-buttons-bs4": "^1.7.0",

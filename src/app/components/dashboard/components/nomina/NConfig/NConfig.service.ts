@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class NConfigService {
 
 
-    SubjectdataConceptos : BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
+    SubjectdataConceptos : BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(public router:Router, private http:HttpClient, private auth:SeguridadService) { 
 

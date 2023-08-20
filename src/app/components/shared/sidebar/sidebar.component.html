@@ -14,7 +14,7 @@
                     margin-left: -10px;"> -->
                 </span>
                 <span class="logo-lg" >
-                    <img src="assets/images/logo_b_claro.png" alt="logo" height="60">
+                    <img src="assets/images/Logo_b_claro.svg" alt="logo" height="60">
 
 
                 </span>
@@ -26,7 +26,7 @@
 
                 </span>
                 <span class="logo-lg">
-                    <img src="assets/images/Logo_b_oscuro.png" alt="logo" height="60">
+                    <img src="assets/images/Logo_b_azul_blanco.svg" alt="logo" height="60">
                 </span>
             </a>
         </div>
@@ -92,30 +92,30 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
                             <li routerLinkActive="mm-active">
-                                <a [routerLink]="['puc']" routerLinkActive="active" data-key="t-user-grid">Plan único de cuentas(PUC)
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-                                <a [routerLink]="['comprobantes-contables']" routerLinkActive="active" data-key="t-user-grid">Comprobantes contables
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-                                <a [routerLink]="['reportes-contables']" routerLinkActive="active" data-key="t-user-grid">Informes
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-                                <!-- <a [routerLink]="['cxpm']" routerLinkActive="active" data-key="t-user-grid">NOTA CONTABLE
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a> -->
-                                <a [routerLink]="['libroAux']" routerLinkActive="active" data-key="t-user-grid">Libro Auxiliar
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-                                <a [routerLink]="['c']" routerLinkActive="active" data-key="t-user-grid">Conciliación
-                                    <span class="badge rounded-pill badge-soft-danger left"></span>
-                                </a>
-
-
+                                <a [routerLink]="['puc']" routerLinkActive="active">Plan único de cuentas (PUC)</a>
                             </li>
-
-
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['comprobantes-contables']" routerLinkActive="active">Comprobantes contables</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['reportes-contables']" routerLinkActive="active">Informes</a>
+                            </li>
+                            <!-- <li routerLinkActive="mm-active">
+                                <a [routerLink]="['cxpm']" routerLinkActive="active" data-key="t-user-grid">NOTA CONTABLE
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                            </li> -->
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['traslados']" routerLinkActive="active">Traslados</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['libroAux']" routerLinkActive="active">Libro Auxiliar</a>
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['c']" routerLinkActive="active">Conciliación</a>
+                            </li>
                         </ul>
+                        
                     </li>
                     <li routerLinkActive="mm-active">
                         <a href="javascript: void(0);" class="has-arrow">
@@ -125,20 +125,25 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
                             <li routerLinkActive="mm-active">
+                                <a [routerLink]="['gastos']" routerLinkActive="active" data-key="t-user-grid">Gastos
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['cxp']" routerLinkActive="active" data-key="t-user-grid">Cuentas x Pagar
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['ce']" routerLinkActive="active" data-key="t-user-grid">Egreso
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['listado_ce']" routerLinkActive="active" data-key="t-user-grid">Comprobantes Egreso
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
-
-
                             </li>
-
-
                         </ul>
                     </li>
                     <li routerLinkActive="mm-active">
@@ -184,16 +189,36 @@
                                 <a [routerLink]="['facturacion','nueva-factura']" routerLinkActive="active" data-key="t-user-grid">Crear factura
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
+                                
+
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['facturacion','proformas']" routerLinkActive="active" data-key="t-user">Proformas
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
+                                
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['facturacion','facturas']" routerLinkActive="active" data-key="t-fac">Facturas
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
+                               
+
+                                
+                            </li>
+                            <li routerLinkActive="mm-active">
                                 <a [routerLink]="['facturacion','cotizacion']" routerLinkActive="active" data-key="t-fac">Cotizacion
                                     <span class="badge rounded-pill badge-soft-danger left"></span>
                                 </a>
 
+                                
+                            </li>
+                            <li routerLinkActive="mm-active">
+                                <a [routerLink]="['facturacion','nota-credito']" routerLinkActive="active" data-key="t-fac">Nota crédito
+                                    <span class="badge rounded-pill badge-soft-danger left"></span>
+                                </a>
+
+                                
                             </li>
 
 

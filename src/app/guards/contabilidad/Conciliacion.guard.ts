@@ -31,9 +31,7 @@ export class ConciliacionGuard implements CanActivate {
     }
 
   }else{
-
     this.router.navigate(['/home']);
-    // return false;
   }
 
 

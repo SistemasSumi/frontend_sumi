@@ -121,6 +121,16 @@ import { RotacionVentasComponent } from './components/dashboard/components/INFOR
 import { VentasComponent } from './components/dashboard/components/INFORMES/ventas/Ventas/Ventas.component';
 import { VentasVendedorComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedor/VentasVendedor.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TrasladosFondosComponent } from './components/dashboard/components/Contabilidad/TrasladosFondos/TrasladosFondos.component';
+import { FormTrasladosComponent } from './components/dashboard/components/Contabilidad/TrasladosFondos/FormTraslados/FormTraslados.component';
+import { ListadoTrasladosComponent } from './components/dashboard/components/Contabilidad/TrasladosFondos/ListadoTraslados/ListadoTraslados.component';
+import { GastosComponent } from './components/dashboard/components/CuentasxPagar/Gastos/Gastos.component';
+import { ProspectoVentaComponent } from './components/dashboard/components/Facturacion/prospectoVenta/prospectoVenta.component';
+import { PreviewEmpleadosComponent } from './components/dashboard/components/nomina/NEmpleados/PreviewEmpleados/PreviewEmpleados.component';
+import { ModalPreviewFacturaComponent } from './components/dashboard/components/Facturacion/previewFacturas/ModalPreviewFactura/ModalPreviewFactura.component';
+import { NotaCreditoVentasComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/notaCreditoVentas.component';
+import { CrearNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/CrearNCV/CrearNCV.component';
+import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
 
 
 
@@ -217,7 +227,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DateRangeInputComponent,
     RotacionVentasComponent,
     VentasComponent,
-    VentasVendedorComponent
+    VentasVendedorComponent,
+    TrasladosFondosComponent,
+    FormTrasladosComponent,
+    ListadoTrasladosComponent,
+    GastosComponent,
+    ProspectoVentaComponent,
+    PreviewEmpleadosComponent,
+    ModalPreviewFacturaComponent,
+    NotaCreditoVentasComponent,
+    CrearNCVComponent,
+    ListadoNCVComponent
 
 
 

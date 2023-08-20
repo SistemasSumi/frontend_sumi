@@ -5,9 +5,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
+
 import { ConfiguracionService } from '../../../configuracion/Configuracion.service';
 import { ModelTerceroCompleto } from '../../../configuracion/models/ModelTerceroCompleto';
 import { NConfigService } from '../../NConfig/NConfig.service';
+import { EmpleadosService } from '../Empleados.service';
 
 @Component({
   selector: 'app-formEmpleado',
@@ -27,6 +29,9 @@ export class FormEmpleadoComponent implements OnInit {
   
   formEmpleado = this.formBuilder.group({    
     id: ['',{
+      
+    }],
+    foto: ['',{
       
     }],
     idContrato: ['',{
@@ -169,7 +174,7 @@ export class FormEmpleadoComponent implements OnInit {
   protected _onDestroy = new Subject<void>();
 
 
-  constructor(private config:ConfiguracionService, private formBuilder: FormBuilder,private modalService  : NgbModal, private nconfig:NConfigService) { }
+  constructor(private EmpService:EmpleadosService ,private config:ConfiguracionService, private formBuilder: FormBuilder,private modalService  : NgbModal, private nconfig:NConfigService) { }
 
   ngOnInit() {
     this.obtenerEps();
@@ -182,9 +187,7 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
 
-  guardar(){
-      console.log(this.formEmpleado.value);
-  }
+
 
   obtenerProveedor(){
     this.config.SubjectdataProveedor.subscribe(resp => {
@@ -405,6 +408,49 @@ export class FormEmpleadoComponent implements OnInit {
     }else{
 
     }
+  }
+
+  saveEmpleado(){
+    new MetodosShared().AlertQuestion(
+      '¿ SEGURO DESEA GUARDAR UN NUEVO EMPLEADO ?'
+    ).then((result) => {
+      if (result.isConfirmed) {
+
+
+         
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: 'info',
+          title: 'Guardando..',
+          text:'Espere por favor..'
+        });
+        Swal.showLoading();
+        
+        this.EmpService.SaveEmpleado(this.formEmpleado.value).subscribe(
+          (resp) => {
+            Swal.close();
+            this.resetFormEmpleado();
+            this.EmpService.actualizarEmpleados();
+            new MetodosShared().AlertOK('NUEVO EMPLEADO REGISTRADO.!');
+          },
+          (error) => {
+            Swal.close();
+            console.log(error.error)
+          }
+        
+        );
+
+       
+      } 
+    });
+  }
+
+  resetFormEmpleado(){
+    this.formEmpleado.reset();
+
+    // Marcar el formulario como "pristine" (no modificado) y "untouched" (no tocado)
+    this.formEmpleado.markAsPristine();
+    this.formEmpleado.markAsUntouched();
   }
 
 

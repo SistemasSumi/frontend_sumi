@@ -10,10 +10,50 @@ export interface PermisosUsuario {
     cobros      ?: cobrosPermisos,
     empleados   ?: empleadosPermisos,
     wtablas     ?: boolean
+    settings    ?: settingsPermisos,
+    informes    ?: informesPermisos,
+
+
 }
 
 
 
+export interface settingsPermisos {
+    crearUser             ?: boolean,
+    verUser               ?: boolean,
+}
+
+export interface informesPermisos {
+    inv_inventario?       : boolean,
+    inv_inventarioVencido?: boolean,
+
+    oc_comprasDetalladas?: boolean,
+    oc_rotacionProductos?: boolean,
+    oc_retenciones?: boolean,
+
+
+    fac_rotacionProductos?: boolean,
+    fac_ventasDetalladas?: boolean,
+    fac_ventasXVendedor?: boolean,
+    fac_retenciones?: boolean,
+
+
+    conta_balancePrueba?: boolean,
+    conta_EstadoFinanciero?: boolean,
+    conta_EstadoResultado?: boolean,
+    conta_libroAux?: boolean,
+    conta_cxc?: boolean,
+    conta_cxp?: boolean,
+    conta_abonosRecibidos?: boolean,
+
+    cliente_estadoCartera?:boolean,
+    cliente_carteraVencida?:boolean,
+    cliente_listado?:boolean,
+
+
+    proveedor_estadoCartera?:boolean,
+    proveedor_listado?:boolean,
+}
 export interface contabilidadPermisos {
     puc                   ?: boolean,
     comprobantesContables ?: boolean,
@@ -31,6 +71,8 @@ export interface facturacionPermisos {
     despachos            ?: boolean, 
     notaCreditoV          ?: boolean,
     notaDebitoV           ?: boolean,
+    firmarFactura?:boolean,
+    darDeAltaFactura?:boolean,
 } 
 export interface inventarioPermisos {
     bodegas              ?: boolean,
@@ -49,6 +91,7 @@ export interface pagosPermisos {
     cxp?    : boolean,
     egresos?: boolean,
     crear?  : boolean,   
+    pagos?  : boolean,   
 } 
 export interface cobrosPermisos {
     cxc?    : boolean,

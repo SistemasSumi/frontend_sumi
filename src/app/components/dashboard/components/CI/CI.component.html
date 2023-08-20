@@ -175,7 +175,12 @@
                                             
 
                                           
-                                          <td class="text-center font-weight-bold">{{item.factura}}</td>
+                                          <td matTooltip="Pulsa aqui para visualizar la factura." >
+                                            <a href="javascript:;" (click)="imprimirFactura(item)" >{{item.factura}}</a>
+
+                                            
+                                        
+                                        </td>
                                           <td class="text-center font-weight-bold">{{item.fecha}}</td>
                                           <td class="text-center font-weight-bold">{{item.vence}}</td>
                                           <td class="text-end">{{item.valorFactura | currency}}</td>
@@ -272,7 +277,7 @@
                                         </div>
                                     </div>
                                 </div> 
-                                <div class="col-xl-3 col-sm-3" style="min-width: 200px; ">
+                                <div class="col-xl-4 col-sm-3" style="min-width: 200px; ">
                                     <!-- Card -->
                                     <div class="card" style="border: #70C8FF 1px solid;">
                                         <div class="card-body">

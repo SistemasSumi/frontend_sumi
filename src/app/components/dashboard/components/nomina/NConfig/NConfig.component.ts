@@ -44,13 +44,13 @@ export class NConfigComponent implements OnInit {
 
   onEdit(tipo:TipoDeConceptoModel,concepto:Concepto){
 
-    this.edicionEnProceso = true;
     
-
+    
     tipo.conceptos.forEach(element => {
       element.isEdit = false;
     });
-
+    
+    this.edicionEnProceso = true;
     concepto.isEdit = true;
 
 
@@ -69,7 +69,7 @@ export class NConfigComponent implements OnInit {
 
   onCancel(concepto:Concepto){
 
-    this.config.cargarConceptos();
+    // this.config.cargarConceptos();
     
     this.edicionEnProceso = false;
   
@@ -89,8 +89,22 @@ export class NConfigComponent implements OnInit {
 
 
   obtenerConceptos(){
-    this.config.SubjectdataConceptos.subscribe(resp => {
-    
+    this.config.SubjectdataConceptos.subscribe(
+      (resp:TipoDeConceptoModel[]) => {
+      for(let x in resp){
+        for(let i of resp[x].conceptos){
+          // console.log(i)
+          if (!i.cuenta){
+            let model:ModelPuc = new ModelPuc();
+            i.cuenta = model;
+            console.log(i);
+          }
+          if(!i.contrapartida){
+            let model:ModelPuc = new ModelPuc();
+            i.contrapartida = model;
+          }
+        }
+      }
       this.tiposDeConcepto = resp;
     })
   }

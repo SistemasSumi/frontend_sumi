@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  secretKey:"SARP2023",
   firebaseConfig : {
     apiKey: "AIzaSyBfS3l6O7C_xlAWy_QRMrlBZmLU7ZXXcZE",
     authDomain: "sarpsoft-5482d.firebaseapp.com",
@@ -39,10 +40,13 @@ export const environment = {
     }
   
   },
+  
   // BACKEND_DIR:"https://backend.sumiprodelacosta.com/"
   BACKEND_DIR:"http://localhost:8000/"
 
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

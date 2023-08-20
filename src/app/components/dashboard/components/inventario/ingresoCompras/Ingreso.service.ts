@@ -64,7 +64,7 @@ export class IngresoService {
 
 
 
-  buscarIngresoSegunOc(id:number){
+  buscarIngresoSegunOc(id:string){
     const  url = environment.BACKEND_DIR+'inventario/ingreso/?oc='+id;
     const token = this.auth.currentUser.getTokenUser();
     const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);

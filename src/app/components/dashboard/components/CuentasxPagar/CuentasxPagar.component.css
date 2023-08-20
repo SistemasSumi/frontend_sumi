@@ -47,3 +47,7 @@ th {
     background-color: #41B6FF;
 }
 
+.text-proveedor{
+    width: 50%;
+    white-space: nowrap;
+}

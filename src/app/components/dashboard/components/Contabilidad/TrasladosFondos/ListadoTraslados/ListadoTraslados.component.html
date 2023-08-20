@@ -1,0 +1,116 @@
+<div class="main-content">
+  <div class="page-content">
+      <!-- <a class="btn btn-primary btn-sm"  (click)="imprimir()" href="javascript:;" role="button">Descargar </a> -->
+      <div class="col-12">
+          <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h4 class="mb-0"></h4>
+      
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="javascript: void(0);">Contabilidad</a></li>
+                      <li  routerLinkActive="router-link-active"  class="breadcrumb-item active">Listado</li>
+                      <li [routerLink]="['/traslados/nuevo']" class="breadcrumb-item "><a href="javascript: void(0);">Nuevo traslado</a></li>
+                  </ol>
+              </div>
+      
+          </div>
+      </div>
+
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card">
+                      <div class="card-body">
+                          <div class="invoice-title">
+                              
+                              <div class="mb-4">
+                                  <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                              </div>
+                              <!-- <div class="text-muted">
+                                  <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
+                                  <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                                  <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                              </div> -->
+                          </div>
+            
+                          
+                          <div class="row">
+                            <p-divider [text]="'LISTADO DE TRASLADOS'" [align]="'left'"></p-divider>
+                          </div>
+            
+                          <div class="row">
+                            <div class="col-md-12" >
+                                    <table id="TableTraslados" style="width:100%" class="table table-nowrap table-striped table-bordered table-responsive" >
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%;text-align: center; justify-content: center; justify-items: center;">
+                                             
+                                                </th>
+                                            
+                                                <th style="white-space: nowrap">TRASLADO N°</th>
+                                                <th style="white-space: nowrap">FECHA</th>
+                                               
+                                                <th style="white-space: normal;">ORIGEN</th>
+                                                <th style="white-space: nowrap">DESTINO</th>
+                                                <th style="white-space: nowrap">MONTO</th>
+                                        
+                                                <th style="white-space: normal; width: 40%;">CONCEPTO</th>
+                                               
+                                                <th style="width: 8%;">
+                                                    <a type="button" class="btn position-relative" style="padding: 0; color: #fff; font-size: 16px; font-weight: bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu">
+                                                        <div class="input-group">
+                                                            <input type="search" placeholder="Buscar " aria-describedby="button-addon1" class="form-control border-0 bg-light" >
+                                                            <div class="input-group-append">
+                                                                <a id="button-addon1" type="button" class="btn btn-link text-primary"><i class="fa fa-search color-primary"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+      
+                                        </tbody>
+                                </table>
+                            </div>
+                             
+                          </div>
+      
+                         
+                      
+                          
+                       
+                      </div>
+            
+                      
+                  </div>
+              </div><!-- end col -->
+            </div>
+            
+      </div>
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+
+
+
