@@ -21,7 +21,7 @@ export class IngresoAlmacen {
               }
             },
             {
-              content: x.producto.nombreymarcaunico+'('+x.laboratorio+')',
+              content: x.producto.nombreymarcaunico,
               styles: {
                 cellWidth: 145
               }

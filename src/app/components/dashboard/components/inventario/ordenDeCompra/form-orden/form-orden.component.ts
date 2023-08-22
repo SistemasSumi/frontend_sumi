@@ -218,6 +218,7 @@ export class FormOrdenComponent implements OnInit {
                     cantidad:x.cantidad,
                     descuento:x.descuento,
                     iva:x.iva,
+                    subtotal:subtotal,
                     producto:producto,
                     valorUnidad:x.valorUnidad,
                     total:subtotal + iva
@@ -454,6 +455,7 @@ export class FormOrdenComponent implements OnInit {
         cantidad:this.cantidad,
         descuento:this.descuento,
         iva:this.iva,
+        subtotal:this.valorUnidad * this.cantidad, 
         producto:this.producto,
         valorUnidad:this.valorUnidad,
         total:this.total
@@ -690,6 +692,7 @@ export interface DetailPurchaseOrder {
   descuento:   number;
   iva:         number;
   total:       number;
+  subtotal:    number;
   producto:    Producto;
 }
 

@@ -132,15 +132,16 @@
                               </mat-form-field>
                           </div>
                       </div>
-                      <div class="col-md-3" *ngIf="domicilio">
+                      <div class="col-md-4">
+                        
                         <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                            <mat-label style="font-size: 16px;">Domicilio</mat-label>
-                            <mat-select required  style="text-align: center;" formControlName="valorDomicilio" >
-                              <mat-option [value]="7000" (click)="calcularTotales(this.listadoDetalleFactura)">{{7000 | currency}}</mat-option> 
-                              <mat-option [value]="6000" (click)="calcularTotales(this.listadoDetalleFactura)">{{6000 | currency}}</mat-option> 
-                              <mat-option [value]="5000" (click)="calcularTotales(this.listadoDetalleFactura)">{{5000 | currency}}</mat-option> 
-                              <mat-option [value]="4000" (click)="calcularTotales(this.listadoDetalleFactura)">{{4000 | currency}}</mat-option> 
-                              <mat-option [value]="0" (click)="calcularTotales(this.listadoDetalleFactura)">{{0 | currency}}</mat-option> 
+                            <mat-label  style="font-size: 16px;">Domicilio  </mat-label>
+                            <mat-select (ngModelChange)="calcularTotales(this.listadoDetalleFactura)" [disabled]="!domicilio" required  style="text-align: center;" formControlName="valorDomicilio" >
+                              <mat-option (click)="domicilio = true"[value]="7000" >{{7000 | currency}}</mat-option> 
+                              <mat-option (click)="domicilio = true" [value]="6000" >{{6000 | currency}}</mat-option> 
+                              <mat-option (click)="domicilio = true" [value]="5000" >{{5000 | currency}}</mat-option> 
+                              <mat-option (click)="domicilio = true" [value]="4000" >{{4000 | currency}}</mat-option> 
+                              <mat-option  [value]="0" (click)="domicilio = false">{{0 | currency}}</mat-option> 
                               <!-- <mat-option *ngFor="let item of formasPago" [value]="item.id">{{item.nombre}}</mat-option> -->
                             </mat-select>
                         </mat-form-field>

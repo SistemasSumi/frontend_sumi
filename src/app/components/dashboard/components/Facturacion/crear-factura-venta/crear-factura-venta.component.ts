@@ -615,7 +615,13 @@ export class CrearFacturaVentaComponent implements OnInit {
 
     if(this.formfacturacion.value.valorDomicilio > 0){
         if(this.totalFactura < 50000   && !this.clienteSeleccionado.isElectronico){
-          this.domicilioFactura = this.formfacturacion.value.valorDomicilio;
+          if(this.domicilio){
+            this.domicilioFactura = this.formfacturacion.value.valorDomicilio;
+
+          }else{
+            this.formfacturacion.get('valorDomicilio').setValue(0);
+            this.domicilioFactura = 0;
+          }
         }else{
           this.formfacturacion.get('valorDomicilio').setValue(0);
           this.domicilioFactura = 0;
@@ -630,6 +636,9 @@ export class CrearFacturaVentaComponent implements OnInit {
           this.domicilioFactura = 0;
         }
         
+      }else{
+        this.formfacturacion.get('valorDomicilio').setValue(0);
+        this.domicilioFactura = 0;
       }
     }
 
