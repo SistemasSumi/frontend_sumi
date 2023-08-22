@@ -74,7 +74,7 @@
                     </div>
                   </div><!-- end table responsive -->
                   <div class="d-print-none mt-4">
-                      <div class="float-end">
+                      <div class="float-end" *ngIf="this.permisos.facturacion.firmarFactura || this.permisos.superusuario">
                           <a (click)="rechazar()" href="javascript:" class="btn btn-danger me-1">RECHAZAR</a>
                           <a (click)="aprobar()" href="javascript:;" class="btn btn-success w-md">APROBAR</a>
                       </div>

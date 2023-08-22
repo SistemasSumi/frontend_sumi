@@ -27,7 +27,7 @@ export class NotaCreditoVentasService {
       private http:HttpClient, 
       private auth:SeguridadService,
       private settings:ConfiguracionService) {
-        // this.cargarNotas();
+         this.cargarNotas();
        }
   
   
@@ -37,7 +37,7 @@ export class NotaCreditoVentasService {
     }
   
     getNotas(){
-        const  url = environment.BACKEND_DIR+'inventario/notacredito/';
+        const  url = environment.BACKEND_DIR+'facturacion/notacredito/';
         const token = this.auth.currentUser.getTokenUser();
         const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
   
@@ -50,7 +50,7 @@ export class NotaCreditoVentasService {
   
   
     cargarNumeracion(){
-      return this.settings.getNumeraciones('notaCreditoVentas');
+      return this.settings.getNumeraciones('notacredito');
     }
   
     cargarFacturas(id:number){

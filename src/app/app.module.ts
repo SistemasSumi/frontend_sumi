@@ -131,6 +131,7 @@ import { ModalPreviewFacturaComponent } from './components/dashboard/components/
 import { NotaCreditoVentasComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/notaCreditoVentas.component';
 import { CrearNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/CrearNCV/CrearNCV.component';
 import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
+import {  CvfFormComponent } from './components/dashboard/components/Facturacion/prospectoVenta/CcfForm/CcfForm.component';
 
 
 
@@ -237,7 +238,8 @@ import { ListadoNCVComponent } from './components/dashboard/components/Facturaci
     ModalPreviewFacturaComponent,
     NotaCreditoVentasComponent,
     CrearNCVComponent,
-    ListadoNCVComponent
+    ListadoNCVComponent,
+    CvfFormComponent,
 
 
 

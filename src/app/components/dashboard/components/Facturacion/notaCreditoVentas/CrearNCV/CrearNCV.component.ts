@@ -294,6 +294,7 @@ export class CrearNCVComponent implements OnInit {
 
       let detalle:DetailNotaCredito = {
         producto:this.productoSeleccionado.producto,
+        valorCompra:this.productoSeleccionado.valorCompra,
         cantidad:this.cantidadDevolucion,
         codigoDeBarra: this.productoSeleccionado.codigoDeBarra,
         nombreymarcaunico: this.productoSeleccionado.nombreymarcaunico,
@@ -500,6 +501,7 @@ interface Productos {
   codigoDeBarra    : number;
   lote             : string;
   cantidad         : number;
+  valorCompra      : number;
   valor            : number;
   descuento        : number;
   iva              : number;
@@ -540,6 +542,7 @@ interface DetailNotaCredito {
   nombreymarcaunico: number;
   codigoDeBarra    : number;
   cantidad:    number;
+  valorCompra: number;
   valor: number;
   lote:   string;
   iva:         number;

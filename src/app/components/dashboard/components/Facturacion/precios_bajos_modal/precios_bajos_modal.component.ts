@@ -3,7 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { DbService } from 'src/app/components/auth/db.service';
-import { Notificaciones } from 'src/app/components/auth/permisosUsuario';
+import { Notificaciones, PermisosUsuario } from 'src/app/components/auth/permisosUsuario';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { ConfiguracionService } from '../../configuracion/Configuracion.service';
@@ -21,12 +21,13 @@ export class Precios_bajos_modalComponent implements OnInit {
 
   @Input() notificacion: Notificaciones;
   @Input() instanciaModal: NgbModalRef;
-
+  permisos:PermisosUsuario;
   clientes:ModelTerceroCompleto[] = [];
   cliente:ModelTerceroCompleto;
   venta:any;
 
   constructor(private toastr: ToastrService,private fire_db:DbService, private config:ConfiguracionService, private auth:SeguridadService) { 
+    this.permisos = this.auth.currentUser.getPermisos();
    
   }
 

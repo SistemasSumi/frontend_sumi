@@ -106,6 +106,7 @@ import { NotaCreditoVentasComponent } from './components/dashboard/components/Fa
 import { NotaCreditoVGuard } from './guards/facturacion/NotaCreditoV.guard';
 import { CrearNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/CrearNCV/CrearNCV.component';
 import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
+import { CvfFormComponent } from './components/dashboard/components/Facturacion/prospectoVenta/CcfForm/CcfForm.component';
 
 
 
@@ -167,29 +168,29 @@ const routes: Routes = [
       path: 'informes', 
       component: INFORMESComponent,
       children: [
-        { path: 'cliente/estadoCartera',component:EstadoCarteraClienteComponent,canActivate:[CrearProductosGuard]},
-        { path: 'cliente/CarteraVencida',component:CarteraVencidaClientesComponent,canActivate:[VerProductosGuard]},
+        { path: 'cliente/estadoCartera',component:EstadoCarteraClienteComponent,canActivate:[InformesCGuard]},
+        { path: 'cliente/CarteraVencida',component:CarteraVencidaClientesComponent,canActivate:[InformesCGuard]},
         
         
-        { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[KardexGuard]},
+        { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[InformesCGuard]},
         
         
-        { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[KardexGuard]},
-        { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[KardexGuard]},
+        { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[InformesCGuard]},
+        { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[InformesCGuard]},
         
-        { path: 'compras/rotacion',component:RotacionComprasComponent,canActivate:[KardexGuard]},
-        { path: 'compras/retencion',component:RetencionesComprasComponent,canActivate:[KardexGuard]},
-        { path: 'compras/detalladas',component:ComprasDetalladasComponent,canActivate:[KardexGuard]},
+        { path: 'compras/rotacion',component:RotacionComprasComponent,canActivate:[InformesCGuard]},
+        { path: 'compras/retencion',component:RetencionesComprasComponent,canActivate:[InformesCGuard]},
+        { path: 'compras/detalladas',component:ComprasDetalladasComponent,canActivate:[InformesCGuard]},
 
 
-        { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[KardexGuard]},
-        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[KardexGuard]},
-        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[KardexGuard]},
+        { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[InformesCGuard]},
+        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[InformesCGuard]},
+        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[InformesCGuard]},
         
-        { path: 'contabilidad/abonos',component:AbonosRecibidosComponent,canActivate:[KardexGuard]},
-        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[KardexGuard]},
-        { path: 'contabilidad/BalanceDePrueba',component:BalanceDePruebaComponent,canActivate:[CrearProductosGuard]},
-        { path: 'contabilidad/EstadoSituacionFinanciera',component:EstadoSituacionFinancieraComponent,canActivate:[CrearProductosGuard]},
+        { path: 'contabilidad/abonos',component:AbonosRecibidosComponent,canActivate:[InformesCGuard]},
+        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[InformesCGuard]},
+        { path: 'contabilidad/BalanceDePrueba',component:BalanceDePruebaComponent,canActivate:[InformesCGuard]},
+        { path: 'contabilidad/EstadoSituacionFinanciera',component:EstadoSituacionFinancieraComponent,canActivate:[InformesCGuard]},
         
     ],
       canActivate:[AuthGuard]
@@ -250,6 +251,16 @@ const routes: Routes = [
           { path: 'proformas',component:ProformasComponent, canActivate:[AuthGuard,ProformaGuard]},
           { path: 'facturas',component:ListadoFacturasComponent, canActivate:[AuthGuard,ListadoFacturaGuard]},
           { path: 'cotizacion',component:ProspectoVentaComponent, canActivate:[AuthGuard,CotizacionGuard]},
+          { 
+            path: 'cotizacion',
+            component:ProspectoVentaComponent,
+            children: [
+              { path: 'add',component:CvfFormComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
+              { path: 'listado',component:ListadoNCVComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
+
+            ],
+            canActivate:[AuthGuard,CotizacionGuard]
+          },
           { path: 'preview/:id',component:PreviewFacturasComponent, canActivate:[AuthGuard,ListadoFacturaGuard]},
           { 
             path: 'nota-credito',
@@ -282,10 +293,10 @@ const routes: Routes = [
 
     // { path: 'nueva-factura', component: FacturacionComponent,canActivate:[AuthGuard]},
     { path: 'preview/empleado', component: PreviewEmpleadosComponent,canActivate:[AuthGuard]},
-    { path: 'terceros', component: TercerosComponent,canActivate:[AuthGuard]},
-    { path: 'terceros/:id', component: TercerosComponent,canActivate:[AuthGuard]},
-    { path: 'proveedores', component: ListadoProveedoresComponent,canActivate:[AuthGuard]},
-    { path: 'clientes', component: ListadoClientesComponent,canActivate:[AuthGuard]},
+    { path: 'terceros', component: TercerosComponent,canActivate:[AuthGuard,MovimientosCGuard]},
+    { path: 'terceros/:id', component: TercerosComponent,canActivate:[AuthGuard,MovimientosCGuard]},
+    { path: 'proveedores', component: ListadoProveedoresComponent,canActivate:[AuthGuard,MovimientosCGuard]},
+    { path: 'clientes', component: ListadoClientesComponent,canActivate:[AuthGuard,MovimientosCGuard]},
     { path: 'login', component: LoginComponent },
     { path: '', pathMatch: 'full', redirectTo:'login' },
     { path: '**', pathMatch: 'full', redirectTo:'home' },
