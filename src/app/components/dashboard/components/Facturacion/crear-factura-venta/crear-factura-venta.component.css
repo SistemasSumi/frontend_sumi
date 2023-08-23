@@ -170,3 +170,12 @@
   .swal2-validation-message{
     font-weight: bold;
   }
+
+  .icon-info {
+    font-size: 1rem;
+    position: absolute;
+    right: 20px; /* Ajusta el valor según tu necesidad */
+    top: 50%; /* Centra verticalmente el icono */
+    transform: translateY(-50%);
+    cursor: pointer;
+  }

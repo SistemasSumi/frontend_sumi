@@ -132,25 +132,12 @@
                               </mat-form-field>
                           </div>
                       </div>
-                      <div class="col-md-4">
-                        
-                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                            <mat-label  style="font-size: 16px;">Domicilio  </mat-label>
-                            <mat-select (ngModelChange)="calcularTotales(this.listadoDetalleFactura)" [disabled]="!domicilio" required  style="text-align: center;" formControlName="valorDomicilio" >
-                              <mat-option (click)="domicilio = true"[value]="7000" >{{7000 | currency}}</mat-option> 
-                              <mat-option (click)="domicilio = true" [value]="6000" >{{6000 | currency}}</mat-option> 
-                              <mat-option (click)="domicilio = true" [value]="5000" >{{5000 | currency}}</mat-option> 
-                              <mat-option (click)="domicilio = true" [value]="4000" >{{4000 | currency}}</mat-option> 
-                              <mat-option  [value]="0" (click)="domicilio = false">{{0 | currency}}</mat-option> 
-                              <!-- <mat-option *ngFor="let item of formasPago" [value]="item.id">{{item.nombre}}</mat-option> -->
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                      <div class="col-md-3">
-                        <div class="float-right">
-                            <a *ngIf="formfacturacion.valid" href="javascript:;" (click)="openModalProductos(content)" class="btn btn-soft-primary btn-md " >Agregar producto <i class="mdi mdi-plus-circle-outline ms-1"></i></a>
-                        </div> 
-                    </div>
+                      
+                        <div class="col-md-3">
+                            <div class="float-right">
+                                <a *ngIf="formfacturacion.valid" href="javascript:;" (click)="openModalProductos(content)" class="btn btn-soft-primary btn-md " >Agregar producto <i class="mdi mdi-plus-circle-outline ms-1"></i></a>
+                            </div> 
+                        </div>
                     </div>
                     <div class="row">
                       
@@ -317,15 +304,15 @@
                   <div class="col-md-10">
                       <mat-form-field appearance="outline" style="width:100%; height: auto;">
                           <mat-label style="font-size: 18px;">Productos</mat-label>
-                          <mat-select  placeholder="Buscar productos" [(ngModel)]="producto">
+                          <mat-select  placeholder="Buscar productos" [(ngModel)]="producto" (ngModelChange)="seleccionarProducto($event)">
                               <mat-option>
                                   <ngx-mat-select-search [formControl]="filtroProductoControl"  #filtroDeProducto
                                       placeholderLabel="Buscar productos" noEntriesFoundLabel="No hay resultados">
                                       <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                   </ngx-mat-select-search>
                               </mat-option>
-                              <mat-option [tooltipProducto]="data" *ngFor="let data of filtroProductos | async" [value]="data" (click)="seleccionarProducto(data)">
-                                {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
+                              <mat-option  *ngFor="let data of filtroProductos | async" [value]="data" >
+                                {{data.codigoDeBarra}} - {{data.nombreymarcaunico}} <span class="icon-info text-primary"><mat-icon [tooltipProducto]="data">info</mat-icon></span>
                               </mat-option>
 
                            
@@ -373,14 +360,7 @@
                </div>
             </div>
           </div>
-          <div class="col-md-2">
-            <mat-form-field appearance="fill" style="width: 100%;">
-                <mat-label>Fecha vencimiento</mat-label>
-                <input [disabled]="true" matInput [matDatepicker]="picker" [(ngModel)]="vence">
-              
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-          </div>
+          
           <div class="col-md-2">
               <div class="form-group">
                   <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
@@ -390,6 +370,18 @@
               </div>
           </div>
           <div class="col-md-2">
+            <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
+              <mat-label>Valor (UND)</mat-label>
+              <input (keyup)="calcular()" (ngModelChange)="calcular()" [onblur]="transform" type="text" placeholder="" aria-label="valor" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="valor" [matAutocomplete]="precio">
+              <mat-autocomplete autoActiveFirstOption #precio="matAutocomplete" >
+        
+                  <mat-option (click)="calcular()"  *ngFor="let data of listaPrecios; let i = index" [value]="data.valor">{{i+1}}  - {{data.valor | currency}}</mat-option>
+                  
+              </mat-autocomplete>
+            </mat-form-field>
+                 
+          </div>
+          <div class="col-md-2">
               <div class="form-group">
                   <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
                       <mat-label style="font-size: 16px;">Cantidad</mat-label>
@@ -397,17 +389,13 @@
                   </mat-form-field>
               </div>
           </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
-              <mat-label>Valor (UND)</mat-label>
-              <input (keyup)="calcular()" (change)="calcular()" [onblur]="transform" type="text" placeholder="" aria-label="valor" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="valor" [matAutocomplete]="precio">
-              <mat-autocomplete autoActiveFirstOption #precio="matAutocomplete" >
-        
-                  <mat-option  *ngFor="let data of listaPrecios; let i = index" [value]="data.valor">{{i+1}}  - {{data.valor | currency}}</mat-option>
-                  
-              </mat-autocomplete>
-            </mat-form-field>
-                 
+          <div class="col-md-2">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Fecha vencimiento</mat-label>
+                <input [disabled]="true" matInput [matDatepicker]="picker" [(ngModel)]="vence">
+              
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
           </div>
          
           <div class="col-md-3">

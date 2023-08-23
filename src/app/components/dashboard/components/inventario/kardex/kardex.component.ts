@@ -13,6 +13,7 @@ export class KardexComponent implements OnInit,AfterViewInit  {
   constructor() { }
   ngAfterViewInit(): void {
     setTimeout(() => {
+      
       const container = this.tablaScroll.nativeElement as HTMLElement;
       if (container.scrollTop + container.clientHeight < container.scrollHeight) {
         this.mostrarIconoFlotante = true;
@@ -24,10 +25,12 @@ export class KardexComponent implements OnInit,AfterViewInit  {
         container.addEventListener('scroll', () => {
           if (container.scrollTop + container.clientHeight < container.scrollHeight) {
             this.mostrarIconoFlotante = true;
+            
           } else {
             this.mostrarIconoFlotante = false;
           }
         });
+       
       }
     }, 0);
   }
@@ -36,6 +39,8 @@ export class KardexComponent implements OnInit,AfterViewInit  {
   }
 
   scrollToLastRow(): void {
+    console.log("hola");
+    
     setTimeout(() => {
       const tableContainer = document.querySelector('.table-scroll') as HTMLElement;
       const table = tableContainer.querySelector('table') as HTMLElement;

@@ -94,19 +94,7 @@
                             </div>
                         </div>
                        
-                        <div class="col-md-3" *ngIf="domicilio">
-                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                <mat-label style="font-size: 16px;">Domicilio</mat-label>
-                                <mat-select required  style="text-align: center;" formControlName="valorDomicilio" >
-                                  <mat-option [value]="7000" (click)="calcularTotales(this.listadoDetalleFactura)">{{7000 | currency}}</mat-option> 
-                                  <mat-option [value]="6000" (click)="calcularTotales(this.listadoDetalleFactura)">{{6000 | currency}}</mat-option> 
-                                  <mat-option [value]="5000" (click)="calcularTotales(this.listadoDetalleFactura)">{{5000 | currency}}</mat-option> 
-                                  <mat-option [value]="4000" (click)="calcularTotales(this.listadoDetalleFactura)">{{4000 | currency}}</mat-option> 
-                                  <mat-option [value]="0" (click)="calcularTotales(this.listadoDetalleFactura)">{{0 | currency}}</mat-option> 
-                                  <!-- <mat-option *ngFor="let item of formasPago" [value]="item.id">{{item.nombre}}</mat-option> -->
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+                        
                       <div class="col-md-3">
                         <div class="float-right">
                             <a *ngIf="formfacturacion.valid" href="javascript:;" (click)="openModalProductos(content)" class="btn btn-soft-primary btn-md " >Agregar producto <i class="mdi mdi-plus-circle-outline ms-1"></i></a>
@@ -319,51 +307,59 @@
               </mat-form-field>
           </div>
           <div class="col-md-2">
-              <div class="form-group">
-                  <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
-                      <mat-label style="font-size: 16px;">Existencia</mat-label>
-                      <input  [disabled]="true" [(ngModel)]="existencia" matInput type="number" id="cantidad" />
-                  </mat-form-field>
-              </div>
-          </div>
-          <div class="col-md-2">
-              <div class="form-group">
-                  <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
-                      <mat-label style="font-size: 16px;">Cantidad</mat-label>
-                      <input  (keyup)="calcular()" (change)="calcular()"  [(ngModel)]="cantidad" matInput type="number" id="cantidad" />
-                  </mat-form-field>
-              </div>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
-              <mat-label>Valor (UND)</mat-label>
-              <input  (keyup)="calcular()" (change)="calcular()" [onblur]="transform" type="text" placeholder="" aria-label="valor" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="valor" [matAutocomplete]="precio">
-              <mat-autocomplete autoActiveFirstOption #precio="matAutocomplete" >
-        
-                  <mat-option (click)="calcular()" *ngFor="let data of listaPrecios; let i = index" [value]="data.valor">{{i+1}}  - {{data.valor | currency}}</mat-option>
-                  
-              </mat-autocomplete>
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
+                    <mat-label style="font-size: 16px;">Existencia</mat-label>
+                    <input  [disabled]="true" [(ngModel)]="existencia" matInput type="number" id="cantidad" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
+            <mat-label>Valor (UND)</mat-label>
+            <input (keyup)="calcular()" (change)="calcular()" [onblur]="transform" type="text" placeholder="" aria-label="valor" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="valor" [matAutocomplete]="precio">
+            <mat-autocomplete autoActiveFirstOption #precio="matAutocomplete" >
+      
+                <mat-option  (click)="calcular()" *ngFor="let data of listaPrecios; let i = index" [value]="data.valor">{{i+1}}  - {{data.valor | currency}}</mat-option>
+                
+            </mat-autocomplete>
+          </mat-form-field>
+               
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: center; ">
+                    <mat-label style="font-size: 16px;">Cantidad</mat-label>
+                    <input  (keyup)="calcular()"  [(ngModel)]="cantidad" matInput type="number" id="cantidad" />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Fecha vencimiento</mat-label>
+              <input [disabled]="true" matInput [matDatepicker]="picker" [(ngModel)]="vence">
+            
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-                 
+        </div>
+       
+        <div class="col-md-3">
+          <div class="form-group">
+              <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
+                  <mat-label style="font-size: 16px;">Descuento</mat-label>
+                  <input (keyup)="calcular()"   (change)="calcular()"   [(ngModel)]="descuento" matInput type="number" id="descuento" />
+                  <mat-checkbox (change)="validarDescuento()" [(ngModel)]="descuentoPorcentaje" matPrefix >%</mat-checkbox>
+                </mat-form-field>
           </div>
-         
-          <div class="col-md-3">
-              <div class="form-group">
-                  <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
-                      <mat-label style="font-size: 16px;">Descuento</mat-label>
-                      <input (keyup)="calcular()"   (change)="calcular()"   [(ngModel)]="descuento" matInput type="number" id="descuento" />
-                      <mat-checkbox (change)="validarDescuento()" [(ngModel)]="descuentoPorcentaje" matPrefix >%</mat-checkbox>
-                    </mat-form-field>
-              </div>
-          </div>
-          <div class="col-md-3">
-              <div class="form-group">
-                  <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
-                      <mat-label style="font-size: 16px;">IVA</mat-label>
-                      <input    [disabled]="true" [(ngModel)]="iva" matInput type="number" id="iva" />
-                  </mat-form-field>
-              </div>
-          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <mat-form-field appearance="outline" style="width:100%; height: auto; text-align: right;">
+                    <mat-label style="font-size: 16px;">IVA</mat-label>
+                    <input   [disabled]="true" [(ngModel)]="iva" matInput type="number" id="iva" />
+                </mat-form-field>
+            </div>
+        </div>
       </div>
     
 

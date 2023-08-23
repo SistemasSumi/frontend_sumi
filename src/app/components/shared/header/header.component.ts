@@ -50,8 +50,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.setOnTheme();
-    this.registerToken();
     this.obtenerNotificaciones();
+    this.registerToken();
     
     // this.loadScript('../assets/js/app.js');
   }
@@ -147,7 +147,7 @@ export class HeaderComponent implements OnInit {
     
                 // Guardar la lista actualizada de tokens de registro en Firebase
                 this.firestore.collection('usuariosNotificacion').doc(userId).set({
-                  grupo:'CONTABILIDAD',
+                  grupo:'DEFAULT',
                   tokens: currentTokens
                 }).then(() => {
                   console.log('Token de registro guardado exitosamente en Firebase');

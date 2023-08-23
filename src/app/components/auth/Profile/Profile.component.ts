@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
     if (this.user.is_vendedor) {
       this.auth.obtenerVentasVendedor().subscribe(resp => {
         this.auth.balance = resp.balance;
+        console.log(resp);
 
       });
     }

@@ -19,6 +19,21 @@
   }
 
 
+
+/* Estilo para ocultar la barra de desplazamiento */
+.table-scroll::-webkit-scrollbar {
+  width: 0.5em; /* Ajusta el ancho de la barra de desplazamiento */
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Oculta el pulgar de la barra de desplazamiento */
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Oculta el fondo de la barra de desplazamiento */
+}
+
+
 .table-scroll tfoot,
 .table-scroll tfoot th,
 .table-scroll tfoot td {
@@ -29,7 +44,7 @@
   /* border: none; */
  background:white; 
   color: #000;
-  z-index:4;
+  z-index:2;
 }
 
 .tabla-container {
@@ -42,7 +57,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3; /* Asegúrate de que el z-index sea mayor que el de las filas */
+    z-index: 100; /* Asegúrate de que el z-index sea mayor que el de las filas */
     pointer-events: auto; /* Permite la interacción con el icono */
     /* Cambia el color de fondo del icono según tus necesidades */
  /* Aplica un borde redondeado al icono si es necesario */
@@ -86,7 +101,48 @@
     z-index:4;
 
     color: #fff;
-
+    z-index:2;
     background-color: #41B6FF; 
 }
 
+.container-2{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.redes a, .btn-mas label{
+  display: block;
+  text-decoration: none;
+  background: #cc2b2b;
+  color: #fff;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
+  transition: all 500ms ease;
+}
+.redes a:hover{
+  background: #fff;
+  color: #cc2b2b;
+}
+.redes a{
+  margin-bottom: -15px;
+  opacity: 0;
+  visibility: hidden;
+}
+#btn-mas:checked~ .redes a{
+  margin-bottom: 10px;
+  opacity: 1;
+  visibility: visible;
+}
+.btn-mas label{
+  cursor: pointer;
+  background: #f44141;
+  font-size: 23px;
+}
+#btn-mas:checked ~ .btn-mas label{
+  transform: rotate(135deg);
+  font-size: 25px;
+}
