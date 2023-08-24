@@ -311,7 +311,7 @@
                     <mat-label style="font-size: 16px;">Lote</mat-label>
                     <mat-select required [(ngModel)]="inventario"  style="text-align: center;" (ngModelChange)="seleccionarInventario($event)">
                       <ng-container *ngFor="let item of inventarioProducto">
-                          <mat-option *ngIf="obtenerExistencias(item) > 0" [value]="item"  [disabled]="!item.estado">
+                          <mat-option  [value]="item"  [disabled]="!item.estado">
                               {{ item.lote }}
                           </mat-option>
                       </ng-container>
