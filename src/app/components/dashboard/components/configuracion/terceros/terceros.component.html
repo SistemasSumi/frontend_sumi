@@ -281,54 +281,103 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <mat-form-field appearance="fill" style="width: 100%;">
-                                                    <mat-label style="font-size: 14px;">Cuenta por cobrar</mat-label>
-                                                    <mat-select formControlName="cuenta_x_cobrar" >    
-                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
-
-                                                        
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Cuenta por cobrar</mat-label>
+                                                    <mat-select formControlName="cuenta_x_cobrar" required   style="text-align: center;">
+                            
+                                                        <mat-option>
+                                                            <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                                placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                            </ngx-mat-select-search>
+                                                        </mat-option>
+                            
+                                                        <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                                            <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
+                                                               {{c.codigo }} - {{ c.nombre}}
+                                                            </mat-option>
+                                                        </mat-optgroup>
+                                                     
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">   
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                                    <mat-label style="font-size: 16px;">Cuenta por pagar</mat-label>
+                                                    <mat-select formControlName="cuenta_x_pagar" required   style="text-align: center;">
+                            
+                                                        <mat-option>
+                                                            <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                                placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                            </ngx-mat-select-search>
+                                                        </mat-option>
+                            
+                                                        <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                                            <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
+                                                               {{c.codigo }} - {{ c.nombre}}
+                                                            </mat-option>
+                                                        </mat-optgroup>
+                                                     
                                                     </mat-select>
                                                 </mat-form-field>
                                 
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">    
-                                                <mat-form-field appearance="fill" style="width: 100%;">
-                                                    <mat-label style="font-size: 14px;">Cuenta por pagar</mat-label>
-                                                    <mat-select formControlName="cuenta_x_pagar" >    
-                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
-
-                                                        
-                                                    </mat-select>
-                                                </mat-form-field>
-                                
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">    
-                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                            <div class="form-group">  
+                                                
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                                     <mat-label style="font-size: 16px;">Saldo a favor cliente</mat-label>
-                                                    <mat-select formControlName="cuenta_saldo_a_cliente" >    
-                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
-
-                                                        
+                                                    <mat-select formControlName="cuenta_saldo_a_cliente" required   style="text-align: center;">
+                            
+                                                        <mat-option>
+                                                            <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                                placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                            </ngx-mat-select-search>
+                                                        </mat-option>
+                            
+                                                        <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                                            <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
+                                                               {{c.codigo }} - {{ c.nombre}}
+                                                            </mat-option>
+                                                        </mat-optgroup>
+                                                     
                                                     </mat-select>
                                                 </mat-form-field>
+
+
+                    
                                 
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">    
-                                                <mat-form-field appearance="fill" style="width: 100%;" color="primary">
+                                            <div class="form-group">  
+                                                
+                                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                                     <mat-label style="font-size: 16px;">Saldo a favor proveedor</mat-label>
-                                                    <mat-select formControlName="cuenta_saldo_a_proveedor">    
-                                                        <mat-option *ngFor="let item of cuentasPuc" [value]="item.id">{{item.nombre}}</mat-option>
-
-                                                        
+                                                    <mat-select formControlName="cuenta_saldo_a_proveedor" required   style="text-align: center;">
+                            
+                                                        <mat-option>
+                                                            <ngx-mat-select-search [formControl]="filtroCuentasControl"  #filtroCuentas 
+                                                                placeholderLabel="Buscar cuenta" noEntriesFoundLabel="No hay resultados">
+                                                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                                            </ngx-mat-select-search>
+                                                        </mat-option>
+                            
+                                                        <mat-optgroup *ngFor="let group of listaDeGrupos" [label]="group.codigo+' - '+group.nombre">
+                                                            <mat-option *ngFor="let c of group.cuentas" [value]="c.id" (click)="cuenta = c">
+                                                               {{c.codigo }} - {{ c.nombre}}
+                                                            </mat-option>
+                                                        </mat-optgroup>
+                                                     
                                                     </mat-select>
                                                 </mat-form-field>
-                                
+                                   
                                             </div>
                                         </div>
                                     </div>

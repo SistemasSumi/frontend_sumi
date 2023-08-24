@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,9 @@ import { ModelRetencionesTercero } from '../models/ModelRetencionesTercero';
 import { ModelVendedor } from '../models/ModelVendedor';
 import { TablesBasicService } from '../TablesBasic/tablesBasic.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 declare var $;
 
@@ -28,8 +31,9 @@ declare var $;
 export class TercerosComponent implements OnInit {
   
   actualizar:boolean = false;
-
-
+  public filtroCuentasControl: FormControl = new FormControl('');
+  listCuentas:ModelPuc[] = [];
+  listaDeGrupos:grupos[] = [];
   descuentoProveedor: ModelPlazosProveedor = null;
   descuentoCliente  : ModelPlazosClientes  = null;
 
@@ -39,7 +43,11 @@ export class TercerosComponent implements OnInit {
   modalDescuentoP: NgbModalRef;
   modalDescuentoC: NgbModalRef;
   modalRetencion: NgbModalRef;
+  protected _onDestroy = new Subject<void>();
 
+  public filtroCuentas: BehaviorSubject<ModelPuc[]> = new BehaviorSubject<ModelPuc[]>([]) ;
+
+  metodos:MetodosShared = new MetodosShared();
   
   table:any = $('').DataTable({});
 
@@ -257,12 +265,47 @@ export class TercerosComponent implements OnInit {
 
         });
 
+      
+
       }
+
+      this.puc.getCuentas().subscribe((resp:ModelPuc[])=>{
+        this.listCuentas = resp;
+  
+        this.filtroCuentas.next(resp);
+  
+      
+      });
+      this.InitFiltroPuc();
+      this.getVendedores();
+      
+      this.filtroCuentas.subscribe(resp => {
+        this.listaDeGrupos = [];
+        console.log(resp);
+        for(let x of resp){
+          if(x.codigo.toString().length < 6 && x.codigo.toString().length >= 4 ){
+            let c:cuentas[] = [];
+            for(let j of resp){
+              if(x.codigo.toString() == j.codigo.toString().substring(0, 4) && j.codigo.toString().length >= 6){
+                c.push(j)
+              }
+            }
+  
+            let g:grupos = {
+              codigo: x.codigo,
+              nombre:x.nombre,
+              cuentas:c
+            }
+  
+            this.listaDeGrupos.push(g);
+          }
+        }
+     
+      });
       
       this.getDepartamentos();
       this.getFormasDePago();
-      this.getCuentasPuc();
-      this.getVendedores();
+
 
   }
 
@@ -364,6 +407,20 @@ export class TercerosComponent implements OnInit {
     
   }
   
+  InitFiltroPuc(){
+    this.filtroCuentasControl.valueChanges
+      .pipe(takeUntil (this._onDestroy))
+      .subscribe(() => {
+        this.filtrarPuc(this.filtroCuentasControl.value);
+      });
+  }
+
+  filtrarPuc(busqueda:string){
+    let filtro:ModelPuc[] = this.metodos.filtrarArrayPuc<ModelPuc>(this.listCuentas,'codigo',busqueda);
+    this.filtroCuentas.next(filtro);
+  }
+
+
   resetform(){
     $("#formTercero").trigger("reset");
    
@@ -387,8 +444,10 @@ export class TercerosComponent implements OnInit {
   }
 
   getCuentasPuc(){
-    this.puc.SubjectdataPuc.subscribe(resp => {
-      this.cuentasPuc = resp;
+    this.puc.SubjectdataPuc.subscribe((resp:ModelPuc[]) => {
+      
+      this.listCuentas = resp;
+      this.filtroCuentas.next(resp);
     });
   }
 
@@ -627,4 +686,16 @@ export class TercerosComponent implements OnInit {
   //   })
   // }
 
+}
+interface grupos {
+  nombre: string;
+  codigo: string;
+  cuentas: cuentas[];
+}
+
+interface cuentas {
+  id: number
+  codigo: string;
+  nombre: string;
+  
 }

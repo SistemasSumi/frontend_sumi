@@ -38,11 +38,11 @@ export const environment = {
       "copy": "Copiar",
       "colvis": "Visibilidad"
     }
-  
+
   },
-  
-  // BACKEND_DIR:"https://backend.sumiprodelacosta.com/"
-  BACKEND_DIR:"http://localhost:8000/"
+
+  BACKEND_DIR:"https://backend.sumiprodelacosta.com/"
+  // BACKEND_DIR:"http://localhost:8000/"
 
 };
 
