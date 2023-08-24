@@ -89,15 +89,92 @@
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="ventas" role="tabpanel">
-                                        <p class="mb-0">
-                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                            sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                                            farm-to-table readymade. Messenger bag gentrify pitchfork
-                                            tattooed craft beer, iphone skateboard locavore carles etsy
-                                            salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                            Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                            mi whatever gluten-free carles.
-                                        </p>
+
+                                        <div class="row mb-2">
+                                            
+                                            <span   class="list-group-item ">
+                                                <div class="d-flex align-items-center">
+                                                  <div class="avatar flex-shrink-0 me-3">
+                                                      <img *ngIf="resumen?.avatar" style="width: 50px; height:50px;" [src]="resumen.avatar" alt="" class="rounded-circle img-thumbnail header-profile-user">
+                                                      <img *ngIf="!resumen?.avatar" style="width: 50px; height:50px;" src="../assets/theme/img/svg/avatar.svg" alt="" class="rounded-circle img-thumbnail header-profile-user">
+                                                  </div>
+                                                  <div class="flex-grow-1">
+                                                        <div style="position: relative;">
+                                                          
+                                                          <div class="row mb-2" >
+                                                            <div class="skill-box">
+                                                    
+                                                                <div class="skill-bar">
+                                                                    
+                                                                    <span class="skill-per html" [style.width]="(resumen?.porcentaje) + '%'" >
+                                                                     
+                                                                      <span class="tooltip-custom">{{resumen?.porcentaje | number:'1.2-2' }}%</span>
+                                                                        
+                                                                    </span>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                    
+                                                          
+                                                          </div>
+                                                          <h5 class="font-size-14 "><b>{{resumen?.cliente__vendedor__nombre}}</b></h5>
+                                                          <ul>
+                                                           
+                                                            <li><b>Balance:</b><span  class="font-size-13 text-muted fw-bold"> {{resumen?.monto_total | currency}} ({{resumen?.porcentaje| number:'1.2-2'  }}%)</span></li>
+                                                            <li><b>Meta:</b><span  class="font-size-13 text-muted fw-bold"> {{resumen?.meta_vendedor | currency}}</span></li>
+                                                          </ul>
+                                                            
+                                  
+                                                        </div>
+                                                    
+                                                          
+                                                  </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div class="row">
+                                            
+                                            <div class="tabla-container">
+    
+                                                <div class="table-scroll" #tablaScroll >
+                                                
+                                                  <table class="table  align-middle  table-hover mb-2 mostrar-barra" >
+                                                    <thead class="bg-light">
+                                                        <tr>
+                                                            <th style="width: 80%;" class="text-center">CLIENTE</th>
+                                                           
+                                                            <th style="width: auto;" class="text-center">TOTAL</th>
+                                                        </tr><!-- end tr -->
+                                                      </thead><!-- end thead -->
+                                                      <tbody>
+                                                  
+                                                        <tr *ngFor="let item of ventas">
+                                                          <td style="white-space: normal;" class="text-left">{{item.cliente__nombreComercial }}</td>
+                                                          <td  class="text-right">{{item.total  | currency}}</td>
+                                                          
+                                                         
+                                                        </tr>
+                                                        
+                                                      </tbody><!-- end tbody -->
+                                                      <tfoot>
+                                                  
+                                                        <tr>
+                                                          <td style="white-space: normal;" class="text-center">TOTAL MES ACTUAL</td>
+                                                          <td  class="text-right">{{totalVendido  | currency}}</td>
+                                                          
+                                        
+                                                        </tr>
+                                                        
+                                                      </tfoot><!-- end tbody -->
+                                                  </table>
+                                                  
+                                                  
+                                                
+                                                
+                                                </div>  
+                                                
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                 </div>

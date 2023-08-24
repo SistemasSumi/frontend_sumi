@@ -126,10 +126,9 @@
                       </div>
                       
                       <div class="py-2">
-                          <h5 class="font-size-15">Detalle del ingreso </h5>
 
-                          <div class="table-responsive">
-                              <table class="table table-responsive align-middle table-normal table-centered mb-0">
+                          <div class="table-scroll">
+                              <table style="border-collapse: collapse;" class="table table-responsive align-middle table-normal table-centered mb-0 table-detalle">
                                   <thead>
                                       <tr>
                                           <th width="auto" class="text-center">COD.</th>
@@ -170,38 +169,56 @@
                                           <td class="text-end">{{item.total | currency}}</td>
                                       </tr>
                                     
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="text-end">Subtotal:</th>
-                                          <td class="text-end">{{subtotalIngreso | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              Descuento :</th>
-                                          <td class="border-0 text-end" style="color: red;">- {{descuentoIngreso | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              IVA :</th>
-                                          <td class="border-0 text-end">{{ivaIngreso | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">
-                                              Retención:</th>
-                                          <td class="border-0 text-end" style="color: red;">- {{retencionIngreso | currency}}</td>
-                                      </tr>
-                                      <!-- end tr -->
-                                      <tr>
-                                          <th scope="row" colspan="9" class="border-0 text-end">Total:</th>
-                                          <td class="border-0 text-end"><h4 class="m-0 fw-semibold">{{totalIngreso | currency}}</h4></td>
-                                      </tr>
-                                      <!-- end tr -->
+                                     
                                   </tbody><!-- end tbody -->
                               </table><!-- end table -->
                           </div><!-- end table responsive -->
+                          <div class="table-footer">
+
+                            <table   class="float-end table-balance">
+                               
+                                <tr>
+                                    <th class="th-title text-end" scope="row" colspan="9" class="text-end">Subtotal :</th>
+                                    <td class=" text-end" [appAnimatedPrice]="subtotalIngreso">  {{subtotalIngreso   | currency}}</td>
+                                   
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="9" class=" th-title text-end">
+                                        Descuento :</th>
+                                    <td class=" text-end text-danger" [appAnimatedPrice]="descuentoIngreso">  - {{descuentoIngreso   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="9" class="th-title text-end">
+                                        IVA :</th>
+                                    <td class="text-end" [appAnimatedPrice]="ivaIngreso">  - {{ivaIngreso   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                                <tr>
+                                    <th scope="row" colspan="9" class=" th-title text-end">
+                                        Retención :</th>
+                                    <td class=" text-end text-danger" [appAnimatedPrice]="retencionIngreso">  - {{retencionIngreso   | currency}}</td>
+                                   
+                                    
+                                </tr>
+                                <!-- end tr -->
+                                <tr #tablaRef style="font-size: 20px; text-transform: uppercase;">
+                                    <th  scope="row" colspan="9" class="text-center border-0 t-total text-end"><h4>Total </h4></th>
+                                    <td  class="t-total border-0  text-end "><h4 [appAnimatedPrice]="totalIngreso" class="fw-semibold">  {{totalIngreso   | currency}}</h4></td>
+                                   
+                                    
+                                </tr>
+                            </table>
+
+                            
+                          </div>
+                          <div style="clear: both;"></div>
+                          <hr>
                           <div class="d-print-none mt-4">
                               <div class="float-end">
                                   <a href="javascript:;" class="btn btn-danger me-1"(click)="cancelarGuardado()"><i class="fa fa-ban"></i></a> 

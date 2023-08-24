@@ -131,7 +131,18 @@
                         
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3 col-md-3 col-lg-6">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                            <mat-label style="font-size: 16px;">ESTADO DIAN</mat-label>
+                                            <mat-select   style="text-align: center;" [(ngModel)]="this.filtroAvanzado.estadoDian">
+                                                <mat-option  value="1">ENVIADA</mat-option>
+                                                <mat-option  value="0">PENDIENTE</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-4">
                                     <div class="form-group">
                                         <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                             <mat-label style="font-size: 16px;">Observación</mat-label>

@@ -48,7 +48,8 @@ export class ListadoFacturasComponent implements OnInit  {
     vendedor:null,
     valor:null,
     fechaInicial:null,
-    fechaFinal:null
+    fechaFinal:null,
+    estadoDian:null
   };
   @ViewChild('dataTableEl') dataTableEl: ElementRef;
 
@@ -652,7 +653,8 @@ export class ListadoFacturasComponent implements OnInit  {
       vendedor:null,
       valor:null,
       fechaInicial:null,
-      fechaFinal:null
+      fechaFinal:null,
+      estadoDian:null
     };
   }
 
