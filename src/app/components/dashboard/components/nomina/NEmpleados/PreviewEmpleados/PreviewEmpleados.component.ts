@@ -14,6 +14,9 @@ export class PreviewEmpleadosComponent implements OnInit {
   datosContrato:DatosContrato;
   datosDePago:DatosDePago;
 
+
+  _editDatosPersonales:boolean = false;
+
   constructor(private route:ActivatedRoute) { }
 
   ngOnInit() {

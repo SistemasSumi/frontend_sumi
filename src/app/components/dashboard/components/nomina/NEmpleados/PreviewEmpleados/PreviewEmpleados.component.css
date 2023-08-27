@@ -2,3 +2,24 @@
     width: 150px;
     height: 150px;
 }
+
+.custom-underline {
+    display: inline-block;
+    position: relative;
+    color: #41b6ff;
+  }
+  
+  .custom-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px dashed #41b6ff;
+  }
+ 
+  
+  
+  
+  
+  

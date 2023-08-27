@@ -321,6 +321,23 @@ export class CrearFacturaVentaComponent implements OnInit {
       return;
     }
 
+    if(this.inventarioProducto){
+      const fechaVenceSelected = data.vencimiento;
+      for(let x of this.inventarioProducto){
+        if(x.vencimiento < fechaVenceSelected){
+          Swal.fire({
+            icon: 'warning', // Icono de advertencia
+            title: '¡Advertencia!',
+            text: 'Nos gustaría señalar que entre los lotes disponibles existen aquellos cuyas fechas de vencimiento están próximas a la del lote que has seleccionado. Esta información reviste relevancia, ya que refleja la alta calidad y frescura de nuestros productos. Te instamos a tener en consideración esta valiosa información al momento de tomar tu decisión final. La excelencia en cada detalle es nuestro compromiso contigo.',
+            confirmButtonText: 'Aceptar'
+          });
+
+          // Salir del bucle for una vez que se muestra la alerta
+          break;
+        }
+      }
+    }
+
     this.lote        = data.lote;
 
     this.vence       = data.vencimiento;
@@ -414,6 +431,7 @@ export class CrearFacturaVentaComponent implements OnInit {
   cerrarModalPRoducto(){
     this.modalProducto.close();
     this.limpiarDetalle();
+    this.inventarioProducto = [];
   }
 
   
