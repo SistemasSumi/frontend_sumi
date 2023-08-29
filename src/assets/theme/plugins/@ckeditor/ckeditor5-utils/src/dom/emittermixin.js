@@ -28,7 +28,7 @@ import { extend } from 'lodash-es';
  *
  *		const view = new SomeView();
  *		view.listenTo( domElement, ( evt, domEvt ) => {
- *			console.log( evt, domEvt );
+ *			// console.log( evt, domEvt );
  *		} );
  *
  * @mixin EmitterMixin

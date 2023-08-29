@@ -270,7 +270,7 @@ export class CombrobantesContablesComponent implements OnInit {
           Swal.showLoading();
           this.pucService.imprimirMovi(data.numero.toString()).subscribe((resp:any)=> {
             Swal.close();
-            console.log(resp)
+            // console.log(resp)
             let reporte = new MovimientoContable();
   
             let report = reporte.ReporteMovimientoContable(resp);

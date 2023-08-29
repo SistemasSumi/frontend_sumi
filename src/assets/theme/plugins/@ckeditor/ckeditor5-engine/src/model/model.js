@@ -201,13 +201,13 @@ export default class Model {
 	 * it will be delayed and executed after the outermost block.
 	 *
 	 *		model.change( writer => {
-	 *			console.log( 1 );
+	 *			// console.log( 1 );
 	 *
 	 *			model.enqueueChange( writer => {
-	 *				console.log( 2 );
+	 *				// console.log( 2 );
 	 *			} );
 	 *
-	 * 			console.log( 3 );
+	 * 			// console.log( 3 );
 	 *		} ); // Will log: 1, 3, 2.
 	 *
 	 * In addition to that, the changes enqueued with `enqueueChange()` will be converted separately from the changes
@@ -263,7 +263,7 @@ export default class Model {
 	 * @param {module:engine/model/operation/operation~Operation} operation The operation to apply.
 	 */
 	applyOperation( operation ) {
-		// @if CK_DEBUG_ENGINE // console.log( 'Applying ' + operation );
+		// @if CK_DEBUG_ENGINE // // console.log( 'Applying ' + operation );
 
 		// @if CK_DEBUG_ENGINE // if ( !this._operationLogs ) {
 		// @if CK_DEBUG_ENGINE //	this._operationLogs = [];

@@ -21,7 +21,7 @@ export class ListadoUsuariosComponent implements OnInit {
 
   ObtenerListado(){
     this.auth.ListadoUsuarios().subscribe(resp => {
-      console.log(resp);
+   
       for(let x of resp){
         let u:UserModel = new UserModel();
 

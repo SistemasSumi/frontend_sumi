@@ -86,7 +86,7 @@ export class VentasComponent implements OnInit {
     Swal.showLoading();
 
     this.informes.VentasDetalladas(this.cliente_id,this.tipo,this.dateRange.startDate,this.dateRange.endDate).subscribe(resp => {
-      console.log(resp)
+      // console.log(resp)
       
       let reporte = new VentasDetalladas()
       reporte.dowloadExcel(resp,this.tipo,this.dateRange.startDate,this.dateRange.endDate);

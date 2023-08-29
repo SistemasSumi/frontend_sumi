@@ -64,9 +64,9 @@ export default class UploadGateway {
 	 *     const token = await Token.create( 'https://token-endpoint' );
 	 *     new UploadGateway( token, 'https://example.org' )
 	 *        .upload( 'FILE' )
-	 *        .onProgress( ( data ) => console.log( data ) )
+	 *        .onProgress( ( data ) => // console.log( data ) )
 	 *        .send()
-	 *        .then( ( response ) => console.log( response ) );
+	 *        .then( ( response ) => // console.log( response ) );
 	 *
 	 * @param {Blob|String} fileOrData A blob object or a data string encoded with Base64.
 	 * @returns {module:cloud-services/uploadgateway/fileuploader~FileUploader} Returns `FileUploader` instance.

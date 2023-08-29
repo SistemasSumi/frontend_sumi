@@ -48,7 +48,7 @@ export default class Input extends Plugin {
 	 *
 	 *		editor.model.document.on( 'change:data', ( evt, batch ) => {
 	 *			if ( input.isInput( batch ) ) {
-	 *				console.log( 'The user typed something...' );
+	 *				// console.log( 'The user typed something...' );
 	 *			}
 	 *		} );
 	 *

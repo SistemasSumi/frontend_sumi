@@ -336,7 +336,7 @@ export class NotaCreditoComprasReport {
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-          console.log(pageCount);
+          // console.log(pageCount);
     
           doc.setFontSize(10);
           // Go to page i

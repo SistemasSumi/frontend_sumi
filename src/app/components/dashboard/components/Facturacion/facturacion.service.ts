@@ -133,7 +133,7 @@ obtenerProformas(){
 
   return this.http.get<any>(url,{headers: httpHeaders}).pipe(
     
-    map(resp =>  {this.SubjectdataProformas.next(resp),console.log("respondio",resp);})
+    map(resp =>  {this.SubjectdataProformas.next(resp)})
   ) 
 }
 
@@ -434,7 +434,7 @@ proformaAFactura(data:any){
   
 
   return this.http.post<any[]>(url,data,{headers: httpHeaders}).pipe(
-      map(resp =>  console.log(resp))
+      map(resp =>  {})
   )
 
 }

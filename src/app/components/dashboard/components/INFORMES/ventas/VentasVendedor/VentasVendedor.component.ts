@@ -43,7 +43,7 @@ export class VentasVendedorComponent implements OnInit {
 
   ngOnInit() {
     this.config.SubjectdataVendedores.subscribe((resp:ModelVendedor[]) => {
-      console.log(resp)
+      // console.log(resp)
       if(resp){
 
         for(let x of resp){
@@ -60,7 +60,7 @@ export class VentasVendedorComponent implements OnInit {
   }
 
   generar(){
-    console.log(this.Listvendedores,this.dateRange)
+    // console.log(this.Listvendedores,this.dateRange)
 
     if(this.Listvendedores.length <= 0){
       new MetodosShared().AlertError('Por favor, asegúrese de seleccionar al menos un vendedor antes de continuar. Es necesario tener al menos un vendedor seleccionado para realizar la operación requerida.')
@@ -86,7 +86,7 @@ export class VentasVendedorComponent implements OnInit {
       this.reporte = resp;
       },
       (error) => {   
-        console.log(error);
+        // console.log(error);
           
         Swal.close();
       });
@@ -94,7 +94,7 @@ export class VentasVendedorComponent implements OnInit {
   
   removeChip(chip: string): void {
     const index = this.Listvendedores.indexOf(chip);
-    console.log(chip,index)
+    // console.log(chip,index)
     if (index >= 0) {
       this.Listvendedores.splice(index, 1);
     }

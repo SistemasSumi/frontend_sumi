@@ -41,7 +41,7 @@ getstock(){
       this.stockData = resp;
       for (let x in this.stockData.data) {
         //  this.productosData[x].porcentaje = resp[x].porcentaje+"%"
-        //  console.log(this.stockData.data[x].vencimiento);
+        //  // console.log(this.stockData.data[x].vencimiento);
          this.stockData.data[x].vencimiento = moment(this.stockData.data[x].vencimiento).format('MMMM DD YYYY');
          this.stockData.data[x].fecha_actualizacion = moment(this.stockData.data[x].vencimiento,'MMMM DD YYYY').fromNow();
         
@@ -71,7 +71,7 @@ getstockConsumo(){
       this.stockDataConsumo = resp;
       for (let x in this.stockDataConsumo.data) {
         //  this.productosData[x].porcentaje = resp[x].porcentaje+"%"
-        //  console.log(this.stockData.data[x].vencimiento);
+        //  // console.log(this.stockData.data[x].vencimiento);
          this.stockDataConsumo.data[x].vencimiento = moment(this.stockDataConsumo.data[x].vencimiento).format('MMMM DD YYYY');
          
        
@@ -98,7 +98,7 @@ getstockTat(){
       this.stockDataTat = resp;
       for (let x in this.stockDataTat.data) {
         //  this.productosData[x].porcentaje = resp[x].porcentaje+"%"
-        //  console.log(this.stockData.data[x].vencimiento);
+        //  // console.log(this.stockData.data[x].vencimiento);
          this.stockDataTat.data[x].vencimiento = moment(this.stockDataTat.data[x].vencimiento).format('MMMM DD YYYY');
          
        
@@ -157,7 +157,7 @@ getstockProductoConsumo(){
          this.productosData.data[x].valorventa  = this.cp.transform(parseInt(this.productosData.data[x].valorventa));
          this.productosData.data[x].valorventa2 = this.cp.transform(parseInt(this.productosData.data[x].valorventa2));
          this.productosData.data[x].valorventa3 = this.cp.transform(parseInt(this.productosData.data[x].valorventa3));
-        //  console.log(this.productosData[x].vencimiento);
+        //  // console.log(this.productosData[x].vencimiento);
        
        }       
          
@@ -184,7 +184,7 @@ getstockProductoComercializado(){
          this.productosData.data[x].valorventa  = this.cp.transform(parseInt(this.productosData.data[x].valorventa));
          this.productosData.data[x].valorventa2 = this.cp.transform(parseInt(this.productosData.data[x].valorventa2));
          this.productosData.data[x].valorventa3 = this.cp.transform(parseInt(this.productosData.data[x].valorventa3));
-        //  console.log(this.productosData[x].vencimiento);
+        //  // console.log(this.productosData[x].vencimiento);
        
        }       
          

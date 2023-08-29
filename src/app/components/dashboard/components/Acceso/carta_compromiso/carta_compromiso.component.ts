@@ -54,13 +54,13 @@ fotoRecuperada:string;
   
 
   archivoSeleccionado(file){
-    console.log(file);
+    // console.log(file);
     
     this.formCartas.get('archivo').setValue(file)
   }
 
   TipoArchivoSeleccionado(file){
-    console.log(file);
+    // console.log(file);
     
     this.formCartas.get('tipoArchivo').setValue(file)
   }
@@ -134,7 +134,7 @@ fotoRecuperada:string;
           class:'text-center',
           orderable: false,
           render: function(data,type,row){
-              console.log(data);
+              // console.log(data);
               
               let img = "";
               if(data.tipo == "PDF"){
@@ -169,7 +169,7 @@ fotoRecuperada:string;
   llenarCartas(){
     this.table.destroy();
     this.productoService.getCartas().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Cartas",
@@ -188,7 +188,7 @@ fotoRecuperada:string;
     }) 
   }
   Registrar(){
-    console.log(this.formCartas.value);
+    // console.log(this.formCartas.value);
 
     this.productoService.createNewCartaCompromiso(this.formCartas).subscribe((resp:any)=>{
       this.llenarCartas();
@@ -199,7 +199,7 @@ fotoRecuperada:string;
 
   getDataProducto(): void {
     this.productoService.getproductos().subscribe((data:any) => {
-      console.log(data);
+      // console.log(data);
       
      this.dataProducto$ = data.data;
    });
@@ -207,13 +207,13 @@ fotoRecuperada:string;
 
 
   onChangeCodigo(deviceValue){
-    console.log(deviceValue);
+    // console.log(deviceValue);
     deviceValue = deviceValue.toString().toUpperCase();
     let producto = this.dataProducto$.filter(p => p.codigodebarra === deviceValue);
  
     
       if(producto.length > 0){
-        console.log(producto);
+        // console.log(producto);
         
         // this.formCorte.get('codigo').setValue(producto[0].codigodebarra);
         this.formCartas.get('producto').setValue(producto[0].id);
@@ -225,11 +225,11 @@ fotoRecuperada:string;
   }
 
   onChangeProducto(deviceValue){
-    console.log(deviceValue);
+    // console.log(deviceValue);
     
       let producto = this.dataProducto$.filter(p => p.id === deviceValue);
       if(producto.length > 0){
-        console.log(producto);
+        // console.log(producto);
         
         this.formCartas.get('codigo').setValue(producto[0].codigodebarra);
         // this.formCorte.get('costo').setValue(producto[0].valorcompra);
@@ -237,7 +237,7 @@ fotoRecuperada:string;
         // this.formCorte.get('precio').setValue(producto[0].valorventa);
           // this.formCorte.get('idcliente').setValue(cliente[0]);
       }
-      // console.log(cliente);
+      // // console.log(cliente);
 
 
     // this.dataCliente$.subscribe(resp => {

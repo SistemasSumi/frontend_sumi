@@ -62,7 +62,7 @@ export class EstadoCarteraProveedorComponent implements OnInit {
   }
 
   generarPDF(){
-    console.log(this.cliente_id)
+    // console.log(this.cliente_id)
     if(this.cliente_id == undefined || this.cliente_id == null || this.cliente_id == '' ){
       this.metodos.AlertError("Debe seleccionar un proveedor.");
       return;
@@ -96,7 +96,7 @@ export class EstadoCarteraProveedorComponent implements OnInit {
   }
 
   generarExcel(){
-    console.log(this.cliente_id)
+    // console.log(this.cliente_id)
     if(this.cliente_id == undefined || this.cliente_id == null || this.cliente_id == '' ){
       this.metodos.AlertError("Debe seleccionar un cliente.");
       return;

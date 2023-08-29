@@ -208,7 +208,7 @@ export class TablasBasicasService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
         this.ServicioData = resp;
-        console.log(resp);
+        // console.log(resp);
         for (let x in resp) {
           this.ServicioData[x].valor = this.cp.transform(parseInt(resp[x].valor));
         }
@@ -279,7 +279,7 @@ export class TablasBasicasService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
         this.settingsData = resp;
-        console.log(resp);
+        // console.log(resp);
         
         return resp;
       })

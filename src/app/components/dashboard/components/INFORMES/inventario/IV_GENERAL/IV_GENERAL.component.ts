@@ -41,7 +41,7 @@ export class IV_GENERALComponent implements OnInit {
 
     this.informes.Inventario_general(this.bodega_id,this.tipo_id).subscribe(resp => {
       
-      console.log(resp);
+      // console.log(resp);
       let reporte = new InventarioGeneral()
       reporte.dowloadExcel(resp);
       Swal.close()

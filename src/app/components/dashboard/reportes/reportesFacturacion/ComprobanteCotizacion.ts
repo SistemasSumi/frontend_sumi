@@ -230,7 +230,7 @@ export class ComprobanteCotizacion{
         });
         const pageCount = (doc as any).internal.getNumberOfPages(); //was doc.internal.getNumberOfPages(); 
         for (let i = 1; i <= pageCount; i++) {
-          console.log(pageCount);
+          // console.log(pageCount);
           doc.setFontSize(10);
           // Go to page i
           doc.setPage(i);

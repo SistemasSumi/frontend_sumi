@@ -38,7 +38,7 @@ export class FormEmpleadosComponent implements OnInit,AfterViewInit {
 
   constructor(private formBuilder: FormBuilder,private tablasBasicas:TablasBasicasService) {
     this.tablasBasicas.cargosSubject.subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.dataCargos = resp;
       
     })
@@ -68,9 +68,9 @@ export class FormEmpleadosComponent implements OnInit,AfterViewInit {
       this.fotoRecuperada = res.foto;
       this.recuperarFoto();
       
-      console.log(this.dataCargos);
+      // console.log(this.dataCargos);
        this.initFormEdit(res);
-       console.log(res.cargo);
+       // console.log(res.cargo);
       
      })
   

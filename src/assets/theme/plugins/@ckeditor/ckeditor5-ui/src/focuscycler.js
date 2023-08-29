@@ -35,7 +35,7 @@ import global from '@ckeditor/ckeditor5-utils/src/dom/global';
  *		cycler.focusFirst();
  *
  *		// Will log the next focusable item in #focusables.
- *		console.log( cycler.next );
+ *		// console.log( cycler.next );
  *
  * Alternatively, it can work side by side with the {@link module:utils/keystrokehandler~KeystrokeHandler}:
  *

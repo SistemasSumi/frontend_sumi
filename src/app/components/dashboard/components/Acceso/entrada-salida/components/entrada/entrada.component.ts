@@ -53,9 +53,9 @@ export class EntradaComponent implements OnInit, AfterViewInit{
   getPerson(form:FormGroup){
     // this.acceso.getPerson(form.value.cedula).subscribe((resp:any) =>{
     //   this.persona = resp; 
-    //   console.log(resp);
+    //   // console.log(resp);
     //   this.phone = "+57"+resp.empleado.telefonos;
-    //   console.log(this.phone);
+    //   // console.log(this.phone);
     //   this.sendSmsCode();
       
     // })
@@ -67,7 +67,7 @@ export class EntradaComponent implements OnInit, AfterViewInit{
       //   'size': 'invisible',
       //   'callback': function(response) {
       //     // reCAPTCHA solved, allow signInWithPhoneNumber.
-      //     console.log(response);
+      //     // console.log(response);
       //   }
       // });
       // this.recaptchaVerifier.render();
@@ -80,7 +80,7 @@ export class EntradaComponent implements OnInit, AfterViewInit{
     // this.acceso.sendSmsVerification(phoneNumber, appVerification).then(result => {
     //   this.confirmationResult = result;
     //   this.smsEnviado = true;
-    // }).catch(error => console.log(error));
+    // }).catch(error => // console.log(error));
 
   }
 
@@ -89,7 +89,7 @@ export class EntradaComponent implements OnInit, AfterViewInit{
     // this.confirmationResult.confirm(this.verificationCode).then(result => {
     //   this.router.navigateByUrl('acceso/detalle-entrada');
       
-    // }).catch(error => console.log('el codigo no es valido'));
+    // }).catch(error => // console.log('el codigo no es valido'));
   }
 
 }

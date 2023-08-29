@@ -168,24 +168,24 @@ const routes: Routes = [
       path: 'informes', 
       component: INFORMESComponent,
       children: [
-        { path: 'cliente/estadoCartera',component:EstadoCarteraClienteComponent,canActivate:[InformesCGuard]},
-        { path: 'cliente/CarteraVencida',component:CarteraVencidaClientesComponent,canActivate:[InformesCGuard]},
+        { path: 'cliente/estadoCartera',component:EstadoCarteraClienteComponent,canActivate:[CxcGuard]},
+        { path: 'cliente/CarteraVencida',component:CarteraVencidaClientesComponent,canActivate:[CxcGuard]},
         
         
-        { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[InformesCGuard]},
+        { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[CxpGuard]},
         
         
-        { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[InformesCGuard]},
-        { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[InformesCGuard]},
+        { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[BodegasGuard]},
+        { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[BodegasGuard]},
         
-        { path: 'compras/rotacion',component:RotacionComprasComponent,canActivate:[InformesCGuard]},
-        { path: 'compras/retencion',component:RetencionesComprasComponent,canActivate:[InformesCGuard]},
-        { path: 'compras/detalladas',component:ComprasDetalladasComponent,canActivate:[InformesCGuard]},
+        { path: 'compras/rotacion',component:RotacionComprasComponent,canActivate:[OrdenCompraGuard]},
+        { path: 'compras/retencion',component:RetencionesComprasComponent,canActivate:[OrdenCompraGuard]},
+        { path: 'compras/detalladas',component:ComprasDetalladasComponent,canActivate:[OrdenCompraGuard]},
 
 
-        { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[InformesCGuard]},
-        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[InformesCGuard]},
-        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[InformesCGuard]},
+        { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[OrdenCompraGuard]},
+        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[OrdenCompraGuard]},
+        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[OrdenCompraGuard]},
         
         { path: 'contabilidad/abonos',component:AbonosRecibidosComponent,canActivate:[InformesCGuard]},
         { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[InformesCGuard]},

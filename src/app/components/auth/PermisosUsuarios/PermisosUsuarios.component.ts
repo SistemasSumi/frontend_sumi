@@ -48,7 +48,6 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
     this.permisos = this.initPermisosDefault();
     this.sub = this.auth.SubjectdataEditUser.subscribe(resp => {
       this.usuario = resp;
-      console.log(resp)
 
       if(resp){
         this.cargarPermisos(resp.username);
@@ -62,12 +61,9 @@ export class PermisosUsuariosComponent implements OnInit,OnDestroy {
 
 
   cargarPermisos(username) {
-    console.log(username)
     this.db.getDoc('permisos',username).subscribe((resp:PermisosUsuario) => {
       
-      console.log(resp);
       this.permisos = resp;
-      console.log(this.permisos);
     })
   }
 

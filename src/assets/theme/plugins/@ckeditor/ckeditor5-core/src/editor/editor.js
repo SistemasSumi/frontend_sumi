@@ -207,7 +207,7 @@ export default class Editor {
 		 *
 		 *		// Execute your own callback:
 		 *		editor.keystrokes.set( 'Ctrl+E', ( data, cancel ) => {
-		 *			console.log( data.keyCode );
+		 *			// console.log( data.keyCode );
 		 *
 		 *			// Prevent the default (native) action and stop the underlying keydown event
 		 *			// so no other editor feature will interfere.

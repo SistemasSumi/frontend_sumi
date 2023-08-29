@@ -51,7 +51,7 @@ export class ModalPreviewFacturaComponent implements OnInit {
       Swal.showLoading();
       this.invoceService.obtenerFactura(this.id).subscribe(resp => {
 
-        console.log(resp);
+        // console.log(resp);
                 
         this.factura = resp;
 

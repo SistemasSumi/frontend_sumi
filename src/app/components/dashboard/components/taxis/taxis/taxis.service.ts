@@ -63,7 +63,7 @@ saveTaxi(form:FormGroup){
 
   return this.http.post(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -89,7 +89,7 @@ saveTaxiKm(form:FormGroup){
 
   return this.http.put(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -117,7 +117,7 @@ updateTurno(form:FormGroup){
 
   return this.http.put(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -143,7 +143,7 @@ saveTurno(form:FormGroup){
 
   return this.http.post(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -173,7 +173,7 @@ updateTaxi(form:FormGroup){
 
   return this.http.put(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })

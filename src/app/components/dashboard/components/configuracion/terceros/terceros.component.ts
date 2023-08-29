@@ -281,7 +281,7 @@ export class TercerosComponent implements OnInit {
       
       this.filtroCuentas.subscribe(resp => {
         this.listaDeGrupos = [];
-        console.log(resp);
+        // console.log(resp);
         for(let x of resp){
           if(x.codigo.toString().length < 6 && x.codigo.toString().length >= 4 ){
             let c:cuentas[] = [];
@@ -335,16 +335,16 @@ export class TercerosComponent implements OnInit {
           title: 'SarpSoft',
           text: 'Tercero actualizado con exito!',
         });
-        console.log(resp);
+        // console.log(resp);
         this.resetform();
       },(ex) => {
         Swal.close();
-          console.log(ex);
+          // console.log(ex);
           // this.resultado.emit(true);
           
           let errores ='';
           for(let x in ex.error){
-            console.log();
+            // console.log();
             
             errores +=`
             <div class="alert alert-danger" role="alert" style="text-align: justify;">
@@ -371,17 +371,17 @@ export class TercerosComponent implements OnInit {
           title: 'SarpSoft',
           text: 'Tercero registrado con exito!',
         });
-          console.log(resp);
+          // console.log(resp);
           this.resetform();
       },(ex) => {
           Swal.close();
           
-          console.log(ex);
+          // console.log(ex);
           // this.resultado.emit(true);
           
           let errores ='';
           for(let x in ex.error){
-            console.log();
+            // console.log();
             
             errores +=`
             <div class="alert alert-danger" role="alert" style="text-align: justify;">
@@ -631,7 +631,7 @@ export class TercerosComponent implements OnInit {
   //       $('#eliminar'+idtable, row).off('click');
   //       $('#eliminar'+idtable, row).on('click', () => {
   //         if (idtable === "Cargo") {
-  //          console.log(data['cargo']+"eliminado");
+  //          // console.log(data['cargo']+"eliminado");
            
   //         }else if (idtable === "Color"){
            
@@ -647,7 +647,7 @@ export class TercerosComponent implements OnInit {
 
   // llenarTableTerceros(){
   //   this.empresa.SubjectdataTerceros.subscribe(resp => {
-  //     console.log(resp);
+  //     // console.log(resp);
       
   //     this.table.destroy();
   //     this.llenarTable(

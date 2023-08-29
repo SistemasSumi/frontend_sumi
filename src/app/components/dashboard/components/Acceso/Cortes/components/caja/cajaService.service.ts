@@ -46,7 +46,7 @@ getReporte(){
   return this.http.post<any>(url, data,this.httpOptions).pipe(
     map(resp => {
       // this.clientesData = resp;
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })

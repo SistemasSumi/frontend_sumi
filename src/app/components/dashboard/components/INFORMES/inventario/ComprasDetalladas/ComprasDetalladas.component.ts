@@ -65,7 +65,7 @@ export class ComprasDetalladasComponent implements OnInit {
 
   generarExcel(){
 
-    console.log(this.dateRange)
+    // console.log(this.dateRange)
     
       if(this.dateRange == undefined || this.dateRange == null  ){
         this.metodos.AlertError("Debe seleccionar un rango de fechas");
@@ -83,7 +83,7 @@ export class ComprasDetalladasComponent implements OnInit {
 
       this.informes.compras_detalladas(this.proveedor_id,this.dateRange.startDate,this.dateRange.endDate).subscribe(resp => {
 
-        console.log(resp);
+        // console.log(resp);
         
         let reporte = new ComprasDetalladas()
         reporte.dowloadExcel(resp,this.dateRange.startDate,this.dateRange.endDate);

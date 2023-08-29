@@ -314,7 +314,7 @@ export class BalanceDePruebaPDF {
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-          console.log(pageCount);
+          // console.log(pageCount);
     
           doc.setFontSize(10);
           // Go to page i
@@ -538,7 +538,7 @@ export class BalanceDePruebaPDF {
       
       for (let i = 1; i <= pageCount; i++) {
         
-        console.log(pageCount);
+        // console.log(pageCount);
   
         doc.setFontSize(10);
         // Go to page i
@@ -636,7 +636,7 @@ export class BalanceDePruebaPDF {
 
 
     setDivicionesEInformacion(doc:jsPDF, startY:number,startYText:number,x:any){
-      console.log(startYText);
+      // console.log(startYText);
       
       doc.line(500,startY,500,startY+18);
 
@@ -653,7 +653,7 @@ export class BalanceDePruebaPDF {
     }
 
     setFinalGrupo(doc:jsPDF, startY:number,startYText:number,grupo:string,total:number){
-      console.log(startYText);
+      // console.log(startYText);
       // doc.setFillColor("#CECECE");
       doc.setFillColor("#000");
       doc.rect(15,startY,581,18,'FD');

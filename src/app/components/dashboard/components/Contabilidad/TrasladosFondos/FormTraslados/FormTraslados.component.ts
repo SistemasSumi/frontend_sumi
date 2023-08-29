@@ -37,7 +37,7 @@ export class FormTrasladosComponent implements OnInit {
     });
     this.numeracion();
     this.puc.getEfectivo().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.pucList = resp;
 
@@ -78,7 +78,7 @@ export class FormTrasladosComponent implements OnInit {
     Swal.showLoading();
       this.trasladoService.getTraslado(this.numeroEdit).subscribe(
         (resp) => {
-        console.log(resp);
+        // console.log(resp);
         Swal.close();
         this.numeraciones = [];
         resp.numeracion.numero = resp.numero
@@ -94,7 +94,7 @@ export class FormTrasladosComponent implements OnInit {
         
       },
       (error) => {
-        console.log(error.error);
+        // console.log(error.error);
         Swal.close();
       }
       
@@ -119,7 +119,7 @@ export class FormTrasladosComponent implements OnInit {
     });
     Swal.showLoading();
     this.trasladoService.getSaldoCuenta(id).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.saldoActual = resp;
       Swal.close();
     });
@@ -209,13 +209,13 @@ export class FormTrasladosComponent implements OnInit {
               (resp) => {
                 Swal.close();
                 new MetodosShared().AlertOK(`El traslado N° ${resp.numero} fue Actualizado con exito.`);
-                console.log(resp);
+                // console.log(resp);
                 this.limpiarCampos();
                 this.numeracion();
                 this.trasladoService.actualizarListado();
               },
               (error) => {
-                console.log(error)
+                // console.log(error)
                 new MetodosShared().AlertError(error.error);
               }
         
@@ -244,14 +244,14 @@ export class FormTrasladosComponent implements OnInit {
               (resp) => {
                 Swal.close();
                 new MetodosShared().AlertOK(`El traslado N° ${resp.numero} fue Registrado con exito.`);
-                console.log(resp);
+                // console.log(resp);
                 this.limpiarCampos();
                 this.numeracion();
                 this.trasladoService.actualizarListado();
 
               },
               (error) => {
-                console.log(error)
+                // console.log(error)
                 new MetodosShared().AlertError(error.error);
               }
         

@@ -306,7 +306,7 @@ export default class StylesMap {
 	 *		styles.remove( 'margin-bottom' );
 	 *
 	 *		for ( const styleName of styles.getStyleNames() ) {
-	 *			console.log( styleName, styles.getAsString( styleName ) );
+	 *			// console.log( styleName, styles.getAsString( styleName ) );
 	 *		}
 	 *		// 'margin-top', '1px'
 	 *		// 'margin-right', '1px'
@@ -320,7 +320,7 @@ export default class StylesMap {
 	 *		styles.setTo( 'margin:1px;' );
 	 *
 	 *		for ( const styleName of styles.getStyleNames() ) {
-	 *			console.log( styleName, styles.getAsString( styleName ) );
+	 *			// console.log( styleName, styles.getAsString( styleName ) );
 	 *		}
 	 *		// 'margin', '1px'
 	 *

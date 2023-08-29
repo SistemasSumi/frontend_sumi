@@ -61,10 +61,10 @@ export class ImpuestosComponent implements OnInit {
     })
 
 
-    console.log(this.ImpuestosEdit);
+    // console.log(this.ImpuestosEdit);
     
     if(this.ImpuestosEdit != null){
-      console.log(this.ImpuestosEdit);
+      // console.log(this.ImpuestosEdit);
       this.editando = true;
       this.formImpuesto.get('id').setValue(this.ImpuestosEdit.id);
       this.formImpuesto.get('nombre').setValue(this.ImpuestosEdit.nombre);
@@ -128,7 +128,7 @@ export class ImpuestosComponent implements OnInit {
       }
       
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       // this.resultado.emit(true);
       
       let errores ='';

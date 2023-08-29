@@ -127,7 +127,7 @@ export class ProveedoresComponent implements OnInit {
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -145,7 +145,7 @@ export class ProveedoresComponent implements OnInit {
   llenarProveedor(){
     this.table.destroy();
     this.proveedoresService.getProveedor().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Proveedores",
@@ -174,10 +174,10 @@ export class ProveedoresComponent implements OnInit {
       this.toastr.success("Nuevo Proveedor registrado.","Sistema");
       this.resetFormProveedor();
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Proveedor con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -243,7 +243,7 @@ export class ProveedoresComponent implements OnInit {
   }
 
   selectItemProveedor(data){
-    console.log(data);
+    // console.log(data);
     
     this.formProveedorEdit = this.formBuilder.group({
       
@@ -295,10 +295,10 @@ export class ProveedoresComponent implements OnInit {
       this.toastr.success("Proveedor actualizado.","Sistema");
       this.resetFormProveedor();
     },(ex) => {
-      console.log(ex);
+      // console.log(ex);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Proveedor con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',

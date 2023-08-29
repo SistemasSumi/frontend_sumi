@@ -133,7 +133,7 @@ document.getElementById("sa-close").addEventListener("click", function() {
     }).then(function (result) {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            // console.log('I was closed by the timer')
         }
     })
 });

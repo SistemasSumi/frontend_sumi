@@ -212,7 +212,7 @@ export class EmpresaComponent implements OnInit {
   }
 
   imagenSeleccionada(img:String){
-    console.log(img);
+    // console.log(img);
     this.formEmpresa.get('logo').setValue(img);
     
   }
@@ -236,7 +236,7 @@ export class EmpresaComponent implements OnInit {
       });
       Swal.showLoading();
     this.empresa.saveEmpresa(this.formEmpresa).subscribe((resp:any) => {
-      console.log(resp);
+      // console.log(resp);
       Swal.close();
       Swal.fire({
         title: 'SquireTech',
@@ -246,7 +246,7 @@ export class EmpresaComponent implements OnInit {
       })
 
       this.resetFormEmpresa();
-      console.log(this.formEmpresa.value);
+      // console.log(this.formEmpresa.value);
     })
    
     

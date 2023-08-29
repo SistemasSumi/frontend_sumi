@@ -18,12 +18,12 @@ export class CierreCajaMenor {
 
     public ReporteCierreCajaMenor(data:any){
         let doc = new jsPDF('p', 'pt', 'letter');
-        console.log(data)
+        // console.log(data)
         let currentPage = 0;
         let startY     = 156;
         let startYText = 168;
         for(let x of clientes){
-            console.log(x)
+            // console.log(x)
             let facturas = x.facturas;
 
 
@@ -113,7 +113,7 @@ export class CierreCajaMenor {
             startY+=28
             startYText+= 28;
 
-            console.log("Final:"+ finalY);
+            // console.log("Final:"+ finalY);
 
             if(finalY >= 700){
                 doc.addPage();
@@ -263,7 +263,7 @@ export class CierreCajaMenor {
 
 
     setDivicionesEInformacion(doc:jsPDF, startY:number,startYText:number,factura:any){
-        console.log(startYText);
+        // console.log(startYText);
         
         doc.line(90,startY,90,startY+18);
         doc.line(160,startY,160,startY+18);

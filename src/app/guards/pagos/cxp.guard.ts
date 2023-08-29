@@ -16,7 +16,7 @@ export class CxpGuard implements CanActivate {
   constructor(private auth: SeguridadService,
     private router: Router) {
       this.permisos = this.auth.currentUser.getPermisos()
-      console.log(this.permisos)
+      // console.log(this.permisos)
   }
   canActivate(): boolean {
     

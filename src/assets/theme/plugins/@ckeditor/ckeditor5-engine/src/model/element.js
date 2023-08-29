@@ -351,19 +351,19 @@ export default class Element extends Node {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelElement: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelElement: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logExtended() {
-	// @if CK_DEBUG_ENGINE // 	console.log( `ModelElement: ${ this }, ${ this.childCount } children,
+	// @if CK_DEBUG_ENGINE // 	// console.log( `ModelElement: ${ this }, ${ this.childCount } children,
 	// @if CK_DEBUG_ENGINE //		attrs: ${ convertMapToStringifiedObject( this.getAttributes() ) }` );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logAll() {
-	// @if CK_DEBUG_ENGINE // 	console.log( '--------------------' );
+	// @if CK_DEBUG_ENGINE // 	// console.log( '--------------------' );
 	// @if CK_DEBUG_ENGINE //
 	// @if CK_DEBUG_ENGINE // 	this.logExtended();
-	// @if CK_DEBUG_ENGINE //	console.log( 'List of children:' );
+	// @if CK_DEBUG_ENGINE //	// console.log( 'List of children:' );
 	// @if CK_DEBUG_ENGINE //
 	// @if CK_DEBUG_ENGINE // 	for ( const child of this.getChildren() ) {
 	// @if CK_DEBUG_ENGINE // 		child.log();
@@ -404,7 +404,7 @@ export default class Element extends Node {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logTree() {
-	// @if CK_DEBUG_ENGINE // 	console.log( this.printTree() );
+	// @if CK_DEBUG_ENGINE // 	// console.log( this.printTree() );
 	// @if CK_DEBUG_ENGINE // }
 }
 

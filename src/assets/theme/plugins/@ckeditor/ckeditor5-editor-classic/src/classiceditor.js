@@ -103,7 +103,7 @@ export default class ClassicEditor extends Editor {
 	 *		ClassicEditor
 	 *			.create( document.querySelector( '#editor' ) )
 	 *			.then( editor => {
-	 *				console.log( 'Editor was initialized', editor );
+	 *				// console.log( 'Editor was initialized', editor );
 	 *			} )
 	 *			.catch( err => {
 	 *				console.error( err.stack );
@@ -119,7 +119,7 @@ export default class ClassicEditor extends Editor {
 	 *		ClassicEditor
 	 *			.create( '<p>Hello world!</p>' )
 	 *			.then( editor => {
-	 *				console.log( 'Editor was initialized', editor );
+	 *				// console.log( 'Editor was initialized', editor );
 	 *
 	 *				// Initial data was provided so the editor UI element needs to be added manually to the DOM.
 	 *				document.body.appendChild( editor.ui.element );
@@ -140,7 +140,7 @@ export default class ClassicEditor extends Editor {
 	 *				initialData: '<h2>Initial data</h2><p>Foo bar.</p>'
 	 *			} )
 	 *			.then( editor => {
-	 *				console.log( 'Editor was initialized', editor );
+	 *				// console.log( 'Editor was initialized', editor );
 	 *			} )
 	 *			.catch( err => {
 	 *				console.error( err.stack );

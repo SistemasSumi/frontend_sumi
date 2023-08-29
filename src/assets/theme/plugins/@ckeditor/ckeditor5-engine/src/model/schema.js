@@ -615,7 +615,7 @@ export default class Schema {
 	 *			two: 2
 	 *		} );
 	 *
-	 *		console.log( schema.getAttributeProperties( 'blockQuote' ) );
+	 *		// console.log( schema.getAttributeProperties( 'blockQuote' ) );
 	 *		// Logs: { one: 1, two: 2 }
 	 *
 	 * @param {String} attributeName A name of the attribute to receive the properties.
@@ -1490,7 +1490,7 @@ export class SchemaContext {
  *		schema.on( 'checkChild', ( evt, args ) => {
  *			const ctx = args[ 0 ];
  *
- *			console.log( Array.from( ctx.getNames() ) );
+ *			// console.log( Array.from( ctx.getNames() ) );
  *		} );
  *
  * Which will log the following:
@@ -1532,9 +1532,9 @@ export class SchemaContext {
  *			const ctx = args[ 0 ];
  *			const firstItem = ctx.getItem( 0 );
  *
- *			console.log( firstItem.name ); // -> '$root'
- *			console.log( firstItem.getAttribute( 'foo' ) ); // -> 'bar'
- *			console.log( Array.from( firstItem.getAttributeKeys() ) ); // -> [ 'foo', 'faa' ]
+ *			// console.log( firstItem.name ); // -> '$root'
+ *			// console.log( firstItem.getAttribute( 'foo' ) ); // -> 'bar'
+ *			// console.log( Array.from( firstItem.getAttributeKeys() ) ); // -> [ 'foo', 'faa' ]
  *		} );
  *
  * @typedef {Object} module:engine/model/schema~SchemaContextItem

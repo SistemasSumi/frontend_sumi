@@ -301,7 +301,7 @@ export class EstadoCarteraProveedor{
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-          console.log(pageCount);
+          // console.log(pageCount);
     
           doc.setFontSize(9);
           // Go to page i
@@ -603,7 +603,7 @@ export class EstadoCarteraProveedor{
 
         for (let index = 0; index < rowsToInsert.length; index++) {
           const itemData = data.facturas[index]; // obtenemos el item segun el index de la iteracion (recorrido)
-          console.log(itemData)
+          // console.log(itemData)
           const row = rowsToInsert[index]; // obtenemos la primera fila segun el index de la iteracion (recorrido)
     
           //  los valores de itemData seran asignados a "row" (fila actual en la iteracion)

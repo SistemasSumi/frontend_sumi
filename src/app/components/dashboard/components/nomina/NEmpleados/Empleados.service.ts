@@ -22,12 +22,12 @@ export class EmpleadosService {
   actualizarEmpleados(){
     this.ListEmpleados().subscribe(
       (resp) => {
-        console.log(resp);
+        // console.log(resp);
         this.SubjectdataEmpleados.next(resp);
 
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

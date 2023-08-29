@@ -187,7 +187,7 @@ export class ListadoClientesComponent implements OnInit {
         /* BOTON EDITAR  */
         $('#editar', row).off('click');
         $('#editar', row).on('click', () => {
-          console.log(data);
+          // console.log(data);
           
           this.router.navigateByUrl('terceros/'+data.id) 
           
@@ -230,7 +230,7 @@ export class ListadoClientesComponent implements OnInit {
 
   llenarTableTerceros(){
     this.config.SubjectdataCliente.subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.table.destroy();
       this.llenarTable(

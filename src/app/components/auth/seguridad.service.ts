@@ -76,7 +76,7 @@ export class SeguridadService {
     let user = this.currentUser;
     if(permisos){
       
-      console.log(permisos);
+   
       user.setPermisos(permisos);
       localStorage.setItem("currentUser",JSON.stringify(this.currentUser));
     }
@@ -87,24 +87,24 @@ export class SeguridadService {
    // METODO PARA INICIAR SECCION VIA EMAIL & PASSWORD
    login(form: FormGroup) {
     var url   = environment.BACKEND_DIR+"auth/users/api/tradicional-login/";
-    console.log(url)
+  
     const authData = {
       correo: form.value.Correo,
       password: form.value.Password,
       returnSecureToken: true
     };
-    console.log(authData);
+   
     
     return this.http.post<any>(url,JSON.stringify(authData),this.httpOptions).pipe(
       map((resp:any) => {
-        console.log(resp);
+      
 
        
 
         this.setUser(resp.user.id,resp.token,resp.user.username,resp.user.email,resp.user.avatar_url,resp.user.nombres,resp.user.apellidos,resp.user.genero,resp.user.last_login,resp.user.empresa,resp.user.is_vendedor,resp.user.grupo);
        
 
-        console.log(this.currentUser);
+     
         // localStorage.setItem("currentUser",JSON.stringify(this.currentUser));
         // localStorage.setItem("permisos",JSON.stringify(resp.permisos));
         this.obtenerPermisos(resp.user.username)
@@ -121,7 +121,7 @@ export class SeguridadService {
   obtenerPermisos(username:string){
 
     this.db.getDoc('permisos',username).subscribe((resp:PermisosUsuario) => {
-      console.log(resp)
+     
       // localStorage.setItem("currentUser",JSON.stringify(this.currentUser));
  
       this.setPermisosUser(resp);
@@ -146,7 +146,7 @@ export class SeguridadService {
   
     // Verificar si la cantidad de propiedades es la misma
     if (clavesObjeto1.length !== clavesObjeto2.length) {
-      console.log("no tienen las mismas claves")
+ 
       return false;
     }
   

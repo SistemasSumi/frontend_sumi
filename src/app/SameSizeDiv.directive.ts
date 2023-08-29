@@ -6,7 +6,7 @@ import { Directive, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 export class SameSizeDivDirective implements  AfterViewInit  {
 
   constructor(private el: ElementRef,private renderer: Renderer2) { 
-    console.log("hola aqui estoy!")
+ 
   }
 
   ngAfterViewInit() {

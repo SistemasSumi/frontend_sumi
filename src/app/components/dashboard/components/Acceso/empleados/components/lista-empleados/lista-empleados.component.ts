@@ -101,7 +101,7 @@ export class ListaEmpleadosComponent implements OnInit,AfterViewInit {
     this.data = new Promise((resolve, reject) => {
       resolve(data);
     });
-    console.log(data);
+    // console.log(data);
       
   }
 

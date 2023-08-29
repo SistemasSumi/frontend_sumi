@@ -42,7 +42,7 @@ export class InformesContabilidadComponent implements OnInit {
 
     ).subscribe(resp => {
       Swal.close();
-      console.log(resp)
+      // console.log(resp)
       let reporte = new BalanceDePruebaPDF();
   
       let report = reporte.GenerarBalanceDePrueba(resp);
@@ -65,7 +65,7 @@ export class InformesContabilidadComponent implements OnInit {
 
     ).subscribe(resp => {
       Swal.close();
-      console.log(resp)
+      // console.log(resp)
       let reporte = new BalanceDePruebaPDF();
 
       let report = reporte.GenerarEstadoFinanciero(resp);

@@ -26,7 +26,7 @@ export class EmpleadosService {
     };
     return this.http.get<any>(url, this.httpOptions).pipe(
       map(resp => {
-        console.log(resp);
+        // console.log(resp);
         
         // for (let x in resp) {
         

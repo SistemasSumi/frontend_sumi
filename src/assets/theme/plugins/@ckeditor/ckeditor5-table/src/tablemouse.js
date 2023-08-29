@@ -108,7 +108,7 @@ export default class TableMouse extends Plugin {
 		// But I have other things to do, like writing this comment.
 		this.listenTo( editor.editing.view.document, 'selectionChange', evt => {
 			if ( blockSelectionChange ) {
-				// @if CK_DEBUG // console.log( 'Blocked selectionChange to avoid breaking table cells selection.' );
+				// @if CK_DEBUG // // console.log( 'Blocked selectionChange to avoid breaking table cells selection.' );
 
 				evt.stop();
 			}
@@ -188,7 +188,7 @@ export default class TableMouse extends Plugin {
 		// See the explanation in `_enableShiftClickSelection()`.
 		this.listenTo( editor.editing.view.document, 'selectionChange', evt => {
 			if ( blockSelectionChange ) {
-				// @if CK_DEBUG // console.log( 'Blocked selectionChange to avoid breaking table cells selection.' );
+				// @if CK_DEBUG // // console.log( 'Blocked selectionChange to avoid breaking table cells selection.' );
 
 				evt.stop();
 			}

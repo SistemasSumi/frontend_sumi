@@ -177,7 +177,7 @@ export default class Template {
 	 *			]
 	 *		} ).apply( element );
 	 *
-	 *		console.log( element.outerHTML ); // -> '<div id="first-div" class="my-div"></div>'
+	 *		// console.log( element.outerHTML ); // -> '<div id="first-div" class="my-div"></div>'
 	 *
 	 * @see module:ui/template~Template#render
 	 * @see module:ui/template~Template#revert
@@ -240,7 +240,7 @@ export default class Template {
 	 *
 	 *		// Logs: viewFoo, viewBar, viewBaz
 	 *		for ( const view of template.getViews() ) {
-	 *			console.log( view );
+	 *			// console.log( view );
 	 *		}
 	 *
 	 * @returns {Iterable.<module:ui/view~View>}
@@ -1656,7 +1656,7 @@ function shouldExtend( attrName ) {
  *				'click@a.foo': {
  *					bind.to( 'clicked' ),
  *					bind.to( evt => {
- *						console.log( `${ evt.target } has been clicked!` );
+ *						// console.log( `${ evt.target } has been clicked!` );
  *					} }
  *				}
  *			}

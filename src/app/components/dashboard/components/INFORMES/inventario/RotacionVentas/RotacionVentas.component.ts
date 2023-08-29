@@ -33,10 +33,10 @@ export class RotacionVentasComponent implements OnInit {
       Swal.showLoading();
 
 
-      console.log(this.dateRange)
+      // console.log(this.dateRange)
       this.informes.rotacion_ventas(this.dateRange.startDate,this.dateRange.endDate).subscribe(resp => {
 
-        console.log(resp);
+        // console.log(resp);
         
         let reporte = new RotacionxCompras()
         reporte.dowloadExcel(resp,this.dateRange.startDate,this.dateRange.endDate);

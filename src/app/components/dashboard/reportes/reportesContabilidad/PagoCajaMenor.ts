@@ -18,12 +18,12 @@ export class PagoCajaMenor {
 
     public ReportePagoCajaMenor(data:any){
         let doc = new jsPDF('p', 'pt', 'letter');
-        console.log(data)
+        // console.log(data)
         let currentPage = 0;
         let startY     = 116;
         let startYText = 128;
         for(let x of clientes){
-            console.log(x)
+            // console.log(x)
             let facturas = x.facturas;
 
 
@@ -114,7 +114,7 @@ export class PagoCajaMenor {
             startY+=56
             startYText+= 56;
 
-            console.log("Final:"+ finalY);
+            // console.log("Final:"+ finalY);
 
             if(finalY >= 711){
                 doc.addPage();
@@ -233,7 +233,7 @@ export class PagoCajaMenor {
 
 
     setDivicionesEInformacion(doc:jsPDF, startY:number,startYText:number,factura:any){
-        console.log(startYText);
+        // console.log(startYText);
         
         doc.line(90,startY,90,startY+18);
         doc.line(160,startY,160,startY+18);

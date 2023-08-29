@@ -313,7 +313,7 @@ export class CuentasxCobrarComponent implements OnInit {
         $('#imprimirFactura', row).off('click');
         $('#imprimirFactura', row).on('click', () => {
           
-          console.log(data);
+          // console.log(data);
 
           if(data.cxc.isElectronica){
 
@@ -400,7 +400,7 @@ export class CuentasxCobrarComponent implements OnInit {
                 
       
           //     },(ex) => {
-          //       console.log(ex);
+          //       // console.log(ex);
           //       Swal.close();
                 
           //       let errores ='';

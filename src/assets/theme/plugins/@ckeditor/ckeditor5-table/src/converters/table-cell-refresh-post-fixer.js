@@ -39,12 +39,12 @@ function tableCellRefreshPostFixer( differ, mapper ) {
 		}
 	}
 
-	// @if CK_DEBUG_TABLE // console.log( `Post-fixing table: Checking table cell to refresh (${ cellsToCheck.size }).` );
+	// @if CK_DEBUG_TABLE // // console.log( `Post-fixing table: Checking table cell to refresh (${ cellsToCheck.size }).` );
 	// @if CK_DEBUG_TABLE // let paragraphsRefreshed = 0;
 
 	for ( const tableCell of cellsToCheck.values() ) {
 		for ( const paragraph of [ ...tableCell.getChildren() ].filter( child => shouldRefresh( child, mapper ) ) ) {
-			// @if CK_DEBUG_TABLE // console.log( `Post-fixing table: refreshing paragraph in table cell (${++paragraphsRefreshed}).` );
+			// @if CK_DEBUG_TABLE // // console.log( `Post-fixing table: refreshing paragraph in table cell (${++paragraphsRefreshed}).` );
 			differ.refreshItem( paragraph );
 		}
 	}

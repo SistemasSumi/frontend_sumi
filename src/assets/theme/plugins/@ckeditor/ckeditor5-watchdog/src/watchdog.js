@@ -333,7 +333,7 @@ export default class Watchdog {
 	 * and the watchdog will react to it.
 	 *
 	 * 	watchdog.on( 'error', ( evt, { error, causesRestart } ) => {
-	 * 		console.log( 'An error occurred.' );
+	 * 		// console.log( 'An error occurred.' );
 	 * 	} );
 	 *
 	 * @event error

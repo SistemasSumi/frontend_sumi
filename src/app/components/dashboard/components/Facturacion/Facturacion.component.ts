@@ -59,7 +59,7 @@ export class FacturacionComponent implements OnInit {
   }
 
   validarCantidad(e:number){
-    console.log(e);
+    // console.log(e);
     
     if(e > this.LoteProductoSeleccionado.unidades){
       this.cantidadProductoSelecionado = this.LoteProductoSeleccionado.unidades

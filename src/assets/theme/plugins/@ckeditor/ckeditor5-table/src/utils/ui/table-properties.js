@@ -339,7 +339,7 @@ export const defaultColors = [
  *		} );
  *
  *		const labeledInputView = new LabeledFieldView( locale, colorInputCreator );
- *		console.log( labeledInputView.view ); // A color input instance.
+ *		// console.log( labeledInputView.view ); // A color input instance.
  *
  * @private
  * @param options Color input options.

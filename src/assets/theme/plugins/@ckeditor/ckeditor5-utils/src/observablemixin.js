@@ -318,7 +318,7 @@ function initObservable( observable ) {
 	// See {@link module:utils/observablemixin~ObservableMixin#bind}.
 	//
 	//		A.bind( 'a', 'b', 'c' ).to( B, 'x', 'y', 'x' );
-	//		console.log( A._boundObservables );
+	//		// console.log( A._boundObservables );
 	//
 	//			Map( {
 	//				B: {
@@ -333,7 +333,7 @@ function initObservable( observable ) {
 	//			} )
 	//
 	//		A.bind( 'd' ).to( B, 'z' ).to( C, 'w' ).as( callback );
-	//		console.log( A._boundObservables );
+	//		// console.log( A._boundObservables );
 	//
 	//			Map( {
 	//				B: {
@@ -370,7 +370,7 @@ function initObservable( observable ) {
 	// See {@link module:utils/observablemixin~ObservableMixin#bind}.
 	//
 	//		A.bind( 'a', 'b', 'c' ).to( B, 'x', 'y', 'x' );
-	//		console.log( A._boundProperties );
+	//		// console.log( A._boundProperties );
 	//
 	//			Map( {
 	//				a: { observable: A, property: 'a', to: [ [ B, 'x' ] ] },
@@ -379,7 +379,7 @@ function initObservable( observable ) {
 	//			} )
 	//
 	//		A.bind( 'd' ).to( B, 'z' ).to( C, 'w' ).as( callback );
-	//		console.log( A._boundProperties );
+	//		// console.log( A._boundProperties );
 	//
 	//			Map( {
 	//				a: { observable: A, property: 'a', to: [ [ B, 'x' ] ] },
@@ -715,7 +715,7 @@ function attachBindToListeners( observable, toBindings ) {
  *		observable.set( 'prop', 1 );
  *
  *		observable.on( 'change:prop', ( evt, propertyName, newValue, oldValue ) => {
- *			console.log( `${ propertyName } has changed from ${ oldValue } to ${ newValue }` );
+ *			// console.log( `${ propertyName } has changed from ${ oldValue } to ${ newValue }` );
  *		} );
  *
  *		observable.prop = 2; // -> 'prop has changed from 1 to 2'
@@ -735,15 +735,15 @@ function attachBindToListeners( observable, toBindings ) {
  *		observable.set( 'prop', 1 );
  *
  *		observable.on( 'set:prop', ( evt, propertyName, newValue, oldValue ) => {
- *			console.log( `Value is going to be changed from ${ oldValue } to ${ newValue }` );
- *			console.log( `Current property value is ${ observable[ propertyName ] }` );
+ *			// console.log( `Value is going to be changed from ${ oldValue } to ${ newValue }` );
+ *			// console.log( `Current property value is ${ observable[ propertyName ] }` );
  *
  *			// Let's override the value.
  *			evt.return = 3;
  *		} );
  *
  *		observable.on( 'change:prop', ( evt, propertyName, newValue, oldValue ) => {
- *			console.log( `Value has changed from ${ oldValue } to ${ newValue }` );
+ *			// console.log( `Value has changed from ${ oldValue } to ${ newValue }` );
  *		} );
  *
  *		observable.prop = 2; // -> 'Value is going to be changed from 1 to 2'
@@ -863,7 +863,7 @@ function attachBindToListeners( observable, toBindings ) {
  *			}
  *
  *			method() {
- *				console.log( 'called!' );
+ *				// console.log( 'called!' );
  *			}
  *		}
  *
@@ -890,7 +890,7 @@ function attachBindToListeners( observable, toBindings ) {
  * Finally, it is possible to access and modify the arguments the method is called with:
  *
  *		method( a, b ) {
- *			console.log( `${ a }, ${ b }`  );
+ *			// console.log( `${ a }, ${ b }`  );
  *		}
  *
  *		// ...
@@ -898,7 +898,7 @@ function attachBindToListeners( observable, toBindings ) {
  *		foo.on( 'method', ( evt, args ) => {
  *			args[ 0 ] = 3;
  *
- *			console.log( args[ 1 ] ); // -> 2
+ *			// console.log( args[ 1 ] ); // -> 2
  *		}, { priority: 'high' } );
  *
  *		foo.method( 1, 2 ); // -> '3, 2'

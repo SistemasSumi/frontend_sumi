@@ -395,7 +395,7 @@
                                                 <input (change)="seleccionar(i)" class=" form-check-input font-size-20" type="checkbox" [checked]="item.seleccionada" id="flexCheckexampleone">
                                             </div>
                                         </td> -->
-                                        <td class="fw-medium" [ngClass]="{'red-bold': !item.proformada, 'green-bold': item.proformada}">
+                                        <td class="fw-medium text-nowrap" [ngClass]="{'red-bold': !item.proformada, 'green-bold': item.proformada}">
                                             {{ item.numero }}
                                         </td>
                                         <td>

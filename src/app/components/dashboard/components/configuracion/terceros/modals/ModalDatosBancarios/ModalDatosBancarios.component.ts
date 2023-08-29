@@ -51,7 +51,7 @@ export class ModalDatosBancariosComponent implements OnInit {
 
     if(this.idProveedor){
       this.config.getDatosBancarios(this.idProveedor.toString()).subscribe(resp => {
-        console.log(resp)  
+        // console.log(resp)  
         this.bancos = resp;
           
       });
@@ -84,7 +84,7 @@ export class ModalDatosBancariosComponent implements OnInit {
       this.toast.success('Registrado con exito!');
       this.config.getDatosBancarios(this.idProveedor.toString()).subscribe(resp => {
         
-        console.log(resp);
+        // console.log(resp);
         this.bancos = resp;
         
       });

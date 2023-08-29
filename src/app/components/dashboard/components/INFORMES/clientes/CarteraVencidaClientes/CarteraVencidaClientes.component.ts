@@ -60,7 +60,7 @@ export class CarteraVencidaClientesComponent implements OnInit {
   }
 
   generarPDF(){
-    console.log(this.cliente_id)
+    // console.log(this.cliente_id)
     if(this.cliente_id === undefined || this.cliente_id === null  ){
       this.metodos.AlertError("Debe seleccionar un cliente.");
       return;
@@ -89,7 +89,7 @@ export class CarteraVencidaClientesComponent implements OnInit {
   }
 
   generarExcel(){
-    console.log(this.cliente_id)
+    // console.log(this.cliente_id)
     if(this.cliente_id == undefined || this.cliente_id == null){
       this.metodos.AlertError("Debe seleccionar un cliente.");
       return;

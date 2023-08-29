@@ -87,5 +87,5 @@ var starRatingreset = raterJs( {
 }); 
 document.querySelector('#raterreset-button').addEventListener("click", function() {
     starRatingreset.clear();
-    console.log(starRatingreset.getRating());
+    // console.log(starRatingreset.getRating());
 }, false);

@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
   }
 
   onchangeUser(user){
-    console.log(user);
+    // console.log(user);
     
     this.home.getPermisos(user).subscribe((resp:any) => {
       this.institucional  = false;
@@ -166,17 +166,17 @@ guardarPermisos(){
 
         this.dataEmpresa = resp.dataEmp;
         
-        console.log(this.dataEmpresa)
+        // console.log(this.dataEmpresa)
         for (let x in resp.data){
          
           let data = resp["data"]
   
             
-            // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
+            // // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
             data[x].totalBarbero = this.cp.transform(parseInt(data[x].totalBarbero));
             
             
-             console.log(data[x]);
+             // console.log(data[x]);
             
             // data[j].totalBarbero = this.cp.transform(parseInt(data[j].totalBarbero));
             this.dataBarber.push(data[x]);
@@ -185,7 +185,7 @@ guardarPermisos(){
           
         }
   
-        console.log(this.dataBarber);
+        // console.log(this.dataBarber);
         
       })
 
@@ -195,7 +195,7 @@ guardarPermisos(){
 
         resp.data.pcrServicio = resp.data.pcrServicio+'%'
         resp.data.pcrProducto = resp.data.pcrProducto+'%'
-        console.log(resp.data.pcrServicio);
+        // console.log(resp.data.pcrServicio);
         
         this.dataTotales = resp.data;
         

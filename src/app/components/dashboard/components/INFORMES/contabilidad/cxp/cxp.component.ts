@@ -61,7 +61,7 @@ export class CxpComponent implements OnInit {
   }
 
   generarPDF(){
-    // console.log(this.cliente_id)
+    // // console.log(this.cliente_id)
     // if(this.cliente_id == undefined || this.cliente_id == null  ){
     //   this.metodos.AlertError("Debe seleccionar un proveedor.");
     //   return;
@@ -81,7 +81,7 @@ export class CxpComponent implements OnInit {
     
     // Swal.showLoading();
     // this.informes.Cxp_compras(this.cliente_id,this.fechaCorte).subscribe(resp => {
-    //   console.log(resp)
+    //   // console.log(resp)
     //   // if(resp.facturas.length > 0){
  
     //   //   let reporte:EstadoCarteraProveedor = new EstadoCarteraProveedor();
@@ -96,7 +96,7 @@ export class CxpComponent implements OnInit {
   }
 
   generarExcel(){
-    console.log(this.cliente_id)
+    // console.log(this.cliente_id)
     if(this.cliente_id == undefined || this.cliente_id == null  ){
       this.metodos.AlertError("Debe seleccionar un cliente.");
       return;
@@ -116,7 +116,7 @@ export class CxpComponent implements OnInit {
     Swal.showLoading();
 
     this.informes.Cxp_compras(this.cliente_id,this.fechaCorte).subscribe(resp => {
-      console.log(resp)
+      // console.log(resp)
       
       let reporte = new Cxp_compras()
       reporte.dowloadExcel(resp);

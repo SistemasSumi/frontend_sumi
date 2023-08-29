@@ -21,7 +21,7 @@ export class KardexComponent implements OnInit,AfterViewInit  {
 
 
       if (container) {
-        console.log("Existe")
+        // console.log("Existe")
         container.addEventListener('scroll', () => {
           if (container.scrollTop + container.clientHeight < container.scrollHeight) {
             this.mostrarIconoFlotante = true;
@@ -39,7 +39,7 @@ export class KardexComponent implements OnInit,AfterViewInit  {
   }
 
   scrollToLastRow(): void {
-    console.log("hola");
+    // console.log("hola");
     
     setTimeout(() => {
       const tableContainer = document.querySelector('.table-scroll') as HTMLElement;

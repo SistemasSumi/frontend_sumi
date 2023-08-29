@@ -47,7 +47,7 @@ getReporte(form:FormGroup){
   return this.http.post<any>(url, data,this.httpOptions).pipe(
     map(resp => {
       // this.clientesData = resp;
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })
@@ -82,7 +82,7 @@ getReporteTotales(form:FormGroup){
   return this.http.post<any>(url, data,this.httpOptions).pipe(
     map(resp => {
  
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })
@@ -106,7 +106,7 @@ getPermisos(user:number){
   return this.http.post<any>(url, data,this.httpOptions).pipe(
     map(resp => {
  
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })
@@ -128,7 +128,7 @@ getReportes(){
   return this.http.get<any>(url,this.httpOptions).pipe(
     map(resp => {
  
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })
@@ -205,7 +205,7 @@ CreatePermisos(
   return this.http.put<any>(url, data,this.httpOptions).pipe(
     map(resp => {
  
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })

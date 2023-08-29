@@ -17,7 +17,7 @@ import { getCode, parseKeystroke } from './keyboard';
  * property. It allows listening to keystrokes executed in the editing view:
  *
  *		editor.keystrokes.set( 'Ctrl+A', ( keyEvtData, cancel ) => {
- *			console.log( 'Ctrl+A has been pressed' );
+ *			// console.log( 'Ctrl+A has been pressed' );
  *			cancel();
  *		} );
  *

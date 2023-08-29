@@ -76,7 +76,7 @@ export class ProveedorService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
         this.proveedorData = resp;
-        console.log(resp);
+        // console.log(resp);
        
         return resp;
       })

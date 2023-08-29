@@ -64,7 +64,7 @@ createNewCorte(form:FormGroup){
 
 
 createNewProducto(form:FormGroup){
-  console.log(form.value);
+  // console.log(form.value);
   
   var url = environment.BACKEND_DIR+"acceso/carshop/"
   const token = this.auth.currentUser.getTokenUser();
@@ -79,7 +79,7 @@ createNewProducto(form:FormGroup){
   }else{
     descuento = form.value.descuento
   }
-  console.log(form.value.idProducto);
+  // console.log(form.value.idProducto);
   
   const carshopData = {
       idProducto: form.value.idProducto,
@@ -123,7 +123,7 @@ getCarshop(){
   return this.http.get(url, this.httpOptions).pipe(
     map(resp => {
       this.dataCarshop = [];
-      console.log(resp);
+      // console.log(resp);
       
       for (const x in resp) {
         
@@ -180,13 +180,13 @@ getCortes(){
             
            this.cortesData.push(corte);
 
-           console.log(corte);
+           // console.log(corte);
            
           //  ;
       }
 
       // this.cortesData = resp;
-      console.log(resp);
+      // console.log(resp);
      
       return resp;
     })
@@ -229,13 +229,13 @@ getCxp(idBarbero:number){
 
            this.cxpData.push(cxp);
 
-           console.log(cxp);
+           // console.log(cxp);
            
           //  ;
       }
 
       // this.cortesData = resp;
-      console.log(resp);
+      // console.log(resp);
      
       return totalDeuuda;
     })
@@ -254,7 +254,7 @@ getproductos(){
   return this.http.get(url, this.httpOptions).pipe(
     map(resp => {
 
-       console.log(resp);
+       // console.log(resp);
        
       return resp;
     })

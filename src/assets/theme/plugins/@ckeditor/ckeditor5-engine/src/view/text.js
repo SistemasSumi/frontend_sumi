@@ -89,7 +89,7 @@ export default class Text extends Node {
 	 *		const bar = downcastWriter.createText( 'bar' );
 	 *
 	 *		foo._data += bar.data;   // executes: `foo._data = foo._data + bar.data`
-	 *		console.log( foo.data ); // prints: 'foobar'
+	 *		// console.log( foo.data ); // prints: 'foobar'
 	 *
 	 * If the protected getter didn't exist, `foo._data` will return `undefined` and result of the merge will be invalid.
 	 *
@@ -138,10 +138,10 @@ export default class Text extends Node {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ViewText: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ViewText: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logExtended() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ViewText: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ViewText: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 }

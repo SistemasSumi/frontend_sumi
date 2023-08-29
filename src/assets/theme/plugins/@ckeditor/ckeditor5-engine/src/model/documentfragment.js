@@ -326,7 +326,7 @@ export default class DocumentFragment {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelDocumentFragment: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelDocumentFragment: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // printTree() {
@@ -356,7 +356,7 @@ export default class DocumentFragment {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logTree() {
-	// @if CK_DEBUG_ENGINE // 	console.log( this.printTree() );
+	// @if CK_DEBUG_ENGINE // 	// console.log( this.printTree() );
 	// @if CK_DEBUG_ENGINE // }
 }
 

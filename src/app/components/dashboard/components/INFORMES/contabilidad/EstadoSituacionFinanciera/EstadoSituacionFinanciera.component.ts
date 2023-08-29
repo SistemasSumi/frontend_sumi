@@ -34,7 +34,7 @@ export class EstadoSituacionFinancieraComponent implements OnInit {
 
     ).subscribe(resp => {
       Swal.close();
-      console.log(resp)
+      // console.log(resp)
       let reporte = new BalanceDePruebaPDF();
 
       let report = reporte.GenerarEstadoFinanciero(resp);

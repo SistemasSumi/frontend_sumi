@@ -198,7 +198,7 @@ export class TarifasComponent implements OnInit,AfterViewInit {
     Swal.showLoading();
     
     this.tarifas.saveMovimiento(this.formMovimiento).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.moviReport = resp;
       this.cargar();
       this.resetFormMovimiento();
@@ -217,7 +217,7 @@ export class TarifasComponent implements OnInit,AfterViewInit {
 
   eliminarTarifa(id:number){
     this.tarifas.deleteTarifa(id).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       Swal.fire({
         title: 'SUMIPROD-INTRANET',
         icon: 'success',
@@ -275,7 +275,7 @@ export class TarifasComponent implements OnInit,AfterViewInit {
       //   this.taxisList.push(x);
       // }
        this.taxisList = resp;
-       console.log(this.taxisList);
+       // console.log(this.taxisList);
        
     })
   
@@ -285,7 +285,7 @@ export class TarifasComponent implements OnInit,AfterViewInit {
 
 mostrarTodos(){
   this.tarifas.getTarifas('PAGADAS','todos').subscribe(resp => {
-    console.log(resp);
+    // console.log(resp);
     
     this.ListTarifasPagadas = resp;
 })
@@ -333,12 +333,12 @@ cargar(){
 
     let turno:any = this.turnosActuales.filter(p => p.id_turno === this.formTarifa.value.turno);
     let saldo = parseFloat(turno[0].tarifa) - parseFloat(this.formTarifa.value.valor);
-    console.log(saldo);
+    // console.log(saldo);
   
     this.formTarifa.get('saldo').setValue(saldo);
     
     this.tarifas.saveTarifa(this.formTarifa).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.cargar();
       this.resetFormTarifa();
       Swal.fire({
@@ -352,9 +352,9 @@ cargar(){
 
   onChangeTaxi(e){
     this.turnosActuales = null;
-    console.log(e);
+    // console.log(e);
     let taxi:any = this.taxisList.filter(p => p.taxi.id_taxi === e);
-    console.log(taxi);
+    // console.log(taxi);
     this.turnosActuales = taxi[0].turnos;
     
     

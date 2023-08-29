@@ -89,7 +89,7 @@ module.exports = ( moduleVerbosity = 'info' ) => {
 				return;
 			}
 
-			console.log( message );
+			// console.log( message );
 		}
 	};
 };

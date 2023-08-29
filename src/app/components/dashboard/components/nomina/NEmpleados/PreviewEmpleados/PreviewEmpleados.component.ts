@@ -75,8 +75,8 @@ export class PreviewEmpleadosComponent implements OnInit {
       sena: null,
     };
 
-    // console.log("Datos Personales:",datosPersonales);
-    // console.log("Datos Bancarios:", datosDePago);
+    // // console.log("Datos Personales:",datosPersonales);
+    // // console.log("Datos Bancarios:", datosDePago);
 
   }
 

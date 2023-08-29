@@ -118,7 +118,7 @@ export class ClientesComponent implements OnInit {
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -136,7 +136,7 @@ export class ClientesComponent implements OnInit {
   llenarClientes(){
     this.table.destroy();
     this.clientesService.getClientes().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Clientes",
@@ -165,10 +165,10 @@ export class ClientesComponent implements OnInit {
       this.toastr.success("Nuevo Cliente registrado.","Sistema");
       this.resetFormCliente();
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Cliente con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -234,7 +234,7 @@ export class ClientesComponent implements OnInit {
   }
 
   selectItemBarber(data){
-    console.log(data);
+    // console.log(data);
     
     this.formClienteEdit = this.formBuilder.group({
       
@@ -286,10 +286,10 @@ export class ClientesComponent implements OnInit {
       this.toastr.success("Cliente actualizado.","Sistema");
       this.resetFormCliente();
     },(ex) => {
-      console.log(ex);
+      // console.log(ex);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Cliente con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',

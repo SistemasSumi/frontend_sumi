@@ -52,7 +52,7 @@ export class ModalDescuentoClienteComponent implements OnInit {
 
   ngOnInit() {
     if(this.DescuentoEdit != null){
-      console.log(this.DescuentoEdit);
+      // console.log(this.DescuentoEdit);
       // this.editando = true;
       this.formDescuento.get('id').setValue(this.DescuentoEdit.id);
       this.formDescuento.get('tercero').setValue(this.DescuentoEdit.tercero);

@@ -31,7 +31,7 @@ export default class TableWalker {
 	 *		const tableWalker = new TableWalker( table, { startRow: 1, endRow: 2 } );
 	 *
 	 *		for ( const tableSlot of tableWalker ) {
-	 *			console.log( 'A cell at row', tableSlot.row, 'and column', tableSlot.column );
+	 *			// console.log( 'A cell at row', tableSlot.row, 'and column', tableSlot.column );
 	 *		}
 	 *
 	 * For instance the code above for the following table:
@@ -58,7 +58,7 @@ export default class TableWalker {
 	 *		const tableWalker = new TableWalker( table, { row: 1, includeAllSlots: true } );
 	 *
 	 *		for ( const tableSlot of tableWalker ) {
-	 *			console.log( 'Slot at', tableSlot.row, 'x', tableSlot.column, ':', tableSlot.isAnchor ? 'is anchored' : 'is spanned' );
+	 *			// console.log( 'Slot at', tableSlot.row, 'x', tableSlot.column, ':', tableSlot.isAnchor ? 'is anchored' : 'is spanned' );
 	 *		}
 	 *
 	 * will log in the console for the table from the previous example:

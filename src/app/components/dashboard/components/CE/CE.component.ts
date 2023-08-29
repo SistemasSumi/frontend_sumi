@@ -83,7 +83,7 @@ export class CEComponent implements OnInit {
   
   ngOnInit() {
     this.puc.getEfectivo().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.pucList = resp;
 
@@ -187,7 +187,7 @@ export class CEComponent implements OnInit {
 
 
     
-    console.log(data);
+    // console.log(data);
 
   }
 
@@ -238,7 +238,7 @@ export class CEComponent implements OnInit {
 
       this.detalle = [];
       for(let x of resp.facturas){
-        console.log(x)
+        // console.log(x)
         let d:detalle = {
           orden: x.ingreso.orden.numero,
           factura:x.factura,
@@ -263,7 +263,7 @@ export class CEComponent implements OnInit {
         this.totalSaldo       += d.saldoTotal
 
 
-        console.log(d)
+        // console.log(d)
 
         this.detalle.push(d);
         
@@ -271,7 +271,7 @@ export class CEComponent implements OnInit {
      
       this.saldoAFavor = resp.afavor.saldoAFavor;
       // this.InputSaldoAFavor.nativeElement.focus();
-      console.log(resp);
+      // console.log(resp);
     });
   }
 
@@ -352,12 +352,12 @@ export class CEComponent implements OnInit {
 
 
     let totalAbono:number = (Number(this.dTotalAbono) + Number(this.dTotalSaldo));
-    console.log("total Abono  " + totalAbono)
+    // console.log("total Abono  " + totalAbono)
     let calculoPorPago = totalAbono * 100 / d.valorFactura;
-    console.log("calculoPorPago"+calculoPorPago)
+    // console.log("calculoPorPago"+calculoPorPago)
 
     let ivaParcial = d.iva * calculoPorPago / 100;
-    console.log("ivaParcial"+ivaParcial)
+    // console.log("ivaParcial"+ivaParcial)
 
     
     if(this.descuentoPorcentaje){
@@ -366,7 +366,7 @@ export class CEComponent implements OnInit {
       descuento =  this.dTotalDescuento ;
 
     }
-    console.log("descuento"+descuento)
+    // console.log("descuento"+descuento)
 
     if (totalAbono > d.valorFactura || totalAbono <= 0) {
       new MetodosShared().AlertError('El valor del pago debe ser igual o menor al Valor de la Factura!');
@@ -380,7 +380,7 @@ export class CEComponent implements OnInit {
 
     d.saldo      = Number(d.saldo) - (Number(d.valorAbono)+Number(descuento)+Number(d.saldoFavor))
     d.descuento  = Number(descuento);
-    console.log(d)
+    // console.log(d)
     // this.detalle[this.filaAEditar]  = d;
     this.calcularTotales(this.detalle);
     this.cerrarModalADDAbono();
@@ -419,11 +419,11 @@ export class CEComponent implements OnInit {
 
    
         if(Dias <= 15){
-          console.log(descuentos.quince);
+          // console.log(descuentos.quince);
           return descuentos.quince;
         }
         else if(Dias > 15 && Dias <= 30){
-          console.log(descuentos.treinta);
+          // console.log(descuentos.treinta);
 
           return descuentos.treinta;
         

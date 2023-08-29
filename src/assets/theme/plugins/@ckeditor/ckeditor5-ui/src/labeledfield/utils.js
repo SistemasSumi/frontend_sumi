@@ -26,7 +26,7 @@ import { createDropdown } from '../dropdown/utils';
  * Usage:
  *
  *		const labeledInputView = new LabeledFieldView( locale, createLabeledDropdown );
- *		console.log( labeledInputView.view ); // An input instance.
+ *		// console.log( labeledInputView.view ); // An input instance.
  *
  * @param {module:ui/labeledfield/labeledfieldview~LabeledFieldView} labeledFieldView The instance of the labeled field view.
  * @param {String} viewUid An UID string that allows DOM logical connection between the
@@ -71,7 +71,7 @@ export function createLabeledInputText( labeledFieldView, viewUid, statusUid ) {
  * Usage:
  *
  *		const labeledInputView = new LabeledFieldView( locale, createLabeledDropdown );
- *		console.log( labeledInputView.view ); // A dropdown instance.
+ *		// console.log( labeledInputView.view ); // A dropdown instance.
  *
  * @param {module:ui/labeledfield/labeledfieldview~LabeledFieldView} labeledFieldView The instance of the labeled field view.
  * @param {String} viewUid An UID string that allows DOM logical connection between the

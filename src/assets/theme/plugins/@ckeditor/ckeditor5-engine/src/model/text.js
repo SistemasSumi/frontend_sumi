@@ -129,10 +129,10 @@ export default class Text extends Node {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logExtended() {
-	// @if CK_DEBUG_ENGINE // 	console.log( `ModelText: ${ this }, attrs: ${ convertMapToStringifiedObject( this.getAttributes() ) }` );
+	// @if CK_DEBUG_ENGINE // 	// console.log( `ModelText: ${ this }, attrs: ${ convertMapToStringifiedObject( this.getAttributes() ) }` );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelText: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelText: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 }

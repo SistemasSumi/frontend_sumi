@@ -418,7 +418,7 @@ export default class Range {
 	 *
 	 *		// Iterate over all items in this range:
 	 *		for ( const value of range.getWalker() ) {
-	 *			console.log( value.item );
+	 *			// console.log( value.item );
 	 *		}
 	 *
 	 * @param {Object} options Object with configuration options. See {@link module:engine/model/treewalker~TreeWalker}.
@@ -1042,6 +1042,6 @@ export default class Range {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelPosition: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelPosition: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 }

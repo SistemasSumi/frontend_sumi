@@ -269,11 +269,11 @@ export default class TextProxy {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelTextProxy: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelTextProxy: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logExtended() {
-	// @if CK_DEBUG_ENGINE // 	console.log( `ModelTextProxy: ${ this }, ` +
+	// @if CK_DEBUG_ENGINE // 	// console.log( `ModelTextProxy: ${ this }, ` +
 	// @if CK_DEBUG_ENGINE // 		`attrs: ${ convertMapToStringifiedObject( this.getAttributes() ) }` );
 	// @if CK_DEBUG_ENGINE // }
 }

@@ -276,7 +276,7 @@ export class ProspectoVentaComponent implements OnInit {
     this.calcularTotales(this.listadoDetalleFactura);
 
 
-    console.log(data.listaPrecios);
+    // console.log(data.listaPrecios);
     
     this.formfacturacion.get('formaPago').setValue(data.formaPago.id); 
     this.formfacturacion.get('vendedor').setValue(data.vendedor.id); 
@@ -585,7 +585,7 @@ export class ProspectoVentaComponent implements OnInit {
      
      
         let subtotal = this.subtotalFactura - this.descuentoFactura;
-        console.log(subtotal);
+        // console.log(subtotal);
         
         for(let x of this.clienteSeleccionado.retencionCliente){
             if(x.fija){
@@ -762,7 +762,7 @@ export class ProspectoVentaComponent implements OnInit {
     
           this.invoceService.saveFactura(this.formfacturacion,this.listadoDetalleFactura).subscribe((resp:any) => {
             
-            console.log(resp);
+            // console.log(resp);
             Swal.close();
     
             Swal.fire({
@@ -781,7 +781,7 @@ export class ProspectoVentaComponent implements OnInit {
             
     
           },(ex) => {
-            console.log(ex);
+            // console.log(ex);
             Swal.close();
             let errores ='';
             for(let x of ex.error){
@@ -963,7 +963,7 @@ export class ProspectoVentaComponent implements OnInit {
                 
         
               },(ex) => {
-                console.log(ex);
+                // console.log(ex);
                 Swal.close();
                 let errores ='';
                 for(let x of ex.error){
@@ -1044,8 +1044,8 @@ export class ProspectoVentaComponent implements OnInit {
           return false; // Evita que se cierre la alerta si no hay palabras ingresadas
         }
 
-        console.log("valores:", values);
-        console.log("Tipo seleccionado:", type);
+        // console.log("valores:", values);
+        // console.log("Tipo seleccionado:", type);
 
 
         const data = {

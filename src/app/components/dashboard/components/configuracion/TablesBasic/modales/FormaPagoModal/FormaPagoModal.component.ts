@@ -38,10 +38,10 @@ export class FormaPagoModalComponent implements OnInit {
   constructor(private tablesService:TablesBasicService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    console.log(this.formaEdit);
+    // console.log(this.formaEdit);
     
     if(this.formaEdit != null){
-      console.log(this.formaEdit);
+      // console.log(this.formaEdit);
       this.editando = true;
       this.formForma.get('id').setValue(this.formaEdit.id);
       this.formForma.get('nombre').setValue(this.formaEdit.nombre);
@@ -82,7 +82,7 @@ export class FormaPagoModalComponent implements OnInit {
       }
       
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       this.resultado.emit(true);
       
       let errores ='';

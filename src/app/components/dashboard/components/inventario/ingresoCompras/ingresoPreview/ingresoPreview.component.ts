@@ -51,7 +51,7 @@ export class IngresoPreviewComponent implements OnInit {
       Swal.showLoading();
       this.ingresoService.buscarIngresoSegunOc(id).subscribe(resp => {
 
-        console.log(resp);
+        // console.log(resp);
                 
         this.ingreso = resp;
 

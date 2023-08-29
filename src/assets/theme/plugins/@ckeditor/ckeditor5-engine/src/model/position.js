@@ -1037,7 +1037,7 @@ export default class Position {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelPosition: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelPosition: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 }
 

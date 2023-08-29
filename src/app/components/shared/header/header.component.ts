@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   obtenerNotificaciones(){
-    console.log(this.$auth.currentUser.getGrupo());
+    // console.log(this.$auth.currentUser.getGrupo());
     const condiciones = [
       { parametro: 'receiver_users', condicion: 'array-contains', busqueda: this.$auth.currentUser.getUsername() },
       { parametro: 'grupo', condicion: '==', busqueda:  this.$auth.currentUser.getGrupo() },
@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
 
 
 
-      console.log('noti:',this.count_noti);
+      // console.log('noti:',this.count_noti);
       if(this.count_noti > 0){
         this.haynotificaciones = true;
       }else{
@@ -125,8 +125,8 @@ export class HeaderComponent implements OnInit {
 
         this.afMessaging.requestToken.subscribe(
           (token) => {
-            console.log('Permiso para recibir notificaciones concedido!');
-            console.log('Token de registro:', token);
+            // console.log('Permiso para recibir notificaciones concedido!');
+            // console.log('Token de registro:', token);
     
             // Guardar el token de registro en Firebase
             const userId = this.$auth.currentUser.getUsername(); // ID del usuario al que pertenece el dispositivo
@@ -150,7 +150,7 @@ export class HeaderComponent implements OnInit {
                   grupo:'DEFAULT',
                   tokens: currentTokens
                 }).then(() => {
-                  console.log('Token de registro guardado exitosamente en Firebase');
+                  // console.log('Token de registro guardado exitosamente en Firebase');
                 }).catch((error) => {
                   console.error('Error al guardar el token de registro en Firebase:', error);
                 });
@@ -167,13 +167,13 @@ export class HeaderComponent implements OnInit {
 
   public setOnTheme(){
     if(this.themeDark){
-      console.log(this.themeDark);
+      // console.log(this.themeDark);
 
       this.evento.emit(this.themeDark)
       this.icono = "fas fa-sun";
       this.themeDark = false;
     }else{
-      console.log(this.themeDark);
+      // console.log(this.themeDark);
       
       this.evento.emit(this.themeDark)
       this.icono = "fas fa-moon ";
@@ -185,7 +185,7 @@ export class HeaderComponent implements OnInit {
   
   salir(){
    this.$auth.logout().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.$router.navigateByUrl('login');
       
    });

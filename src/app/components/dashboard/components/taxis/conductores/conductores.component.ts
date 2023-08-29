@@ -86,13 +86,13 @@ cargar(){
 guardar(){
   if(!this.editar){
     this.conductor.saveConductor(this.formConductores).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.cargar();
       this.resetFormConductor();
     })
   }else{
     this.conductor.UpdateConductor(this.formConductores).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.cargar();
       this.resetFormConductor();
     })
@@ -101,7 +101,7 @@ guardar(){
 
 editarConductor(conductor:any){
   this.editar = true;
-  console.log(conductor);
+  // console.log(conductor);
   this.formConductores.get('id').setValue(conductor.id_conductor);
   this.formConductores.get('nombres').setValue(conductor.nombres);
   this.formConductores.get('apellidos').setValue(conductor.apellidos);

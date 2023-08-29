@@ -47,7 +47,7 @@ export class OrdenDeCompraService {
 
     imprimir(orden:PurchaseOrder){
 
-        console.log(orden);
+        // console.log(orden);
         let reporte = new ReportPurchaseOrder();
 
         let report = reporte.generarOrdenCompra(orden);
@@ -135,7 +135,7 @@ export class OrdenDeCompraService {
      
 
         return this.http.post<any>(url,data,{headers: httpHeaders}).pipe(
-            map(resp =>  console.log(resp))
+            map(resp => {})
         )
        
         

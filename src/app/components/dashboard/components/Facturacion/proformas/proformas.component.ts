@@ -76,7 +76,7 @@ export class ProformasComponent implements OnInit {
     ActualizarProformas(){
     this.isLoading = true;
     this.invoceService.cargarProformas().subscribe((resp) => {
-      console.log(resp);
+      // console.log(resp);
       if(resp != null){
 
         this.isLoading = false;
@@ -88,7 +88,7 @@ export class ProformasComponent implements OnInit {
   llenarTabla(){
     this.isLoading = true;
     this.invoceService.SubjectdataProformas.subscribe((resp:Proformas[]) => {
-      console.log(resp);
+      // console.log(resp);
       if(resp != null){
 
         this.isLoading = false;
@@ -149,7 +149,7 @@ export class ProformasComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           Swal.close();
           
           let errores ='';

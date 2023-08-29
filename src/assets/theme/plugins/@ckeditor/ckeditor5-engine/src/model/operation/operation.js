@@ -134,6 +134,6 @@ export default class Operation {
 	}
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( this.toString() );
+	// @if CK_DEBUG_ENGINE // 	// console.log( this.toString() );
 	// @if CK_DEBUG_ENGINE // }
 }

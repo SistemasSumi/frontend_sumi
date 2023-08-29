@@ -65,9 +65,9 @@ public loadScript(url: string) {
 
 guardarPermisos(id:string,data:PermisosUsuario){
   const path = 'permisos/';
-  console.log(path);
+
    this.db.createDoc(data, path, id).then( () => {
-        console.log('añdido con exito');
+        
    });
 }
 

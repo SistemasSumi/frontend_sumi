@@ -61,7 +61,7 @@ export class TablesBasicComponent implements OnInit {
   }
 
   ResultForma(value){
-    console.log(value);
+    // console.log(value);
     
     if(value){
       this.closeModalForma();

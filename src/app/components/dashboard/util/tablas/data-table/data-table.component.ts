@@ -126,7 +126,7 @@ export class DataTableComponent implements OnInit,AfterViewInit,OnChanges {
       this.empleados = resp;
       this.llenarTable(this.obtenerData(),this.obtenerColumnsDefs(this.obtenerName()));
     })
-    console.log(this.column_defs);
+    // console.log(this.column_defs);
     
    
     

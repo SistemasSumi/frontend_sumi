@@ -54,7 +54,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
     this.getDataCliente();
     this.getDataProducto();
     this.getDataServicios();
-   // console.log(tablasBasicas.barberosData);
+   // // console.log(tablasBasicas.barberosData);
 
    }
   ngAfterViewInit(): void {
@@ -76,7 +76,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
   onChange(deviceValue) {
     this.tipoServicio = deviceValue;
     
-    console.log(deviceValue);
+    // console.log(deviceValue);
     // I want to do something here with the new selectedDevice, but what I
     // get here is always the last selection, not the one I just selected.
   }
@@ -92,7 +92,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
 
   getDataProducto(): void {
      this.cortes.getproductos().subscribe((data:any) => {
-       console.log(data);
+       // console.log(data);
        
       this.dataProducto$ = data.data;
     });
@@ -100,7 +100,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
 
   getDataServicios(): void {
     this.tablasBasicas.getServicios().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       
       this.dataServicios$ = data;
     });
@@ -177,13 +177,13 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
 
 
   onChangeCodigo(deviceValue){
-    console.log(deviceValue);
+    // console.log(deviceValue);
     deviceValue = deviceValue.toString().toUpperCase();
     let producto = this.dataProducto$.filter(p => p.codigodebarra === deviceValue);
  
     
       if(producto.length > 0){
-        console.log(producto);
+        // console.log(producto);
         
         // this.formCorte.get('codigo').setValue(producto[0].codigodebarra);
         this.formCorte.get('idProducto').setValue(producto[0].id);
@@ -195,11 +195,11 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
   }
 
   onChangeProducto(deviceValue){
-    console.log(deviceValue);
+    // console.log(deviceValue);
     
       let producto = this.dataProducto$.filter(p => p.id === deviceValue);
       if(producto.length > 0){
-        console.log(producto);
+        // console.log(producto);
         
         this.formCorte.get('codigo').setValue(producto[0].codigodebarra);
         this.formCorte.get('costo').setValue(producto[0].valorcompra);
@@ -207,7 +207,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
         this.formCorte.get('precio').setValue(producto[0].valorventa);
           // this.formCorte.get('idcliente').setValue(cliente[0]);
       }
-      // console.log(cliente);
+      // // console.log(cliente);
 
 
     // this.dataCliente$.subscribe(resp => {
@@ -237,10 +237,10 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
        
     },(ex) => {
       Swal.close();
-      console.log(ex.error);
+      // console.log(ex.error);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Cliente con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -266,7 +266,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
 
 
   capturarDetalle(){
-    console.log(this.formCorte.value);
+    // console.log(this.formCorte.value);
     
     if(this.formCorte.get('idProducto').value == '' && this.formCorte.get('idServicio').value == ''){
       Swal.fire({
@@ -309,7 +309,7 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
         footer: '<a href="" style="color:#4acf50;">Contácte a soporte?</a>'
       });
       
-      console.log(ex.error);
+      // console.log(ex.error);
      
     });
    
@@ -348,11 +348,11 @@ export class FormCortesComponent implements OnInit,AfterViewInit{
        this.subtotal  = 0;
        this.descuento = 0;
 
-       console.log(resp);
+       // console.log(resp);
        
       this.dataCarrito$ = resp;
       for (let x in resp) {
-        console.log(resp[x].getSubtotal());
+        // console.log(resp[x].getSubtotal());
         this.total += Number(resp[x].getSubtotal());
         this.subtotal = this.subtotal + Number(resp[x].getPrecio()*resp[x].getCantidad());
         this.descuento +=  Number(resp[x].getDescuento()*resp[x].getCantidad());

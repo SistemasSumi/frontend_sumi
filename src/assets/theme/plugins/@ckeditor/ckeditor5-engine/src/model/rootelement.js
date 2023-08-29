@@ -105,7 +105,7 @@ export default class RootElement extends Element {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // log() {
-	// @if CK_DEBUG_ENGINE // 	console.log( 'ModelRootElement: ' + this );
+	// @if CK_DEBUG_ENGINE // 	// console.log( 'ModelRootElement: ' + this );
 	// @if CK_DEBUG_ENGINE // }
 }
 

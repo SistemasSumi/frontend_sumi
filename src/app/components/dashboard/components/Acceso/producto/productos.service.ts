@@ -106,7 +106,7 @@ export class ProductosService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
   
-         console.log(resp);
+         // console.log(resp);
          
         return resp;
       })
@@ -127,7 +127,7 @@ export class ProductosService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
   
-         console.log(resp);
+         // console.log(resp);
          
         return resp;
       })

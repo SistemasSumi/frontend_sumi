@@ -174,7 +174,7 @@ export class ListadoTrasladosComponent implements OnInit {
           // Swal.showLoading();
           // this.stock.imprimirPagos(data.numero.toString()).subscribe((resp:any)=> {
           //   Swal.close();
-          //   console.log(resp)
+          //   // console.log(resp)
           //   let reporte = new ComprobanteEgreso();
   
           //   let report = reporte.ReporteComprobanteEgreso(resp);

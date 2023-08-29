@@ -127,7 +127,7 @@ export class LibroAuxiliarComponent implements OnInit {
 
         Swal.close();
         
-        console.log(resp);
+        // console.log(resp);
         this.libro = resp.detalle;
 
 
@@ -137,7 +137,7 @@ export class LibroAuxiliarComponent implements OnInit {
         this.saldoActual   = resp.saldoActual;
 
         
-        console.log(this.libro)
+        // console.log(this.libro)
         this.llenarTableMovimientos();
     },(ex) => {
       Swal.close();
@@ -205,7 +205,7 @@ export class LibroAuxiliarComponent implements OnInit {
 
   filtraTerceros(busqueda:string){
     let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.terceros,'nombreComercial',busqueda);
-    console.log(filtro)
+    // console.log(filtro)
     this.filtroTerceros.next(filtro);
   }
 

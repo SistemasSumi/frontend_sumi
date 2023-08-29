@@ -43,7 +43,7 @@ export class Precios_bajos_modalComponent implements OnInit {
   consultarFactura(){
     let sub:Subscription = this.fire_db.getDoc('autorizacionFacturas',this.notificacion.data?.codigo).subscribe((resp:any) => {
       
-      console.log(resp);
+      // console.log(resp);
       this.venta = resp;
       this.cliente = this.metodos.getObjectByValue<ModelTerceroCompleto>(this.clientes,resp.factura.cliente,"id")
       

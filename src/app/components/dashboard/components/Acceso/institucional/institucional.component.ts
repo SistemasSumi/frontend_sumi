@@ -129,7 +129,7 @@ export class InstitucionalComponent implements  OnInit, AfterViewInit,AfterConte
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -226,7 +226,7 @@ export class InstitucionalComponent implements  OnInit, AfterViewInit,AfterConte
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -345,7 +345,7 @@ export class InstitucionalComponent implements  OnInit, AfterViewInit,AfterConte
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -399,7 +399,7 @@ export class InstitucionalComponent implements  OnInit, AfterViewInit,AfterConte
     
       // this.llenarSemanasAnio();
     }else if(tab.index === 5){
-       console.log("pendiente");
+       // console.log("pendiente");
        
     }else if(tab.index === 6){
     
@@ -415,7 +415,7 @@ export class InstitucionalComponent implements  OnInit, AfterViewInit,AfterConte
 llenarStock(){
     this.tablasBasicas.getstock().subscribe((resp:any) => {
       this.datastock = resp.data;
-      console.log(this.datastock);
+      // console.log(this.datastock);
       this.table.destroy();
       this.llenarTable(
         "stockLotes",
@@ -441,7 +441,7 @@ llenarStock(){
 llenarStockCosto(){
   this.tablasBasicas.getstock().subscribe((resp:any) => {
     this.datastock = resp.data;
-    console.log(this.datastock);
+    // console.log(this.datastock);
     this.table.destroy();
     this.llenarTableCosto(
       "stockCosto",
@@ -469,7 +469,7 @@ llenarStockCosto(){
 llenarStockProductos(){
   this.tablasBasicas.getstockProductoInstitucional().subscribe((resp:any) => {
     this.dataProductos = resp.data;
-    console.log(this.dataProductos);
+    // console.log(this.dataProductos);
     
 
       this.tabClick({"index":0}); // tabs de cargos 

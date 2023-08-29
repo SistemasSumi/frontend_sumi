@@ -96,7 +96,7 @@ export class ListadoCortesComponent implements OnInit {
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -113,7 +113,7 @@ export class ListadoCortesComponent implements OnInit {
   llenarCortes(){
     this.table.destroy();
     this.cortes.getCortes().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Cortes",

@@ -242,7 +242,7 @@ export class VentasDetalladas {
 
         for (let index = 0; index < rowsToInsert.length; index++) {
           const itemData = data[index]; // obtenemos el item segun el index de la iteracion (recorrido)
-          console.log(itemData)
+          // console.log(itemData)
           const row = rowsToInsert[index]; // obtenemos la primera fila segun el index de la iteracion (recorrido)
     
           //  los valores de itemData seran asignados a "row" (fila actual en la iteracion)

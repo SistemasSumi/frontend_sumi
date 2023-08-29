@@ -113,13 +113,13 @@ export class GastosComponent implements OnInit {
         this.gastos.abrirCaja().subscribe(
           (resp) => {
             Swal.close();
-            console.log(resp);
+            // console.log(resp);
             this.cajaActual = resp;
             this.metodos.AlertOK('Caja N° '+ resp.numero_str)
           },
           (error)=> {
             Swal.close();
-            console.log(error.error);
+            // console.log(error.error);
           }
         );
        
@@ -151,7 +151,7 @@ export class GastosComponent implements OnInit {
     this.gastos.getCaja().subscribe(
       (resp) => {
         this.cajaActual = resp;
-        console.log(resp)
+        // console.log(resp)
 
         this.currentPago.caja = resp.numero;
       }
@@ -163,7 +163,7 @@ export class GastosComponent implements OnInit {
     this.gastos.getFondoDisponible().subscribe(
       (resp) => {
         this.fondoDisponible = resp;
-        console.log(resp)
+        // console.log(resp)
       }
     );
   }
@@ -240,7 +240,7 @@ export class GastosComponent implements OnInit {
             (resp) => {
               Swal.close();
               new MetodosShared().AlertOK(`El pago N° ${resp.numero_str} fue Actualizado con exito.`);
-              console.log(resp);
+              // console.log(resp);
               this.limpiar();
               this.consultarFondo();
               this.getCaja(); 
@@ -251,7 +251,7 @@ export class GastosComponent implements OnInit {
 
             },
             (error) => {
-              console.log(error)
+              // console.log(error)
               new MetodosShared().AlertError(error.error);
             }
       
@@ -281,7 +281,7 @@ export class GastosComponent implements OnInit {
               (resp) => {
                 Swal.close();
                 new MetodosShared().AlertOK(`El pago N° ${resp.numero_str} fue Registrado con exito.`);
-                console.log(resp);
+                // console.log(resp);
                 this.limpiar();
                 this.consultarFondo();
                 this.getCaja();
@@ -292,7 +292,7 @@ export class GastosComponent implements OnInit {
 
               },
               (error) => {
-                console.log(error)
+                // console.log(error)
                 new MetodosShared().AlertError(error.error);
               }
         

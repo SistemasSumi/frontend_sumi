@@ -87,7 +87,7 @@ export class CxpComponent implements OnInit {
             class:'text-center',
             orderable: false,
             render: function(data,type,row){
-                // console.log(data);
+                // // console.log(data);
                 
                let cadena = '';
                 if(data){
@@ -123,7 +123,7 @@ export class CxpComponent implements OnInit {
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -140,7 +140,7 @@ export class CxpComponent implements OnInit {
   llenarCxp(idBarbero:number){
     this.table.destroy();
     this.cortes.getCxp(idBarbero).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.totalDeuda = resp;
       this.llenarTable(
         "Cxp",

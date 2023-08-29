@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       });
       Swal.showLoading();
       this.auth.login(this.form).subscribe(resp => {
-        console.log(resp);
+        
         Swal.close();
           if(this.form.value.recordarPassword){
             localStorage.setItem('Correo', this.form.value.Correo)
@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit {
           }
         
       },(ex) => {
-        console.log(ex)
-        console.log(ex.error)
+       
         Swal.fire({
           icon: 'error',
           title: 'Error de autenticacion.',
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
           footer: '<a href="" style="color:#4acf50;">Recuperar cuenta?</a>'
         });
         
-        console.log(ex.error.detail);
+      
        
       });
     }
@@ -124,7 +123,6 @@ export class LoginComponent implements OnInit {
   }
 
   upper(){
-    console.log("cambio")
    
   }
 }

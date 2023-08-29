@@ -64,7 +64,7 @@ export class ProductoDetalleComponent implements OnInit {
           this.changeProducto(productoEncontrado.id);
         } else {
           this.toast.error('No existe el producto','SARP SOFT');
-          console.log('No existe el producto');
+          // console.log('No existe el producto');
           this.producto = null;
         }
       }else{
@@ -113,7 +113,7 @@ export class ProductoDetalleComponent implements OnInit {
   showInventario(id:number){
     
     this.stock.productosInventario(id).subscribe(resp => {
-      console.log(resp)
+      // console.log(resp)
       this.inventario = resp;
     })
   }

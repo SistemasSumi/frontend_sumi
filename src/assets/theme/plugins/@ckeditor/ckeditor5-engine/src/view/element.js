@@ -879,7 +879,7 @@ export default class Element extends Node {
 	// @if CK_DEBUG_ENGINE // }
 
 	// @if CK_DEBUG_ENGINE // logTree() {
-	// @if CK_DEBUG_ENGINE // 	console.log( this.printTree() );
+	// @if CK_DEBUG_ENGINE // 	// console.log( this.printTree() );
 	// @if CK_DEBUG_ENGINE // }
 }
 

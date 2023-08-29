@@ -43,7 +43,7 @@ export class IV_VENCIDOComponent implements OnInit {
 
     this.informes.Inventario_vencido(this.bodega_id,this.tipo_id).subscribe(resp => {
       
-      console.log(resp);
+      // console.log(resp);
       let reporte = new InventarioVencido()
       reporte.dowloadExcel(resp);
       Swal.close()

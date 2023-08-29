@@ -303,7 +303,7 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
             
   
           },(ex) => {
-            console.log(ex);
+            // console.log(ex);
             
             let errores ='';
             for(let x in ex.error){
@@ -367,7 +367,7 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
             
   
           },(ex) => {
-            console.log(ex);
+            // console.log(ex);
             
             let errores ='';
             for(let x in ex.error){

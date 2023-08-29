@@ -33,28 +33,28 @@ export default class Collection {
 	 *
 	 *		const collection = new Collection( [ { id: 'John' }, { id: 'Mike' } ] );
 	 *
-	 *		console.log( collection.get( 0 ) ); // -> { id: 'John' }
-	 *		console.log( collection.get( 1 ) ); // -> { id: 'Mike' }
-	 *		console.log( collection.get( 'Mike' ) ); // -> { id: 'Mike' }
+	 *		// console.log( collection.get( 0 ) ); // -> { id: 'John' }
+	 *		// console.log( collection.get( 1 ) ); // -> { id: 'Mike' }
+	 *		// console.log( collection.get( 'Mike' ) ); // -> { id: 'Mike' }
 	 *
 	 * Or you can first create a collection and then add new items using the {@link #add} method:
 	 *
 	 *		const collection = new Collection();
 	 *
 	 *		collection.add( { id: 'John' } );
-	 *		console.log( collection.get( 0 ) ); // -> { id: 'John' }
+	 *		// console.log( collection.get( 0 ) ); // -> { id: 'John' }
 	 *
 	 * Whatever option you choose, you can always pass a configuration object as the last argument
 	 * of the constructor:
 	 *
 	 *		const emptyCollection = new Collection( { idProperty: 'name' } );
 	 *		emptyCollection.add( { name: 'John' } );
-	 *		console.log( collection.get( 'John' ) ); // -> { name: 'John' }
+	 *		// console.log( collection.get( 'John' ) ); // -> { name: 'John' }
 	 *
 	 *		const nonEmptyCollection = new Collection( [ { name: 'John' } ], { idProperty: 'name' } );
 	 *		nonEmptyCollection.add( { name: 'George' } );
-	 *		console.log( collection.get( 'George' ) ); // -> { name: 'George' }
-	 *		console.log( collection.get( 'John' ) ); // -> { name: 'John' }
+	 *		// console.log( collection.get( 'George' ) ); // -> { name: 'George' }
+	 *		// console.log( collection.get( 'John' ) ); // -> { name: 'John' }
 	 *
 	 * @param {Iterable.<Object>|Object} initialItemsOrOptions The initial items of the collection or
 	 * the options object.
@@ -394,12 +394,12 @@ export default class Collection {
 	 *		source.add( { label: 'foo' } );
 	 *		source.add( { label: 'bar' } );
 	 *
-	 *		console.log( target.length ); // 2
-	 *		console.log( target.get( 1 ).label ); // 'bar'
+	 *		// console.log( target.length ); // 2
+	 *		// console.log( target.get( 1 ).label ); // 'bar'
 	 *
 	 *		source.remove( 0 );
-	 *		console.log( target.length ); // 1
-	 *		console.log( target.get( 0 ).label ); // 'bar'
+	 *		// console.log( target.length ); // 1
+	 *		// console.log( target.get( 0 ).label ); // 'bar'
 	 *
 	 * or the factory driven by a custom callback:
 	 *
@@ -429,9 +429,9 @@ export default class Collection {
 	 *		source.add( { label: 'foo' } );
 	 *		source.add( { label: 'bar' } );
 	 *
-	 *		console.log( target.length ); // 2
-	 *		console.log( target.get( 0 ) instanceof FooClass ); // true
-	 *		console.log( target.get( 1 ) instanceof BarClass ); // true
+	 *		// console.log( target.length ); // 2
+	 *		// console.log( target.get( 0 ) instanceof FooClass ); // true
+	 *		// console.log( target.get( 1 ) instanceof BarClass ); // true
 	 *
 	 * or the factory out of property name:
 	 *
@@ -443,9 +443,9 @@ export default class Collection {
 	 *		source.add( { label: { value: 'foo' } } );
 	 *		source.add( { label: { value: 'bar' } } );
 	 *
-	 *		console.log( target.length ); // 2
-	 *		console.log( target.get( 0 ).value ); // 'foo'
-	 *		console.log( target.get( 1 ).value ); // 'bar'
+	 *		// console.log( target.length ); // 2
+	 *		// console.log( target.get( 0 ).value ); // 'foo'
+	 *		// console.log( target.get( 1 ).value ); // 'bar'
 	 *
 	 * It's possible to skip specified items by returning falsy value:
 	 *
@@ -463,8 +463,8 @@ export default class Collection {
 	 *		source.add( { hidden: true } );
 	 *		source.add( { hidden: false } );
 	 *
-	 *		console.log( source.length ); // 2
-	 *		console.log( target.length ); // 1
+	 *		// console.log( source.length ); // 2
+	 *		// console.log( target.length ); // 1
 	 *
 	 * **Note**: {@link #clear} can be used to break the binding.
 	 *

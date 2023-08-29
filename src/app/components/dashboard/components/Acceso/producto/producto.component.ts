@@ -30,7 +30,7 @@ export class ProductoComponent implements OnInit {
   
 
    selectItemProducto(data){
-    console.log(data);
+    // console.log(data);
     let valorCompra = data.precioCompra.replace(/[$,]/g,'');
     let valorVenta = data.precioVenta.replace(/[$,]/g,'');
     this.formProductoEdit = this.formBuilder.group({
@@ -87,10 +87,10 @@ export class ProductoComponent implements OnInit {
       this.toastr.success("Nuevo Producto actualizado.","Sistema");
       this.resetFormProductos();
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Cliente con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -121,10 +121,10 @@ export class ProductoComponent implements OnInit {
       this.toastr.success("Nuevo Producto registrado.","Sistema");
       this.resetFormProductos();
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.documento[0] === "Ya existe Cliente con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -220,7 +220,7 @@ export class ProductoComponent implements OnInit {
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -238,7 +238,7 @@ export class ProductoComponent implements OnInit {
   llenarProductos(){
     this.table.destroy();
     this.productoService.getproductos().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Productos",

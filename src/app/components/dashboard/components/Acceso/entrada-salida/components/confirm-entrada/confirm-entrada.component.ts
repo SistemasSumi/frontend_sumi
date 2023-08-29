@@ -52,9 +52,9 @@ export class ConfirmEntradaComponent implements OnInit {
   getPerson(form:FormGroup){
     this.acceso.getPerson(form.value.cedula).subscribe((resp:any) =>{
       this.persona = resp; 
-      console.log(resp);
+      // console.log(resp);
       this.phone = "+57"+resp.empleado.telefonos;
-      console.log(this.phone);
+      // console.log(this.phone);
       this.sendSmsCode();
       
     })
@@ -66,7 +66,7 @@ export class ConfirmEntradaComponent implements OnInit {
         'size': 'invisible',
         'callback': function(response) {
           // reCAPTCHA solved, allow signInWithPhoneNumber.
-          console.log(response);
+          // console.log(response);
         }
       });
       this.recaptchaVerifier.render();
@@ -79,18 +79,18 @@ export class ConfirmEntradaComponent implements OnInit {
     this.acceso.sendSmsVerification(phoneNumber, appVerification).then(result => {
       this.confirmationResult = result;
       this.smsEnviado = true;
-    }).catch(error => console.log(error));
+    }).catch(error => // console.log(error));
 
   }
 
   verificarSmsCode(formCode:FormGroup){
     this.verificationCode = formCode.value.code;
     this.confirmationResult.confirm(this.verificationCode).then(result => {
-      console.log('confirmado');
+      // console.log('confirmado');
       localStorage.setItem("personaEntrando",JSON.stringify(this.persona));
       this.router.navigateByUrl('acceso/entrada/detalle-entrada');
       
-    }).catch(error => console.log('el codigo no es valido'));
+    }).catch(error => // console.log('el codigo no es valido'));
   }
 
 }

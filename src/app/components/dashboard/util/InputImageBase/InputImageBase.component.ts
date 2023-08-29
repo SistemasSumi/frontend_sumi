@@ -68,12 +68,12 @@ export class InputImageBaseComponent implements OnInit {
   }
   obtenerImagenRecuperada(){
     if (this.imagen != null) {
-      console.log(this.urlDIR);
+      // console.log(this.urlDIR);
       
       this.urlImage = this.imagen;
     }else{
      this.urlImage = null;
-     console.log(this.imagen);
+     // console.log(this.imagen);
 
     }
   }

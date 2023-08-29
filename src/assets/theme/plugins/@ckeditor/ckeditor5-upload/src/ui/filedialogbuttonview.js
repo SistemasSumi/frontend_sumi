@@ -31,7 +31,7 @@ import View from '@ckeditor/ckeditor5-ui/src/view';
  *
  *		view.on( 'done', ( evt, files ) => {
  *			for ( const file of Array.from( files ) ) {
- *				console.log( 'Selected file', file );
+ *				// console.log( 'Selected file', file );
  *			}
  *		} );
  *
@@ -83,7 +83,7 @@ export default class FileDialogButtonView extends View {
 		 *
 		 *		view.on( 'done', ( evt, files ) => {
 		 *			for ( const file of files ) {
-		 *				console.log( 'Selected file', file );
+		 *				// console.log( 'Selected file', file );
 		 *			}
 		 *		}
 		 *

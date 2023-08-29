@@ -22,9 +22,9 @@ const RESIZE_CHECK_INTERVAL = 100;
  *		const editableElement = editor.editing.view.getDomRoot();
  *
  *		const observer = new ResizeObserver( editableElement, entry => {
- *			console.log( 'The editable element has been resized in DOM.' );
- *			console.log( entry.target ); // -> editableElement
- *			console.log( entry.contentRect.width ); // -> e.g. '423px'
+ *			// console.log( 'The editable element has been resized in DOM.' );
+ *			// console.log( entry.target ); // -> editableElement
+ *			// console.log( entry.contentRect.width ); // -> e.g. '423px'
  *		} );
  *
  * By default, it uses the [native DOM resize observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)

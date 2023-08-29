@@ -188,7 +188,7 @@ export class ListadoProveedoresComponent implements OnInit {
         /* BOTON EDITAR  */
         $('#editar', row).off('click');
         $('#editar', row).on('click', () => {
-          console.log(data);
+          // console.log(data);
           
           this.router.navigateByUrl('terceros/'+data.id) 
           
@@ -231,7 +231,7 @@ export class ListadoProveedoresComponent implements OnInit {
 
   llenarTableTerceros(){
     this.config.SubjectdataProveedor.subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.table.destroy();
       this.llenarTable(

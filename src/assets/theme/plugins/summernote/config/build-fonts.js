@@ -17,7 +17,7 @@ const webfontConfig = {
 };
 
 // eslint-disable-next-line
-console.log('Building fonts...');
+// console.log('Building fonts...');
 
 webfont(webfontConfig).then(result => {
   Object.keys(result).map(type => {
@@ -38,12 +38,12 @@ webfont(webfontConfig).then(result => {
       file = path.resolve(webfontConfig['destTemplate']);
     }
     // eslint-disable-next-line
-    console.log('Writing ', file);
+    // console.log('Writing ', file);
 
     fs.writeFileSync(file, content);
   });
 }).catch(error => {
   // eslint-disable-next-line
-  console.log(error);
+  // console.log(error);
   throw error;
 });

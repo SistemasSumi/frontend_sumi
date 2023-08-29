@@ -78,7 +78,7 @@ import '../theme/globals/globals.css';
  *
  *		// Respond to the "click" event in DOM by executing a custom action.
  *		view.on( 'clicked', () => {
- *			console.log( 'The view has been clicked!' );
+ *			// console.log( 'The view has been clicked!' );
  *		} );
  *
  * @mixes module:utils/observablemixin~ObservableMixin

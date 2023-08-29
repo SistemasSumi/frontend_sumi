@@ -11,7 +11,7 @@ export class FechaVencimientoPipe implements PipeTransform {
   transform(value: any,tercero?:any, args?: any): any {
     
 
-    console.log(tercero);
+    // console.log(tercero);
 
     let dias = 0;
 

@@ -26,8 +26,8 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
  *		collection.add( viewA );
  *		collection.add( viewB );
  *
- *		console.log( parentView.element.firsChild ); // -> viewA.element
- *		console.log( parentView.element.lastChild ); // -> viewB.element
+ *		// console.log( parentView.element.firsChild ); // -> viewA.element
+ *		// console.log( parentView.element.lastChild ); // -> viewB.element
  *
  * It {@link module:ui/viewcollection~ViewCollection#delegate propagates} DOM events too:
  *
@@ -35,7 +35,7 @@ import Collection from '@ckeditor/ckeditor5-utils/src/collection';
  *		collection.delegate( 'click' ).to( parentView );
  *
  *		parentView.on( 'click', ( evt ) => {
- *			console.log( `${ evt.source } has been clicked.` );
+ *			// console.log( `${ evt.source } has been clicked.` );
  *		} );
  *
  *		// This event will be delegated to the parentView.

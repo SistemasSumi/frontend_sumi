@@ -18,7 +18,7 @@ import View from '../view';
  *		document.body.appendChild( iframe.element );
  *
  * 		iframe.on( 'loaded', () => {
- *			console.log( 'The iframe has loaded', iframe.element.contentWindow );
+ *			// console.log( 'The iframe has loaded', iframe.element.contentWindow );
  *		} );
  *
  * 		iframe.element.src = 'https://ckeditor.com';

@@ -33,7 +33,7 @@ public generarPDFOrden(data:any){
 
   // variable productos a recorrer en el pdf
   let productos = [];
-  console.log(data);
+  // console.log(data);
 
   // for para recorrer productos y diseñar la tabla
   for(let x =0; x < data.productos.length; x++){
@@ -277,7 +277,7 @@ public generarPDFOrden(data:any){
        let totalPage = 0;
       for(let x in doc.internal.pages){
         totalPage++;
-        console.log(totalPage);
+        // console.log(totalPage);
       }
       
       // var str = "Página " + doc.internal.pages;
@@ -375,7 +375,7 @@ public geerarPDFFactura(data:any){
 
 // variable productos a recorrer en el pdf
 let productos = [];
-console.log(data);
+// console.log(data);
 
 // for para recorrer productos y diseñar la tabla
 for(let x =0; x < data.productos.length; x++){
@@ -695,7 +695,7 @@ autoTable(doc, {
     let totalPage = 0;
     for(let x in doc.internal.pages){
       totalPage++;
-      console.log(totalPage);
+      // console.log(totalPage);
     }
     doc.setFontSize(6)
     doc.text("Pagina: "+totalPage,45,780)
@@ -1020,7 +1020,7 @@ public generarOrdenCompra(data: any) {
   // For each page, print the page number and the total pages
   for (let i = 1; i <= pageCount; i++) {
 
-    console.log(pageCount);
+    // console.log(pageCount);
 
     doc.setFontSize(10);
     // Go to page i

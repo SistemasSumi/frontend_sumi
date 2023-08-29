@@ -438,7 +438,7 @@ export class CuentasxPagarComponent implements OnInit {
                 
       
               },(ex) => {
-                console.log(ex);
+                // console.log(ex);
                 Swal.close();
                 
                 let errores ='';

@@ -24,7 +24,7 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: x.producto.nombreymarcaunico+"("+x.laboratorio+")",
+              content: x.producto.nombreymarcaunico,
               styles: {
                 cellWidth: 210
               }
@@ -45,7 +45,7 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: this.cp.transform(x.iva),
+              content: this.cp.transform((x.iva*x.cantidad) / x.subtotal * 100),
               styles: {
               }
             },
@@ -67,7 +67,7 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: "Descripción del producto",
+              content: "Producto",
               styles: {
                 halign: 'left'
               }
@@ -79,7 +79,7 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: "Uni",
+              content: "Unidad",
               styles: {
                 halign: 'center'
               }
@@ -91,13 +91,13 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: "Iva %",
+              content: "Iva",
               styles: {
                 halign: 'right'
               }
             },
             {
-              content: "Valor Total",
+              content: "Subtotal",
               styles: {
                 halign: 'right'
               }
@@ -266,7 +266,7 @@ export class ComprobanteProforma {
         // For each page, print the page number and the total pages
         const pageCount = (doc as any).internal.getNumberOfPages(); //was doc.internal.getNumberOfPages(); 
         for (let i = 1; i <= pageCount; i++) {
-          console.log(pageCount);
+          // console.log(pageCount);
           doc.setFontSize(10);
           // Go to page i
           doc.setPage(i);

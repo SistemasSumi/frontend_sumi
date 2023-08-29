@@ -62,11 +62,11 @@ function checkConnectionBetweenProps( target1, target2, excludedNodes ) {
 				node = prevNodeMap2.get( node );
 			}
 
-			console.log( '--------' );
-			console.log( { target1 } );
-			console.log( { sharedNode } );
-			console.log( { target2 } );
-			console.log( { connection } );
+			// console.log( '--------' );
+			// console.log( { target1 } );
+			// console.log( { sharedNode } );
+			// console.log( { target2 } );
+			// console.log( { connection } );
 
 			return true;
 		}

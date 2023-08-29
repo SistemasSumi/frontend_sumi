@@ -85,7 +85,7 @@ export function getSelectionAffectedTableCells( selection ) {
  *
  *		const { first, last } = getRowIndexes( selectedTableCells );
  *
- *		console.log( `Selected rows: ${ first } to ${ last }` );
+ *		// console.log( `Selected rows: ${ first } to ${ last }` );
  *
  * @param {Array.<module:engine/model/element~Element>} tableCells
  * @returns {Object} Returns an object with the `first` and `last` table row indexes.
@@ -103,7 +103,7 @@ export function getRowIndexes( tableCells ) {
  *
  *		const { first, last } = getColumnIndexes( selectedTableCells );
  *
- *		console.log( `Selected columns: ${ first } to ${ last }` );
+ *		// console.log( `Selected columns: ${ first } to ${ last }` );
  *
  * @param {Array.<module:engine/model/element~Element>} tableCells
  * @returns {Object} Returns an object with the `first` and `last` table column indexes.

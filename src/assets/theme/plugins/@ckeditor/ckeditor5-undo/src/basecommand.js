@@ -119,7 +119,7 @@ export default class BaseCommand extends Command {
 			selectionRanges.push( transformed[ 0 ] );
 		}
 
-		// @if CK_DEBUG_ENGINE // console.log( `Restored selection by undo: ${ selectionRanges.join( ', ' ) }` );
+		// @if CK_DEBUG_ENGINE // // console.log( `Restored selection by undo: ${ selectionRanges.join( ', ' ) }` );
 
 		// `selectionRanges` may be empty if all ranges ended up in graveyard. If that is the case, do not restore selection.
 		if ( selectionRanges.length ) {

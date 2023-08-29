@@ -80,7 +80,6 @@ export class ClientesService {
     return this.http.get(url, this.httpOptions).pipe(
       map(resp => {
         this.clientesData = resp;
-        console.log(resp);
        
         return resp;
       })

@@ -16,10 +16,10 @@ export class RetencionEnLaFuenteGeneral {
         let currentPage = 0;
         let startY     = 146;
         let startYText = 158;
-        console.log(data.resultados)
+        // console.log(data.resultados)
 
         for(let x of data.resultados.retenciones){
-            console.log(x)
+            // console.log(x)
             let facturas = x.detalle;
 
 
@@ -94,7 +94,7 @@ export class RetencionEnLaFuenteGeneral {
             startY+=56
             startYText+= 56;
 
-            console.log("Final:"+ finalY);
+            // console.log("Final:"+ finalY);
 
             if(finalY >= 711){
                 doc.addPage();
@@ -133,7 +133,7 @@ export class RetencionEnLaFuenteGeneral {
             startY+=56
             startYText+= 56;
 
-            console.log("Final:"+ finalYY);
+            // console.log("Final:"+ finalYY);
 
             if(finalYY >= 711){
                 doc.addPage();
@@ -252,7 +252,7 @@ export class RetencionEnLaFuenteGeneral {
 
 
     setDivicionesEInformacion(doc:jsPDF, startY:number,startYText:number,index:number,rtf:any){
-        console.log(startYText);
+        // console.log(startYText);
         
         doc.line(38,startY,38,startY+18);
         doc.line(330,startY,330,startY+18);

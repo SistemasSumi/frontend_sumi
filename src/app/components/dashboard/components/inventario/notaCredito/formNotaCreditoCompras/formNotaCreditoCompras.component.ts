@@ -265,7 +265,7 @@ export class FormNotaCreditoComprasComponent implements OnInit {
           
           );
         
-          console.log(detalle_a_quitar);
+          // console.log(detalle_a_quitar);
           this.detalleNota.splice(detalle_a_quitar, 1);
 
 
@@ -276,12 +276,12 @@ export class FormNotaCreditoComprasComponent implements OnInit {
 
 
 
-          // console.log(detalle);
+          // // console.log(detalle);
           
 
           this.detalleNota.push(detalle);
 
-          // console.log(this.detalleNota);
+          // // console.log(this.detalleNota);
 
 
 
@@ -333,7 +333,7 @@ export class FormNotaCreditoComprasComponent implements OnInit {
       if(this.terceroSeleccionado.isRetencion){
       
             let retefuente = this.IngresoSeleecionado.retencion;
-            console.log(retefuente);
+            // console.log(retefuente);
             
             for(let x of this.terceroSeleccionado.retencionProveedor){
                 if(x.fija){
@@ -430,7 +430,7 @@ export class FormNotaCreditoComprasComponent implements OnInit {
             text: "Nota crédito registrada con exito"
           });
           this.obtenerNumeraciones();
-          console.log(resp);
+          // console.log(resp);
           this.limpiarNota();
           this.notaService.cargarNotas();
 
@@ -439,7 +439,7 @@ export class FormNotaCreditoComprasComponent implements OnInit {
         },(ex) => {
 
           Swal.close();
-          console.log(ex);
+          // console.log(ex);
           
           let errores ='';
           for(let x in ex.error){

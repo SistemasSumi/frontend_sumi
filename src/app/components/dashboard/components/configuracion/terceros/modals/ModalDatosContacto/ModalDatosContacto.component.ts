@@ -60,7 +60,7 @@ export class ModalDatosContactoComponent implements OnInit {
 
     if(this.idProveedor){
       this.config.getDatosDeContato(this.idProveedor.toString()).subscribe(resp => {
-        console.log(resp)  
+        // console.log(resp)  
         this.contactos = resp;
           
       });
@@ -93,7 +93,7 @@ export class ModalDatosContactoComponent implements OnInit {
       this.toast.success('Registrado con exito!');
       this.config.getDatosDeContato(this.idProveedor.toString()).subscribe(resp => {
         
-        console.log(resp);
+        // console.log(resp);
         this.contactos = resp;
         
       });

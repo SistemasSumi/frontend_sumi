@@ -166,7 +166,7 @@ export class ListadoCIComponent implements OnInit {
           Swal.showLoading();
           this.cxc.imprimirPagos(data.numero.toString()).subscribe((resp:any)=> {
             Swal.close();
-            console.log(resp)
+            // console.log(resp)
             let reporte = new ComprobanteIngreso();
   
             let report = reporte.ReporteComprobanteIngreso(resp);

@@ -61,7 +61,7 @@ export class NConfigComponent implements OnInit {
       this.config.cargarConceptos();
       this.edicionEnProceso = false;
     },(ex) => {
-      console.log(ex);
+      // console.log(ex);
       
       new MetodosShared().AlertError(ex);
     });
@@ -93,11 +93,11 @@ export class NConfigComponent implements OnInit {
       (resp:TipoDeConceptoModel[]) => {
       for(let x in resp){
         for(let i of resp[x].conceptos){
-          // console.log(i)
+          // // console.log(i)
           if (!i.cuenta){
             let model:ModelPuc = new ModelPuc();
             i.cuenta = model;
-            console.log(i);
+            // console.log(i);
           }
           if(!i.contrapartida){
             let model:ModelPuc = new ModelPuc();

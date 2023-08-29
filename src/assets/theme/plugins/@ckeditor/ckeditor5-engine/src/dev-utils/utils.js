@@ -58,7 +58,7 @@ const maxTreeDumpLength = 20;
  * @param {*} version
  */
 export function dumpTrees( document, version ) {
-	console.log( document, version );
+	// console.log( document, version );
 
 	let string = '';
 
@@ -93,11 +93,11 @@ export function initDocumentDumping( document ) {
  * @param {*} version
  */
 export function logDocument( document, version ) {
-	console.log( '--------------------' );
+	// console.log( '--------------------' );
 
 	if ( document[ treeDump ][ version ] ) {
-		console.log( document[ treeDump ][ version ] );
+		// console.log( document[ treeDump ][ version ] );
 	} else {
-		console.log( 'Tree log unavailable for given version: ' + version );
+		// console.log( 'Tree log unavailable for given version: ' + version );
 	}
 }

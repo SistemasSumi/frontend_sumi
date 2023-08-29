@@ -48,12 +48,9 @@ export class RegistrarIzquierdoComponent implements OnInit {
   
 
   cargarPermisos(username) {
-    console.log(username)
     this.db.getDoc('permisos',username).subscribe((resp:PermisosUsuario) => {
       
-      console.log(resp);
       this.permisos = resp;
-      console.log(this.permisos);
     })
   }
 
@@ -147,14 +144,13 @@ export class RegistrarIzquierdoComponent implements OnInit {
     this.auth.registrarUsuario(data).subscribe(resp => {
 
       let p = this.initPermisosDefault();
-      // console.log(this.permisos);
+      // // console.log(this.permisos);
       this.db.createDoc(p,'permisos/',resp.user).then(() =>{
         this.reset();
         this.toastr.success('Usuario creado');
       });
 
       this.cargarUsuarios();
-      console.log(resp)
     })
   }
 
@@ -167,7 +163,6 @@ export class RegistrarIzquierdoComponent implements OnInit {
 
   guardarDefault(){
      let p = this.initPermisosDefault();
-    // console.log(this.permisos);
     this.db.createDoc(p,'permisos/',this.usuario).then(() =>{
 
     });

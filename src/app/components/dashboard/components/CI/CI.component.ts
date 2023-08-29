@@ -84,7 +84,7 @@ export class CIComponent implements OnInit {
 
   ngOnInit() {
     this.puc.getEfectivo().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.pucList = resp;
 
@@ -194,7 +194,7 @@ export class CIComponent implements OnInit {
 
 
     
-    console.log(data);
+    // console.log(data);
 
   }
 
@@ -302,7 +302,7 @@ export class CIComponent implements OnInit {
 
         this.detalle = [];
         for(let x of resp.facturas){
-          console.log(x)
+          // console.log(x)
           let d:detalle = {
             idfactura:x.cxc.id,
             isElectronica:x.cxc.isElectronica,
@@ -335,13 +335,13 @@ export class CIComponent implements OnInit {
           this.totalSaldo       += d.saldo
 
 
-          console.log(d)
+          // console.log(d)
 
           this.detalle.push(d);
         
       }
       this.saldoAFavor = resp.afavor.saldoAFavor;
-      console.log(resp);
+      // console.log(resp);
     });
   }
 
@@ -409,12 +409,12 @@ export class CIComponent implements OnInit {
 
 
     let totalAbono:number = (Number(this.dTotalAbono) + Number(this.dTotalSaldo) + Number(this.dRetefuente) + Number(this.dReteica));
-    console.log("total Abono  " + totalAbono)
+    // console.log("total Abono  " + totalAbono)
     let calculoPorPago = totalAbono * 100 / d.valorFactura;
-    console.log("calculoPorPago"+calculoPorPago)
+    // console.log("calculoPorPago"+calculoPorPago)
 
     let ivaParcial = d.iva * calculoPorPago / 100;
-    console.log("ivaParcial"+ivaParcial)
+    // console.log("ivaParcial"+ivaParcial)
 
     
     if(this.descuentoPorcentaje){
@@ -423,7 +423,7 @@ export class CIComponent implements OnInit {
       descuento =  this.dTotalDescuento ;
 
     }
-    console.log("descuento"+descuento)
+    // console.log("descuento"+descuento)
 
     if (totalAbono > d.valorFactura || totalAbono <= 0) {
       new MetodosShared().AlertError('El valor del pago debe ser igual o menor al Valor de la Factura!');
@@ -438,7 +438,7 @@ export class CIComponent implements OnInit {
     d.reteica    = Number(this.dReteica);
     d.saldo      = Number(d.saldo) - (Number(d.valorAbono)+Number(descuento)+Number(d.saldoFavor)+Number(d.retefuente)+Number(d.reteica))
     d.descuento  = Number(descuento);
-    console.log(d)
+    // console.log(d)
 
     this.saldoAFavor -=      Number(d.saldoFavor);
 
@@ -481,11 +481,11 @@ export class CIComponent implements OnInit {
   calcularDescuento(descuentos,Dias){
     
     if(Dias <= 15){
-      console.log(descuentos.quince);
+      // console.log(descuentos.quince);
       return descuentos.quince;
     }
     else if(Dias > 15 && Dias <= 30){
-      console.log(descuentos.treinta);
+      // console.log(descuentos.treinta);
 
       return descuentos.treinta;
     

@@ -79,12 +79,12 @@ export class InputImageComponent implements OnInit {
   }
   obtenerImagenRecuperada(){
     if (this.imagen != null) {
-      console.log(this.urlDIR);
+      // console.log(this.urlDIR);
       
       this.urlImage = this.imagen;
     }else{
      this.urlImage = null;
-     console.log(this.imagen);
+     // console.log(this.imagen);
 
     }
   }
@@ -120,7 +120,7 @@ export class InputImageComponent implements OnInit {
           this.TypeImage = 'IMG'
         }
         this.tituloFoto = file.name;
-        console.log(file);
+        // console.log(file);
         
         const filePath   = this.obtenerURL(file.name);
         const ref        = this.storage.ref(filePath);
@@ -140,7 +140,7 @@ export class InputImageComponent implements OnInit {
         
 
         // toBase64(file).then((value:string) => this.imagenBase64 = value)
-        // .catch(error => console.log(error));
+        // .catch(error => // console.log(error));
         // this.archivoSeleccionado.emit(file);
     }
   }

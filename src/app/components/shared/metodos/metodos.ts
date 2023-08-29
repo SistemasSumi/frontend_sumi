@@ -38,14 +38,14 @@ export class MetodosShared {
       const date2 = new Date();
       const diffInMs = date1.getTime() - date2.getTime();
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-      console.log(diffInDays);  
+      // console.log(diffInDays);  
       return diffInDays;
     }
 
     public filtrarArray<tipo>(data:tipo[],columnName:string, busqueda:string){
         
-      console.log(columnName)
-      console.log(data)
+      // console.log(columnName)
+      // console.log(data)
         if (!data) {
 
           return;

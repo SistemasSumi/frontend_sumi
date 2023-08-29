@@ -333,7 +333,7 @@ export class facturaElectronicaReport {
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-          console.log(pageCount);
+          // console.log(pageCount);
     
           doc.setFontSize(8);
           // Go to page i
@@ -460,7 +460,7 @@ export class facturaElectronicaReport {
     
       // Obtener altura necesaria para el texto del rectángulo derecho
       const rectRightLines = doc.splitTextToSize(rectRightContent, (rectRightWidth - 15));
-      console.log('N° lineas:',rectRightLines)
+      // console.log('N° lineas:',rectRightLines)
       let numLines = rectHeight;
       if(rectRightLines.length > 1){
         numLines = Math.ceil(rectRightLines.length * rectHeight);
@@ -521,7 +521,7 @@ export class facturaElectronicaReport {
     
       // Obtener altura necesaria para el texto del rectángulo derecho
       const rectRightLines = doc.splitTextToSize(rectRightContent, (rectRightWidth - 15));
-      console.log('N° lineas:',rectRightLines)
+      // console.log('N° lineas:',rectRightLines)
       let numLines = rectHeight;
       if(rectRightLines.length > 1){
         numLines = Math.ceil(rectRightLines.length * rectHeight);
@@ -1167,7 +1167,7 @@ export class facturaElectronicaReport {
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-          console.log(pageCount);
+          // console.log(pageCount);
     
           doc.setFontSize(8);
           // Go to page i
@@ -1651,7 +1651,7 @@ export class facturaElectronicaReport {
       // For each page, print the page number and the total pages
       for (let i = 1; i <= pageCount; i++) {
   
-        console.log(pageCount);
+        // console.log(pageCount);
   
         doc.setFontSize(8);
         // Go to page i

@@ -156,7 +156,7 @@ File: Main Js File
                         if (parent2 && parent2.id !== "side-menu") {
                             parent2.classList.add("mm-show"); // ul tag
                             if (parent2.classList.contains('mm-collapsing')) {
-                                console.log('has mm-collapsing')
+                                // console.log('has mm-collapsing')
                             }
                             var parent3 = parent2.parentElement; // li tag
                             if (parent3 && parent3.id !== "side-menu") {

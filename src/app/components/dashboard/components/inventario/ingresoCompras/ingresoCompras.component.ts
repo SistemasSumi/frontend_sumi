@@ -372,7 +372,7 @@ export class IngresoComprasComponent implements OnInit {
       return;
     }
    
-    console.log(detalleActual);
+    // console.log(detalleActual);
     
     let newDetail:DetalleIngreso = {
       producto   : detalleActual.producto,
@@ -434,10 +434,10 @@ export class IngresoComprasComponent implements OnInit {
     if(this.terceroSeleccionado){
       if(this.terceroSeleccionado.isRetencion){
       
-            console.log("Subtotal ingreso => "+this.subtotalIngreso );
-            console.log("descuento ingreso => "+this.descuentoIngreso);
+            // console.log("Subtotal ingreso => "+this.subtotalIngreso );
+            // console.log("descuento ingreso => "+this.descuentoIngreso);
             let subtotal = this.subtotalIngreso - this.descuentoIngreso;
-            console.log(subtotal);
+            // console.log(subtotal);
             
             for(let x of this.terceroSeleccionado.retencionProveedor){
                 if(x.fija){
@@ -519,7 +519,7 @@ export class IngresoComprasComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           
           let errores ='';
           for(let x in ex.error){

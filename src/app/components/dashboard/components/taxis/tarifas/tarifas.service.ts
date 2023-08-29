@@ -70,7 +70,7 @@ deleteTarifa(pk:number){
 
   return this.http.delete(url, this.httpOptions).pipe(
     map  (resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -101,7 +101,7 @@ saveTarifa(form:FormGroup){
 
   return this.http.post(url,data, this.httpOptions).pipe(
     map  (resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -131,7 +131,7 @@ saveMovimiento(form:FormGroup){
 
   return this.http.post(url,data, this.httpOptions).pipe(
     map  (resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })

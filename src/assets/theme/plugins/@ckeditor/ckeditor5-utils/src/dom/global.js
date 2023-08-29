@@ -21,6 +21,6 @@
  *			innerWidth: 10000
  *		} );
  *
- *		console.log( global.window.innerWidth );
+ *		// console.log( global.window.innerWidth );
  */
 export default { window, document };

@@ -167,7 +167,7 @@ export class CrearNCVComponent implements OnInit {
 
     this.facturaSeleccionada = factura;
     this.notaService.cargarProductos(idfactura).subscribe((resp:Productos[]) => {
-      console.log(resp);
+      // console.log(resp);
       this.Productos = resp;
       
       
@@ -261,7 +261,7 @@ export class CrearNCVComponent implements OnInit {
             return;
           }
         
-          console.log(detalle_a_quitar);
+          // console.log(detalle_a_quitar);
           this.detalleNota.splice(detalle_a_quitar, 1);
 
 
@@ -272,12 +272,12 @@ export class CrearNCVComponent implements OnInit {
 
 
 
-          // console.log(detalle);
+          // // console.log(detalle);
           
 
           this.detalleNota.push(detalle);
 
-          // console.log(this.detalleNota);
+          // // console.log(this.detalleNota);
 
 
 
@@ -332,7 +332,7 @@ export class CrearNCVComponent implements OnInit {
       if(this.terceroSeleccionado.isRetencion){
       
             let retefuente = this.facturaSeleccionada.valorReteFuente;
-            console.log(retefuente);
+            // console.log(retefuente);
             
             for(let x of this.terceroSeleccionado.retencionProveedor){
                 if(x.fija){
@@ -428,7 +428,7 @@ export class CrearNCVComponent implements OnInit {
             text: "Nota crédito registrada con exito"
           });
           this.obtenerNumeraciones();
-          console.log(resp);
+          // console.log(resp);
           this.limpiarNota();
           this.notaService.cargarNotas();
 
@@ -437,7 +437,7 @@ export class CrearNCVComponent implements OnInit {
         },(ex) => {
 
           Swal.close();
-          console.log(ex);
+          // console.log(ex);
           
           let errores ='';
           for(let x in ex.error){

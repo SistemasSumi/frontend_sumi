@@ -354,7 +354,7 @@ export function removeEmptyColumns( table, tableUtils ) {
 		// Remove only last empty column because it will recurrently trigger removing empty rows.
 		const emptyColumn = emptyColumns[ emptyColumns.length - 1 ];
 
-		// @if CK_DEBUG_TABLE // console.log( `Removing empty column: ${ emptyColumn }.` );
+		// @if CK_DEBUG_TABLE // // console.log( `Removing empty column: ${ emptyColumn }.` );
 		tableUtils.removeColumns( table, { at: emptyColumn } );
 
 		return true;
@@ -409,7 +409,7 @@ export function removeEmptyRows( table, tableUtils ) {
 		// Remove only last empty row because it will recurrently trigger removing empty columns.
 		const emptyRow = emptyRows[ emptyRows.length - 1 ];
 
-		// @if CK_DEBUG_TABLE // console.log( `Removing empty row: ${ emptyRow }.` );
+		// @if CK_DEBUG_TABLE // // console.log( `Removing empty row: ${ emptyRow }.` );
 		tableUtils.removeRows( table, { at: emptyRow } );
 
 		return true;

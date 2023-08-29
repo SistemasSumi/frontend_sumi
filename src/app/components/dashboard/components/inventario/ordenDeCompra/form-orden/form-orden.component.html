@@ -286,13 +286,14 @@
                             <mat-label style="font-size: 18px;">Productos</mat-label>
                             <mat-select  placeholder="Buscar productos" [(ngModel)]="producto">
                                 <mat-option>
-                                    <ngx-mat-select-search ngModel (ngModelChange)="filtrarProductos($event)"  #filtroDeProducto
+                                    <ngx-mat-select-search ngModel (ngModelChange)="filtroValor$.next($event)"  #filtroDeProducto
                                         placeholderLabel="Buscar productos" noEntriesFoundLabel="No hay resultados">
                                         <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
                                     </ngx-mat-select-search>
                                 </mat-option>
                                 <mat-option [tooltipProducto]="data" *ngFor="let data of filtroProductos | async" [value]="data">
                                     {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
+                                    
                                 </mat-option>
 
                              

@@ -73,7 +73,7 @@ if ( windowOrGlobal.CKEDITOR_VERSION ) {
 	 *				toolbar: [ 'bold', 'italic' ]
 	 *			} )
 	 *			.then( editor => {
-	 *				console.log( 'Editor was initialized', editor );
+	 *				// console.log( 'Editor was initialized', editor );
 	 *			} )
 	 *			.catch( error => {
 	 *				console.error( error.stack );

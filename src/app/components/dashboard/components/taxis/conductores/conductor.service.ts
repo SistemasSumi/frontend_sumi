@@ -58,7 +58,7 @@ saveConductor(form:FormGroup){
 
   return this.http.post(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })
@@ -89,7 +89,7 @@ UpdateConductor(form:FormGroup){
 
   return this.http.put(url,data, this.httpOptions).pipe(
     map(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp;
     })

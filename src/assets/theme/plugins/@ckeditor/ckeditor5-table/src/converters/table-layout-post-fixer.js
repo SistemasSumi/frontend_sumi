@@ -271,7 +271,7 @@ function fixTableCellsRowspan( table, writer ) {
 	const cellsToTrim = findCellsToTrim( table );
 
 	if ( cellsToTrim.length ) {
-		// @if CK_DEBUG_TABLE // console.log( `Post-fixing table: trimming cells row-spans (${ cellsToTrim.length }).` );
+		// @if CK_DEBUG_TABLE // // console.log( `Post-fixing table: trimming cells row-spans (${ cellsToTrim.length }).` );
 
 		wasFixed = true;
 
@@ -303,7 +303,7 @@ function fixTableRowsSizes( table, writer ) {
 
 	// Remove empty rows.
 	if ( rowsToRemove.length ) {
-		// @if CK_DEBUG_TABLE // console.log( `Post-fixing table: remove empty rows (${ rowsToRemove.length }).` );
+		// @if CK_DEBUG_TABLE // // console.log( `Post-fixing table: remove empty rows (${ rowsToRemove.length }).` );
 
 		wasFixed = true;
 
@@ -318,7 +318,7 @@ function fixTableRowsSizes( table, writer ) {
 	const isValid = rowsLengths.every( length => length === tableSize );
 
 	if ( !isValid ) {
-		// @if CK_DEBUG_TABLE // console.log( 'Post-fixing table: adding missing cells.' );
+		// @if CK_DEBUG_TABLE // // console.log( 'Post-fixing table: adding missing cells.' );
 
 		// Find the maximum number of columns.
 		const maxColumns = rowsLengths.reduce( ( prev, current ) => current > prev ? current : prev, 0 );

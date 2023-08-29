@@ -248,7 +248,7 @@ export class DbService {
   //   try {
   //     const sendPushNotification = this.functions.httpsCallable('sendPushNotification');
   //     const response = await sendPushNotification({ token, title, body }).toPromise();
-  //     console.log('Notificación enviada con éxito:', response);
+  //     // console.log('Notificación enviada con éxito:', response);
   //   } catch (error) {
   //     console.error('Error al enviar la notificación push:', error);
   //     throw error;
@@ -260,7 +260,7 @@ export class DbService {
     
     notificacion.id = this.getId();
     this.createDoc(notificacion,'notificaciones',notificacion.id).then(()=>{
-      console.log("notificacion creada");
+  
     });
   }
 
@@ -271,7 +271,7 @@ export class DbService {
     if(grupoUser){
       this.getCollectionQuery<string>('usuariosNotificacion', 'grupo', '==' ,grupoUser).subscribe(usuario => {
         usuario.forEach((user:any) => {
-          console.log(user)
+         
           user.tokens.forEach(token => {
        
             this.sendPushNotification(token,sender,mensaje);
@@ -333,12 +333,12 @@ export class DbService {
     let sub:Subscription = this.http.post<any>(url,message,{headers: httpHeaders}).subscribe(
       (response) => {
         sub.unsubscribe();
-        console.log('Notificación enviada con éxito:', response);
+        
       },
       (error) => {
         sub.unsubscribe();
 
-        console.error('Error al enviar la notificación:', error);
+        
       }
     );
   }

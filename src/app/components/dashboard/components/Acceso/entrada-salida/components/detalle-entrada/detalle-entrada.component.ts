@@ -22,7 +22,7 @@ export class DetalleEntradaComponent implements OnInit {
     const person = JSON.parse(localStorage.getItem('personaEntrando'))
     if(person){
         this.persona = person;
-        console.log(this.persona);
+        // console.log(this.persona);
         let name = this.persona.empleado.nombre.split(' ');
         let surname = this.persona.empleado.apellido.split(' ');
         this.nombreCorto = name[0] + " " + surname[0];

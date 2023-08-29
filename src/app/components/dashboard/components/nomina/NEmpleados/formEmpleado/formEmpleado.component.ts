@@ -238,35 +238,35 @@ export class FormEmpleadoComponent implements OnInit {
 
   obtenerEps(){
     this.nconfig.obtenerEps().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.listadoEps = resp;
     });
   }
 
   obtenerPension(){
     this.nconfig.obtenerPension().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.listadoPension = resp;
     });
   }
 
   obtenerArl(){
     this.nconfig.obtenerArls().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.listadoArl = resp;
     });
   }
 
   obtenerCaja(){
     this.nconfig.obtenerCaja().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.listadoCajaCompensacion = resp;
     });
   }
 
   obtenerCesantias(){
     this.nconfig.obtenerCesantias().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.listadoCesantias = resp;
     });
   }
@@ -435,7 +435,7 @@ export class FormEmpleadoComponent implements OnInit {
           },
           (error) => {
             Swal.close();
-            console.log(error.error)
+            // console.log(error.error)
           }
         
         );

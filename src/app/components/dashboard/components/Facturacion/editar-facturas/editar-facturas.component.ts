@@ -384,7 +384,7 @@ export class EditarFacturasComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           Swal.close();
           
           let errores ='';
@@ -439,7 +439,7 @@ export class EditarFacturasComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           Swal.close();
           
           let errores ='';
@@ -668,7 +668,7 @@ export class EditarFacturasComponent implements OnInit {
      
      
         let subtotal = this.subtotalFactura - this.descuentoFactura;
-        console.log(subtotal);
+        // console.log(subtotal);
         
         for(let x of this.clienteSeleccionado.retencionCliente){
             if(x.fija){
@@ -757,7 +757,7 @@ export class EditarFacturasComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           Swal.close();
           let errores ='';
           for(let x of ex.error){

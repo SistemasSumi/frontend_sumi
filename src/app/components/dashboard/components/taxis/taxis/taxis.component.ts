@@ -119,10 +119,10 @@ export class TaxisComponent implements OnInit {
     let km_fin = km + 6000
     this.formTaxisKm.get('km_fin').setValue(km_fin);
 
-    console.log(this.formTaxisKm.value);
+    // console.log(this.formTaxisKm.value);
     
     this.taxis.saveTaxiKm(this.formTaxisKm).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.toastr.success("Kilometraje Agregado","SarpTaxis");
         this.resetFormTaxisKm();
         this.cargar();
@@ -131,7 +131,7 @@ export class TaxisComponent implements OnInit {
 
   updateTaxiKm(){
     this.taxis.saveTaxiKm(this.formTaxisKm).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.toastr.success("Kilometraje Actualizado","SarpTaxis");
         this.resetFormTaxisKm();
         this.cargar();
@@ -147,7 +147,7 @@ export class TaxisComponent implements OnInit {
   guardarTurno(){
     if(!this.editarTurnos){
       this.taxis.saveTurno(this.formTurnos).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.cargar();
         this.resetFormTurno();
         Swal.fire({
@@ -159,7 +159,7 @@ export class TaxisComponent implements OnInit {
       })
     }else{
       this.taxis.updateTurno(this.formTurnos).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.cargar();
         this.resetFormTurno();
         Swal.fire({
@@ -177,7 +177,7 @@ export class TaxisComponent implements OnInit {
   crearTurnos(id_taxi:any){
     this.nuevoTurno();
     this.formTurnos.get('taxi').setValue(id_taxi);
-    console.log(id_taxi);
+    // console.log(id_taxi);
     
   }
 
@@ -192,7 +192,7 @@ export class TaxisComponent implements OnInit {
 
   editarTurno(turno:any){
     this.editarTurnos = true;
-    console.log(turno);
+    // console.log(turno);
     
     this.formTurnos.get('id').setValue(turno.id_turno)
     this.formTurnos.get('turno').setValue(turno.turno)
@@ -205,7 +205,7 @@ export class TaxisComponent implements OnInit {
 
   editarTaxi(taxi:any){
     this.editar = true;
-    console.log(taxi);
+    // console.log(taxi);
     
     this.formTaxis.get('id').setValue(taxi.taxi.id_taxi)
     this.formTaxis.get('placa').setValue(taxi.taxi.placa)
@@ -222,7 +222,7 @@ export class TaxisComponent implements OnInit {
       //   this.taxisList.push(x);
       // }
        this.taxisList = resp;
-       console.log(this.taxisList);
+       // console.log(this.taxisList);
        
     })
   }
@@ -230,7 +230,7 @@ export class TaxisComponent implements OnInit {
 
     if(!this.editar){
       this.taxis.saveTaxi(this.formTaxis).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.cargar();
         this.resetFormTaxi();
         Swal.fire({
@@ -242,7 +242,7 @@ export class TaxisComponent implements OnInit {
       })
     }else{
       this.taxis.updateTaxi(this.formTaxis).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.cargar();
         this.resetFormTaxi();
         Swal.fire({

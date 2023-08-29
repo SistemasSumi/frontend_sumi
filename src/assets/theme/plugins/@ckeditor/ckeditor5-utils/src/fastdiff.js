@@ -124,7 +124,7 @@ export default function fastDiff( a, b, cmp, atomicChanges = false ) {
 // Finds position of the first and last change in the given arrays. For example:
 //
 //		const indexes = findChangeBoundaryIndexes( [ '1', '2', '3', '4' ], [ '1', '3', '4', '2', '4' ] );
-//		console.log( indexes ); // { firstIndex: 1, lastIndexOld: 3, lastIndexNew: 4 }
+//		// console.log( indexes ); // { firstIndex: 1, lastIndexOld: 3, lastIndexNew: 4 }
 //
 // The above indexes means that in the first array the modified part is `1[23]4` and in the second array it is `1[342]4`.
 // Based on such indexes, array with `insert`/`delete` operations which allows transforming first value into the second one

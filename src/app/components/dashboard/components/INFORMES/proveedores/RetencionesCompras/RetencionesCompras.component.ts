@@ -33,7 +33,7 @@ export class RetencionesComprasComponent implements OnInit {
 
       this.informes.retencion_compras(this.dateRange.startDate,this.dateRange.endDate).subscribe(resp => {
 
-        console.log(resp);
+        // console.log(resp);
         
         let reporte:RetencionEnLaFuenteGeneral = new RetencionEnLaFuenteGeneral()
         let report = reporte.ReporteRetencionEnLaFuenteGeneral(resp);

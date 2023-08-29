@@ -424,7 +424,7 @@ export default class Document {
 	 * If you want to be notified about all these changes, then simply listen to this event like this:
 	 *
 	 *		model.document.on( 'change', () => {
-	 *			console.log( 'The document has changed!' );
+	 *			// console.log( 'The document has changed!' );
 	 *		} );
 	 *
 	 * If, however, you only want to be notified about the data changes, then use the
@@ -432,7 +432,7 @@ export default class Document {
 	 * which is fired for document structure changes and marker changes (which affects the data).
 	 *
 	 *		model.document.on( 'change:data', () => {
-	 *			console.log( 'The data has changed!' );
+	 *			// console.log( 'The data has changed!' );
 	 *		} );
 	 *
 	 * @event change
@@ -449,7 +449,7 @@ export default class Document {
 	 * If you want to be notified about the data changes, then listen to this event:
 	 *
 	 *		model.document.on( 'change:data', () => {
-	 *			console.log( 'The data has changed!' );
+	 *			// console.log( 'The data has changed!' );
 	 *		} );
 	 *
 	 * If you would like to listen to all document changes, then check out the

@@ -16,7 +16,7 @@ export class VerProductosGuard implements CanActivate {
       private router: Router)
     {
         this.permisos = this.auth.currentUser.getPermisos()
-        console.log(this.permisos)
+        // console.log(this.permisos)
     }
     canActivate(): boolean {
       

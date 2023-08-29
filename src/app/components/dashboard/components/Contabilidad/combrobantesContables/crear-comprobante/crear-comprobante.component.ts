@@ -139,12 +139,12 @@ export class CrearComprobanteComponent implements OnInit {
   MetodoEditar(){
     if(this.numeroEdit != ''){
       this.pucService.imprimirMovi(this.numeroEdit).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.numeraciones = [];
         resp.numeracion.numero = resp.numero
         this.numeracion = resp.numeracion.id
         this.numeraciones.push(resp.numeracion);
-        console.log(parseDateWithoutTimezone(resp.fechaRegistro));
+        // console.log(parseDateWithoutTimezone(resp.fechaRegistro));
         this.fechaRegistro = parseDateWithoutTimezone(resp.fechaRegistro);
         this.tipoMovimiento = resp.tipo.valor;
 
@@ -187,7 +187,7 @@ export class CrearComprobanteComponent implements OnInit {
   MetodoDuplicar(){
     if(this.duplicar != ''){
       this.pucService.imprimirMovi(this.duplicar).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
       
         this.tipoMovimiento = resp.tipo.valor;
 
@@ -244,7 +244,7 @@ export class CrearComprobanteComponent implements OnInit {
 
   filtraTerceros(busqueda:string){
     let filtro:ModelTerceroCompleto[] = this.metodos.filtrarArray<ModelTerceroCompleto>(this.terceros,'nombreComercial',busqueda);
-    console.log(filtro)
+    // console.log(filtro)
     this.filtroTerceros.next(filtro);
   }
 
@@ -400,8 +400,8 @@ export class CrearComprobanteComponent implements OnInit {
   cargarNumeracion(){
     this.pucService.cargarNumeracion().subscribe(resp => {
       this.numeraciones = resp;
-      console.log("Holaa")
-      console.log(resp[0]?.id);
+      // console.log("Holaa")
+      // console.log(resp[0]?.id);
       this.numeracion = resp[0]?.id;
     })
   }

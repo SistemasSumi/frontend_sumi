@@ -27,8 +27,8 @@ function printError () {
 }
 
 function printHelp () {
-  console.log('Usage: rtlcss [option option=parameter ...] [source] [destination]')
-  console.log('')
+  // console.log('Usage: rtlcss [option option=parameter ...] [source] [destination]')
+  // console.log('')
   /*eslint-disable*/
   const options = [
     'Option '       , 'Description ',
@@ -43,11 +43,11 @@ function printHelp () {
   ]
   /* eslint-enable */
   for (let x = 0; x < options.length; x++) {
-    console.log(options[x++], '\t', options[x])
+    // console.log(options[x++], '\t', options[x])
   }
-  console.log('')
-  console.log('*If no destination is specified, output will be written to the same input folder as {source}.rtl.{ext}')
-  console.log('')
+  // console.log('')
+  // console.log('*If no destination is specified, output will be written to the same input folder as {source}.rtl.{ext}')
+  // console.log('')
   printInfo('RTLCSS version: ' + require('../package.json').version)
   printInfo('Report issues to: https://github.com/MohammadYounes/rtlcss/issues')
 }
@@ -84,7 +84,7 @@ while ((arg = args.shift())) {
       break
     case '-s':
     case '--silent':
-      console.log = console.info = console.warn = function () {}
+      // console.log = console.info = console.warn = function () {}
       break
     case '-':
     case '--stdin':
@@ -108,7 +108,7 @@ while ((arg = args.shift())) {
 if (!shouldBreak) {
   if (!directory && !input) {
     printError('rtlcss: no input file')
-    console.log('')
+    // console.log('')
     printHelp()
     shouldBreak = true
   }

@@ -113,7 +113,7 @@ export class PucComponent implements OnInit {
 
   getCuentas(){
     this.pucService.getCuentas().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
 
       this.pucClases = [];
@@ -127,7 +127,7 @@ export class PucComponent implements OnInit {
       this.pucClases = f.transform(resp,'CLASES','tipoDeCuenta');
       this.pucSubclases = f.transform(resp,'SUBCLASE','tipoDeCuenta');
       this.pucGrupos = f.transform(resp,'GRUPO','tipoDeCuenta');
-      console.log(this.pucGrupos);
+      // console.log(this.pucGrupos);
       this.pucCuentas = f.transform(resp,'CUENTA','tipoDeCuenta');
       this.pucSubcuentas = f.transform(resp,'SUBCUENTA','tipoDeCuenta');
       
@@ -245,7 +245,7 @@ export class PucComponent implements OnInit {
   }
 
   guardar(){
-    console.log(this.formCuentasPuc.value);
+    // console.log(this.formCuentasPuc.value);
     
 
     Swal.fire({
@@ -269,7 +269,7 @@ export class PucComponent implements OnInit {
         });
         this.getCuentas();
       },(ex) => {
-        console.log(ex.error);
+        // console.log(ex.error);
         
         let errores ='';
         for(let x in ex.error){
@@ -302,7 +302,7 @@ export class PucComponent implements OnInit {
         
         });
       },(ex) => {
-        console.log(ex.error);
+        // console.log(ex.error);
         
         let errores ='';
         for(let x in ex.error){

@@ -417,9 +417,9 @@ class FileLoader {
 	 *		.then( data => { ... } )
 	 *		.catch( err => {
 	 *			if ( err === 'aborted' ) {
-	 *				console.log( 'Reading aborted.' );
+	 *				// console.log( 'Reading aborted.' );
 	 *			} else {
-	 *				console.log( 'Reading error.', err );
+	 *				// console.log( 'Reading error.', err );
 	 *			}
 	 *		} );
 	 *
@@ -473,9 +473,9 @@ class FileLoader {
 	 *		.then( data => { ... } )
 	 *		.catch( e => {
 	 *			if ( e === 'aborted' ) {
-	 *				console.log( 'Uploading aborted.' );
+	 *				// console.log( 'Uploading aborted.' );
 	 *			} else {
-	 *				console.log( 'Uploading error.', e );
+	 *				// console.log( 'Uploading error.', e );
 	 *			}
 	 *		} );
 	 *

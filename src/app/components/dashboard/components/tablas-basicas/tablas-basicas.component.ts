@@ -200,7 +200,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
         $('#eliminar'+idtable, row).off('click');
         $('#eliminar'+idtable, row).on('click', () => {
           if (idtable === "Cargo") {
-           console.log(data['cargo']+"eliminado");
+           // console.log(data['cargo']+"eliminado");
            
           }else if (idtable === "Color"){
            
@@ -253,7 +253,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
     
       this.llenarSemanasAnio();
     }else if(tab.index === 5){
-       console.log("pendiente");
+       // console.log("pendiente");
        
     }else if(tab.index === 6){
     
@@ -282,7 +282,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
       this.resetFormBarber();
     },(ex) => {
       if(ex.error.cargo){
-        console.log(ex.error.cargo);
+        // console.log(ex.error.cargo);
         if (ex.error.cargo[0] === "Ya existe Barbero con este documento:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -347,7 +347,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
       }],
       users: new FormControl(this.dataBarber.filter(x => x.id == data.usuario.id)[0].id,{ validators:[Validators.required,]})
     });
-    console.log(this.formBarberosEdit.value);
+    // console.log(this.formBarberosEdit.value);
   }
 
   editBarber(){
@@ -358,7 +358,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
       this.resetFormBarber();
     },(ex) => {
       if(ex.error.documento){
-        console.log(ex.error.documento);
+        // console.log(ex.error.documento);
         if (ex.error.cargo[0] === "Ya existe Barbero con este documento:.") {
           Swal.fire({
             title: 'Error en el documento',
@@ -486,7 +486,7 @@ export class TablasBasicasComponent implements OnInit, AfterViewInit,AfterConten
 llenarServicios(){
     this.table.destroy();
     this.tablasBasicas.getServicios().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       
       this.llenarTable(
         "Servicios",
@@ -511,7 +511,7 @@ createNewServicio(){
     this.resetFormServicios();
   },(ex) => {
     if(true){
-      console.log(ex.error.valor);
+      // console.log(ex.error.valor);
   
           Swal.fire({
             title: 'Error en los datos',
@@ -544,7 +544,7 @@ selectItemServicio(data){
       ]
     }]
   });
-  console.log(this.formServiciosEdit.value);
+  // console.log(this.formServiciosEdit.value);
 }
 
 editServicio(){
@@ -554,7 +554,7 @@ editServicio(){
     this.toastr.success("Servicio actualizado.","Sistema");
     this.resetFormServicios();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
   });
 }
@@ -648,13 +648,13 @@ ObtenerErrorCampoServicio(input:string,mensaje:string){
 
   createNewConfiguracion(){
     this.tablasBasicas.createNewConfiguracion(this.formConfiguracion).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.llenarSettings();
       this.toastr.success("Configuracion Guardada..","Sitema");
       this.resetFormSettings();
     },(ex) => {
       if(ex.error.color){
-        console.log(ex.error.color);
+        // console.log(ex.error.color);
         if (ex.error.color[0] === "Ya existe Color con este Color:.") {
           Swal.fire({
             title: 'Error en los datos',
@@ -675,7 +675,7 @@ ObtenerErrorCampoServicio(input:string,mensaje:string){
      
           
       }else if(ex.error.finca){
-        console.log(ex.error.finca);
+        // console.log(ex.error.finca);
         
         Swal.fire({
           title: 'Error en los datos',
@@ -718,7 +718,7 @@ ObtenerErrorCampoServicio(input:string,mensaje:string){
       this.resetFormSettings();
     },(ex) => {
       if(ex.error.color){
-        console.log(ex.error.color);
+        // console.log(ex.error.color);
         if (ex.error.color[0] === "Ya existe Color con este Color:.") {
           Swal.fire({
             title: 'Error en el color',
@@ -827,15 +827,15 @@ initFormLabores(){
 
 createNewLabor(){
   this.tablasBasicas.createNewLabor(this.formLabores).subscribe(resp => {
-    console.log(resp);
+    // console.log(resp);
     this.llenarLabores();
     this.toastr.success("Nueva laborr registrada.","SigBan Admin");
     this.resetFormLabores();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.labor){
-      console.log(ex.error.labor);
+      // console.log(ex.error.labor);
       if (ex.error.labor[0] === "Ya existe Labor con este Labor:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -856,7 +856,7 @@ createNewLabor(){
    
         
     }else if(ex.error.finca){
-      console.log(ex.error.finca);
+      // console.log(ex.error.finca);
       
       Swal.fire({
         title: 'Error en los datos',
@@ -902,7 +902,7 @@ editLabor(){
     this.resetFormLabores();
   },(ex) => {
     if(ex.error.labor){
-      console.log(ex.error.labor);
+      // console.log(ex.error.labor);
       if (ex.error.labor[0] === "Ya existe Color con este Color:.") {
         Swal.fire({
           title: 'Error en el color',
@@ -1020,10 +1020,10 @@ createNewTipo(){
     this.toastr.success("Nuevo Tipo de empleado registrado.","SigBan Admin");
     this.resetFormTipoEmp();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.tipo){
-      console.log(ex.error.tipo);
+      // console.log(ex.error.tipo);
       if (ex.error.tipo[0] === "Ya existe Tipo con este Tipo:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1086,7 +1086,7 @@ editTipoEmp(){
     this.resetFormTipoEmp();
   },(ex) => {
     if(ex.error.tipo){
-      console.log(ex.error.tipo);
+      // console.log(ex.error.tipo);
       if (ex.error.tipo[0] === "Ya existe Tipo con este Tipo:.") {
         Swal.fire({
           title: 'Error en el tipo',
@@ -1214,7 +1214,7 @@ createNewSemana(){
   },(ex) => {
     
     if(ex.error.semana){
-      console.log(ex.error.seamana);
+      // console.log(ex.error.seamana);
       if (ex.error.semana[0] === "Ya existe Semana con este Semana:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1262,10 +1262,10 @@ selectItemSemana(data){
   this.fechaInit = moment(fecha1,"MMMM/DD/YYYY").toDate();
   this.fechaFin  = moment(fecha2,"MMMM/DD/YYYY").toDate();
 
-  console.log(data.fecha_inicial,data.fecha_final);
-  console.log("**********************************");
-  console.log(fecha1,fecha2);
-  console.log(this.fechaInit,this.fechaFin);
+  // console.log(data.fecha_inicial,data.fecha_final);
+  // console.log("**********************************");
+  // console.log(fecha1,fecha2);
+  // console.log(this.fechaInit,this.fechaFin);
   
  
   this.formSemanasAnioEdit = this.formBuilder.group({
@@ -1293,7 +1293,7 @@ selectItemSemana(data){
     }]
   });
 
-  console.log(this.formSemanasAnioEdit.value);
+  // console.log(this.formSemanasAnioEdit.value);
 }
 
 editSemana(){
@@ -1308,7 +1308,7 @@ editSemana(){
   },(ex) => {
 
     if(ex.error.semana){
-      console.log(ex.error.seamana);
+      // console.log(ex.error.seamana);
       if (ex.error.semana[0] === "Ya existe Semana con este Semana:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1432,10 +1432,10 @@ createNewProceso(){
     this.toastr.success("Nuevo proceso registrado.","SigBan Admin");
     this.resetFormProcesos();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.proceso){
-      console.log(ex.error.proceso);
+      // console.log(ex.error.proceso);
       if (ex.error.proceso[0] === "Ya existe Proceso con este Proceso:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1496,7 +1496,7 @@ selectItemProceso(data){
     }],
     finca: new FormControl(this.dataFinca.filter(x => x.id == data.finca.id)[0].id,{ validators:[Validators.required,]}),
   });
-  console.log(this.formProcesosEdit.value);
+  // console.log(this.formProcesosEdit.value);
 
 }
 
@@ -1508,10 +1508,10 @@ editProceso(){
     this.toastr.success("proceso actualizado.","SigBan Admin");
     this.resetFormProcesos();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.proceso){
-      console.log(ex.error.proceso);
+      // console.log(ex.error.proceso);
       if (ex.error.proceso[0] === "Ya existe Proceso con este Proceso:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1636,10 +1636,10 @@ createNewFuncionesEmpleados(){
     this.toastr.success("Nueva funcion registrada.","SigBan Admin");
     this.resetFormFuncionesEmpleados();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.funcion){
-      console.log(ex.error.funcion);
+      // console.log(ex.error.funcion);
       if (ex.error.funcion[0] === "Ya existe Funcion con este Funcion:.") {
         Swal.fire({
           title: 'Error en los datos',
@@ -1681,7 +1681,7 @@ createNewFuncionesEmpleados(){
 }
 
 selectItemFuncionesEmpleados(data){
-console.log(data);
+// console.log(data);
 
   this.formFuncionesEmpEdit = this.formBuilder.group({
     id: [data.id,{
@@ -1713,10 +1713,10 @@ editFuncionesEmpleados(){
     this.toastr.success("función actualizada.","SigBan Admin");
     this.resetFormFuncionesEmpleados();
   },(ex) => {
-    console.log(ex);
+    // console.log(ex);
     
     if(ex.error.funcion){
-      console.log(ex.error.funcion);
+      // console.log(ex.error.funcion);
       if (ex.error.funcion[0] === "Ya existe Funcion con este Funcion:.") {
         Swal.fire({
           title: 'Error en los datos',

@@ -15,30 +15,30 @@ export class CajaDiariaComponent implements OnInit {
     this.home.getReporte().subscribe((resp:any) => {
       this.dataBarber = [];
       
-      console.log()
+      // console.log()
       for (let x in resp.data){
  
         
         let data = resp["data"]
-        console.log(data)
+        // console.log(data)
         
           
-          // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
+          // // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
           data[x].totalBarbero = this.cp.transform(parseInt(data[x].totalBarbero));
           
           
-           console.log(data[x]);
+           // console.log(data[x]);
           
           // data[j].totalBarbero = this.cp.transform(parseInt(data[j].totalBarbero));
           this.dataBarber.push(data[x]);
 
-          console.log(this.dataBarber);
+          // console.log(this.dataBarber);
         
         
         
       }
 
-      console.log(this.dataBarber);
+      // console.log(this.dataBarber);
       
       
        
@@ -47,7 +47,7 @@ export class CajaDiariaComponent implements OnInit {
 
     this.home.getReporteCaja().subscribe((resp:any) => {
       this.dataCaja = resp;
-      console.log(resp);
+      // console.log(resp);
       
     })
     

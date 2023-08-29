@@ -62,10 +62,10 @@ export class RetencionesComponent implements OnInit {
     })
 
 
-    console.log(this.RetencionesEdit);
+    // console.log(this.RetencionesEdit);
     
     if(this.RetencionesEdit != null){
-      console.log(this.RetencionesEdit);
+      // console.log(this.RetencionesEdit);
       this.editando = true;
       this.formRetenciones.get('id').setValue(this.RetencionesEdit.id);
       this.formRetenciones.get('nombre').setValue(this.RetencionesEdit.nombre);
@@ -128,7 +128,7 @@ export class RetencionesComponent implements OnInit {
       }
       
     },(ex) => {
-      console.log(ex.error);
+      // console.log(ex.error);
       // this.resultado.emit(true);
       
       let errores ='';

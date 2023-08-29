@@ -67,7 +67,7 @@ export class ModalDescuentoProveedorComponent implements OnInit {
 
     if(this.idProveedor){
       this.config.getDescuentoProveedor(this.idProveedor.toString()).subscribe(resp => {
-          console.log(resp);
+          // console.log(resp);
           this.formDescuento.get('id').setValue(resp.id);
           this.formDescuento.get('tercero').setValue(this.idProveedor);
           this.formDescuento.get('quince').setValue(resp.quince);
@@ -88,7 +88,7 @@ export class ModalDescuentoProveedorComponent implements OnInit {
 
     descuento = this.formDescuento.value;
     this.config.saveDescuentoProveedor(descuento).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.resultado.emit(true);
       this.toast.success('Registrado con exito!');
     })  

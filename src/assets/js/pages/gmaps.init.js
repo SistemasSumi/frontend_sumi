@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       author: 'HPNeo'
     },
     click: function(e){
-      if(console.log)
-        console.log(e);
+      if(// console.log)
+        // console.log(e);
       alert('You clicked in this marker');
     }
   });

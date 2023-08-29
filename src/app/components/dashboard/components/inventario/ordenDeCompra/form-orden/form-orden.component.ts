@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
+import { debounceTime } from 'rxjs/operators';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
 import { ConfiguracionService } from '../../../configuracion/Configuracion.service';
@@ -28,7 +28,8 @@ import { OrdenDeCompraService } from '../ordenDeCompra.service';
 })
 export class FormOrdenComponent implements OnInit {
 
-
+  filtroValor$ = new Subject<string>();
+  filtroSubscription: Subscription | undefined;
   actualizacion:boolean = false;
 
 
@@ -151,8 +152,7 @@ export class FormOrdenComponent implements OnInit {
   numeraciones:ModelNumeraciones[] = [];
 
   ngOnInit() {
-    
-
+    this.setupFiltroSubscription();
 
 
     this.InitFiltroTercero();
@@ -223,7 +223,7 @@ export class FormOrdenComponent implements OnInit {
                     valorUnidad:x.valorUnidad,
                     total:subtotal + iva
                   }
-                  console.log(this.detalleOrden);
+                  // console.log(this.detalleOrden);
                   this.detalleOrden.push(detalle);
                   this.detalleSubject.next(this.detalleOrden);
       
@@ -245,7 +245,17 @@ export class FormOrdenComponent implements OnInit {
     
   }
 
+  private setupFiltroSubscription(): void {
+    if (this.filtroSubscription) {
+      this.filtroSubscription.unsubscribe();
+    }
 
+    this.filtroSubscription = this.filtroValor$
+      .pipe(debounceTime(300))
+      .subscribe((valor: string) => {
+        this.filtrarProductos(valor);
+      });
+  }
   obtenerNumeraciones(){
     this.ordenService.cargarNumeracion().subscribe((resp:ModelNumeraciones[]) => {
         this.numeraciones = resp;
@@ -503,7 +513,7 @@ export class FormOrdenComponent implements OnInit {
       if(this.terceroSeleccionado.isRetencion){
       
             let subtotal = this.subtotalOrden - this.descuentoOrden;
-            console.log(subtotal);
+            // console.log(subtotal);
             
             for(let x of this.terceroSeleccionado.retencionProveedor){
                 if(x.fija){
@@ -598,7 +608,12 @@ export class FormOrdenComponent implements OnInit {
     this.calcularTotales(this.detalleOrden);
   
   }
+  hoveredData: any; // Variable para rastrear la opción sobre la que el usuario ha pasado el mouse
 
+  setHoveredData(data: any) {
+    // console.log("hola")
+      this.hoveredData = data;
+  }
   guardarOrden(){
     
 
@@ -655,7 +670,7 @@ export class FormOrdenComponent implements OnInit {
           
 
         },(ex) => {
-          console.log(ex);
+          // console.log(ex);
           
           let errores ='';
           for(let x in ex.error){
