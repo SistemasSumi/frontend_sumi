@@ -55,12 +55,12 @@ export class IngresoAlmacen {
               }
             },
             {
-              content: this.cp.transform(x.descuento),
+              content: this.cp.transform(x.descuento / x.valorUnidad * 100),
               styles: {
               }
             },
             {
-              content: this.cp.transform(x.iva),
+              content: this.cp.transform((x.iva*x.cantidad) / x.subtotal * 100),
               styles: {
               }
             },

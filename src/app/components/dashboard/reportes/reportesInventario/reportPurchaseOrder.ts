@@ -57,12 +57,12 @@ export class ReportPurchaseOrder {
               }
             },
             {
-              content: this.cp.transform(x.descuento),
+              content: this.cp.transform(x.descuento / x.valorUnidad * 100),
               styles: {
               }
             },
             {
-              content: this.cp.transform(x.iva),
+              content: this.cp.transform(x.iva / x.valorUnidad * 100),
               styles: {
               }
             },
