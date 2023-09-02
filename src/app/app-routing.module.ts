@@ -107,6 +107,7 @@ import { NotaCreditoVGuard } from './guards/facturacion/NotaCreditoV.guard';
 import { CrearNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/CrearNCV/CrearNCV.component';
 import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
 import { CvfFormComponent } from './components/dashboard/components/Facturacion/prospectoVenta/CcfForm/CcfForm.component';
+import { ConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/conciliacion.component';
 
 
 
@@ -144,6 +145,7 @@ const routes: Routes = [
       canActivate:[AuthGuard,TrasladosGuard]
     },
     // { path: 'traslados', component: TrasladosFondosComponent,canActivate:[AuthGuard,PucGuard]},
+    { path: 'conciliacion', component: ConciliacionComponent,canActivate:[AuthGuard,LibroAuxGuard]},
     { path: 'libroAux', component: LibroAuxiliarComponent,canActivate:[AuthGuard,LibroAuxGuard]},
     { path: 'reportes-contables', component: InformesContabilidadComponent,canActivate:[AuthGuard,InformesCGuard]},
     { path: 'comprobantes-contables', component: CombrobantesContablesComponent,canActivate:[AuthGuard,MovimientosCGuard]},
@@ -277,19 +279,19 @@ const routes: Routes = [
       ],
       canActivate:[AuthGuard]
     },
-    { 
-      path: 'empleados', 
-      component: NEmpleadosComponent,
-        children: [
-          { path: 'nuevo',component:FormEmpleadoComponent,},
-          { path: 'listado',component:ListadoEmpleadoComponent,},
-          // { path: 'preview',component:PreviewEmpleadosComponent,},
-          { path: '**',component:ListadoEmpleadoComponent, }
+    // { 
+    //   path: 'empleados', 
+    //   component: NEmpleadosComponent,
+    //     children: [
+    //       { path: 'nuevo',component:FormEmpleadoComponent,},
+    //       { path: 'listado',component:ListadoEmpleadoComponent,},
+    //       // { path: 'preview',component:PreviewEmpleadosComponent,},
+    //       { path: '**',component:ListadoEmpleadoComponent, }
 
          
-      ],
-      canActivate:[AuthGuard]
-    },
+    //   ],
+    //   canActivate:[AuthGuard]
+    // },
 
     // { path: 'nueva-factura', component: FacturacionComponent,canActivate:[AuthGuard]},
     { path: 'preview/empleado', component: PreviewEmpleadosComponent,canActivate:[AuthGuard]},

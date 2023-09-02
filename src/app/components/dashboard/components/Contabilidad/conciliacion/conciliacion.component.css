@@ -1,0 +1,31 @@
+
+thead {
+    background-color: var(--color-primario);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+th {
+    border: none;
+}
+
+
+::ng-deep .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-round{
+    border: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    padding: 10%;
+}
+

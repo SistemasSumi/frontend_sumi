@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
 import { ConfiguracionService } from '../../../configuracion/Configuracion.service';
 import { TablesBasicService } from '../../../configuracion/TablesBasic/tablesBasic.service';
@@ -24,8 +26,15 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
   tipos:any[] = [];
   impuestos:any[] = [];
 
-  laboratorios:laboratorio[] = marcas;
 
+  public filtroTerceroControl: FormControl = new FormControl('');
+  metodos:MetodosShared = new MetodosShared();
+
+  public filtroProveedores: BehaviorSubject<laboratorio[]>;
+
+
+  laboratorios:laboratorio[] = marcas;
+  protected _onDestroy = new Subject<void>();
 
   actualizar:boolean = false;
 
@@ -172,7 +181,21 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
     private tables:TablesBasicService
   ) { }
 
+
+  sortObject(obj: any): string {
+    const ordered = Object.keys(obj)
+      .sort()
+      .reduce((result: any, key: string) => {
+        result[key] = obj[key];
+        return result;
+      }, {});
+    
+    return JSON.stringify(ordered);
+  }
+
   ngOnInit() {
+    this.filtroProveedores = new BehaviorSubject<laboratorio[]>(this.laboratorios);
+    this.InitFiltroTercero();
     this.cargarBodegas();
     this.cargarTipos();
     this.cargarImpuestos()
@@ -192,6 +215,19 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
 
   }
 
+
+  InitFiltroTercero(){
+    this.filtroTerceroControl.valueChanges
+      .pipe(takeUntil (this._onDestroy))
+      .subscribe(() => {
+        this.filtraTerceros(this.filtroTerceroControl.value);
+      });
+  }
+
+  filtraTerceros(busqueda:string){
+    let filtro:laboratorio[] = this.metodos.filtrarArray<laboratorio>(this.laboratorios,'nombre',busqueda);
+      this.filtroProveedores.next(filtro);
+  }
 
   obetnerProductoAEditar(id:number){
     Swal.fire({

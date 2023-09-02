@@ -256,7 +256,13 @@
                             <mat-form-field appearance="outline" style="width:100%; height: auto;">
                                 <mat-label style="font-size: 16px;">Laboratorio</mat-label>
                                 <mat-select formControlName="laboratorio"  required style="text-align: center;">
-                                    <mat-option *ngFor="let item of laboratorios" [value]="item.nombre">{{item.nombre}}</mat-option>
+                                  <mat-option>
+                                    <ngx-mat-select-search [formControl]="filtroTerceroControl"  #filtroTercero 
+                                            placeholderLabel="Buscar laboratorios" noEntriesFoundLabel="No hay resultados">
+                                            <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                                        </ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of filtroProveedores | async" [value]="item.nombre">{{item.nombre}}</mat-option>
                                     
                                 </mat-select>
                             </mat-form-field>

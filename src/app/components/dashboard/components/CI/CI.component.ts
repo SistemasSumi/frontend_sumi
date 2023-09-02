@@ -19,7 +19,8 @@ import { FacturacionService } from '../Facturacion/facturacion.service';
 import { ModalPreviewFacturaComponent } from '../Facturacion/previewFacturas/ModalPreviewFactura/ModalPreviewFactura.component';
 import { PreviewFacturasComponent } from '../Facturacion/previewFacturas/previewFacturas.component';
 import { StockService } from '../inventario/stock/stock.service';
-
+import * as moment from 'moment';
+moment.locale('es')
 @Component({
   selector: 'app-CI',
   templateUrl: './CI.component.html',
@@ -115,7 +116,7 @@ export class CIComponent implements OnInit {
 
   guardar(){
   
-
+    
     if(this.GlobalTerceroSeleccionado == undefined ){
       new MetodosShared().AlertError('Seleccione un tercero.');
       return;
@@ -143,7 +144,7 @@ export class CIComponent implements OnInit {
       "numeracion":this.GlobalNumeracion,
       "observacion":this.GlobalObservacion,
       "diferencia":this.GlobalDiferencia,
-      "fecha":this.fecha,
+      "fecha":moment(this.fecha).format('YYYY-MM-DD'),
       "totalAbono":this.totalAbono,
       "totalSaldoAFavor":this.totalSaldoAFavor,
       "totalRetefuente":this.totalRetefuente,

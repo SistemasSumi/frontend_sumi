@@ -24,7 +24,7 @@ export class ComprobanteProforma {
               }
             },
             {
-              content: x.producto.nombreymarcaunico,
+              content: x.producto.nombreymarcaunico+'Lote: '+x.lote,
               styles: {
                 cellWidth: 210
               }

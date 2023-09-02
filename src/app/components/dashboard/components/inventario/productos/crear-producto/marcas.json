@@ -150,6 +150,9 @@
     "nombre": "BCN"
   },
   {
+    "nombre": "GLENMARK"
+  },
+  {
     "nombre": "BCN**"
   },
   {
@@ -1065,7 +1068,7 @@
     "nombre": "Medicales**"
   },
   {
-    "nombre": "Medevice"
+    "nombre": "Medivice"
   },
   {
     "nombre": "Mediplus"
