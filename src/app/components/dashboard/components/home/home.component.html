@@ -2,59 +2,71 @@
 
     <div class="page-content">
   
-      <!-- <div class="row">
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="imprimirNotaCredito()">
-            <i class="squire ico-pdf"></i>&nbsp; NOTA CREDITO
-        </button>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Tu gráfico ngx-charts aquí -->
+            <div class="chart-container">
+              <ngx-charts-bar-vertical-2d
+                [view]="[viewWidth, 400]"
+                [scheme]="barChartOptions.colorScheme"
+                [results]="data"
+                [gradient]="barChartOptions.gradient"
+                [xAxis]="barChartOptions.showXAxis"
+                [yAxis]="barChartOptions.showYAxis"
+                [legend]="barChartOptions.showLegend"
+                [legendTitle]="barChartOptions.legendTitle"
+                [showXAxisLabel]="barChartOptions.showXAxisLabel"
+                [legendPosition]="barChartOptions.legendPosition"
+                [xAxisLabel]="barChartOptions.xAxisLabel"
+                [showYAxisLabel]="barChartOptions.showYAxisLabel"
+                [yAxisLabel]="barChartOptions.yAxisLabel"
+              ></ngx-charts-bar-vertical-2d>
+
+              
+            </div>
+            
+          </div>
+          <hr>
+          <div class="col-12">
+            <!-- Tu gráfico ngx-charts aquí -->
+            <!-- <p>Cuentas por pagar</p> -->
+            <div class="chart-container">
+              <ngx-charts-advanced-pie-chart
+                [results]="cxp"
+                [gradient]="false"
+                [scheme]="barChartOptions.colorScheme"
+                
+                [animations]="true"
+              ></ngx-charts-advanced-pie-chart>
+              <div class="chart-title">
+                <p class="fw-bold">CUENTAS POR PAGAR </p><!-- Título del gráfico -->
+              </div>
+              
+            </div>
+            
+          </div>
+          <hr>
+          <div class="col-12">
+            <!-- Tu gráfico ngx-charts aquí -->
+            <!-- <p>Cuentas por pagar</p> -->
+            <div class="chart-container">
+              <ngx-charts-advanced-pie-chart
+                [results]="cxc"
+                [gradient]="false"
+                [scheme]="barChartOptions.colorScheme"
+                
+                [animations]="true"
+              ></ngx-charts-advanced-pie-chart>
+              <div class="chart-title">
+                <p class="fw-bold">CUENTAS POR COBRAR </p><!-- Título del gráfico -->
+              </div>
+              
+            </div>
+            
+          </div>
         </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="COTIZACION()">
-            <i class="squire ico-pdf"></i>&nbsp; COTIZACIÓN
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraVencida()">
-            <i class="squire ico-pdf"></i>&nbsp; Cartera Vencida
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="egreso()">
-            <i class="squire ico-pdf"></i>&nbsp; Egreso
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="ingreso()">
-            <i class="squire ico-pdf"></i>&nbsp; ingreso
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraCliente()">
-            <i class="squire ico-pdf"></i>&nbsp; Cartera Cliente
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="carteraProveedor()">
-            <i class="squire ico-pdf"></i>&nbsp; cartera Proveedor
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="aux()">
-            <i class="squire ico-pdf"></i>&nbsp; AUXILIAR
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="movi()">
-            <i class="squire ico-pdf"></i>&nbsp; Movimiento Contable
-        </button>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-outline-danger mb-4" (click)="salidaConsumo()">
-            <i class="squire ico-pdf"></i>&nbsp; Salida consumo
-        </button>
-        </div>
-      </div> -->
-       
+      </div> 
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->

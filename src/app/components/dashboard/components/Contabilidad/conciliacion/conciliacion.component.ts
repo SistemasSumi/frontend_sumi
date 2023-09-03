@@ -381,6 +381,9 @@ export class ConciliacionComponent implements OnInit {
     
   }
   
+  cerrar(){
+    this.conciliacion.imprimir();
+  }
 
 }
 

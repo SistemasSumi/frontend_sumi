@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Observable } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
@@ -25,6 +25,7 @@ import { ComprobanteCotizacion } from '../../reportes/reportesFacturacion/Compro
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as moment from 'moment';
+import { PermisosUsuario } from 'src/app/components/auth/permisosUsuario';
 // import { CurrencyPipe } from '@angular/common';
 // import { logoSumi } from '../logoSumi';
 
@@ -33,317 +34,187 @@ import * as moment from 'moment';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  fechaInit:any;
-  fechaFin:any;
+export class HomeComponent implements OnInit,AfterViewInit  {
+  permisos:PermisosUsuario;
+  viewWidth:any;
+
+ 
+
+  cxp:any;
+  cxc:any;
+
+
+  data:any;
+  result:any = [
+    {
+      name: 'Enero',
+      ventas: 1000,
+      compras: 800,
+    },
+    {
+      name: 'Febrero',
+      ventas: 1200,
+      compras: 950,
+    },
+    {
+      name: 'Marzo',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+    {
+      name: 'Abril',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+    {
+      name: 'Mayo',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+    {
+      name: 'Junio',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+    {
+      name: 'Julio',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+    {
+      name: 'Agosto',
+      ventas: 800,
+      compras: 950,
+    },
+    // Agrega más meses aquí...
+  ];
+
+  barChartOptions: any = {// Tamaño del gráfico
+    showXAxis: true,  // Mostrar el eje X (meses)
+    showYAxis: true,  // Mostrar el eje Y (valores)
+    gradient: false,  // Usar degradado en las barras
+    showLegend: true, // Mostrar la leyenda
+    legendTitle: '',
+    showXAxisLabel: true, // Mostrar etiquetas en el eje X
+    xAxisLabel: 'COMPARACIÓN ANUAL ENTRE VENTAS Y COMPRAS',
+    legendPosition: 'below',
+    colorScheme: {
+      domain: ['#41B6FF', '#FFA500', '#FFFF00', '#FF0000', '#00FF00', '#FFFF00'],
+
+    }
+  };
   
-  formSemanasAnio    : FormGroup;
+
+  constructor( private route:ActivatedRoute, 
+    public reporte:ReportesService,
+    private el: ElementRef,
+    public auth:SeguridadService,
+     private home:HomeService,
+     private cp:CurrencyPipe,
+     public formBuilder:FormBuilder) { 
+      this.permisos = this.auth.currentUser.getPermisos()
+
+     }
 
 
-  public dataBarber:any= [];
-  public dataEmpresa:any= [];
-  public dataTotales : any;
 
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.adjustView();
+    });
 
-  usuariosData$:any;
-
-
-  usuario:any;
-  institucional:boolean = false;
-  consumo:boolean = false;
-  tat:boolean = false;
-  lista1:boolean = false;
-  lista2:boolean = false;
-  dashboard:boolean = false;
-  proveedores:boolean = false;
-  clientes:boolean = false;
-
-  articulos:any
-
-  constructor( private route:ActivatedRoute, public reporte:ReportesService,public auth:SeguridadService, private home:HomeService,private cp:CurrencyPipe,public formBuilder:FormBuilder) { }
+  }
 
   ngOnInit(): void {
-    // let permisos = this.route.snapshot.data['permisos'];
-    // this.auth.setPermisosUser(permisos); 
-   
-  }
+    this.adjustView();
 
-  imprimir(){
-    let reporte:RetencionEnLaFuenteGeneral = new RetencionEnLaFuenteGeneral();
-
-    this.home.getReportes().subscribe(resp => {
-
-      let report = reporte.ReporteRetencionEnLaFuenteGeneral(resp);
-      window.open(report.output('bloburl'), '_blank');
-    });
-  }
-
-  onchangeUser(user){
-    // console.log(user);
-    
-    this.home.getPermisos(user).subscribe((resp:any) => {
-      this.institucional  = false;
-      this.consumo = false;
-      this.tat = false;
-      this.lista1 = false;
-      this.lista2 = false;
-      this.dashboard = false;
-      this.proveedores = false;
-      this.clientes = false;
-
-      if(resp.data.institucional){
-        this.institucional = resp.data.institucional
-      }
-      if(resp.data.consumo){
-        this.consumo = resp.data.consumo
-      }
-      if(resp.data.tat){
-        this.tat = resp.data.tat
-      }
-
-      if(resp.data.lista1){
-        this.lista1 = resp.data.lista1
-      }
-      if(resp.data.lista2){
-        this.lista2 = resp.data.lista2
-      }
-      if(resp.data.dashboard){
-        this.dashboard = resp.data.dashboard
-      }
-      if(resp.data.proveedores){
-        this.proveedores = resp.data.proveedores
-      }
-      if(resp.data.clientes){
-        this.clientes = resp.data.clientes
-      }
-    },(ex)=>{
-      this.institucional  = false;
-      this.consumo = false;
-      this.tat = false;
-      this.lista1 = false;
-      this.lista2 = false;
-      this.dashboard = false;
-      this.proveedores = false;
-      this.clientes = false;
-
-    });
-  }
-
-
-
-guardarPermisos(){
-  this.home.CreatePermisos(
-    this.usuario,
-    this.institucional,
-    this.consumo,
-    this.tat,
-    this.lista1,
-    this.lista2,
-    this.dashboard,
-    this.proveedores,
-    this.clientes
-  ).subscribe(resp => {
-    this.usuario = '';
-    this.institucional  = false;
-    this.consumo = false;
-    this.tat = false;
-    this.lista1 = false;
-    this.lista2 = false;
-    this.dashboard = false;
-    this.proveedores = false;
-    this.clientes = false;
-    
-  })
-}
-
-  buscar(){
-    if(this.formSemanasAnio.valid){
-    
-      this.home.getReporte(this.formSemanasAnio).subscribe((resp:any) => {
-        this.dataBarber = [];
-        this.dataEmpresa = [];
-
-        this.dataEmpresa = resp.dataEmp;
-        
-        // console.log(this.dataEmpresa)
-        for (let x in resp.data){
-         
-          let data = resp["data"]
-  
-            
-            // // console.log(this.cp.transform(parseInt(data[j].totalBarbero)));
-            data[x].totalBarbero = this.cp.transform(parseInt(data[x].totalBarbero));
-            
-            
-             // console.log(data[x]);
-            
-            // data[j].totalBarbero = this.cp.transform(parseInt(data[j].totalBarbero));
-            this.dataBarber.push(data[x]);
-          
-          
-          
+    if(this.permisos.contabilidad.informes || this.permisos.superusuario){
+      
+      this.home.getReporteVentasVsCompras().subscribe(
+        (resp) =>{
+          const dataFormatted = resp.map(item => ({
+            name: item.name,
+            series: [
+              {
+                name: 'VENTAS',
+                value: item.ventas,
+              },
+              {
+                name: 'COMPRAS',
+                value: item.compras,
+              }
+            ],
+          }));
+          this.data = dataFormatted;
         }
+      );
   
-        // console.log(this.dataBarber);
-        
-      })
+      this.home.getCxp().subscribe(
+        (resp) => {
+          this.cxp = resp;
+        }
+      );
+      this.home.getCxc().subscribe(
+        (resp) => {
+          this.cxc = resp;
+        }
+      );
+      
+       
+   }
+  
+   
+  }
+  
 
-
-      this.home.getReporteTotales(this.formSemanasAnio).subscribe((resp:any) => {
-        this.dataTotales = {}; 
-
-        resp.data.pcrServicio = resp.data.pcrServicio+'%'
-        resp.data.pcrProducto = resp.data.pcrProducto+'%'
-        // console.log(resp.data.pcrServicio);
-        
-        this.dataTotales = resp.data;
-        
-      })
+  adjustContainerWidth() {
+    const container = this.el.nativeElement.querySelector('.chart-container');
+    if (container) {
+      const containerWidth = container.clientWidth;
+      // Ajusta el ancho del div según su propio ancho
+      container.style.width = containerWidth + 'px';
     }
-    
-    
   }
+   // Método para ajustar el ancho del gráfico en función del ancho de la pantalla
+   adjustView() {
+    const screenWidth = window.innerWidth;
+    const container = this.el.nativeElement.querySelector('.chart-container');
 
-  initFormSemanaAnio(){
-    this.formSemanasAnio = this.formBuilder.group({
-      fecha_inicial: ['',{
-        validators:[
-          Validators.required,
-        ]
-      }],
-      fecha_final: ['',{
-        validators:[
-          Validators.required,
-        ]
-      }],
+    if (container) {
+      const containerWidth = container.clientWidth;
+      // Ajusta el ancho del div según su propio ancho
       
-    });
-   
+      this.viewWidth = containerWidth; // Ancho predeterminado en otros casos
+      
+    }
   }
 
-  imprimirNotaCredito(){
-    let reporte:NotaCreditoComprasReport = new NotaCreditoComprasReport();
-    let report = reporte.reporteNotaCreditoCompras();
-    window.open(report.output('bloburl'), '_blank');
+  // Detectar cambios en el tamaño de la ventana y ajustar el ancho del gráfico
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    
+    this.adjustView();
   }
+
+
+
+
+
+
   
-  COTIZACION(){
-    let reporte:ComprobanteCotizacion = new ComprobanteCotizacion();
-    let report = reporte.ReporteComprobanteCotizacion(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
-  carteraVencida(){
-    let reporte:CarteraVencidaEnGeneral = new CarteraVencidaEnGeneral();
-    let report = reporte.ReporteCarteraVencidaEnGeneral(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
 
-  egreso(){
-    let reporte:ComprobanteEgreso = new ComprobanteEgreso();
-    let report = reporte.ReporteComprobanteEgreso(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
-  ingreso(){
-    let reporte:ComprobanteIngreso = new ComprobanteIngreso();
-    let report = reporte.ReporteComprobanteIngreso(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
-  carteraCliente(){
-    let reporte:EstadoCarteraCliente = new EstadoCarteraCliente();
-    let report = reporte.ReporteEstadoCarteraCliente(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
-  carteraProveedor(){
-    let reporte:EstadoCarteraProveedor = new EstadoCarteraProveedor();
-    let report = reporte.ReporteEstadoCarteraProveedor(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
 
-  aux(){
-    let reporte:LibroAuxiliarReporte = new LibroAuxiliarReporte();
-    let report = reporte.GenerarLibroAux(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
 
-  movi(){
-    let reporte:MovimientoContable = new MovimientoContable();
-    let report = reporte.ReporteMovimientoContable(null);
-    window.open(report.output('bloburl'), '_blank');
-  }
-  salidaConsumo(){
-    var doc = new jsPDF();
-    
-    // Definir los datos del ticket
-    var productos = [
-      ["Producto 1", "$10.00"],
-      ["Producto 2", "$15.00"],
-      ["Producto 3", "$20.00"],
-      // ... agregar más productos según sea necesario
-    ];
-    
-    // Definir las opciones de la tabla
+ 
+
+
+
+
   
-    var ancho = 80; // Ancho de 80 mm
-    var alturaInicial = doc.internal.pageSize.height;
-    
-    // Calcular la altura máxima del contenido
-   
-    
-    // Agregar la tabla al documento
-    autoTable(doc, {
-      head: [
-          [
-          {
-          content: "Descripción",
-          styles: {
-              halign: 'center'
-          }
-          },
-          {
-          content: 'precio',
-          styles: {
-              halign: 'center'
-          }
-
-          },
-         
-          ]],
-      body: productos,
-      horizontalPageBreak: true,
-      margin: {
-          top: 10,
-          bottom: 65,
-          left: 5,
-          right: 5,
-
-      },
-      // metodo que se repite en cad pagina
-      didDrawPage: ({ pageNumber, doc: jsPDF }) => {
-        
-      },
-      
-
-
-      theme: 'grid',
-      headStyles: {
-          fillColor: '#41B6FF',
-      },
-      
-      });
-    
-    // Obtener la altura de la tabla generada
-    // Calcular la altura necesaria para los productos
-    var alturaProductos = productos.length * 10; // 10 es un valor de ejemplo para la altura de cada producto
-
-    // Establecer el tamaño de página adecuado
-    doc.setPageSize(ancho, alturaInicial + alturaProductos);
-
-    // Guardar el documento PDF
-    doc.save('ticket.pdf');
-    // let reporte:SalidaConsumo = new SalidaConsumo();
-    // let report = reporte.ReporteSalidaConsumo(null);
-    // window.open(report.output('bloburl'), '_blank');
-  }
-
 }

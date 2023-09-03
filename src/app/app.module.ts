@@ -21,7 +21,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './components/dashboard/components/home/home.component';
 
@@ -264,7 +264,7 @@ import { ConciliacionComponent } from './components/dashboard/components/Contabi
     PipesModule,
     TooltipModule,
     NgbModule,
-   
+    NgxChartsModule,
 
    
     ToastrModule.forRoot()

@@ -32,6 +32,7 @@
     "@fullcalendar/interaction": "^4.4.2",
     "@fullcalendar/timegrid": "^4.4.2",
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
+    "@swimlane/ngx-charts": "^17.0.1",
     "@types/ckeditor": "^4.9.10",
     "angular-datatables": "^11.2.0",
     "angular-ng-autocomplete": "^2.0.8",
