@@ -27,6 +27,8 @@ declare var $;
 export class LibroAuxiliarComponent implements OnInit {
   txtBuscar:string = '';
 
+
+  libroReport:any;
   table:any = $('').DataTable({});
 
   listCuentas:ModelPuc[] = [];
@@ -122,8 +124,8 @@ export class LibroAuxiliarComponent implements OnInit {
       moment(this.inicio).format("YYYY-MM-DD"),
       moment(this.fin).format("YYYY-MM-DD")).subscribe(resp => {
 
-
-
+        console.log(resp)
+        this.libroReport = resp;
 
         Swal.close();
         
@@ -147,7 +149,7 @@ export class LibroAuxiliarComponent implements OnInit {
   imprimir(){
     let reporte = new LibroAuxiliarReporte();
   
-    let report = reporte.GenerarLibroAux(null);
+    let report = reporte.GenerarLibroAux(this.libroReport);
     window.open(report.output('bloburl'), '_blank');
   }
 

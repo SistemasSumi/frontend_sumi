@@ -17,7 +17,7 @@ export class RotacionxCompras {
     
         this._workbook.creator = 'Sarp Soft';
     
-        this._createHeroTable(dataExcel);
+        this._createHeroTable(dataExcel,fechaInicio,fechaFin);
     
         this._workbook.xlsx.writeBuffer().then((data) => {
           const blob = new Blob([data]);
@@ -26,7 +26,7 @@ export class RotacionxCompras {
     }
 
 
-    private async _createHeroTable(data: any): Promise<void> {
+    private async _createHeroTable(data: any,fechaInicio,fechaFin): Promise<void> {
         // CREAMOS LA PRIMERA HOJA
         const sheet = this._workbook.addWorksheet("Rotacion x compras");
         sheet.properties.showGridLines = false;
@@ -116,7 +116,7 @@ export class RotacionxCompras {
         }
 
         const tituloReporteCell = sheet.getCell('D11');
-        tituloReporteCell.value =  'ROTACIÓN POR COMPRAS DEL '+moment(data.fecha_incial).format("DD-MM-YYYY").toUpperCase() + ' AL '+moment(data.fecha_final).format("DD-MM-YYYY").toUpperCase();
+        tituloReporteCell.value =  'ROTACIÓN POR COMPRAS DEL '+moment(fechaInicio).format("DD-MM-YYYY").toUpperCase() + ' AL '+moment(fechaFin).format("DD-MM-YYYY").toUpperCase();
         tituloReporteCell.style.font = { bold: true, size: 18 };
 
         const nextCell = sheet.getCell('I11');

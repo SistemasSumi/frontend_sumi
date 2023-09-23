@@ -162,10 +162,11 @@ export class CrearNCVComponent implements OnInit {
 
 
   obtenerProductos(idfactura, factura){
+    this.facturaSeleccionada = factura;
     this.detalleNota = [];
     this.calcularTotales(this.detalleNota);
 
-    this.facturaSeleccionada = factura;
+
     this.notaService.cargarProductos(idfactura).subscribe((resp:Productos[]) => {
       // console.log(resp);
       this.Productos = resp;
@@ -329,12 +330,12 @@ export class CrearNCVComponent implements OnInit {
     this.totalNota    += this.subtotalNota + this.ivaNota;   
     
     if(this.terceroSeleccionado){
-      if(this.terceroSeleccionado.isRetencion){
+      if(this.facturaSeleccionada.valorReteFuente > 0){
       
             let retefuente = this.facturaSeleccionada.valorReteFuente;
             // console.log(retefuente);
             
-            for(let x of this.terceroSeleccionado.retencionProveedor){
+            for(let x of this.terceroSeleccionado.retencionCliente){
                 if(x.fija){
               
                     this.retencionNota += this.subtotalNota * x.retencion.porcentaje / 100;

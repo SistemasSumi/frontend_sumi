@@ -108,6 +108,8 @@ import { CrearNCVComponent } from './components/dashboard/components/Facturacion
 import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
 import { CvfFormComponent } from './components/dashboard/components/Facturacion/prospectoVenta/CcfForm/CcfForm.component';
 import { ConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/conciliacion.component';
+import { VentasVendedorIndividualComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedorIndividual/VentasVendedorIndividual.component';
+import { VentasxVendedorIndividual } from './guards/facturacion/VentasXVendedorIndividual.guard';
 
 
 
@@ -186,12 +188,14 @@ const routes: Routes = [
 
 
         { path: 'ventas/rotacion',component:RotacionVentasComponent,canActivate:[OrdenCompraGuard]},
-        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[OrdenCompraGuard]},
-        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[OrdenCompraGuard]},
+        { path: 'ventas/detalladas',component:VentasComponent,canActivate:[InformesCGuard]},
+        { path: 'ventas/vendedor',component:VentasVendedorComponent,canActivate:[InformesCGuard]},
+        { path: 'ventas/vendedor/individual',component:VentasVendedorIndividualComponent,canActivate:[VentasxVendedorIndividual]},
         
         { path: 'contabilidad/abonos',component:AbonosRecibidosComponent,canActivate:[InformesCGuard]},
-        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[InformesCGuard]},
         { path: 'contabilidad/BalanceDePrueba',component:BalanceDePruebaComponent,canActivate:[InformesCGuard]},
+        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[InformesCGuard]},
+        { path: 'contabilidad/cxp',component:CxpComponent,canActivate:[InformesCGuard]},
         { path: 'contabilidad/EstadoSituacionFinanciera',component:EstadoSituacionFinancieraComponent,canActivate:[InformesCGuard]},
         
     ],

@@ -133,6 +133,8 @@ import { CrearNCVComponent } from './components/dashboard/components/Facturacion
 import { ListadoNCVComponent } from './components/dashboard/components/Facturacion/notaCreditoVentas/ListadoNCV/ListadoNCV.component';
 import {  CvfFormComponent } from './components/dashboard/components/Facturacion/prospectoVenta/CcfForm/CcfForm.component';
 import { ConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/conciliacion.component';
+import { ModuloConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/ModuloConciliacion/ModuloConciliacion.component';
+import { VentasVendedorIndividualComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedorIndividual/VentasVendedorIndividual.component';
 
 
 
@@ -241,7 +243,9 @@ import { ConciliacionComponent } from './components/dashboard/components/Contabi
     CrearNCVComponent,
     ListadoNCVComponent,
     CvfFormComponent,
-    ConciliacionComponent
+    ConciliacionComponent,
+    ModuloConciliacionComponent,
+    VentasVendedorIndividualComponent
 
 
 

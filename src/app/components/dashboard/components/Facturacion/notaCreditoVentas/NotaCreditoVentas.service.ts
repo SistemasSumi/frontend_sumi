@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { environment } from 'src/environments/environment';
+import { NotaCreditoVentasReport } from '../../../reportes/reportesFacturacion/notaCreditoVentas';
 import { NotaCreditoComprasReport } from '../../../reportes/reportesInventario/notaCreditoCompras';
 import { ConfiguracionService } from '../../configuracion/Configuracion.service';
 import { ModelAsiento } from '../../Contabilidad/models/ModelAsiento';
@@ -99,16 +100,16 @@ export class NotaCreditoVentasService {
         this.obtenerContabilidadAsiento(data.numero).subscribe((resp:ModelAsiento) => {
   
   
-          let reporte:NotaCreditoComprasReport = new NotaCreditoComprasReport();
-          let report = reporte.reporteNotaCreditoCompras(data,resp);
+          let reporte:NotaCreditoVentasReport = new NotaCreditoVentasReport();
+          let report = reporte.reporteNotaCreditoVentas(data,resp);
           window.open(report.output('bloburl'), '_blank');
         
   
         })
   
       }else{
-        let reporte:NotaCreditoComprasReport = new NotaCreditoComprasReport();
-        let report = reporte.reporteNotaCreditoCompras(data);
+        let reporte:NotaCreditoVentasReport = new NotaCreditoVentasReport();
+        let report = reporte.reporteNotaCreditoVentas(data);
         window.open(report.output('bloburl'), '_blank');
         
       }

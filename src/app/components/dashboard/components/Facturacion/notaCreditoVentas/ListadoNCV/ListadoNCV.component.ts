@@ -251,7 +251,7 @@ export class ListadoNCVComponent implements OnInit {
               }
           },
       ],
-      rowCallback: (row: Node, data: NotaCreditoCompras, index: number) => {
+      rowCallback: (row: Node, data: any, index: number) => {
         const self = this;
         // Unbind first in order to avoid any duplicate handler
         // (see https://github.com/l-lin/angular-datatables/issues/87)
@@ -262,27 +262,10 @@ export class ListadoNCVComponent implements OnInit {
         $('#imprimir', row).off('click');
         $('#imprimir', row).on('click', () => {
           
+          console.log("DATA",data)
           this.notaService.imprimir(data);
   
-          // Swal.fire({
-          //   allowOutsideClick: false,
-          //   icon: 'info',
-          //   title: 'Generando PDF..',
-          //   text:'Espere por favor..'
-          // });
-          // Swal.showLoading();
-          // this.ordenService.buscarEimprimir(data.id.toString()).subscribe((resp:PurchaseOrder)=> {
-          //   Swal.close();
-          //   this.ordenService.imprimir(resp); 
-         
-          // },(ex) => {
-            
-          //   Swal.close();
-          //   Swal.fire({
-          //     icon: 'error',
-          //     title: 'SarpSoft',
-          //     text: 'Error al generar el PDF!',
-          //   });
+    
 
 
 

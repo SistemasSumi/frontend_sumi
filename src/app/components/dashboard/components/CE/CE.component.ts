@@ -93,6 +93,10 @@ export class CEComponent implements OnInit {
           for(let j of resp){
             if(x.codigo.toString() == j.codigo.toString().substring(0, 4) && j.codigo.toString().length >= 6){
               c.push(j)
+
+              if(j.codigo == '11200505'){
+                this.GlobalFormaDePago = j.id;
+              }
             }
           }
 
@@ -277,9 +281,9 @@ export class CEComponent implements OnInit {
 
 
   limpiarFormulario(){
-    this.GlobalFormaDePago  = undefined;
-    this.GlobalObservacion  = undefined;
-    this.GlobalDiferencia   = undefined;
+    this.GlobalFormaDePago  = 372;
+    this.GlobalObservacion  = '';
+    this.GlobalDiferencia   = 0;
     this.totalAbono         = undefined;
     this.totalSaldoAFavor   = undefined;
     this.totalDescuento     = undefined;

@@ -19,6 +19,28 @@ export class ConciliacionService {
 
     return this.http.post<any[]>(url,datos,{headers: httpHeaders});
   }
+
+
+  saveConciliacion(datos){
+    const  url = environment.BACKEND_DIR+'contabilidad/conciliacion/save/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+    return this.http.post<any[]>(url,datos,{headers: httpHeaders});
+  }
+
+
+  buscar(numero){
+    const  url = environment.BACKEND_DIR+'contabilidad/conciliacion/save/?numero='+numero;
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+    return this.http.get<any[]>(url,{headers: httpHeaders});
+  }
+
+
+
+
   setConciliado(row){
     const  url = environment.BACKEND_DIR+'contabilidad/conciliar/';
     const token = this.auth.currentUser.getTokenUser();
@@ -28,8 +50,7 @@ export class ConciliacionService {
   }
 
 
-  imprimir(){
-    console.log('rnytor')
+  imprimir(data){
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
@@ -41,9 +62,18 @@ export class ConciliacionService {
       Swal.close();
       let reporte = new ConciliacionBancos();
     
-      let report = reporte.ReporteConciliacion(null);
+      let report = reporte.ReporteConciliacion(data);
       window.open(report.output('bloburl'), '_blank');
       
+  
+  }
+
+  reporteCierre(mes,year){
+    const  url = environment.BACKEND_DIR+'contabilidad/conciliar/?mes='+mes+'&year='+year;
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+    return this.http.get<any[]>(url,{headers: httpHeaders});
   
   }
 

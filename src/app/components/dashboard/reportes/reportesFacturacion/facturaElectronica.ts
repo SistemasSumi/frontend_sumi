@@ -741,7 +741,7 @@ export class facturaElectronicaReport {
             }
           },
           {
-            content: this.cp.transform((x.iva*x.cantidad) / x.subtotal * 100),
+            content: this.cp.transform((x.iva*x.cantidad) / (x.subtotal-(x.descuento*x.cantidad)) * 100),
             styles: {
     
               cellWidth: 60,
@@ -1666,7 +1666,7 @@ export class facturaElectronicaReport {
       return doc;
   
   
-  }
+    }
 
 
 
@@ -1675,7 +1675,7 @@ export class facturaElectronicaReport {
 
 
 
-    Unidades(num){
+      Unidades(num){
 
         switch(num)
         {

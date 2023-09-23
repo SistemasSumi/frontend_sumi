@@ -10,13 +10,19 @@
                           <div class="mb-4">
                               <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
                           </div>
-                          <!-- <div class="text-muted">
-                              <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>SUMIPROD DE LA COSTA S.A.S. </strong> </p>
-                              <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
-                              <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
-                          </div> -->
+                          <div class="float-end">
+                             <button (click)="abrirModal(modalContent)" mat-raised-button color="primary" aria-label="">
+                                Reporte de cierre
+                              </button>
+                              &nbsp;
+                              &nbsp;
+                             <button (click)="imprimir()" mat-fab color="accent" aria-label="Example icon button with a home icon">
+                                <mat-icon>print</mat-icon>
+                              </button>
+                          </div>
                       </div>
         
+                      <div style="clear: both;"></div>
                       
                       <div class="row">
                         <p-divider [text]="'DATOS DE LA CONCILIACIÓN'" [align]="'left'"></p-divider>
@@ -130,7 +136,7 @@
                             </div>
                             <hr>
                             <div class="d-flex flex-wrap gap-2 float-end">
-                                <button (click)="cerrar()" type="button" class="btn btn-warning float-right"><i class="uil uil-exclamation-triangle me-2"></i> CERRAR</button>
+                                <button *ngIf="consulta" (click)="cerrar()" type="button" class="btn btn-warning float-right"><i class="uil uil-exclamation-triangle me-2"></i> CERRAR</button>
                                 <button (click)="consultar()" type="button" class="btn btn-success float-right"><i class="uil uil-search me-2"></i> CONSULTAR</button>
                             </div>
                 
@@ -208,3 +214,42 @@
         </div>
     </footer>
 </div>
+
+
+<ng-template #modalContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Cierre contable</h4>
+    </div>
+    <div class="modal-body">
+      <!-- Contenido del modal -->
+      <div class="row">
+        
+          <div class="col-6 ">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">AÑO</mat-label>
+                      <mat-select required (ngModelChange)="setMesesDefault($event)"  style="text-align: center;" [(ngModel)]="selectedAnio">
+                          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+  
+              </div>
+          </div>
+          <div class="col-6 ">
+              <div class="form-group">
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">MES</mat-label>
+                      <mat-select  required style="text-align: center;" [(ngModel)]="selectedMes">
+                          <mat-option  *ngFor="let mes of meses" [value]="mes.id">{{ mes.mes }}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+  
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancelar')">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close('Guardar')">Generar</button>
+    </div>
+  </ng-template>

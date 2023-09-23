@@ -101,10 +101,10 @@ export class HomeComponent implements OnInit,AfterViewInit  {
     showLegend: true, // Mostrar la leyenda
     legendTitle: '',
     showXAxisLabel: true, // Mostrar etiquetas en el eje X
-    xAxisLabel: 'COMPARACIÓN ANUAL ENTRE VENTAS Y COMPRAS',
+    xAxisLabel: 'COMPARACIÓN ANUAL ENTRE VENTAS, COMPRAS, INGRESOS, EGRESOS',
     legendPosition: 'below',
     colorScheme: {
-      domain: ['#41B6FF', '#FFA500', '#FFFF00', '#FF0000', '#00FF00', '#FFFF00'],
+      domain: ['#41B6FF', '#FFA500', '#28a745', '#FF0000', '#FFFF00', '#FFFF00'],
 
     }
   };
@@ -148,7 +148,15 @@ export class HomeComponent implements OnInit,AfterViewInit  {
               {
                 name: 'COMPRAS',
                 value: item.compras,
-              }
+              },
+              {
+                name: 'INGRESOS',
+                value: item.ingresos,
+              },
+              {
+                name: 'EGRESOS',
+                value: item.egresos,
+              },
             ],
           }));
           this.data = dataFormatted;

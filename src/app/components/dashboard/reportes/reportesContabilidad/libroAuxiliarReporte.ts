@@ -13,25 +13,25 @@ export class LibroAuxiliarReporte {
 
     public GenerarLibroAux(data:any){
 
+        let totalCredito = 0;
+        let totalDebito = 0;
         const doc = new jsPDF('p', 'pt', 'letter')
         //tabla de valores y paginas
         let productos = []
-        for (let x = 0; x < 35; x++) {
+        for (let x of data.detalle) {
     
           let p = [{
-            content: "ABC",
+            content: x.tipo,
             styles: {
-              cellWidth: 25
             }
           },
           {
-            content: "ABC-123",
+            content: x.asiento.numero,
             styles: {
-              cellWidth: 40,
             }
           },
           {
-            content: `${moment(new Date()).format("DD/MM/YYYY").toUpperCase()}`,
+            content: `${moment(x.fecha).format("DD/MM/YYYY").toUpperCase()}`,
             styles: {
     
               cellWidth: 45,
@@ -40,50 +40,41 @@ export class LibroAuxiliarReporte {
     
             }
           },
+          
           {
-            content: "1083018728-5",
+            content: x.tercero.nombreComercial,
             styles: {
     
-              cellWidth: 49,
-              halign: 'right'
-    
-    
-            }
-          },
-          {
-            content: "INVERSIONES MEDICAS BARU S.A.S",
-            styles: {
-    
-              cellWidth: 100,
+              cellWidth: 140,
               halling: "left"
     
     
             }
           },
           {
-            content: "FS-123456",
+            content: x.docReferencia,
             styles: {
     
-              cellWidth: 40,
+              cellWidth: 43,
     
     
     
             }
           },
           {
-            content: this.cp.transform(20000000),
+            content: this.cp.transform(x.debito),
             cellWidth: 65,
           },
           {
-            content: this.cp.transform(20000000),
+            content: this.cp.transform(x.credito),
             cellWidth: 65,
           },
           {
-            content: this.cp.transform(20000000),
+            content: this.cp.transform(x.saldo),
             cellWidth: 70,
           },
           {
-            content: "modi magni asperiores totam tenetur ",
+            content: x.concepto,
             styles: {
     
               cellWidth: 93,
@@ -93,7 +84,9 @@ export class LibroAuxiliarReporte {
             }
           },
           ]
-    
+
+          totalCredito += x.credito
+          totalDebito  += x.debito
           productos.push(p);
         }
         let totalpage = 1
@@ -106,24 +99,24 @@ export class LibroAuxiliarReporte {
               }
     
             },
-              'NUM',
+            {
+              content: 'NUM',
+              styles: {
+                halign: 'center'
+              }
+    
+            },
             {
               content: 'FECHA',
               styles: {
                 halign: 'center'
               }
     
-            }, {
-              content: 'NIT',
-              styles: {
-                halign: 'left'
-              }
-    
             },
             {
               content: 'TERCERO.',
               styles: {
-                halign: 'center'
+                halign: 'left'
               }
     
             },
@@ -222,44 +215,44 @@ export class LibroAuxiliarReporte {
             doc.setFontSize(9)
             doc.text("Cuenta Inicial:", 27, 175)
             doc.setFont(undefined, 'normal')
-            doc.text("130505", 90, 175)
+            doc.text(data.cuenta, 90, 175)
     
             doc.setFont(undefined, 'bold')
             doc.setFontSize(9)
-            doc.text("Fecha Inicial:", 30, 195)
+            doc.text("Fecha Inicial: ", 30, 195)
             doc.setFont(undefined, 'normal')
-            doc.text(moment(new Date).format(" dddd DD/MM MMMM YYYY").toUpperCase(), 88, 195)
+            doc.text(moment(data.fecha_inicial).format(" dddd DD/MM MMMM YYYY").toUpperCase(), 88, 195)
     
             doc.setFont(undefined, 'bold')
             doc.setFontSize(9)
             doc.text("Terceros:", 46, 215, { alig: "right" })
             doc.setFont(undefined, 'bold')
-            var tts = doc.splitTextToSize("INVERSIONES MEDICAS BARU S.A.S", 200)
+            var tts = doc.splitTextToSize(data.tercero, 200)
             doc.text(tts, 90, 215)
     
             // texto en cuadro 2
             doc.roundedRect(310, 155, 285, 85, 3, 3);
             doc.setFont(undefined, 'bold')
             doc.setFontSize(9)
-            doc.text("Cuenta Final:", 317, 175)
+            doc.text("Cuenta Final: ", 317, 175)
             doc.setFont(undefined, 'normal')
-            doc.text("130505", 375, 175)
+            doc.text(data.cuenta, 375, 175)
     
             doc.setFont(undefined, 'bold')
             doc.setFontSize(9)
             doc.text("Fecha Final:", 320, 195)
             doc.setFont(undefined, 'normal')
-            doc.text(moment(new Date).format(" dddd DD/MM MMMM YYYY").toUpperCase(), 373, 195)
+            doc.text(moment(data.fecha_final).format(" dddd DD/MM MMMM YYYY").toUpperCase(), 373, 195)
     
             // Cuenta y Saldo
-            doc.text("CUENTA", 15, 265)
-            doc.text("SALDO ANTERIOR", 95, 265)
-            doc.text("SALDO ACTUAL", 225, 265)
+            doc.text("CUENTA ", 15, 265)
+            doc.text("SALDO ANTERIOR", 180, 265)
+            doc.text("SALDO ACTUAL", 320, 265)
             doc.line(15, 270, 595, 270, 'F')
             doc.setFont(undefined, 'bold')
-            doc.text("130505", 15, 285)
-            doc.text(this.cp.transform(0), 95, 285)
-            doc.text(this.cp.transform(0), 225, 285)
+            doc.text(data.cuenta, 15, 285)
+            doc.text(this.cp.transform(data.saldoAnterior), 180, 285)
+            doc.text(this.cp.transform(data.saldoActual), 320, 285)
             doc.setFont(undefined, 'normal')
             
            
@@ -284,15 +277,14 @@ export class LibroAuxiliarReporte {
     
           columnStyles: {
             0: { halign: 'center' },
-            1: { halign: 'left' },
+            1: { halign: 'center' },
             2: { halign: 'center' },
-            3: { halign: 'center' },
+            3: { halign: 'left' },
             4: { halign: 'center' },
-            5: { halign: 'center' },
+            5: { halign: 'right' },
             6: { halign: 'right' },
             7: { halign: 'right' },
-            8: { halign: 'right' },
-            9: { halign: 'left' },
+            8: { halign: 'left' },
           },
     
           styles: {
@@ -336,8 +328,8 @@ export class LibroAuxiliarReporte {
         let FinalY = doc.lastAutoTable.finalY+30
         doc.setFontSize(12);
         doc.text("Totales:",260,   FinalY+30);
-        doc.text(this.cp.transform(20000000),390,  FinalY+30,{align:'right'});
-        doc.text(this.cp.transform(30000000),485,   FinalY+30,{align:'right'});
+        doc.text(this.cp.transform(totalDebito),390,  FinalY+30,{align:'right'});
+        doc.text(this.cp.transform(totalCredito),485,   FinalY+30,{align:'right'});
 
     
         return doc;

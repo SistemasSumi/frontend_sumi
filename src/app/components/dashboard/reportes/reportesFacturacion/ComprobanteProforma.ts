@@ -206,7 +206,9 @@ export class ComprobanteProforma {
             var Nota = doc.splitTextToSize("NOTA: SOLO SE ACEPTAN RECLAMOS DURANTE LAS 36 HORAS SIGUIENTES AL RECIBO DE ESTA MERCANCÍA - PRODUCTOS REFRIGERADOS NO SE ACEPTA DEVOLUCIÓN.", 320)
             doc.text(Nota, 25, 615)
             doc.line(15, 640, 390, 640)
-            doc.text("Observación:", 25, 651)
+            var obs = doc.splitTextToSize(data.observacion || '', 300)
+            obs = "Observación: " +obs
+            doc.text(obs , 25, 651)
     
             // Cuadro resultados
             doc.roundedRect(400, 605, 198, 90, 3, 3)

@@ -19,21 +19,181 @@ export class ConciliacionBancos {
     public ReporteConciliacion(data:any){
         let doc = new jsPDF('p', 'pt', 'letter');
         let currentPage = 0;
-        let startY     = 156;
+        let startY = 156;
         let startYText = 168;
-       
-       
+
+        let totalDebito = 0;
+        let totalCredito = 0;
+
+        let productos = [];
+        for (let x of data.movimientos) {
+            // Dividir el concepto en varias líneas
+            const Tercero = doc.splitTextToSize(x.tercero__nombreComercial || '', 120); // Ajusta el ancho según tus necesidades
+            const conceptoLines = doc.splitTextToSize(x.concepto || '', 153); // Ajusta el ancho según tus necesidades
+            const docReferencia = doc.splitTextToSize(x.docReferencia || '', 65); // Ajusta el ancho según tus necesidades
+
+        let p = [
+        {
+            content: x.tipo,
+        },
+        {
+            content: x.asiento__numero,
+        },
+        {
+            content: `${moment(x.fecha).format('DD/MM/YYYY').toUpperCase()}`,
+            styles: {
+            cellWidth: 44,
+            },
+        },
+        {
+            content: Tercero,
+            styles: {
+            cellWidth: 120,
+            halling: 'left',
+            },
+        },
+        {
+            content: docReferencia,
+            styles: {
+            cellWidth: 65,
+            },
+        },
+        {
+            content: this.cp.transform(x.debito),
+        },
+        {
+            content: this.cp.transform(x.credito),
+        },
+        {
+            content: conceptoLines,
+            styles: {
+            cellWidth: 153,
+            },
+        },
+        ];
+
+        totalDebito += x.debito;
+        totalCredito += x.credito;
+        productos.push(p);
+    }
+    let totalpage = 1;
+    autoTable(doc, {
+        head: [
+        [
+            {
+            content: 'Tipo',
+            styles: {
+                halign: 'center',
+            },
+            },
+            {
+            content: 'Asiento',
+            styles: {
+                halign: 'center',
+            },
+            },
+            {
+            content: 'Fecha',
+            styles: {
+                halign: 'center',
+            },
+            },
+            {
+            content: 'Tercero.',
+            styles: {
+                halign: 'center',
+            },
+            },
+            {
+            content: 'Referencia',
+            styles: {
+                halign: 'center',
+            },
+            },
+            {
+            content: 'Débito',
+            styles: {
+                halign: 'right',
+            },
+            },
+            {
+            content: 'Crédito',
+            styles: {
+                halign: 'right',
+            },
+            },
+            {
+            content: 'Concepto',
+            styles: {
+                halign: 'left',
+            },
+            },
+        ],
+        ],
+        body: productos,
+        horizontalPageBreak: true,
+
+        margin: {
+        top: 175,
+        bottom: 85,
+        left: 15,
+        right: 15,
+        },
+        // metodo que se repite en cad pagina
+        didDrawPage: ({ pageNumber, doc: jsPDF }) => {},
+        foot: [
+        ['', '', '', '', '', '', '', ''],
+        [
+            '',
+            '',
+            '',
+            '',
+            '',
+            { content: this.cp.transform(totalDebito), styles: { halign: 'right' } },
+            { content: this.cp.transform(totalCredito), styles: { halign: 'right' } },
+            '',
+        ],
+        ],
+        theme: 'grid',
+        headStyles: {
+        fillColor: '#41B6FF',
+        },
+        columnStyles: {
+        0: { halign: 'center' },
+        1: { halign: 'center' },
+        2: { halign: 'center' },
+        3: { halign: 'left' },
+        4: { halign: 'center' },
+        5: { halign: 'right' },
+        6: { halign: 'right' },
+        7: { halign: 'left' },
+        },
+        styles: {
+        fontSize: 7,
+        fontStyle: 'bold',
+        },
+        bodyStyles: {},
+        footStyles: {
+            fillColor: '#ffffff',
+            textColor: '#000000',
+        },
+        alternateRowStyles: {},
+    });
+        
         const pageCount = (doc as any).internal.getNumberOfPages(); //was doc.internal.getNumberOfPages(); 
         // For each page, print the page number and the total pages
         for (let i = 1; i <= pageCount; i++) {
     
-         
+            
     
             doc.setFontSize(8);
            
             doc.setPage(i);
             var pageSize = doc.internal.pageSize;
             var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+            doc.text('Fecha de conciliación: ' + String(data.con.fechaCierre), 20, 169,{
+                align:'left'
+            }); 
             doc.text('Pagina ' + String(i) + ' de ' + String(pageCount), 530, 169,{
                 align:'left'
             }); 
@@ -95,786 +255,48 @@ export class ConciliacionBancos {
                    doc.setFontSize(10)
                    doc.text('CONCILIACIÓN N°.', 495, 55, { align: "center" })
                    doc.setFont(undefined, 'normal')
-                   doc.text("0001", 495, 70, { align: "center" })
+                   doc.text(data.con.numero, 495, 70, { align: "center" })
                    doc.setFontSize(7)
 
                     doc.setFillColor("#41B6FF");
-                    doc.rect(20, 80, 500, 18, 'FD');
-                    doc.line(230.5, 115, 230.5, 115 + 18);
-                    doc.line(300.5, 115, 300.5, 115 + 18);
-                    doc.line(370.5, 115, 370.5, 115 + 18);
-                    doc.line(440.5, 115, 440.5, 115 + 18);
+                    doc.rect(77, 115, 460, 18, 'FD');
+                    doc.line(182, 115, 182, 115 + 18);
+                    doc.line(337, 115, 337, 115 + 18);
+                    doc.line(437, 115, 437, 115 + 18);
 
                     doc.setTextColor("#FFF");
                     doc.setFontSize(8);
                     doc.setFont(undefined, 'bold');
-                    doc.text("FECHA INICIO", 50.5, 127, { align: "center" });
-                    doc.text("SALDO INICIAL", 235.5, 127, { align: "center" });
-                    doc.text("BANCO", 300.5, 127, { align: "center" });
-                    doc.text("FECHA CIERRE", 370.5, 127, { align: "center" });
-                    doc.text("SALDO FINAL", 440.5, 127, { align: "center" });
+                    doc.text("SALDO INICIAL", 129.5, 127, { align: "center" });
+                    doc.text("BANCO", 259.5, 127, { align: "center" });
+                    doc.text("MES CONCILIADO",387, 127, { align: "center" });
+                    doc.text("SALDO FINAL", 487, 127, { align: "center" });
 
                     doc.setTextColor("#000");
 
-                    doc.rect(20, 133, 500, 18);
-
-                    doc.line(230.5, 133, 230.5, 133 + 18);
-                    doc.line(300.5, 133, 300.5, 133 + 18);
-                    doc.line(370.5, 133, 370.5, 133 + 18);
-                    doc.line(440.5, 133, 440.5, 133 + 18);
+                    doc.rect(77, 133, 460, 18);
+                    doc.line(182, 133, 182, 133 + 18);
+                    doc.line(337, 133, 337, 133 + 18);
+                    doc.line(437, 133, 437, 133 + 18);
 
                     doc.setFont(undefined, 'bold');
-                    doc.text("01/01/2023", 125.5, 145, { align: "center" });
-                    doc.text("00000", 235.5, 145, { align: "center" });
-                    doc.text("BANCOLOMBIA" || "0.00", 300.5, 145, { align: "center" });
-                    doc.text("09/09/2023 " || "01/0/2023", 370.5, 145, { align: "center" });
-                    doc.text("12345", 440.5, 145, { align: "center" });
+                    doc.setFontSize(7);
+
+                    doc.text( this.cp.transform(data.con.saldoAnterior), 178, 145, { align: "right" });
+                    doc.text(data.con.cuenta.codigo+' - '+data.con.cuenta.nombre || "0.00", 259.5, 145, { align: "center" });
+                    doc.text(data.con.mes+' - '+data.con.year || "01/0/2023", 387, 145, { align: "center" });
+                    doc.text(this.cp.transform(data.con.saldoFinal), 531, 145, { align: "right" });
+                    doc.setFont(undefined, 'normal');
+
     }
 
    
 
-    setEncabezadoTabla(doc:jsPDF, startY:number, startYText:number){
-        doc.setFillColor("#41B6FF");
-        doc.rect(15,startY,581,18,'FD');
+ 
 
-        doc.line(90,startY,90,startY+18);
-        doc.line(160,startY,160,startY+18);
-        doc.line(230,startY,230,startY+18);
-        // doc.line(300,startY,300,startY+18);
-        // doc.line(335,startY,335,startY+18);
-        // doc.line(405,startY,405,startY+18);
-
-
-        doc.setTextColor("#FFF");
-
-        doc.setFontSize(8);
-        doc.setFont(undefined,'bold');
-        doc.text("PAGO N°",52.5, startYText,{align:"center"});
-        doc.text("FECHA",125, startYText,{align:"center"});
-        doc.text("VALOR",195, startYText,{align:"center"});
-        doc.text("PAGADO A",395, startYText,{align:"center"});
-        // doc.text("DIAS",317.5, startYText,{align:"center"});
-        // doc.text("SALDO",370, startYText,{align:"center"});
-        // doc.text("OBSERVACIÓN",493, startYText,{align:"center"});
-        doc.setTextColor("#000");
-    }
-
-
-    setDivicionesEInformacion(doc:jsPDF, startY:number,startYText:number,factura:any){
-        // console.log(startYText);
-        
-        doc.line(90,startY,90,startY+18);
-        doc.line(160,startY,160,startY+18);
-        doc.line(230,startY,230,startY+18);
-        // doc.line(300,startY,300,startY+18);
-        // doc.line(335,startY,335,startY+18);
-        // doc.line(405,startY,405,startY+18);
-
-
-        doc.setTextColor("#000");
-
-        doc.setFontSize(8);
-        doc.setFont(undefined,'bold');
-
-        doc.text("1",52.5, startYText,{align:"center"});
-        doc.text("17/05/2023",125, startYText,{align:"center"});
-        doc.text("26.000.00",227, startYText,{align:"right"});
-        // doc.text(factura.estado,265, startYText,{align:"center"});
-        // doc.text(factura.dias+"",317.5, startYText,{align:"center"});
-        // doc.text(this.cp.transform(factura.saldo),402, startYText,{align:"right"});
-
-      
-    }
+    
 
 }
 
 
-        var  clientes = [
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            },
-            {
-                nombre   : "ARMONIA MEDICAL S.A.S",
-                formaPago: "Credito 30 Dias",
-                noFacturas: "7",
-                total: 7000000,
-                facturas:[
-           
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            },
-            {
-                noFactura:"SUM-00012",
-                fecha:"01/11/2022",
-                vence:"01/11/2022",
-                estado:"vencida",
-                dias:"12",
-                saldo:11014.88,
-                Observacion:""
-            }
-                    ]
-            }
-            
-        
-                
-        ]
+     

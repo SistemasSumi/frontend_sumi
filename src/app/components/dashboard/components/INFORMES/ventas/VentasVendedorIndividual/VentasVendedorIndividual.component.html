@@ -1,0 +1,66 @@
+
+  <div class="card">
+    <div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <div class="avatar-sm">
+                            <div class="avatar-title rounded-circle font-size-16">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-left mb-1 mb-2"><strong>Ventas (INDIVIDUALES)</strong></p>
+                        <div class="row">
+                          <div class="col-md-5">
+                       
+                            <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                              <mat-label style="font-size: 18px;">Vendedor</mat-label>
+                              <mat-select [disabled]="true" placeholder="Seleccionar cliente"  [(ngModel)]="vendedor_id" >
+                                 
+                                 
+                                  <mat-option *ngFor="let vendedor of Listvendedores" [value]="vendedor.id" >
+                                      {{vendedor.nombre}}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                             
+                          </div>
+                        
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <app-date-range-picker [(ngModel)]="dateRange" name="dateRange"></app-date-range-picker>
+              
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="flex-shrink-0 align-self-end">
+                              <div class="ms-2">
+                              
+                                <button  id="btn-report" (click)="generar()" type="button"  class="btn btn-outline-primary mb-4">
+                                  <i class="squire ico-excel"></i>
+                                </button>
+                                
+                              </div>
+                          </div>
+                          </div>
+                          
+                        
+                         
+                        </div>
+                    </div>
+                  </div>
+                  
+            </li>
+
+            
+         
+        </ul>
+    </div>
+</div>
+<!-- end card -->
+
+
+<!-- end card -->

@@ -1,12 +1,15 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
+import { CierreContable } from '../../../reportes/reportesContabilidad/cierreReportContable';
 import { ModelPuc } from '../models/ModelPuc';
 import { PucService } from '../puc/puc.service';
 import { ConciliacionService } from './conciliacion.service';
@@ -16,7 +19,15 @@ declare var $;
   templateUrl: './conciliacion.component.html',
   styleUrls: ['./conciliacion.component.css']
 })
-export class ConciliacionComponent implements OnInit {
+export class ConciliacionComponent implements OnInit,AfterViewInit  {
+
+
+
+  selectedMes: string;
+  selectedAnio: number;
+
+
+
   listCuentas:ModelPuc[] = [];
   listaDeGrupos:grupos[] = [];
 
@@ -39,17 +50,101 @@ export class ConciliacionComponent implements OnInit {
     year        : number | null,
   }
   table:any = $('').DataTable({});
-  constructor(private auth:SeguridadService , private pucService:PucService, private conciliacion:ConciliacionService) {
+  constructor(private cdr: ChangeDetectorRef,private modalService: NgbModal,private auth:SeguridadService , private pucService:PucService, private conciliacion:ConciliacionService) {
 
     this.setYearsDefault();
    }
 
 
 
+   abrirModal(content) {
+    const modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+
+    modalRef.result.then(
+      (result) => {
+        if (result === 'Guardar') {
+          // Realiza acciones cuando se guarda
+          console.log('Mes seleccionado:', this.selectedMes);
+          console.log('Año seleccionado:', this.selectedAnio);
+          Swal.fire({
+            allowOutsideClick: false,
+            icon: 'info',
+            title: 'GENERANDO..',
+            text:'Espere por favor..'
+          });
+          Swal.showLoading();
+
+          this.conciliacion.reporteCierre(this.selectedMes,this.selectedAnio).subscribe(
+            (resp) => {
+              console.log(resp);
+              Swal.close()
+
+              Swal.fire({
+                allowOutsideClick: false,
+                icon: 'info',
+                title: 'Imprimiendo..',
+                text:'Espere por favor..'
+              });
+              Swal.showLoading();
+             
+                Swal.close();
+                let reporte = new CierreContable();
+              
+                let report = reporte.ReporteCierre(resp);
+                window.open(report.output('bloburl'), '_blank');
+
+            }
+          )
+        }
+      },
+      (reason) => {
+        // Realiza acciones cuando se cierra sin guardar
+      }
+    );
+  
+   
+  
+  }
+
+
+  ngAfterViewInit() {
+    this.setMesesDefault(this.selectedAnio);
+  }
+
+
   consultar(){
+
+    if(this.filtroConciliacion.saldoBanco == undefined || this.filtroConciliacion.saldoBanco == null ){
+
+
+      this.metodos.AlertError('INGRESE EL SALDO ACTUAL DEL BANCO.')
+      return;
+    }
+    if(this.filtroConciliacion.cuenta == undefined || this.filtroConciliacion.cuenta == null ){
+
+
+      this.metodos.AlertError('SELECCIONE UNA CARTERA A CONCILIAR.')
+      return;
+    }
+    if(this.filtroConciliacion.year == undefined || this.filtroConciliacion.year == null ){
+
+
+      this.metodos.AlertError('SELECCIONE UN AÑO.')
+      return;
+    }
+    if(this.filtroConciliacion.mes == undefined || this.filtroConciliacion.mes == null ){
+
+
+      this.metodos.AlertError('SELECCIONE UN MES.')
+      return;
+    }
+
+
     this.conciliacion.getConciliacionView(this.filtroConciliacion).subscribe(
         (resp:any) => {
           this.consulta = resp;
+          console.log(resp)
+          this.filtroConciliacion.saldoInicial = resp.saldo_anterior;
           this.llenarTablePagos(resp.movimientos)
         },
         (error) => {
@@ -382,7 +477,121 @@ export class ConciliacionComponent implements OnInit {
   }
   
   cerrar(){
-    this.conciliacion.imprimir();
+    if(this.consulta ){
+      const tolerancia = 0.01; // Define una tolerancia adecuada para tu caso
+
+      if (Math.abs(this.consulta.diferencia) < tolerancia) {
+          this.consulta.diferencia = 0;
+      } else if (this.consulta.diferencia > -tolerancia && this.consulta.diferencia < 0) {
+          this.consulta.diferencia = 0;
+      }
+
+      if(this.consulta.diferencia != 0 ){
+
+        this.metodos.AlertError('Existe diferencias en los movimientos')
+        return;
+      }
+
+      this.metodos.AlertQuestion('Esta seguro de cerrar la conciliación?').then((result) => {
+        if (result.isConfirmed) {
+          this.conciliacion.saveConciliacion(this.filtroConciliacion).subscribe(
+            (resp) => {
+              console.log(resp);
+
+              this.consulta = null;
+
+               
+              this.llenarTablePagos([]);
+              this.filtroConciliacion = {
+                saldoBanco  : null,
+                saldoInicial: null,
+                cuenta      : null,
+                mes         : null,
+                year        : null,
+              }
+              this.conciliacion.imprimir(resp);
+            }
+          )
+        }
+      });
+    }
+
+    
+    
+  
+
+
+    
+
+    
+  }
+
+  imprimir(){
+    Swal.fire({
+      icon: 'info',
+      title:'IMPRIMIR CONCILIACIÓN',
+      html: `
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info me-2"></i>
+            ESCRIBA EL VALOR Y PRESIONE EL BOTÓN "IMPRIMIR".
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="swal-input-container">
+          <input type="text" id="input" class="swal2-input mb-3" placeholder="AÑADE UN VALOR" />
+        </div>
+      `,
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'IMPRIMIR',
+      preConfirm: () => {
+        const inputElement = document.getElementById('input') as HTMLInputElement;
+        const inputValue = inputElement.value.trim();
+        
+        if (inputValue === '') {
+          Swal.showValidationMessage('Ingrese un valor válido');
+          return false; // Evita que se cierre la alerta si el valor está vacío
+        }
+    
+        // Realiza la acción deseada con el valor inputValue aquí
+        
+        this.conciliacion.buscar(inputValue).subscribe(
+          (resp) => {
+            this.conciliacion.imprimir(resp);
+          }
+        )
+
+      }
+    });
+    
+  }
+  cierreContable(){
+    Swal.fire({
+      title: 'Seleccionar Mes y Año',
+      html: `
+        <div class="form-group">
+          <label for="mes">Mes:</label>
+          <select class="form-control" id="mes" [(ngModel)]="selectedMes">
+            <option *ngFor="let mes of meses" [value]="mes">{{ mes }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="anio">Año:</label>
+          <select class="form-control" id="anio" [(ngModel)]="selectedAnio">
+            <option *ngFor="let anio of anios" [value]="anio">{{ anio }}</option>
+          </select>
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      focusConfirm: false,
+      preConfirm: () => {
+        // Aquí puedes hacer algo con selectedMes y selectedAnio
+        console.log('Mes seleccionado:', this.selectedMes);
+        console.log('Año seleccionado:', this.selectedAnio);
+      }
+    });
+  
   }
 
 }

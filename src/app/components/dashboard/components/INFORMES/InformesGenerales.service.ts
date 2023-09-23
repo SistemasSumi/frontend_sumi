@@ -148,6 +148,52 @@ constructor(
     
 
   }
+
+  VentasxVendedorIndividual(vendedor,fechaInicio,fechaFin): Observable<any>{
+    const  url = environment.BACKEND_DIR+'facturacion/informes/ventas/vendedor/individual';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+  
+    let data = {
+        "vendedor"  : vendedor,
+
+        "fecha_inicio": fechaInicio,
+        "fecha_fin"   : fechaFin,
+      
+    }
+
+
+
+    return this.http.post<any>(url,data,{headers: httpHeaders});
+    
+    
+
+  }
+
+
+  VentasxVendedorGeneral(vendedores,fechaInicio,fechaFin): Observable<any>{
+    const  url = environment.BACKEND_DIR+'facturacion/informes/ventas/vendedor/general';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+  
+    let data = {
+        "vendedores"  : vendedores,
+
+        "fecha_inicio": fechaInicio,
+        "fecha_fin"   : fechaFin,
+      
+    }
+
+
+
+    return this.http.post<any>(url,data,{headers: httpHeaders});
+    
+    
+
+  }
+
+
+
   VentasDetalladas(cliente_id,tipo,fechaInicio,fechaFin): Observable<any>{
     const  url = environment.BACKEND_DIR+'facturacion/informes/ventas/';
     const token = this.auth.currentUser.getTokenUser();
