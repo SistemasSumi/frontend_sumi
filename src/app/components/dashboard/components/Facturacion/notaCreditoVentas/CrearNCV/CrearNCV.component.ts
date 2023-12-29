@@ -299,7 +299,7 @@ export class CrearNCVComponent implements OnInit {
         cantidad:this.cantidadDevolucion,
         codigoDeBarra: this.productoSeleccionado.codigoDeBarra,
         nombreymarcaunico: this.productoSeleccionado.nombreymarcaunico,
-        iva:this.productoSeleccionado.iva / this.productoSeleccionado.cantidad,
+        iva:this.productoSeleccionado.iva,
         lote:this.productoSeleccionado.lote,
         valor:(this.productoSeleccionado.valor - this.productoSeleccionado.descuento ),
         subtotal: (this.productoSeleccionado.valor - this.productoSeleccionado.descuento) * this.cantidadDevolucion

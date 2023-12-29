@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { cobrosPermisos, contabilidadPermisos, empleadosPermisos, facturacionPermisos, inventarioPermisos, pagosPermisos, PermisosUsuario } from './permisosUsuario';
 import { DbService } from './db.service';
 import { BehaviorSubject } from 'rxjs';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { WebSocketService } from './WebtokenService.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +34,9 @@ export class SeguridadService {
   balance:number = 0;
 
 
-  constructor(private http: HttpClient,  public router:Router,private db:DbService) { 
+  constructor(private webSocketService: WebSocketService,private http: HttpClient,  public router:Router,private db:DbService) { 
     this.getCurrentUser();
+    // this.webSocketService.connect('notificaciones',this.currentUser.getTokenUser())
      // DECLARACION DE MIS OPCIONES DE CABEZERA PARA MIS PETICIONES HTTP
      const csrftoken = this.getCookie('csrftoken');
      this.httpOptions = {
@@ -45,13 +48,34 @@ export class SeguridadService {
         this.balance = resp.balance;
       });
 
+
     }
+
+    // this.obtenerNotificaciones();
     
   }
     // VARIABLE PRIVADA PARA LAS OPCIONES DE LOS HEADERS DE MIS PETICIONES HTTP
     private httpOptions: any;
   
     
+
+  obtenerNotificaciones(){
+    // const websocketUrl = environment.WEBSOCKETURL+'ws/notificaciones/';
+    
+
+    
+
+    this.webSocketService.subscribeToNotifications().subscribe( 
+    (data) => {
+      // Manejar los datos recibidos aquí
+      console.log(data);
+    },
+    (error) => {
+      // Manejar errores aquí
+      console.error(error);
+    });
+  }
+
 
 
   // METODO PARA ASIGNARLE UN USUARIO A MI MODELO USUARIO 
@@ -110,6 +134,8 @@ export class SeguridadService {
         this.obtenerPermisos(resp.user.username)
         // this.router.navigateByUrl('home');
         // window.location.reload();
+        // console.log(resp.permisos)
+        // this.setPermisosUser(resp.permisos);
         return this.currentUser;
         
       })

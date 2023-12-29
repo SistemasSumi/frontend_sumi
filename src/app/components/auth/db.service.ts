@@ -301,7 +301,7 @@ export class DbService {
     // Convierte la imagen en Base64 a una URL válida
     const blob = this.dataURItoBlob(base64Image);
     const url_img = URL.createObjectURL(blob);
-    const  url = 'https://fcm.googleapis.com/fcm/send';
+    const url = 'https://fcm.googleapis.com/fcm/send';
             
     const httpHeaders = new HttpHeaders()
     .set('Authorization', 'key=AAAAzH7MZWA:APA91bGYBaaS02lnGnk0o8YYByShtsiYOT-qg3InRoLWpjOx37BHQiCu2iQKpNEYxMfIqfrfVIlg4-un28E0Ty1wGOYEj6SHSpJVcXcErf8fV3OgbRZu_r_tGd2V_LLDPMom0C_Mzsft')

@@ -1,0 +1,519 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="col-12">
+          <div class="page-title-box d-flex align-items-center justify-content-between">
+              <h4 class="mb-0">Nuevo Ajuste</h4>
+      
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">Inventario<a href="javascript: void(0);"></a></li>
+                      <li class="breadcrumb-item">Ajuste<a href="javascript: void(0);"></a></li>
+                      <li class="breadcrumb-item active">Nuevo</li>
+                  </ol>
+              </div>
+      
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="invoice-title">
+                    
+                      
+                        
+                        <div class="mb-4">
+                            <img src="assets/images/logoEmpresa.png" alt="logo" height="120">
+                        </div>
+                        <!-- <div class="text-muted">
+                            <p class="mb-1"> <i class="uil uil-building me-1"></i><strong>Sumiprod de la costa S.A.S. </strong> </p>
+                            <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>sumiprodelacosta@gmail.com</p>
+                            <p><i class="uil uil-postcard me-1"></i> <strong>901648084</strong></p>
+                        </div> -->
+                    </div>
+
+          
+
+                    <div class="row">
+                      <p-divider [text]="'DATOS DEL AJUSTE'" [align]="'left'"></p-divider>
+                    </div>
+                    <!-- end row -->
+                   
+                  <form (submit)="onSubmit()" [formGroup]="ajusteForm" #formDirective="" id="formFacturacion">
+
+
+                    <div class="row">
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Numeración</mat-label>
+                                    <mat-select formControlName="numeracion" required  style="text-align: center;">
+                                        <mat-option   [matTooltip]="data.nombre"  *ngFor="let data of numeraciones " [value]="data.id" >
+                                            {{data.numero}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                  
+
+                  
+
+                    </div>
+                    <div class="mb-4 row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                                    <mat-label style="font-size: 16px;">Observaciones</mat-label>
+                                    <textarea  formControlName="observacion" matInput placeholder=""></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                       
+                      
+                     
+                    </div>
+            
+                  
+                 
+
+                    <div class="row">
+                      <p-divider [text]="'DETALLE DEL AJUSTE'"></p-divider>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 col-lg-6">
+                            <div class="float-end">
+                                <a href="javascript:;" class="btn btn-info me-1"(click)="openModalEntrada(entrada)"><i class="fa fa-plus"></i></a> 
+                              
+                            </div>
+                            <div class="row">
+                                <p-divider [text]="'AJUSTE DE ENTRADA'"></p-divider>
+                            </div>
+                            <div class="py-2">
+                    
+
+                                <div class="table-scroll">
+                                    <table style="border-collapse: collapse;" class="table table-responsive align-middle table-normal table-centered mb-0 table-detalle">
+                                        <thead>
+                                            <tr>
+                                                <th width="auto" class="text-center">COD.</th>
+                                                <th width="25%" style="white-space: normal;">PRODUCTO</th>
+                                                <th width="auto" class="text-center">LOTE</th>         
+                                                <th width="auto" class="text-center">VENCE</th>
+                                                <th width="auto" class="text-end">CANT</th>
+                                                <th width="auto" class="text-end">COSTO</th>
+                                             
+                                                <th width="auto" class="text-end">TOTAL</th>
+                                            </tr>
+                                        </thead><!-- end thead -->
+                                        <tbody>
+                                            <tr  *ngFor="let item of listadoEntradas let i = index"  style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                                                  <mat-menu #menu="matMenu">
+                                                      
+                                                      <button mat-menu-item (click)="removeEntrada(i)"><mat-icon style="color:red;">delete</mat-icon>ELIMINAR FILA</button>
+                                                  </mat-menu>
+        
+                                                <th class="text-center">{{item.producto.codigoDeBarra}}</th>
+                                                <td >
+                                                  
+                                                  {{item.producto.nombreymarcaunico | acortarText:14}}
+                                                  
+                                                </td>
+                                                <td class="text-center">{{item.lote}} </td>
+                                                <td class="text-center">{{item.fechaVencimiento | date}}</td>
+                                              
+                                                <td class="text-center">{{item.cantidad}}</td>
+                                                <td class="text-end">{{item.costo | currency }}</td>
+                                                
+                                                <td class="text-end">{{item.costo * item.cantidad | currency}}</td>
+                                            </tr>
+                                          
+                                         
+                                            <!-- end tr -->
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+                                </div><!-- end table responsive -->
+                               
+                                <div class="table-footer">
+        
+                                  <table   class="float-end table-balance">
+                                     
+                                      
+                                  
+                                     
+                                      <!-- end tr -->
+                                  
+                                      <!-- end tr -->
+                                      <tr #tablaRef style="font-size: 12px; text-transform: uppercase;">
+                                          <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h5>Total </h5></th>
+                                          <td  class="t-total border-0  text-end "><h5 [appAnimatedPrice]="obtenerTotal(listadoEntradas)" class="fw-semibold">  {{obtenerTotal(listadoEntradas) | currency}}</h5></td>
+                                         
+                                          
+                                      </tr>
+                                  </table>
+        
+                                 
+                              </div>
+                              <div style="clear: both;"></div>
+                              <hr>    
+                                <div class="d-print-none mt-4">
+                                    <div class="float-end">
+                                        <!-- <a href="javascript:;" class="btn btn-info me-1"(click)="null"><i class="fa fa-plus"></i></a>  -->
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-lg-6">
+                            <div class="float-end">
+                                <a href="javascript:;" class="btn btn-info me-1"(click)="openModalSalida(salida)"><i class="fa fa-plus"></i></a> 
+                              
+                            </div>
+                            <div class="row">
+                                <p-divider [text]="'AJUSTE DE SALIDA'"></p-divider>
+                            </div>
+                            
+                            <div class="py-2">
+                    
+                                <div class="table-scroll">
+                                    <table style="border-collapse: collapse;" class="table table-responsive align-middle table-normal table-centered mb-0 table-detalle">
+                                        <thead>
+                                            <tr>
+                                                <th width="auto" class="text-center">COD.</th>
+                                                <th width="25%" style="white-space: normal;">PRODUCTO</th>
+                                                <th width="auto" class="text-center">LOTE</th>         
+                                                <th width="auto" class="text-center">VENCE</th>
+                                                <th width="auto" class="text-end">CANT</th>
+                                                <th width="auto" class="text-end">COSTO</th>
+                                             
+                                                <th width="auto" class="text-end">TOTAL</th>
+                                            </tr>
+                                        </thead><!-- end thead -->
+                                        <tbody>
+                                            <tr  *ngFor="let item of listadoSalidas let i = index"  style="cursor: pointer;" [matMenuTriggerFor]="menu">
+                                                  <mat-menu #menu="matMenu">
+                                                      
+                                                      <button mat-menu-item (click)="removeSalida(i)"><mat-icon style="color:red;">delete</mat-icon>ELIMINAR FILA</button>
+                                                  </mat-menu>
+        
+                                                <th class="text-center">{{item.producto.codigoDeBarra}}</th>
+                                                <td >
+                                                  
+                                                  {{item.producto.nombreymarcaunico | acortarText:14}}
+                                                  
+                                                </td>
+                                                <td class="text-center">{{item.lote}} </td>
+                                                <td class="text-center">{{item.fechaVencimiento | date}}</td>
+                                              
+                                                <td class="text-center">{{item.cantidad}}</td>
+                                                <td class="text-end">{{item.costo | currency }}</td>
+                                                
+                                                <td class="text-end">{{item.costo * item.cantidad | currency}}</td>
+                                            </tr>
+                                          
+                                         
+                                            <!-- end tr -->
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+                                </div><!-- end table responsive -->
+                               
+                                <div class="table-footer">
+        
+                                  <table   class="float-end table-balance">
+                                     
+                                      
+                                  
+                                     
+                                      <!-- end tr -->
+                                  
+                                      <!-- end tr -->
+                                      <tr #tablaRef style="font-size: 12px; text-transform: uppercase;">
+                                          <th  scope="row" colspan="8" class="text-center border-0 t-total text-end"><h5>Total </h5></th>
+                                          <td  class="t-total border-0  text-end "><h5 [appAnimatedPrice]="obtenerTotal(listadoSalidas)" class="fw-semibold">  {{obtenerTotal(listadoEntradas) | currency}}</h5></td>
+                                         
+                                          
+                                      </tr>
+                                  </table>
+        
+                                 
+                              </div>
+                              <div style="clear: both;"></div>
+                              <hr>    
+                                <div class="d-print-none mt-4">
+                                    <div class="float-end">
+                                        <!-- <!-- <a href="javascript:;" class="btn btn-danger me-1"(click)="null"><i class="fa fa-ban"></i></a>  -->
+                                        <button class="btn btn-primary w-md" type="submit" [disabled]="ajusteForm.invalid">Guardar </button> 
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  </form>
+                </div>
+            </div>
+        </div><!-- end col -->
+    </div><!-- end row -->
+    </div>
+      <!-- <a class="btn btn-primary btn-sm"  (click)="imprimir()" href="javascript:;" role="button">Descargar </a> -->
+
+      <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-6">
+                  {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+              </div>
+              <div class="col-sm-6">
+                  <div class="text-sm-end d-none d-sm-block">
+                      Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+
+<ng-template #entrada let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalMarca">AJUSTE DE ENTRADA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalEntrada()" aria-label="Close"></button>
+    </div>
+    
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Tipo de entrada</mat-label>
+                        <mat-select [(ngModel)]="ajusteEntrada.tipoAjuste"  style="text-align: center;">
+                            <mat-option value="1">SOBRANTES</mat-option>
+                            <mat-option value="2">BONIFICACIÓN</mat-option>
+                            <mat-option disabled value="3">LOTE TROCADO</mat-option>
+                            <mat-option disabled value="4">FV ERRADA</mat-option>
+                        
+                            
+                            
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Bodega</mat-label>
+                      <mat-select  [(ngModel)]="bodega" style="text-align: center;">
+                          <mat-option value="institucional" (click)="obtenerProductos('institucional')">Institucional</mat-option>
+                          <mat-option value="consumo" (click)="obtenerProductos('consumo')">Consumo</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                    <mat-label style="font-size: 18px;">Producto</mat-label>
+                    <mat-select (ngModelChange)="selectProductoEntrada($event)"  placeholder="Buscar productos" [(ngModel)]="ajusteEntrada.producto">
+                        <mat-option>
+                            <ngx-mat-select-search [formControl]="filtroProductoControl"   #filtroDeProducto
+                                placeholderLabel="Buscar productos" noEntriesFoundLabel="No hay resultados">
+                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option  *ngFor="let data of filtroProductos | async" [value]="data">
+                            {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
+                            
+                        </mat-option>
+
+                     
+                    </mat-select>
+                    
+                </mat-form-field>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Existencia</mat-label>
+                        <input [disabled]="true" [(ngModel)]="ajusteEntrada.existencia" matInput type="text" id="" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Cantidad</mat-label>
+                        <input  required [(ngModel)]="ajusteEntrada.cantidad" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Costo</mat-label>
+                        <input  required [(ngModel)]="ajusteEntrada.costo" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Lote</mat-label>
+                        <input  required [(ngModel)]="ajusteEntrada.lote" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Vencimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="ajusteEntrada.fechaVencimiento">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                      <mat-icon color="primary">calendar_month</mat-icon>
+                    </a>
+                  
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+        </div>
+  
+    </div>
+    <div class="modal-footer">
+        
+        <button type="button" (click)="agregarAjusteEntrada()" [disabled]="false" class="btn btn-primary">Agregar</button>
+    </div>
+</ng-template>
+<ng-template #salida let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalMarca">AJUSTE DE SALIDA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalSalida()" aria-label="Close"></button>
+    </div>
+    
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Tipo de salida</mat-label>
+                        <mat-select (ngModelChange)="changeTipoAjusteSalida($event)" [(ngModel)]="ajusteSalida.tipoAjuste"  style="text-align: center;">
+                            <mat-option value="3">LOTE TROCADO</mat-option>
+                            <mat-option value="4">FV ERRADA</mat-option>
+                            <mat-option value="5">PERDIDA</mat-option>
+                            
+                            
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Bodega</mat-label>
+                      <mat-select  [(ngModel)]="bodega" style="text-align: center;">
+                          <mat-option value="institucional" (click)="obtenerProductosStock('institucional')">Institucional</mat-option>
+                          <mat-option value="consumo" (click)="obtenerProductosStock('consumo')">Consumo</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                    <mat-label style="font-size: 18px;">Producto</mat-label>
+                    <mat-select (ngModelChange)="selectProductoSalida($event)"  placeholder="Buscar productos" [(ngModel)]="ajusteSalida.producto">
+                        <mat-option>
+                            <ngx-mat-select-search [formControl]="filtroProductoControl"   #filtroDeProducto
+                                placeholderLabel="Buscar productos" noEntriesFoundLabel="No hay resultados">
+                                <mat-icon style="color: red;" ngxMatSelectSearchClear>delete_forever</mat-icon>
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option  *ngFor="let data of filtroProductos | async" [value]="data">
+                            {{data.codigoDeBarra}} - {{data.nombreymarcaunico}}
+                            
+                        </mat-option>
+
+                     
+                    </mat-select>
+                    
+                </mat-form-field>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Lotes</mat-label>
+                        <mat-select  style="text-align: center;">
+                            <ng-container *ngFor="let item of Lotes" >
+                                <mat-option  [value]="item"  (click)="seleccionarLote(item)">
+                                    {{ item.lote }}
+                                </mat-option>
+                            </ng-container>
+                            
+                            
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Existencia</mat-label>
+                        <input [disabled]="true" [(ngModel)]="ajusteSalida.existencia" matInput type="text" id="" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Cantidad</mat-label>
+                        <input  required [(ngModel)]="ajusteSalida.cantidad" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Costo</mat-label>
+                        <input  required [(ngModel)]="ajusteSalida.costo" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            
+            <div class="col-md-3" *ngIf="viewLote">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                        <mat-label style="font-size: 16px;">Lote</mat-label>
+                        <input   [(ngModel)]="nuevoLote" matInput type="text" id="ajusteEntrada.cantidad" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2" *ngIf="viewFV">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Vencimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="nuevaFV">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
+                      <mat-icon color="primary">calendar_month</mat-icon>
+                    </a>
+                  
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+        </div>
+  
+    </div>
+    <div class="modal-footer">
+        
+        <button type="button" (click)="agregarAjusteSalida()" [disabled]="false" class="btn btn-primary">Agregar</button>
+    </div>
+</ng-template>
+  

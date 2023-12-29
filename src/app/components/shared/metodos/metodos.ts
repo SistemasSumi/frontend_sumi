@@ -36,7 +36,7 @@ export class MetodosShared {
     public DiasEntreFechaActualYOTRA(fecha){
       const date1 = new Date(fecha);
       const date2 = new Date();
-      const diffInMs = date1.getTime() - date2.getTime();
+      const diffInMs = date2.getTime() - date1.getTime();
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
       // console.log(diffInDays);  
       return diffInDays;

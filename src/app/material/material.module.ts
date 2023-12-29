@@ -59,7 +59,6 @@ import {MatChipsModule} from '@angular/material/chips';
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
-    { provide: MAT_DATE_FORMATS, useValue: { display: { dateInput: 'DD/MM/YYYY' } } }
   ],
 })
 export class MaterialModule {}

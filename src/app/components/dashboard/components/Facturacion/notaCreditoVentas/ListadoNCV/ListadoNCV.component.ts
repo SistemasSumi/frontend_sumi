@@ -10,6 +10,7 @@ import { NotaCreditoCompras } from '../../../inventario/notaCredito/models/notaC
 import { NotaCreditoComprasService } from '../../../inventario/notaCredito/notaCreditoCompras.service';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { NotaCreditoVentasService } from '../NotaCreditoVentas.service';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 declare var $;
 
 @Component({
@@ -109,8 +110,16 @@ export class ListadoNCVComponent implements OnInit {
             render: function(data,type,row){
                 let numero = `<p>`+data+`</p>`;;
 
-                if(row.contabilizado){
-                numero = `<p style="color: green; font-weight: bold;">`+data+`</p>`;
+                if(row.isElectronica){
+                  if(row.enviadaDian){
+                    numero = `<p style="color: green; font-weight: bold;">`+data+`</p>`;
+                    
+                  }else{
+                    numero = `<p style="color: red; font-weight: bold;">`+data+`</p>`;
+
+                  }
+                }else{
+                  numero = `<p style="font-weight: bold;">`+data+`</p>`;
                 }
                 if(row.anulada){
                 numero = `<p style="color: red; font-weight: bold;">`+data+`</p>`;
@@ -213,6 +222,13 @@ export class ListadoNCVComponent implements OnInit {
               render: function(data,type,row){
                   let botonConta = "";
                   let botonAnular = "";
+                  let botonEnviarElectronica = "";
+
+                  if(row.isElectronica){
+                    botonEnviarElectronica = `<a class="dropdown-item" href="javascript:;" id="dian"><i  class="fas fa-signature" style="margin-right: 5px; color:green;"></i>  Firmar</a>`
+                  }else{
+                    botonEnviarElectronica = "";
+                  }
                 
                   if(row.contabilizado == false){
                     botonConta =  `<a class="dropdown-item" id="contabilizar" href="javascript:;" style="margin-right: 5px;"><i class="fas fa-money-check-alt" style="margin-right: 5px; color:green;"></i> CONTABILIZAR</a> `
@@ -235,7 +251,8 @@ export class ListadoNCVComponent implements OnInit {
                           <a class="dropdown-item"  href="javascript:;" id="imprimir"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i>  Imprimir</a>`
                           +botonAnular+
                           ``
-
+                          +botonEnviarElectronica+
+                          ``
                           +botonConta+
                           `
                           
@@ -303,6 +320,19 @@ export class ListadoNCVComponent implements OnInit {
           
         });
 
+
+        $('#dian', row).off('click');
+        $('#dian', row).on('click', () => {
+
+            this.FirmarNC(data.numero);
+          
+          
+
+
+          // this.openModalCorreo(this.myModal,data);
+          
+        });
+
         /* BOTON CORREO  */
         $('#contabilizar', row).off('click');
         $('#contabilizar', row).on('click', () => {
@@ -319,6 +349,100 @@ export class ListadoNCVComponent implements OnInit {
     });
   }
 
+
+  FirmarNC(numero:string){
+    // if(this.permisos){
+    //   if(this.permisos.facturacion.firmarFactura || this.permisos.superusuario){
+    //     new MetodosShared().AlertQuestion('ESTA SEGURO DE ENVIAR ESTA FACTURA A LA DIAN ?').then((result) => {
+    //       if (result.isConfirmed) {
+    
+    
+             
+    //         Swal.fire({
+    //           allowOutsideClick: false,
+    //           icon: 'info',
+    //           title: 'ENVIANDO..',
+    //           text:'Espere por favor..'
+    //         });
+    //         Swal.showLoading();
+    
+    //         this.invoceService.FirmarInvoce(numero).subscribe((resp:any) => {
+              
+    //           Swal.close();
+    
+    
+    //           new MetodosShared().AlertOK('FACTURA FIRMADA CON ÉXITO!');
+             
+             
+    //           this.resetTable();
+    
+    
+              
+    
+    //         },(ex) => {
+    //           // console.log(ex);
+    //           Swal.close();
+              
+    //           let errores ='';
+    //           for(let x of ex.error){
+             
+    //             new MetodosShared().AlertError(x,'text-left')
+                
+    //           }
+            
+    //         });
+    //       } 
+    //     });
+    //   }else{
+    //     this.metodos.AlertDenegado('NO TIENE LOS PERMISOS ADECUADOS');
+    //     return false;
+    
+    //   }
+  
+    // }
+
+    new MetodosShared().AlertQuestion('ESTA SEGURO DE ENVIAR ESTA FACTURA A LA DIAN ?').then((result) => {
+      if (result.isConfirmed) {
+
+
+         
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: 'info',
+          title: 'ENVIANDO..',
+          text:'Espere por favor..'
+        });
+        Swal.showLoading();
+
+        this.notaService.FirmarInvoceNC(numero).subscribe((resp:any) => {
+          
+          Swal.close();
+
+
+          new MetodosShared().AlertOK('NOTA FIRMADA CON ÉXITO!');
+         
+         
+          this.notaService.getNotas();
+
+
+          
+
+        },(ex) => {
+          // console.log(ex);
+          Swal.close();
+          
+          let errores ='';
+          for(let x of ex.error){
+         
+            new MetodosShared().AlertError(x,'text-left')
+            
+          }
+        
+        });
+      } 
+    });
+   
+  }
 
   llenarTableOrdenes(){
     return this.notaService.SubjectdataNota.subscribe(resp => {

@@ -41,8 +41,10 @@ export const environment = {
 
   },
 
-  BACKEND_DIR:"https://backend.sumiprodelacosta.com/"
-  // BACKEND_DIR:"http://localhost:8000/"    
+  BACKEND_DIR:"https://backend.sumiprodelacosta.com/",
+  // BACKEND_DIR:"http://localhost:8000/",
+  // WEBSOCKETURL: "ws://localhost:8000/"
+  // WEBSOCKETURL: "ws://backend.sumiprodelacosta.com/"
 
 };
 

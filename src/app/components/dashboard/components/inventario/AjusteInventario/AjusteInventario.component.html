@@ -1,0 +1,113 @@
+<div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">Ajustes de inventario</h4>
+        
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">Inventario<a href="javascript: void(0);"></a></li>
+                        <li class="breadcrumb-item">Ajuste<a href="javascript: void(0);"></a></li>
+                        <li class="breadcrumb-item active">Listado</li>
+                    </ol>
+                </div>
+        
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-header">
+                    <div class="row align-items-end">
+                      <div class="col-sm">
+                          <div style="float: right;" class="botones-header">
+                                <!-- <button type="button" class="btn btn-outline-warning mb-4 " (click)="updateListado()">
+                                    <i class="fas fa-spinner rotate"></i>&nbsp; <b>Actualizar</b>
+                                </button> -->
+                                <button type="button" class="btn btn-outline-primary mb-4 " [routerLink]="['/crear-ajuste']" >
+                                    <i class="fas fa-plus pulse"></i>&nbsp; <b>Nuevo Ajuste</b>
+                                </button>
+                                <!-- <button type="button" (click)="busquedaAvanzada = !busquedaAvanzada" class="btn btn-outline-primary mb-4 ">
+                                    <i class="fas fa-search-plus pulse"></i>&nbsp; <b> Busqueda avanzada</b>
+                                </button> -->
+                              <!-- <button type="button" (click)="exportarExcel()" class="btn btn-outline-primary mb-4">
+                                <i class="squire ico-excel"></i>&nbsp; Exportar excel
+                              </button> -->
+                             
+                           
+                          </div>
+                      </div>
+                      <div class="col-sm-auto ">
+
+                      </div>
+                  </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                          
+
+                            
+                                <table  #dataTableEl id="TableFacturas" style="width:100%" class="table table table-striped table-bordered table-responsive" >
+                                    <thead>
+                                        <tr>
+                                           
+                                          
+                                            <th style="white-space: nowrap; width: 10%;" >N°</th>
+                                            <th style="white-space: nowrap;width: 10%;">CREACIÓN</th>
+                                            <th style="white-space: normal;width: 65%;" class="pr-250">OBSERVACIÓN</th>
+                                            <th style="white-space: nowrap;width: 10%;">USUARIO</th>
+                                            <th style="white-space: nowrap;width: 5%;"></th>
+                                           
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of ajustes">
+                                            <td style="white-space: nowrap; width: 10%; text-align: center;" >{{item.numero}}</td>
+                                            <td style="white-space: nowrap;width: 10%; text-align: center;">{{item.fecha | date}}</td>
+                                            <td style="white-space: normal;width: 65%;" >{{item.observacion}}</td>
+                                            <td style="white-space: nowrap;width: 10%; text-align: center;">{{item.usuario}}</td>
+                                            <td style="white-space: nowrap;width: 5%; text-align: center;">
+                                                <a href="javascript:;" (click)="imprimir(item)">
+
+                                                    <i class="squire ico-pdf text-danger"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        
+        
+                                    </tbody>
+                                </table>
+
+                        </div>
+                     
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+        <!-- <a class="btn btn-primary btn-sm"  (click)="imprimir()" href="javascript:;" role="button">Descargar </a> -->
+
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ 'currentYear' | currentYear }}&copy; SarpSoft.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

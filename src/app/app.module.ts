@@ -135,6 +135,11 @@ import {  CvfFormComponent } from './components/dashboard/components/Facturacion
 import { ConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/conciliacion.component';
 import { ModuloConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/ModuloConciliacion/ModuloConciliacion.component';
 import { VentasVendedorIndividualComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedorIndividual/VentasVendedorIndividual.component';
+import { AjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/AjusteInventario.component';
+import { FormAjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/FormAjusteInventario/FormAjusteInventario.component';
+import { CotizacionComponent } from './components/dashboard/components/Facturacion/Cotizacion/Cotizacion.component';
+import { ListaCotizacionesComponent } from './components/dashboard/components/Facturacion/lista-cotizaciones/lista-cotizaciones.component';
+
 
 
 
@@ -245,7 +250,11 @@ import { VentasVendedorIndividualComponent } from './components/dashboard/compon
     CvfFormComponent,
     ConciliacionComponent,
     ModuloConciliacionComponent,
-    VentasVendedorIndividualComponent
+    VentasVendedorIndividualComponent,
+    AjusteInventarioComponent,
+    FormAjusteInventarioComponent,
+    CotizacionComponent,
+    ListaCotizacionesComponent,
 
 
 

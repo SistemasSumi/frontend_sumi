@@ -728,59 +728,94 @@ export class EditarFacturasComponent implements OnInit {
     this.clienteSeleccionado = null;
   }
 
+
+  async mostrarOpcionesDomicilio() {
+    const { value: selectedValue } = await Swal.fire({
+      title: 'Selecciona el valor del domicilio',
+      icon: 'warning',
+      html: `
+        <select class="form-control" id="swal-select">
+          <option value="0">$0</option>
+          <option value="4000">$4000</option>
+          <option value="5000">$5000</option>
+          <option value="6000">$6000</option>
+          <option value="7000">$7000</option>
+          <option value="8000">$8000</option>
+          <option value="9000">$9000</option>
+        </select>`,
+      showCancelButton: false,
+      allowOutsideClick: false,
+      inputPlaceholder: 'Selecciona una opción',
+      preConfirm: () => {
+        const selectElement = document.getElementById('swal-select') as HTMLSelectElement;
+        return selectElement.value;
+      },
+    });
+  
+    if (selectedValue !== undefined) {
+      this.formfacturacion.get('valorDomicilio').setValue(parseFloat(selectedValue));
+      this.domicilioFactura = parseFloat(selectedValue);
+    } else {
+      this.formfacturacion.get('valorDomicilio').setValue(0);
+      this.domicilioFactura = 0;
+    }
+  }
+
   guardarFactura(){
-   
-
-    new MetodosShared().AlertQuestion(
-      '¿ ESTA SEGURO DE ACTUALIZAR LA VENTA ?'
-    ).then((result) => {
-      if (result.isConfirmed) {
-
-
-        Swal.fire({
-          allowOutsideClick: false,
-          icon: 'info',
-          title: 'Guardando..',
-          text:'Espere por favor..'
-        });
-        Swal.showLoading();
-
-        this.invoceService.updateFactura(this.formfacturacion).subscribe((resp:any) => {
-
-          Swal.close();
-
-          new MetodosShared().AlertOK('VENTA ACTUALIZADA CON EXITO')
-          this.resetformFactura();
-          this.invoceService.cargarFacturas();
-          this.route.navigateByUrl("facturacion/facturas");
-
-          
-
-        },(ex) => {
-          // console.log(ex);
-          Swal.close();
-          let errores ='';
-          for(let x of ex.error){
-       
-              errores +=`
-              <div class="alert alert-danger" role="alert" style="text-align: left;">
-                ${x}
-              </div>
-              `
-            
-            
-          }
+    this.mostrarOpcionesDomicilio().then(() => {
+      
+      new MetodosShared().AlertQuestion(
+        '¿ ESTA SEGURO DE ACTUALIZAR LA VENTA ?'
+      ).then((result) => {
+        if (result.isConfirmed) {
+  
+  
           Swal.fire({
-            icon: 'error',
-            title: 'Error al guardar.',
-            html:errores,
-            confirmButtonColor: '#4acf50',
-        
+            allowOutsideClick: false,
+            icon: 'info',
+            title: 'Guardando..',
+            text:'Espere por favor..'
           });
-        
-        });
-      } 
-    })
+          Swal.showLoading();
+  
+          this.invoceService.updateFactura(this.formfacturacion).subscribe((resp:any) => {
+  
+            Swal.close();
+  
+            new MetodosShared().AlertOK('VENTA ACTUALIZADA CON EXITO')
+            this.resetformFactura();
+            this.invoceService.cargarFacturas();
+            this.route.navigateByUrl("facturacion/facturas");
+  
+            
+  
+          },(ex) => {
+            // console.log(ex);
+            Swal.close();
+            let errores ='';
+            for(let x of ex.error){
+         
+                errores +=`
+                <div class="alert alert-danger" role="alert" style="text-align: left;">
+                  ${x}
+                </div>
+                `
+              
+              
+            }
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al guardar.',
+              html:errores,
+              confirmButtonColor: '#4acf50',
+          
+            });
+          
+          });
+        } 
+      })
+    });
+
   }
 
 

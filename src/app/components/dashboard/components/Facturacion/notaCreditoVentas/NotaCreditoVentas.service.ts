@@ -126,5 +126,22 @@ export class NotaCreditoVentasService {
   
       return this.http.get<any>(url,{headers: httpHeaders}); 
     }
+
+    FirmarInvoceNC(numero:string): Observable<any>{
+      const  url = environment.BACKEND_DIR+'facturacion/facturas/nc/envio/dian/';
+      const token = this.auth.currentUser.getTokenUser();
+      const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+     
+      let data = {
+          "numero":numero,
+      }
+    
+    
+    
+      return this.http.post<any>(url,data,{headers: httpHeaders});
+      
+      
+    
+    }
   
 }

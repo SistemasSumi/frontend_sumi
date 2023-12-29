@@ -72,7 +72,7 @@ export class ComprobanteIngreso{
           horizontalPageBreak: true,
           margin: {
             top: 220,
-            bottom: 65,
+            bottom: 150,
             left: 15,
             right: 15
           },
@@ -319,9 +319,9 @@ export class ComprobanteIngreso{
         });
     
         doc.line(15, doc.lastAutoTable.finalY + 10, 595, doc.lastAutoTable.finalY + 10)
-        doc.setFont(undefined, 'bold')
-        doc.setFontSize(10)
-        doc.text(data.conta.concepto, 15, doc.lastAutoTable.finalY + 30)
+        doc.setFont(undefined, 'normal')
+        doc.setFontSize(9)
+        doc.text(data.conta.concepto, 15, doc.lastAutoTable.finalY + 30,{"maxWidth":520})
         return doc
 
 

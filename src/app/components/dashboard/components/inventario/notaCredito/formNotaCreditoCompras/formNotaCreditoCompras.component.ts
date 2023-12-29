@@ -299,7 +299,7 @@ export class FormNotaCreditoComprasComponent implements OnInit {
       let detalle:DetailNotaCredito = {
         producto:this.productoSeleccionado.producto,
         cantidad:this.cantidadDevolucion,
-        iva:this.productoSeleccionado.iva / this.productoSeleccionado.cantidad,
+        iva:this.productoSeleccionado.iva ,
         lote:this.productoSeleccionado.lote,
         valorUnidad:(this.productoSeleccionado.valorUnidad - this.productoSeleccionado.descuento ),
         subtotal: (this.productoSeleccionado.valorUnidad - this.productoSeleccionado.descuento) * this.cantidadDevolucion

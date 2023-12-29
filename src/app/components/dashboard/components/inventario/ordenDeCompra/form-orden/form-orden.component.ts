@@ -5,6 +5,8 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/operators';
+import { PermisosUsuario } from 'src/app/components/auth/permisosUsuario';
+import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
 import { ConfiguracionService } from '../../../configuracion/Configuracion.service';
@@ -27,6 +29,7 @@ import { OrdenDeCompraService } from '../ordenDeCompra.service';
   styleUrls: ['./form-orden.component.css']
 })
 export class FormOrdenComponent implements OnInit {
+  permisos:PermisosUsuario;
 
   filtroValor$ = new Subject<string>();
   filtroSubscription: Subscription | undefined;
@@ -35,6 +38,7 @@ export class FormOrdenComponent implements OnInit {
 
 
   columnFiltroProducto:string = 'nombreymarcaunico';  
+  tipoProducto:string;  
 
   terceroSeleccionado:ModelTerceroCompleto;
 
@@ -146,7 +150,18 @@ export class FormOrdenComponent implements OnInit {
   public producto:    Producto;
 
 
-  constructor(private rutaActiva: ActivatedRoute,private modalService: NgbModal,private stock:StockService,private formBuilder: FormBuilder,private ordenService:OrdenDeCompraService, private config:ConfiguracionService,private tables:TablesBasicService) { }
+  constructor(
+    private rutaActiva: ActivatedRoute,
+    private modalService: NgbModal,
+    private stock:StockService,
+    private formBuilder: FormBuilder,
+    private ordenService:OrdenDeCompraService, 
+    private config:ConfiguracionService,
+    private tables:TablesBasicService,
+    private auth:SeguridadService
+    ) {
+    this.permisos = this.auth.currentUser.getPermisos()
+  }
 
 
   numeraciones:ModelNumeraciones[] = [];
@@ -160,7 +175,7 @@ export class FormOrdenComponent implements OnInit {
     this.obtenerNumeraciones();
     this.obtenerProveedores();
     this.obtenerFormaDepago();
-    this.obtenerProductos();
+ 
 
     if(this.rutaActiva.snapshot.params.id){
         let id = this.rutaActiva.snapshot.params.id;
@@ -277,13 +292,42 @@ export class FormOrdenComponent implements OnInit {
   refreshProveedor(){
     this.config.obtenerProveedorCompras();
   }
-  obtenerProductos(){
-    this.stock.SubjectdataProductos.subscribe(resp => {
-   
-      
-      this.productos = resp;
-      this.filtroProductos = new BehaviorSubject<Producto[]>(this.productos);
-    });
+
+  obtenerProductos(event){
+    console.log(event)
+    if(event == 'consumo'){
+        if(this.permisos){
+          if(this.permisos.inventario.consumo || this.permisos.superusuario){
+              console.log(this.tipoProducto)
+              this.stock.SubjectdataProductosConsumo.subscribe(resp => {
+     
+        
+                this.productos = resp;
+                this.filtroProductos = new BehaviorSubject<Producto[]>(this.productos);
+              });
+              return true;
+          
+          }else{
+              this.metodos.AlertDenegado('NO TIENE LOS PERMISOS ADECUADOS');
+              // this.tipoProducto = 'institucional';
+          
+          }
+
+      }else{
+
+          this.metodos.AlertDenegado('NO TIENE LOS PERMISOS ADECUADOS');
+          // return false;
+      }
+    }else{
+      console.log(this.tipoProducto)
+
+      this.stock.SubjectdataProductos.subscribe(resp => {
+     
+        
+        this.productos = resp;
+        this.filtroProductos = new BehaviorSubject<Producto[]>(this.productos);
+      });
+    }
   }
 
 
@@ -322,7 +366,7 @@ export class FormOrdenComponent implements OnInit {
   }
 
   openModalProductos(content) {
-		this.modalProducto = this.modalService.open(content, { size: 'lg',centered: true });
+		this.modalProducto = this.modalService.open(content, { size: 'xl',centered: true });
   }
 
   cerrarModalPRoducto(){

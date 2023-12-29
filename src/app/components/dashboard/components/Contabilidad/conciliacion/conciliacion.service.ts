@@ -77,5 +77,14 @@ export class ConciliacionService {
   
   }
 
+  reporteCierreInventario(){
+    const  url = environment.BACKEND_DIR+'inventario/informes/inventario/cierre/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+    return this.http.get<any[]>(url,{headers: httpHeaders});
+  
+  }
+
 
 }

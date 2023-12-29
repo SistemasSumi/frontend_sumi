@@ -140,7 +140,9 @@ export class IngresoComprasComponent implements OnInit {
               private config        : ConfiguracionService,
               private tables        : TablesBasicService,
 
-  ) { }
+  ) {
+    this.fechaVencimiento = '';
+   }
 
   ngOnInit() {
     this.cargarNumeracion();

@@ -22,11 +22,13 @@ export class StockService {
     SubjectdataCE   : BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
     SubjectdataProductosVenta    : BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(null);
     SubjectdataProductos         : BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(null);
+    SubjectdataProductosConsumo  : BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(null);
    
 
 constructor(private settings:ConfiguracionService,public router:Router, private http:HttpClient, private auth:SeguridadService) {
     this.actualizarProductosVentas();
     this.actualizarProductos();
+    this.actualizarProductosConsumo();
     this.getPagos().subscribe();
    
 }
@@ -41,6 +43,12 @@ actualizarProductosVentas(){
 actualizarProductos(){
     this.productosFull().subscribe(resp => {
         this.SubjectdataProductos.next(resp);
+      
+    });
+}
+actualizarProductosConsumo(){
+    this.productosConsumo().subscribe(resp => {
+        this.SubjectdataProductosConsumo.next(resp);
       
     });
 }
@@ -72,6 +80,15 @@ productosFull(){
   
 }
 
+
+productosConsumo(){
+    const  url = environment.BACKEND_DIR+'inventario/getProductos/?consumo='+'consumo';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+  
+    return this.http.get<Producto[]>(url,{headers: httpHeaders});
+  
+}
 
 
 getProducto(id:number){

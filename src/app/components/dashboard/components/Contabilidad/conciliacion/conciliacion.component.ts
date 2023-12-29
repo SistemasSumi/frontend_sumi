@@ -10,6 +10,7 @@ import { DatePipe } from 'src/app/pipes/date.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { CierreContable } from '../../../reportes/reportesContabilidad/cierreReportContable';
+import { CierreInventario } from '../../../reportes/reportesInventario/cierreInventario';
 import { ModelPuc } from '../models/ModelPuc';
 import { PucService } from '../puc/puc.service';
 import { ConciliacionService } from './conciliacion.service';
@@ -23,9 +24,10 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
 
 
 
+
   selectedMes: string;
   selectedAnio: number;
-
+  txtBuscar:string;
 
 
   listCuentas:ModelPuc[] = [];
@@ -106,13 +108,23 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
   
   }
 
+  searchInTable(valor){
+    this.table.search(valor).draw();
+    const self = this;
+
+    this.table.on('draw', () => {
+      // Llama a la función footerCallback después de que se haya redibujado la tabla
+      self.table.api().footerCallback();
+    });
+  }
+
 
   ngAfterViewInit() {
     this.setMesesDefault(this.selectedAnio);
   }
 
 
-  consultar(){
+  consultar(page?){
 
     if(this.filtroConciliacion.saldoBanco == undefined || this.filtroConciliacion.saldoBanco == null ){
 
@@ -145,21 +157,21 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
           this.consulta = resp;
           console.log(resp)
           this.filtroConciliacion.saldoInicial = resp.saldo_anterior;
-          this.llenarTablePagos(resp.movimientos)
+          this.llenarTablePagos(resp.movimientos,page)
         },
         (error) => {
           console.log(error)
         }
     );
   }
-  setConciliado(id,estado){
+  setConciliado(id,estado,page){
     let row = {
       estado:estado,
       id:id
     }
     this.conciliacion.setConciliado(row).subscribe(
         (resp:any) => {
-          this.consultar();
+          this.consultar(page);
         },
         (error) => {
           console.log(error)
@@ -183,7 +195,7 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
       mes         : null,
       year        : null,
     }
-    this.pucService.getEfectivo().subscribe((resp:ModelPuc[])=>{
+    this.pucService.getEfectivo().subscribe((resp:any[])=>{
       
       this.listCuentas = resp;
 
@@ -195,22 +207,26 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
     this.filtroCuentas.subscribe(resp => {
       this.listaDeGrupos = [];
 
-      for(let x of resp){
-        if(x.codigo.toString().length < 6 && x.codigo.toString().length >= 4 ){
-          let c:cuentas[] = [];
-          for(let j of resp){
-            if(x.codigo.toString() == j.codigo.toString().substring(0, 4) && j.codigo.toString().length >= 6){
-              c.push(j)
+      for (let x of resp) {
+        if (x.codigo !== null && x.codigo !== undefined) {
+          if (x.codigo.toString().length < 6 && x.codigo.toString().length >= 4) {
+            let c: any[] = [];
+            for (let j of resp) {
+              if (j.codigo !== null && j.codigo !== undefined) {
+                if (x.codigo.toString() == j.codigo.toString().substring(0, 4) && j.codigo.toString().length >= 6) {
+                  c.push(j);
+                }
+              }
             }
+      
+            let g: grupos = {
+              codigo: x.codigo,
+              nombre: x.nombre,
+              cuentas: c
+            };
+      
+            this.listaDeGrupos.push(g);
           }
-
-          let g:grupos = {
-            codigo: x.codigo,
-            nombre:x.nombre,
-            cuentas:c
-          }
-
-          this.listaDeGrupos.push(g);
         }
       }
    
@@ -226,8 +242,26 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
   }
 
   filtrarPuc(busqueda:string){
-    let filtro:ModelPuc[] = this.metodos.filtrarArrayPuc<ModelPuc>(this.listCuentas,'codigo',busqueda);
+    let filtro:ModelPuc[] = this.metodos.filtrarArrayPuc<ModelPuc>(this.listCuentas,'codigo',busqueda) || [];
     this.filtroCuentas.next(filtro);
+  }
+
+  cierreInventario(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Generando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.conciliacion.reporteCierreInventario().subscribe(resp => {
+      Swal.close();
+      let reporte = new CierreInventario();
+    
+      let report = reporte.reporteCierreInventario(resp);
+      window.open(report.output('bloburl'), '_blank');
+
+    });
   }
 
   llenarTable(idtable:string,data,columns,nameButton){
@@ -315,7 +349,7 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
           },
           {
             targets:[5],
-        
+            class:'text-left',
             orderable: true,
             render: function(data,type,row){
               return data;
@@ -429,10 +463,11 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
         $(row).find('input[type="checkbox"]').on('change', function() {
             var checkbox = $(this);
             var isChecked = checkbox.prop('checked');
-      
+            var currentPage = self.table.page.info().page + 1;
+            
             console.log(data)
             console.log(isChecked)
-            self.setConciliado(data.id,isChecked);
+            self.setConciliado(data.id,isChecked,currentPage);
             // Acciones adicionales según el estado del checkbox, por ejemplo:
             
             // Aquí puedes agregar más lógica según tus necesidades
@@ -440,13 +475,31 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
         
        
         return row;
+      },
+      footerCallback: function(row, data, start, end, display) {
+        var api = this.api();
+        let cp:CurrencyPipe = new CurrencyPipe('en-US');
+
+        var debitoTotal = 0;
+        var creditoTotal = 0;
+  
+        api.rows({ search: 'applied' }).data().each(function(rowData) {
+          debitoTotal += parseFloat(rowData.debito); // Assuming column 1 is "debito"
+          creditoTotal += parseFloat(rowData.credito); // Assuming column 2 is "credito"
+        });
+
+
+  
+        // Mostrar las sumas en el footer
+        $(api.column(6).footer()).html(cp.transform(debitoTotal)); // Format to 2 decimal places
+        $(api.column(7).footer()).html(cp.transform(creditoTotal)); // Format to 2 decimal places
       }
       
     });
   }
 
-  llenarTablePagos(movimientos){
-
+  llenarTablePagos(movimientos,page?){
+    console.log('page',page);
 
     this.llenarTable(
       "Conta",
@@ -472,6 +525,10 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
 
       this.table.columns.adjust();
       $('#TableConta_filter').html(``);
+      if(page){
+
+        this.table.page(parseInt(page) - 1).draw(false);
+      }
 
     
   }
@@ -598,7 +655,7 @@ export class ConciliacionComponent implements OnInit,AfterViewInit  {
 
 
 interface grupos {
-  nombre: string;
+  nombre: string  | null;
   codigo: string;
   cuentas: cuentas[];
 }
@@ -606,6 +663,6 @@ interface grupos {
 interface cuentas {
   id: number
   codigo: string;
-  nombre: string;
+  nombre: string | null;
   
 }

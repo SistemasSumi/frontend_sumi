@@ -110,8 +110,10 @@ import { CvfFormComponent } from './components/dashboard/components/Facturacion/
 import { ConciliacionComponent } from './components/dashboard/components/Contabilidad/conciliacion/conciliacion.component';
 import { VentasVendedorIndividualComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedorIndividual/VentasVendedorIndividual.component';
 import { VentasxVendedorIndividual } from './guards/facturacion/VentasXVendedorIndividual.guard';
-
-
+import { AjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/AjusteInventario.component';
+import { FormAjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/FormAjusteInventario/FormAjusteInventario.component';
+import { CotizacionComponent } from './components/dashboard/components/Facturacion/cotizacion/cotizacion.component';
+import {ListaCotizacionesComponent} from './components/dashboard/components/Facturacion/lista-cotizaciones/lista-cotizaciones.component'
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent,canActivate:[AuthGuard]},
@@ -226,6 +228,8 @@ const routes: Routes = [
       canActivate:[AuthGuard,BodegasGuard]
     },
     { path: 'stock', component: StockComponent,canActivate:[AuthGuard,BodegasGuard],},
+    { path: 'ajustes', component: AjusteInventarioComponent,canActivate:[AuthGuard],},
+    { path: 'crear-ajuste', component: FormAjusteInventarioComponent,canActivate:[AuthGuard],},
     
     { 
       path: 'purchaseOrder', 
@@ -256,17 +260,18 @@ const routes: Routes = [
           { path: 'addFactura',component:CrearFacturaVentaComponent, canActivate:[AuthGuard,CrearFacturaGuard]},
           { path: 'proformas',component:ProformasComponent, canActivate:[AuthGuard,ProformaGuard]},
           { path: 'facturas',component:ListadoFacturasComponent, canActivate:[AuthGuard,ListadoFacturaGuard]},
-          { path: 'cotizacion',component:ProspectoVentaComponent, canActivate:[AuthGuard,CotizacionGuard]},
-          { 
-            path: 'cotizacion',
-            component:ProspectoVentaComponent,
-            children: [
-              { path: 'add',component:CvfFormComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
-              { path: 'listado',component:ListadoNCVComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
+          { path: 'cotizacion',component:ListaCotizacionesComponent, canActivate:[AuthGuard,CotizacionGuard]},
+          { path: 'nueva-cotizacion',component:CotizacionComponent, canActivate:[AuthGuard,CotizacionGuard]},
+          // { 
+          //   path: 'cotizacion',
+          //   component:ProspectoVentaComponent,
+          //   children: [
+          //     { path: 'add',component:CvfFormComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
+          //     { path: 'listado',component:ListadoNCVComponent, canActivate:[AuthGuard,NotaCreditoVGuard]},
 
-            ],
-            canActivate:[AuthGuard,CotizacionGuard]
-          },
+          //   ],
+          //   canActivate:[AuthGuard,CotizacionGuard]
+          // },
           { path: 'preview/:id',component:PreviewFacturasComponent, canActivate:[AuthGuard,ListadoFacturaGuard]},
           { 
             path: 'nota-credito',
@@ -283,19 +288,19 @@ const routes: Routes = [
       ],
       canActivate:[AuthGuard]
     },
-    // { 
-    //   path: 'empleados', 
-    //   component: NEmpleadosComponent,
-    //     children: [
-    //       { path: 'nuevo',component:FormEmpleadoComponent,},
-    //       { path: 'listado',component:ListadoEmpleadoComponent,},
-    //       // { path: 'preview',component:PreviewEmpleadosComponent,},
-    //       { path: '**',component:ListadoEmpleadoComponent, }
+    { 
+      path: 'empleados', 
+      component: NEmpleadosComponent,
+        children: [
+          { path: 'nuevo',component:FormEmpleadoComponent,},
+          { path: 'listado',component:ListadoEmpleadoComponent,},
+          // { path: 'preview',component:PreviewEmpleadosComponent,},
+          { path: '**',component:ListadoEmpleadoComponent, }
 
          
-    //   ],
-    //   canActivate:[AuthGuard]
-    // },
+      ],
+      canActivate:[AuthGuard]
+    },
 
     // { path: 'nueva-factura', component: FacturacionComponent,canActivate:[AuthGuard]},
     { path: 'preview/empleado', component: PreviewEmpleadosComponent,canActivate:[AuthGuard]},

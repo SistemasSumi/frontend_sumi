@@ -16,13 +16,14 @@ import { FechaVencimientoPipe } from './FechaVencimiento.pipe';
 import { SafeHtmlPipe } from './safeHtml.pipe';
 import { FechaRelativaPipe } from './fechaRelativa.pipe';
 import { ParseFloatPipe } from './parseFloat.pipe';
+import { ObjectFilterPipe } from './ObjectFilter.pipe';
 
 
 
 
 
 @NgModule({
-  declarations: [																
+  declarations: [																	
     FiltroPipe,
     CerosPipe,
       DatetimePipe,
@@ -38,7 +39,8 @@ import { ParseFloatPipe } from './parseFloat.pipe';
       FechaVencimientoPipe,
       SafeHtmlPipe,
       FechaRelativaPipe,
-      ParseFloatPipe
+      ParseFloatPipe,
+      ObjectFilterPipe
    ],
   exports: [
     FiltroPipe,
@@ -54,7 +56,8 @@ import { ParseFloatPipe } from './parseFloat.pipe';
     FechaVencimientoPipe,
     SafeHtmlPipe,
     FechaRelativaPipe,
-    ParseFloatPipe
+    ParseFloatPipe,
+    ObjectFilterPipe
 
 
   ]

@@ -317,8 +317,8 @@ export class CEComponent implements OnInit {
 
     let d = this.detalle[this.filaAEditar];
     let descuentos = this.terceroSeleccionado.descuentoProveedor;
-    let dias = new MetodosShared().DiasEntreFechaActualYOTRA(d.vence);
-    
+    let dias = new MetodosShared().DiasEntreFechaActualYOTRA(d.fecha);
+    console.log("diff",dias);
     this.dTotalDescuento = this.calcularDescuento(descuentos[0],dias);
     if(this.dTotalDescuento > 0){
       this.descuentoPorcentaje = true;

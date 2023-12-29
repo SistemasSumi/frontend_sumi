@@ -1,0 +1,181 @@
+::ng-deep .swal2-styled.swal2-confirm {
+    background-color: #41B6FF;
+}
+
+.desaprobado{
+    background-color: #EDE04D;
+    color: #333333;
+}
+
+
+
+.table-scroll {
+    position: relative;
+    width:100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    /* height: 350px; */
+    table-layout: fixed;
+    max-height: 350px;
+  }
+
+
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  /* border: none; */
+ background:white; 
+  color: #000;
+  z-index:4;
+}
+
+
+
+
+.table-detalle td {
+  border: 0.2px solid rgb(202, 200, 200);
+  padding: 8px;
+}
+
+
+
+.example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+
+.table-scroll tbody,
+.table-scroll tbody th,
+.table-scroll tbody td {
+  height: auto;
+  
+}
+
+
+
+.table-scroll thead,
+.table-scroll thead th,
+.table-scroll thead td {
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  
+    color: #fff;
+    z-index:4;
+
+    color: #fff;
+
+    background-color: #41B6FF; 
+}
+
+
+
+
+.table-footer{
+  border: #41B6FF solid 1px;
+ 
+}
+
+.table-balance{
+  border-collapse: collapse;
+  /* margin-right: 2px;  */
+  margin-top: 2px;
+  font-size: 18px;
+}
+
+
+
+.table-balance th,
+.table-balance td{
+  border: 0.2px solid rgb(202, 200, 200);
+  padding : 8px;
+}
+
+
+.t-total{
+  background-color: rgb(202, 200, 200);
+}
+
+
+.table-footer tr td{
+    min-width: 150px;
+}
+
+
+.table-footer tr .th-title{
+    background-color: #41B6FF;
+    color: white;
+}
+
+
+
+::ng-deep .toast-custom {
+    background-color: white !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    max-width: 400px; /* Ajusta esto según el valor deseado */
+    overflow-y: auto;
+  }
+  .toast-custom .toast-title {
+    font-weight: bold;
+  }
+  .toast-custom .toast-message {
+    font-style: italic;
+  }
+  .toast-custom .toast-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+
+  ::ng-deep .noti-toast{
+    background-color: white !important;
+  }
+
+  .swal-words-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .swal-word {
+    margin-right: 3px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 12px;
+  }
+  
+  .swal-word .delete-icon {
+    margin-left: 3px;
+    cursor: pointer;
+  }
+  .swal-word-delete {
+    margin-left: 3px;
+    cursor: pointer;
+  }
+  .swal2-validation-message{
+    font-weight: bold;
+  }
+
+  .icon-info {
+    font-size: 1rem;
+    position: absolute;
+    right: 20px; /* Ajusta el valor según tu necesidad */
+    top: 50%; /* Centra verticalmente el icono */
+    transform: translateY(-50%);
+    cursor: pointer;
+  }

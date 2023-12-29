@@ -5,14 +5,6 @@ thead {
     font-weight: bold;
 }
 
-
-tfoot {
-    background-color: #f3f5f6;
-    /* color: #ffffff; */
-    font-weight: bold;
-}
-
-
 th {
     border: none;
 }
@@ -35,5 +27,23 @@ th {
     height: 30px;
     border-radius: 100%;
     padding: 10%;
+}
+
+
+
+
+
+
+.dropdown-menu i{
+    margin-right: 10px;
+ 
+}
+
+.botones-header button{
+    margin-right: 10px;
+}
+
+::ng-deep .swal2-styled.swal2-confirm {
+    background-color: #41B6FF;
 }
 

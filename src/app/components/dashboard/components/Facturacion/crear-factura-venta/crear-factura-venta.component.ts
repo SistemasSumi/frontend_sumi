@@ -180,9 +180,6 @@ export class CrearFacturaVentaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission();
-    }
     this.obtenerNumeraciones();
     this.obtenerFormaDepago();
     
@@ -276,7 +273,6 @@ export class CrearFacturaVentaComponent implements OnInit {
   
   seleccionarTercero(data:ModelTerceroCompleto){
     this.clienteSeleccionado = data;
-    this.listadoDetalleFactura = [];
     this.calcularTotales(this.listadoDetalleFactura);
 
 

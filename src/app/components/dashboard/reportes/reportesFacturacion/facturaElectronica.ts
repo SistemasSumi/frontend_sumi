@@ -711,7 +711,7 @@ export class facturaElectronicaReport {
             }
           },
           {
-            content: x.producto.nombreymarcaunico + ' Lote: '+x.lote,
+            content: x.producto.nombreymarcaunico + ' Lote: '+x.lote+ ' Vence:'+x.vence,
             styles: {
               cellWidth: 260,
             

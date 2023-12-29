@@ -159,6 +159,7 @@ interface ProductoElement {
     factura?:     number;
 }
 
+
  interface ProductoProducto {
     id:                number;
     tipoProducto:      TipoProducto;

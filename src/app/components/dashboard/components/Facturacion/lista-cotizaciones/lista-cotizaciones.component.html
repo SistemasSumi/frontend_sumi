@@ -1,0 +1,428 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="page-title-box d-flex align-items-center justify-content-between"
+        >
+          <h4 class="mb-0">LISTADO DE COTIZACIONES</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item">
+                <a href="javascript: void(0);">cotización</a>
+              </li>
+              <li class="breadcrumb-item active">listado</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-end">
+                <div class="col-sm">
+                  <div style="float: right" class="botones-header">
+                    <button
+                      type="button"
+                      class="btn btn-outline-warning mb-4"
+                      (click)="updateListado()"
+                    >
+                      <i class="fas fa-spinner rotate"></i>&nbsp;
+                      <b>Actualizar</b>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary mb-4"
+                      (click)="newCotizacion()"
+                    >
+                      <i class="fas fa-cart-plus pulse"></i>&nbsp;
+                      <b>Generar cotizacion</b>
+                    </button>
+                    <button
+                      type="button"
+                      (click)="busquedaAvanzada = !busquedaAvanzada"
+                      class="btn btn-outline-primary mb-4"
+                    >
+                      <i class="fas fa-search-plus pulse"></i>&nbsp;
+                      <b> Busqueda avanzada</b>
+                    </button>
+                    <!-- <button type="button" (click)="exportarExcel()" class="btn btn-outline-primary mb-4">
+                                <i class="squire ico-excel"></i>&nbsp; Exportar excel
+                              </button> -->
+                  </div>
+                </div>
+                <div class="col-sm-auto"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row" *ngIf="busquedaAvanzada">
+                <fieldset class="rounded-3 p-3">
+                  <legend class="float-none w-auto">FILTROS DE BÚSQUEDA</legend>
+                  <div class="row">
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                      <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px">PREFIJO</mat-label>
+                        <input
+                          [(ngModel)]="filtroAvanzado.prefijo"
+                          matInput
+                          type="text"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                      <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px"
+                          >N° COTIZACION</mat-label
+                        >
+                        <input
+                          [(ngModel)]="filtroAvanzado.numero"
+                          matInput
+                          type="number"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+                      <div class="form-group">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Forma de pago</mat-label
+                          >
+                          <mat-select
+                            style="text-align: center"
+                            [(ngModel)]="this.filtroAvanzado.formaPago"
+                          >
+                            <mat-option
+                              *ngFor="let item of formasPago"
+                              [value]="item.id"
+                              >{{ item.nombre }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-sm-3 col-md-3 col-lg-6">
+                      <div class="form-group">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 18px">Cliente</mat-label>
+                          <mat-select
+                            placeholder="Seleccionar cliente"
+                            [(ngModel)]="filtroAvanzado.cliente"
+                          >
+                            <mat-option>
+                              <ngx-mat-select-search
+                                ngModel
+                                #filtroTercero
+                                placeholderLabel="Buscar cliente"
+                                noEntriesFoundLabel="No hay resultados"
+                              >
+                                <mat-icon
+                                  style="color: red"
+                                  ngxMatSelectSearchClear
+                                  >delete_forever</mat-icon
+                                >
+                              </ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option
+                              *ngFor="let cliente of filtroClientes | async"
+                              [value]="cliente.id"
+                            >
+                              {{ cliente.nombreComercial }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                      <div class="form-group">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Vendedor</mat-label
+                          >
+                          <mat-select
+                            style="text-align: center"
+                            [(ngModel)]="this.filtroAvanzado.vendedor"
+                          >
+                            <mat-option
+                              *ngFor="let item of vendedores"
+                              [value]="item.id"
+                              >{{ item.nombre }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                      <div class="form-group">
+                        <mat-form-field
+                          style="width: 100%"
+                          class="example-form-field"
+                          appearance="fill"
+                        >
+                          <!-- <mat-label>Fechas</mat-label> -->
+                          <mat-date-range-input
+                            [rangePicker]="estadoFinancieroPicker"
+                          >
+                            <input
+                              matStartDate
+                              placeholder="FECHA INICIAL"
+                              [(ngModel)]="filtroAvanzado.fechaInicial"
+                            />
+                            <input
+                              matEndDate
+                              placeholder="FECHA FINAL"
+                              [(ngModel)]="filtroAvanzado.fechaFinal"
+                            />
+                          </mat-date-range-input>
+                          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                          <a
+                            matSuffix
+                            mat-icon-button
+                            aria-label="Clear"
+                            (click)="estadoFinancieroPicker.open()"
+                          >
+                            <mat-icon color="primary">calendar_month</mat-icon>
+                            <!-- <i class="fas fa-calendar"></i> -->
+                          </a>
+                          <mat-date-range-picker
+                            #estadoFinancieroPicker
+                          ></mat-date-range-picker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-3 col-md-3 col-lg-2">
+                      <div class="form-group">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >ESTADO DIAN</mat-label
+                          >
+                          <mat-select
+                            style="text-align: center"
+                            [(ngModel)]="this.filtroAvanzado.estadoDian"
+                          >
+                            <mat-option value="1">ENVIADA</mat-option>
+                            <mat-option value="0">PENDIENTE</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-3 col-md-3 col-lg-4">
+                      <div class="form-group">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Observación</mat-label
+                          >
+                          <textarea
+                            [(ngModel)]="filtroAvanzado.observacion"
+                            matInput
+                            placeholder="Ejem: profoma N° 0250"
+                          ></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="d-flex flex-wrap gap-2 float-end">
+                    <button
+                      (click)="limpiarFiltro()"
+                      type="button"
+                      class="btn btn-danger float-right"
+                    >
+                      <i class="uil uil-trash-alt"></i>
+                    </button>
+                    <button
+                      (click)="BusquedaAvanzada()"
+                      type="button"
+                      class="btn btn-success float-right"
+                    >
+                      <i class="uil uil-search me-2"></i> BUSCAR
+                    </button>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <table
+                    #dataTableEl
+                    id="TableCotizaciones"
+                    style="width: 100%"
+                    class="table table table-striped table-bordered table-responsive"
+                  >
+                    <thead>
+                      <tr>
+                        <th
+                          style="
+                            width: 3%;
+                            text-align: center;
+                            justify-content: center;
+                            justify-items: center;
+                          "
+                        ></th>
+
+                        <th style="white-space: nowrap">N°</th>
+                        <th style="white-space: normal" class="pr-250">
+                          CLIENTE
+                        </th>
+                        <th style="white-space: nowrap">FORMA DE PAGO</th>
+                        <th style="white-space: nowrap">CREACIÓN</th>
+                        <!-- <th style="white-space: nowrap">DESPACHO</th> -->
+                        <th style="white-space: nowrap">SUBTOTAL</th>
+                        <th style="white-space: nowrap">IVA</th>
+                        <th style="white-space: nowrap">DESCUENTO</th>
+                        <th style="white-space: nowrap">RETENCIÓN</th>
+                        <th style="white-space: nowrap">TOTAL</th>
+                        <th style="white-space: nowrap">USUARIO</th>
+                        <th style="width: 8%">
+                          <a
+                            type="button"
+                            class="btn position-relative"
+                            style="
+                              padding: 0;
+                              color: #fff;
+                              font-size: 16px;
+                              font-weight: bold;
+                            "
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            <i class="fas fa-search"></i>
+                          </a>
+                          <div
+                            class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 dropdown-menu"
+                          >
+                            <div class="input-group">
+                              <input
+                                type="search"
+                                placeholder="Buscar en cotizaciones"
+                                aria-describedby="button-addon1"
+                                class="form-control border-0 bg-light"
+                                (ngModelChange)="table.search($event).draw()"
+                              />
+                              <div class="input-group-append">
+                                <a
+                                  id="button-addon1"
+                                  type="button"
+                                  class="btn btn-link text-primary"
+                                  ><i class="fa fa-search color-primary"></i
+                                ></a>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- end row -->
+            </div>
+            <!-- end card body -->
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+      </div>
+    </div>
+
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          &copy; SarpSoft.
+        </div>
+        <div class="col-sm-6">
+          <div class="text-sm-end d-none d-sm-block">
+            Crafted by
+            <a
+              href="https://Pichforest.com/"
+              target="_blank"
+              class="text-reset"
+            >
+              Dto: Sistemas</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<ng-template #imprimir let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalMarca"></h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      (click)="cerrarModalImprimir()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row d-flex">
+      <div class="col-md-4">
+        <button
+          (click)="imprimirPrefactura()"
+          mat-button
+          style="width: 90%; background-color: #41b6ff"
+        >
+          <span class="squire ico-pdf" style="color: red"></span> PRE COTIZACION
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button
+          (click)="imprimirELECTRONICA()"
+          mat-button
+          style="width: 90%; background-color: #41b6ff"
+        >
+          <span class="squire ico-pdf" style="color: red"></span> ELECTRÓNICA
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button
+          (click)="imprimirFACTURATECH()"
+          mat-button
+          style="width: 90%; background-color: #41b6ff"
+        >
+          <span class="squire ico-pdf" style="color: red"> </span> ORIGINAL
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
