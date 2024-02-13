@@ -18,6 +18,13 @@
     border-bottom: 1px dashed #41b6ff;
   }
  
+
+
+.table thead {
+  background-color: #41b6ff;
+  color: white;
+  
+}
   
   
   

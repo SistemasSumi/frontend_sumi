@@ -1,0 +1,63 @@
+<div>
+    <div class="modal-body">
+  
+        <div class="row">
+            <div class="col-md-4">
+                
+                  <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                    <mat-label style="font-size: 16px;">Tipo</mat-label>
+                    <mat-select [(ngModel)]="this.resultado.tipo" (ngModelChange)="onTipoChange()" style="text-align: center;">
+                      <mat-option *ngFor="let item of tiposSelect" [value]="item.value">{{item.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                
+              </div>
+
+          <div class="col-md-4">
+            
+              <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                <mat-label style="font-size: 16px;">Concepto</mat-label>
+                <mat-select  [(ngModel)]="this.resultado.concepto" style="text-align: center;">
+                  <mat-option *ngFor="let item of conceptos" [value]="item.id">{{item.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            
+          </div>
+          <div class="col-md-4">
+            
+              <mat-form-field
+                appearance="fill"
+                floatLabel="always"
+                style="
+                  width: 100%;
+                  height: auto;
+                  margin: 0px 0px 10px 0px;
+                "
+              >
+                <mat-label style="font-size: 16px"
+                  >Valor(Mensual)</mat-label
+                >
+                <input
+                  [(ngModel)]="this.resultado.valorMensual"
+                  matInput
+                  type="number"
+                  class="example-right-align"
+                  #salarioBase
+                />
+                <span matPrefix>$&nbsp;</span>
+                <span matSuffix>.00</span>
+              </mat-form-field>
+            </div>
+          
+  
+        </div>
+  
+  
+    </div>
+    <div class="modal-footer">
+        
+        <button type="submit" (click)="guardar()"  class="btn btn-primary">Agregar</button>
+    </div>
+    </div>
+  
+  

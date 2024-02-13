@@ -28,13 +28,21 @@ constructor(
         "fecha_corte":fecha_corte,
       
     }
-
-
-
     return this.http.post<any>(url,data,{headers: httpHeaders});
-    
-    
+  }
 
+  CertificadoRetencionProveedor(proveedor_id,fecha_inicio,fecha_fin): Observable<any>{
+    const  url = environment.BACKEND_DIR+'inventario/informes/proveedores/certificadoRetencion/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+  
+    let data = {
+        "proveedor_id":proveedor_id,
+        "fecha_inicio":fecha_inicio,
+        "fecha_fin":fecha_fin
+      
+    }
+    return this.http.post<any>(url,data,{headers: httpHeaders});
   }
 
   Abonos_Recibidos(fecha_inicial,fecha_final): Observable<any>{

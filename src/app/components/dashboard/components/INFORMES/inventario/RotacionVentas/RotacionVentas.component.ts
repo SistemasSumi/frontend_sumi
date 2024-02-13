@@ -3,6 +3,7 @@ import { RotacionxCompras } from 'src/app/components/dashboard/reportes/reportes
 import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
 import Swal from 'sweetalert2';
 import { InformesGeneralesService } from '../../InformesGenerales.service';
+import { RotacionxVentas } from 'src/app/components/dashboard/reportes/reportesInventario/excel/RotacionxVentas';
 
 @Component({
   selector: 'app-RotacionVentas',
@@ -38,11 +39,30 @@ export class RotacionVentasComponent implements OnInit {
 
         // console.log(resp);
         
-        let reporte = new RotacionxCompras()
+        let reporte = new RotacionxVentas()
         reporte.dowloadExcel(resp,this.dateRange.startDate,this.dateRange.endDate);
         Swal.close()
       
         
-      });
+      },(ex)=>{
+        Swal.close();
+          
+          let errores ='';
+
+              errores +=`
+              <div class="alert alert-danger" role="alert" style="text-align: justify;">
+                ${ex.error}
+              </div>
+              `
+           
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al guardar.',
+            html:errores,
+            confirmButtonColor: '#4acf50',
+        
+          });
+      }
+      );
     }
 }

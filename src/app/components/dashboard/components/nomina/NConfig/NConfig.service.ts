@@ -41,7 +41,16 @@ export class NConfigService {
         const  url = environment.BACKEND_DIR+'nomina/conceptosEmpleados/';
         const token = this.auth.currentUser.getTokenUser();
         const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+        
+        return this.http.get<any[]>(url,{headers: httpHeaders});
       
+    }
+
+    getConceptosEmpleadosIngresos(){
+        const  url = environment.BACKEND_DIR+'nomina/conceptosEmpleados/ingresos/';
+        const token = this.auth.currentUser.getTokenUser();
+        const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+        
         return this.http.get<any[]>(url,{headers: httpHeaders});
       
     }
@@ -136,6 +145,30 @@ export class NConfigService {
          
             return this.http.get<any>(url,{headers: httpHeaders});
        
+    }
+    obtenerIngresoRecurrentes(){
+        const  url = environment.BACKEND_DIR+'nomina/ingreso/';
+            const token = this.auth.currentUser.getTokenUser();
+            const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+            return this.http.get<any>(url,{headers: httpHeaders});
+
+    }
+    guardarIngresoRecurrentes(form){
+        const  url = environment.BACKEND_DIR+'nomina/ingreso/';
+            const token = this.auth.currentUser.getTokenUser();
+            const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+            let data = form
+            return this.http.post<any>(url,data,{headers: httpHeaders});
+    }
+
+    obtenerDeduccionRecurrentes(){
+        const  url = environment.BACKEND_DIR+'nomina/deduccion/';
+            const token = this.auth.currentUser.getTokenUser();
+            const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+          
+         
+            return this.http.get<any>(url,{headers: httpHeaders});
+
     }
 
     obtenerArls(){

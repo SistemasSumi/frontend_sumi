@@ -8,16 +8,21 @@ import { InvoceReport } from '../../components/Facturacion/models/InvoceReport';
 import { AcortarTextPipe } from 'src/app/pipes/acortarText.pipe';
 
 export class facturaElectronicaReport {
+  
 
 
-    constructor(){}
+    constructor(){
+      console.log('Entrando al reporte de la factura')
+    }
 
 
     private cp:CurrencyPipe = new CurrencyPipe('en-US');
 
     public geerarPDFFacturaSumisx(datos:InvoceReport) {
+      
 
         const data = datos;
+        console.log(data)
         const doc = new jsPDF('p', 'pt', 'letter');
         
     
@@ -690,6 +695,7 @@ export class facturaElectronicaReport {
 
 
     public geerarPDFFacturaSumi(data:InvoceReport) {
+      console.log(data)
 
         const doc = new jsPDF('p', 'pt', 'letter');
         

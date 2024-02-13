@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true  ,
   secretKey:"SARP2023",
   firebaseConfig : {
     apiKey: "AIzaSyBfS3l6O7C_xlAWy_QRMrlBZmLU7ZXXcZE",
@@ -43,6 +43,9 @@ export const environment = {
 
   BACKEND_DIR:"https://backend.sumiprodelacosta.com/",
   // BACKEND_DIR:"http://localhost:8000/",
+
+
+  
   // WEBSOCKETURL: "ws://localhost:8000/"
   // WEBSOCKETURL: "ws://backend.sumiprodelacosta.com/"
 

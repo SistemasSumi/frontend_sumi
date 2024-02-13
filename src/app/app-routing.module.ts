@@ -25,6 +25,7 @@ import { CrearFacturaVentaComponent } from './components/dashboard/components/Fa
 import { BlurFormatDirective } from './blur-format.directive';
 import { ProformasComponent } from './components/dashboard/components/Facturacion/proformas/proformas.component';
 import { EditarFacturasComponent } from './components/dashboard/components/Facturacion/editar-facturas/editar-facturas.component';
+import { EditarCotizacionesComponent } from './components/dashboard/components/Facturacion/editar-cotizaciones/editar-cotizaciones.component';
 import { ListadoFacturasComponent } from './components/dashboard/components/Facturacion/ListadoFacturas/ListadoFacturas.component';
 import { PreviewFacturasComponent } from './components/dashboard/components/Facturacion/previewFacturas/previewFacturas.component';
 import { CrearProductoComponent } from './components/dashboard/components/inventario/productos/crear-producto/crear-producto.component';
@@ -114,7 +115,9 @@ import { AjusteInventarioComponent } from './components/dashboard/components/inv
 import { FormAjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/FormAjusteInventario/FormAjusteInventario.component';
 import { CotizacionComponent } from './components/dashboard/components/Facturacion/cotizacion/cotizacion.component';
 import {ListaCotizacionesComponent} from './components/dashboard/components/Facturacion/lista-cotizaciones/lista-cotizaciones.component'
-
+import { CertificadoRetencionComponent } from './components/dashboard/components/INFORMES/proveedores/certificado-retencion/certificado-retencion.component';
+import { NominaReporteComponent } from './components/dashboard/components/INFORMES/nomina-reporte/nomina-reporte.component';
+import { FormNominaComponent } from './components/dashboard/components/nomina/form-nomina/form-nomina.component';
 const routes: Routes = [
     { path: 'home', component: HomeComponent,canActivate:[AuthGuard]},
     { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
@@ -179,7 +182,7 @@ const routes: Routes = [
         
         
         { path: 'proveedor/EstadoCartera',component:EstadoCarteraProveedorComponent,canActivate:[CxpGuard]},
-        
+        { path: 'proveedor/CertificadoRetencion',component:CertificadoRetencionComponent,canActivate:[CxpGuard]},
         
         { path: 'inventario/vencido',component:IV_VENCIDOComponent,canActivate:[BodegasGuard]},
         { path: 'inventario/general',component:IV_GENERALComponent,canActivate:[BodegasGuard]},
@@ -204,6 +207,8 @@ const routes: Routes = [
       canActivate:[AuthGuard]
     },
     { path: 'configuracion_nomina', component: NConfigComponent,canActivate:[AuthGuard]},
+    { path: 'reporte_nomina', component: NominaReporteComponent,canActivate:[AuthGuard]},
+    { path: 'nueva_nomina', component: FormNominaComponent,canActivate:[AuthGuard]},
     { 
       path: 'productos', 
       component: ProductosComponent,
@@ -284,6 +289,7 @@ const routes: Routes = [
             canActivate:[AuthGuard,NotaCreditoVGuard]
           },
           { path: 'editar/:id',component:EditarFacturasComponent,canActivate:[AuthGuard,CrearFacturaGuard]},
+          { path: 'editarCotizacion/:id',component:EditarCotizacionesComponent,canActivate:[AuthGuard,CrearFacturaGuard]},
           { path: '**',component:CrearFacturaVentaComponent, canActivate:[AuthGuard,CrearFacturaGuard] }
       ],
       canActivate:[AuthGuard]
@@ -294,7 +300,7 @@ const routes: Routes = [
         children: [
           { path: 'nuevo',component:FormEmpleadoComponent,},
           { path: 'listado',component:ListadoEmpleadoComponent,},
-          // { path: 'preview',component:PreviewEmpleadosComponent,},
+          { path: 'preview',component:PreviewEmpleadosComponent,},
           { path: '**',component:ListadoEmpleadoComponent, }
 
          

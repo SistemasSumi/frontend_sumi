@@ -251,7 +251,7 @@ export class VentasDetalladas {
             itemData.n_factura,
             itemData.documento,
             itemData.tercero,
-            itemData.tercero,
+            itemData.vendedor,
             moment(itemData.fecha_venta).format("DD/MM/YYYY"),
             moment(itemData.fecha_vence).format("DD/MM/YYYY"),
             moment().month(itemData.mes - 1).format('MMMM').toUpperCase(), 

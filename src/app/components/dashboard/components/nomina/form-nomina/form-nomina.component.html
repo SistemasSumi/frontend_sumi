@@ -1,0 +1,151 @@
+<div class="main-content">
+  <div class="page-content">
+      <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+
+                <div class="row align-items-center">
+                    <div class="col-sm-7">
+                        <p class="font-size-18 fw-semibold">Nomina <span class="fw-normal">Automatiza y gestiona eficientemente los procesos de nómina con nuestro módulo especializado.</span></p>
+                        
+                    </div>
+                    <div class="col-sm-5">
+                        <img src="assets/images/illustrator/nomina.webp" class="img-fluid" alt="">
+                    </div>
+                </div>
+      <form>
+        <div class="row">
+          <p-divider [text]="'NUEVA NOMINA'" [align]="'center'"></p-divider>
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <mat-form-field
+                appearance="outline"
+                style="width: 100%; height: auto"
+              >
+                <mat-label style="font-size: 16px">Numeracion</mat-label>
+                <mat-select style="text-align: center">
+                  <mat-option>1</mat-option>
+                  <mat-option>1</mat-option>
+                  <mat-option>1</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+        
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" style="width: 100%">
+              <mat-label>Fecha inicio de pago</mat-label>
+              <input  matInput [matDatepicker]="picker" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <a
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="picker.open()"
+              >
+                <mat-icon color="primary">calendar_month</mat-icon>
+              </a>
+
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" style="width: 100%">
+              <mat-label>Fecha fin de pago</mat-label>
+              <input  matInput [matDatepicker]="dpicker" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <a
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="dpicker.open()"
+              >
+                <mat-icon color="primary">calendar_month</mat-icon>
+              </a>
+
+              <mat-datepicker #dpicker></mat-datepicker>
+            </mat-form-field>
+          </div> 
+          
+          <div class="modal-footer">
+            <button
+              style="margin-right: 10px"
+              mat-raised-button
+              color="accent"
+              type="button"
+            >
+              CANCELAR
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="true"
+            >
+              CREAR NOMINA
+            </button>
+          </div>
+
+          
+          </div>
+          
+          
+
+        <div class="row mt-4">
+          <p-divider [text]="'DETALLE DE NOMINA'" [align]="'center'"></p-divider>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+      
+              <table id="TableEmpleados" style="width:100%" class="table  table-striped table-bordered">
+                      <thead>
+                          <tr>
+                            <th class="text-nowrap">Nº</th>
+                            <th class="text-nowrap">Nombre Empleado</th>
+                            <th class="text-nowrap">Novedades</th>
+                            <th class="text-nowrap">Cálculo Básico</th>
+                            <th class="text-nowrap">Ingresos</th>
+                            <th class="text-nowrap">Deducciones</th>
+                            <th class="text-nowrap">Neto</th> 
+                            <th class="text-nowrap"></th> 
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of detalleNomina"  style="cursor: pointer;" >
+                              <td class="text-center">{{item.index}}</td>
+                              <td class="text-start">{{item.nombre}}</td>
+                              <td (click)="openModalNovedades()" class="text-end">{{item.novedades | currency}}</td>
+                              <td class="text-end">{{item.basico | currency}}</td>
+                              <td (click)="openModalIngresos()" class="text-end">{{item.ingresos | currency}}</td>
+                              <td (click)="openModalDeducciones()" class="text-end">{{item.deducciones | currency}}</td>
+                              <td class="text-end">{{item.neto | currency}}</td>
+                              <td class="text-center" [matMenuTriggerFor]="menu">
+                                <mat-icon style="color:rgb(64, 183, 219);">new_releases</mat-icon>
+                                <mat-menu #menu="matMenu">
+                                  <button mat-menu-item><mat-icon style="color:rgb(238, 255, 0);">attach_money</mat-icon>Crear anticipo</button>
+                                  <button mat-menu-item><mat-icon style="color:rgb(170, 151, 255);">receipt</mat-icon>Imprimir desprendible</button>
+                                  <button mat-menu-item><mat-icon style="color:rgb(0, 255, 76);">done</mat-icon>Firmar</button>
+                                </mat-menu>
+                              </td>
+                          </tr>
+                      </tbody>
+              </table>
+            </div>
+          </div>
+           
+        </div>
+    </form>
+    </div>
+      </div>
+      </div>
+  </div>
+</div>

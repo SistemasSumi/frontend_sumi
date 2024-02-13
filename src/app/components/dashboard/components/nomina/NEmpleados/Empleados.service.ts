@@ -24,6 +24,7 @@ export class EmpleadosService {
       (resp) => {
         // console.log(resp);
         this.SubjectdataEmpleados.next(resp);
+        // console.log(resp)
 
       },
       (error) => {
@@ -43,11 +44,28 @@ export class EmpleadosService {
   
   }
 
+  UpdateEmpleado(data){
+    const  url = environment.BACKEND_DIR+'nomina/empleados/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+    return this.http.put<any>(url,data,{headers: httpHeaders});
+  }
+
+  UpdateContratoEmpleado(data){
+    const  url = environment.BACKEND_DIR+'nomina/empleadosContrato/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+    return this.http.put<any>(url,data,{headers: httpHeaders});
+  
+  }
+
   
   ListEmpleados(){
     const  url = environment.BACKEND_DIR+'nomina/empleados/';
     const token = this.auth.currentUser.getTokenUser();
     const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+
+   
   
    
 

@@ -1,29 +1,28 @@
 <div class="main-content">
-    <div class="page-content">
-      <div class="container-fluid">
-
-        <div class="mx-n4 mt-n4">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card mb-0">
-                        <div class="card-body p-0">
-                            <div class="profile-bg position-relative overflow-hidden">
-                                <div class="bg-overlay bg-dark bg-gradient"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card -->
-                </div>
-            </div>
-            <!-- end row -->
-        </div>
-
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="mx-n4 mt-n4">
         <div class="row">
-            <div class="col-xl-3">
-                <div class="card mt-n5">
-                    <div class="card-body text-center">
-                        <div class="text-end">
-                            <!-- <div class="dropdown">
+          <div class="col-lg-12">
+            <div class="card mb-0">
+              <div class="card-body p-0">
+                <div class="profile-bg position-relative overflow-hidden">
+                  <div class="bg-overlay bg-dark bg-gradient"></div>
+                </div>
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+
+      <div class="row">
+        <div class="col-xl-3">
+          <div class="card mt-n5">
+            <div class="card-body text-center">
+              <div class="text-end">
+                <!-- <div class="dropdown">
                                 <a class="btn btn-link text-dark font-size-16 p-1 dropdown-toggle shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="uil uil-ellipsis-h"></i>
                                 </a>
@@ -33,686 +32,1264 @@
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </div> -->
-                        </div>
-                        <div class="avatar-xxl mx-auto mb-4">
-                            <img [src]="this._empleado.foto" alt="" class="rounded-circle img-thumbnail">
-                        </div>
-                        <h5 class="mb-1">{{this.datosPersonales.primerNombre}} {{ this.datosPersonales.primerApellido }}</h5>
-                        <p class="text-muted">{{this.datosPersonales.Cargo}}</p>
+              </div>
+              <div class="avatar-xxl mx-auto mb-4">
+                <img
+                  [src]="this._empleado.foto"
+                  alt=""
+                  class="rounded-circle img-thumbnail"
+                />
+              </div>
+              <h5 class="mb-1">
+                {{ this.datosPersonales.primerNombre }}
+                {{ this.datosPersonales.primerApellido }}
+              </h5>
+              <p class="text-muted">{{ this.datosPersonales.Cargo }}</p>
 
-                        <div><i class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Salario : <b class="fw-semibold font-size-16">{{this.datosContrato.salarioBase | currency }}</b></span></div>
-                    </div>
-                    <div class="d-flex border-top p-2">
-                        <div class="flex-grow-1">
-                            <div class="p-2 ps-3">{{this.datosContrato.salarioBase / 30 | currency }} / Dia</div>
-                        </div>
-                       
-                    </div>
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="list-group list-group-flush mb-2">
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-2.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Esther James</h5>
-                                            <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-3.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Jacqueline Steve</h5>
-                                            <p class="font-size-13 text-muted mb-0">UI/UX Designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-4.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">George Whalen</h5>
-                                            <p class="font-size-13 text-muted mb-0">Backend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Frontend Developer</h5>
-                                            <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="list-group list-group-flush mb-2">
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-2.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Esther James</h5>
-                                            <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-3.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Jacqueline Steve</h5>
-                                            <p class="font-size-13 text-muted mb-0">UI/UX Designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-4.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">George Whalen</h5>
-                                            <p class="font-size-13 text-muted mb-0">Backend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="img-thumbnail rounded-circle">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h5 class="font-size-14 mb-1">Frontend Developer</h5>
-                                            <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
+              <div>
+                <i
+                  class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"
+                ></i>
+                <span class="align-middle"
+                  >Salario :
+                  <b class="fw-semibold font-size-16">{{
+                    this.datosContrato.salarioBase | currency
+                  }}</b></span
+                >
+              </div>
+              <div>
+                <i
+                  class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"
+                ></i>
+                <span class="align-middle"
+                  >Ingresos :
+                  <b class="fw-semibold font-size-16">{{
+                    calcularSumaIngresos(this.datosContrato.ingresosRecurrentes)
+                      | currency
+                  }}</b></span
+                >
+              </div>
+              <div>
+                <i
+                  class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"
+                ></i>
+                <span class="align-middle"
+                  >Descuento :
+                  <b class="fw-semibold font-size-16">{{
+                    calcularSumaDeducciones(
+                      this.datosContrato.deduccionesRecurrentes
+                    ) | currency
+                  }}</b></span
+                >
+              </div>
             </div>
-            <!-- end col -->
-
-
-            <!-- PRIMERA PARTE DEBAJO DE LA FOTO PRINCIPAL -->
-
-            <div class="col-xl-9">
-                <div class="mt-4">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="card">
-                                
-                                <div class="card-body">
-                                    <div class="row">
-                                        <p-divider [text]="'DATOS PERSONALES'" [align]="'center'"></p-divider>
-                                    </div>
-
-                                    <div *ngIf="!_editDatosPersonales" class="list-group list-group-flush mb-2">
-                                        <a class="list-group-item ">
-                                            <div class="d-flex align-items-center">
-                                                
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Nombres</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0">{{this.datosPersonales.primerNombre}} {{this.datosPersonales.segundoNombre}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Apellidos</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0">{{this.datosPersonales.primerApellido}} {{this.datosPersonales.segundoApellido}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">{{this.datosPersonales.tipoDocumento.nombre}}</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0"> {{this.datosPersonales.documento}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="list-group-item ">
-                                            <div class="d-flex align-items-center">
-                                                
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Nacimiento</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0">{{this.datosPersonales.fechaNacimiento  | date}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Correo</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0">{{this.datosPersonales.correo}}  &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Teléfono</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0"> {{this.datosPersonales.telefono}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="list-group-item ">
-                                            <div class="d-flex align-items-center">
-                                                
-                                                
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Dirección</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0">{{this.datosPersonales.direccion}}  &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Cargo</h5>
-                                                        <p class="custom-underline font-size-14 text-muted mb-0"> {{this.datosPersonales.Cargo}} &nbsp; </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="flex-shrink-0 mt-2">
-                                            <div class="d-flex gap-2 justify-content-end arrow-sm">
-                                                <button (click)="this._editDatosPersonales = !this._editDatosPersonales" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
-                                                    <mat-icon>edit</mat-icon>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div *ngIf="_editDatosPersonales" class="list-group list-group-flush mb-2">
-                                        <div class="row">
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Primer nombre</mat-label>
-                                                        <input required [(ngModel)]="this.datosPersonales.primerNombre" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                               </div>
-                                            </div>
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Segundo nombre</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.segundoNombre" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Primer apellido</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.primerApellido" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Segundo apellido</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.segundoApellido" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                   </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Nacimiento</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.fechaNacimiento" matInput [matDatepicker]="picker" >
-                                                        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-                                                        <a matSuffix mat-icon-button aria-label="Clear"  (click)="picker.open()">
-                                                            <mat-icon color="primary">calendar_month</mat-icon>
-                                                        </a>
-                                                        
-                                                        <mat-datepicker #picker></mat-datepicker>
-                                                     
-                                                    </mat-form-field>
-                                               </div>
-                                            </div>
-                                            <div class="col-6 col-md-6">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Correo</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.correo" matInput type="email" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-md-3">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Telefono</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.telefono" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            
-
-                                        </div>
-                                        <div class="row">
-                                         
-                                            <div class="col-6 col-md-6">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Dirección</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.direccion" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-md-6">
-                                                <div class="form-group">
-                                                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
-                                                        <mat-label style="font-size: 16px;">Cargo</mat-label>
-                                                        <input  [(ngModel)]="this.datosPersonales.Cargo" matInput type="text" id="" />
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                           
-                                          
-
-                                           
-                                        </div>
-                                        <div class="flex-shrink-0 mt-2">
-                                            <div class="d-flex gap-2 justify-content-end arrow-sm">
-                                                <button (click)="this._editDatosPersonales = !this._editDatosPersonales" mat-raised-button color="accent">CANCELAR</button>
-                                                <button mat-raised-button color="primary">GUARDAR</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <div class="hori-timeline">
-                                        <!-- Swiper -->
-                                        <div class="swiper-container slider swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
-                                            <div class="d-flex align-items-start">
-                                                <div class="flex-grow-1">
-                                                    <!-- <h5 class="card-title mb-4">Experience</h5> -->
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <div class="swiper-arrow d-flex gap-2 justify-content-end arrow-sm">
-                                                        <div class="swiper-button-prev position-relative rounded-start swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-110f25f58a808493c" aria-disabled="true"></div>
-                                                        <div class="swiper-button-next position-relative rounded-end" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-110f25f58a808493c" aria-disabled="false"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-wrapper" id="swiper-wrapper-110f25f58a808493c" aria-live="polite">
-                                                <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 308px;">
-                                                    <div class="event-list pb-2">
-                                                        <!-- <p class="font-size-13 text-primary">2018 - 20</p>
-
-                                                        <h5 class="font-size-14 mb-1">Full Stack Developer</h5>
-                                                        <p class="text-muted mb-0">ABC Company</p> -->
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4" style="width: 308px;">
-                                                    <div class="event-list pb-2">
-                                                        <!-- <p class="font-size-13 text-primary">2017 - 18</p>
-
-                                                        <h5 class="font-size-14 mb-1">Backend Developer</h5>
-                                                        <p class="text-muted mb-0">XYZ Company</p> -->
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide" role="group" aria-label="3 / 4" style="width: 308px;">
-                                                    <div class="event-list pb-2">
-                                                        <!-- <p class="font-size-13 text-primary">2015 - 17</p>
-
-                                                        <h5 class="font-size-14 mb-1">Frontend Developer</h5>
-                                                        <p class="text-muted mb-0">ABC Company</p> -->
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide" role="group" aria-label="4 / 4" style="width: 308px;">
-                                                    <div class="event-list pb-2">
-                                                        <!-- <p class="font-size-13 text-primary">2018 - 20</p>
-
-                                                        <h5 class="font-size-14 mb-1">UI/UX Designer</h5>
-                                                        <p class="text-muted mb-0">XYZ Company</p> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                                    </div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title mb-3">Blog</h5> -->
-
-                                    <div data-simplebar="init" style="max-height: 242px;"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: -20px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden scroll; padding-right: 20px; padding-bottom: 0px;"><div class="simplebar-content" style="padding: 0px;">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item py-3 px-0">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <!-- <div>
-                                                            <img src="assets/images/small/img-4.jpg" alt="blog img" class="avatar-lg h-auto rounded">
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <h5 class="font-size-14 mb-1 text-truncate"><a href="#" class="text-dark">Beautiful Day with Friends</a></h5>
-                                                        <ul class="list-inline font-size-13 text-muted">
-                                                            <li class="list-inline-item">
-                                                                <!-- <a href="#" class="text-muted">
-                                                                    <i class="uil uil-user me-1"></i> Katie
-                                                                </a> -->
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <!-- <i class="uil uil-calender me-1"></i> 12 May -->
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <!-- <div class="dropdown">
-                                                            <a class="btn btn-link text-dark font-size-16 p-1 dropdown-toggle shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="uil uil-ellipsis-h"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                            </ul>
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item py-3 px-0">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div>
-                                                            <!-- <img src="assets/images/small/img-3.jpg" alt="blog img" class="avatar-lg h-auto rounded"> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <!-- <h5 class="font-size-14 mb-1 text-truncate"><a href="#" class="text-dark">Morning skating with friends</a></h5> -->
-                                                        <ul class="list-inline font-size-13 text-muted">
-                                                            <li class="list-inline-item">
-                                                                <!-- <a href="#" class="text-muted">
-                                                                    <i class="uil uil-user me-1"></i> Katie
-                                                                </a> -->
-                                                            </li>
-                                                            <!-- <li class="list-inline-item">
-                                                                <i class="uil uil-calender me-1"></i> 24 Apr
-                                                            </li> -->
-                                                        </ul>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <!-- <div class="dropdown">
-                                                            <a class="btn btn-link text-dark font-size-16 p-1 dropdown-toggle shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="uil uil-ellipsis-h"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                            </ul>
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- <li class="list-group-item py-3 px-0">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div>
-                                                            <img src="assets/images/small/img-2.jpg" alt="blog img" class="avatar-lg h-auto rounded">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <h5 class="font-size-14 mb-1 text-truncate"><a href="#" class="text-dark">Project Discussion with Team</a></h5>
-                                                        <ul class="list-inline font-size-13 text-muted">
-                                                            <li class="list-inline-item">
-                                                                <a href="#" class="text-muted">
-                                                                    <i class="uil uil-user me-1"></i> Katie
-                                                                </a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <i class="uil uil-calender me-1"></i> 12 Apr
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-link text-dark font-size-16 p-1 dropdown-toggle shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="uil uil-ellipsis-h"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item py-3 px-0">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div>
-                                                            <img src="assets/images/small/img-9.jpg" alt="blog img" class="avatar-lg h-auto rounded">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <h5 class="font-size-14 mb-1 text-truncate"><a href="#" class="text-dark">Reading book</a></h5>
-                                                        <ul class="list-inline font-size-13 text-muted">
-                                                            <li class="list-inline-item">
-                                                                <a href="#" class="text-muted">
-                                                                    <i class="uil uil-user me-1"></i> Katie
-                                                                </a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <i class="uil uil-calender me-1"></i> 01 Apr
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-link text-dark font-size-16 p-1 dropdown-toggle shadow-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="uil uil-ellipsis-h"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li> -->
-                                        </ul>
-                                    </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 344px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 180px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title mb-4">Skills</h5>
-
-                                    <div class="d-flex flex-wrap gap-2 font-size-16">
-                                        <a href="#" class="badge badge-soft-primary">Photoshop</a>
-                                        <a href="#" class="badge badge-soft-primary">illustrator</a>
-                                        <a href="#" class="badge badge-soft-primary">HTML</a>
-                                        <a href="#" class="badge badge-soft-primary">CSS</a>
-                                        <a href="#" class="badge badge-soft-primary">Javascript</a>
-                                        <a href="#" class="badge badge-soft-primary">Php</a>
-                                        <a href="#" class="badge badge-soft-primary">Python</a>
-                                    </div> -->
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title mb-3">Portfolio</h5> -->
-
-                                    <div>
-                                        <ul class="list-unstyled mb-0">
-                                            <!-- <li>
-                                                <a href="#" class="py-2 d-block text-muted"><i class="uil uil-globe font-size-16 text-primary me-1"></i> Website</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="py-2 d-block text-muted"><i class="uil uil-newspaper font-size-16 text-primary me-1"></i> Blog</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="py-2 d-block text-muted"><i class="uil uil-notebooks font-size-16 text-primary me-1"></i> Projects</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="py-2 d-block text-muted"><i class="uil uil-images font-size-16 text-primary me-1"></i> Posts</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="py-2 d-block text-muted"><i class="uil uil-newspaper font-size-16 text-primary me-1"></i> Portfolio</a>
-                                            </li> -->
-                                            
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-
-                            <div class="card">
-                                <div class="card-header border-bottom-0">
-                                    <!-- <h5 class="card-title">Similar Profiles</h5> -->
-                                </div>
-                                <div>
-
-                                    <div class="list-group list-group-flush mb-2">
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="assets/images/users/avatar-2.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Esther James</h5>
-                                                        <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="assets/images/users/avatar-3.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Jacqueline Steve</h5>
-                                                        <p class="font-size-13 text-muted mb-0">UI/UX Designer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="assets/images/users/avatar-4.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">George Whalen</h5>
-                                                        <p class="font-size-13 text-muted mb-0">Backend Developer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="assets/images/users/avatar-5.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <div>
-                                                        <h5 class="font-size-14 mb-1">Frontend Developer</h5>
-                                                        <p class="font-size-13 text-muted mb-0">Frontend Developer</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-                        </div>
-                    </div><!-- end row -->
+            <div class="d-flex border-top p-2">
+              <div class="flex-grow-1">
+                <div class="p-2 ps-3">
+                  {{ this.datosContrato.salarioBase / 30 | currency }} / Valor
+                  del dia
                 </div>
-            </div><!-- end col -->
-        </div><!-- end row -->
-        
-    </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card -->
+
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <p-divider
+                  [text]="'Forma de pago'"
+                  [align]="'center'"
+                ></p-divider>
+              </div>
+
+              <div class="col">
+                <mat-form-field
+                  appearance="outline"
+                  style="width: 100%; height: auto"
+                >
+                  <mat-label style="font-size: 16px">Banco</mat-label>
+
+                  <mat-select
+                    [(ngModel)]="this.datosPersonales.banco"
+                    style="text-align: center"
+                    [disabled]="!_editDatosPago"
+                  >
+                    <mat-option value="Banco Davivienda"
+                      >Banco Davivienda</mat-option
+                    >
+                    <mat-option value="Banco Bogotá">Banco Bogotá</mat-option>
+                    <mat-option value="Banco Occidente"
+                      >Banco Occidente</mat-option
+                    >
+                    <mat-option value="Bancolombia">Bancolombia</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field
+                  appearance="outline"
+                  style="width: 100%; height: auto"
+                >
+                  <mat-label style="font-size: 16px">Forma de pago</mat-label>
+                  <mat-select
+                    [(ngModel)]="this.datosPersonales.formaDepago.valor"
+                    style="text-align: center"
+                    [disabled]="!_editDatosPago"
+                  >
+                    <mat-option value="1">Instrumento no definido</mat-option>
+                    <mat-option value="10">Efectivo</mat-option>
+                    <mat-option value="42">Consignación bancaria</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field
+                  appearance="outline"
+                  style="width: 100%; height: auto"
+                >
+                  <mat-label style="font-size: 16px">N° Cuenta</mat-label>
+                  <input
+                    [disabled]="!_editDatosPago"
+                    [(ngModel)]="this.datosPersonales.noCuenta"
+                    placeholder="this.datosDePago.noCuenta"
+                    matInput
+                    type="text"
+                    id=""
+                  />
+                </mat-form-field>
+              </div>
+
+              <div *ngIf="!_editDatosPago" class="flex-shrink-0 mt-3">
+                <div class="d-flex gap-2 justify-content-end arrow-sm">
+                  <button
+                    (click)="this._editDatosPago = !this._editDatosPago"
+                    mat-mini-fab
+                    color="primary"
+                    aria-label="Example icon button with a plus one icon"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="_editDatosPago" class="flex-shrink-0 mt-4">
+                <div class="d-flex gap-2 justify-content-end arrow-sm">
+                  <button
+                    (click)="this._editDatosPago = !this._editDatosPago"
+                    mat-raised-button
+                    color="accent"
+                  >
+                    CANCELAR
+                  </button>
+                  <button
+                    (click)="actualizarDatosPersonales()"
+                    mat-raised-button
+                    color="primary"
+                  >
+                    GUARDAR
+                  </button>
+                </div>
+              </div>
+
+              <!-- <div class="col">
+                    <mat-form-field appearance="outline" style="width:100%; height: auto;">
+                      <mat-label style="font-size: 16px;">Tipo de trabajador</mat-label>
+                      <mat-select  [(ngModel)]="this.datosContrato.tipoTrabajador.valor style="text-align: center;">
+                        <mat-option value="1"> Dependiente </mat-option>
+                        <mat-option value="2"> Servicio domestico </mat-option>
+                        <mat-option value="3"> Independiente </mat-option>
+                        <mat-option value="4"> Madre comunitaria </mat-option>
+                        <mat-option value="12"> Aprendices del Sena en etapa lectiva </mat-option>
+                        <mat-option value="16"> Independiente agremiado o asociado </mat-option>
+                        <mat-option value="19"> Aprendices del SENA en etapa productiva </mat-option>
+                        <mat-option value="20"> Estudiantes (régimen especial ley 789 de 2002) </mat-option>
+                        <mat-option value="21"> Estudiantes de postgrado en salud </mat-option>
+                        <mat-option value="23"> Estudiantes aportes solo riesgos laborales </mat-option>
+                        <mat-option value="59"> Independiente con contrato de prestación de servicios superior a 1 mes </mat-option>
+                      </mat-select>
+                    
+                    </mat-form-field>
+                  </div> -->
+            </div>
+
+            <!-- end card body -->
+          </div>
+          <!-- end card -->
+
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+
+        <!-- PRIMERA PARTE DEBAJO DE LA FOTO PRINCIPAL -->
+
+        <div class="col-xl-9">
+          <div class="mt-4">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <p-divider
+                        [text]="'DATOS PERSONALES'"
+                        [align]="'center'"
+                      ></p-divider>
+                    </div>
+
+                    <div
+                      *ngIf="!_editDatosPersonales"
+                      class="list-group list-group-flush mb-2"
+                    >
+                      <a class="list-group-item">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Nombres</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.primerNombre }}
+                                {{ this.datosPersonales.segundoNombre }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Apellidos</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.primerApellido }}
+                                {{ this.datosPersonales.segundoApellido }}
+                                &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">
+                                {{ this.datosPersonales.tipoDocumento.nombre }}
+                              </h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.documento }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+
+                        </div>
+                      </a>
+                      <a class="list-group-item">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Nacimiento</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{
+                                  this.datosPersonales.fechaNacimiento | date
+                                }}
+                                &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Correo</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.correo }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Teléfono</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.telefono }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Dirección</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.direccion }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Cargo</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.Cargo }} &nbsp;
+                              </p>
+                            </div>
+                          </div>
+
+                          <div class="flex-grow-1">
+                            <div>
+                              <h5 class="font-size-14 mb-1">Proveedor</h5>
+                              <p
+                                class="custom-underline font-size-14 text-muted mb-0"
+                              >
+                                {{ this.datosPersonales.tercero.nombreComercial }}
+                                &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <div class="flex-shrink-0 mt-2">
+                        <div class="d-flex gap-2 justify-content-end arrow-sm">
+                          <button
+                            (click)="
+                              this._editDatosPersonales =
+                                !this._editDatosPersonales
+                            "
+                            mat-mini-fab
+                            color="primary"
+                            aria-label="Example icon button with a plus one icon"
+                          >
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      *ngIf="_editDatosPersonales"
+                      class="list-group list-group-flush mb-2"
+                    >
+                      <div class="row">
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Primer nombre</mat-label
+                              >
+                              <input
+                                required
+                                [(ngModel)]="this.datosPersonales.primerNombre"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Segundo nombre</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.segundoNombre"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Primer apellido</mat-label
+                              >
+                              <input
+                                [(ngModel)]="
+                                  this.datosPersonales.primerApellido
+                                "
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Segundo apellido</mat-label
+                              >
+                              <input
+                                [(ngModel)]="
+                                  this.datosPersonales.segundoApellido
+                                "
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Tipo de documento</mat-label
+                              >
+                              <mat-select
+                                [(ngModel)]="
+                                  this.datosPersonales.tipoDocumento.valor
+                                "
+                                style="text-align: center"
+                              >
+                                <mat-option value="1"
+                                  >Cédula de ciudadanía</mat-option
+                                >
+                                <mat-option value="2"
+                                  >Cédula de extranjería</mat-option
+                                >
+                                <mat-option value="3"
+                                  >Tarjeta de identidad</mat-option
+                                >
+                                <mat-option value="4">Pasaporte</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >No Documento</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.documento"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 18px"
+                                >Proveedor</mat-label
+                              >
+                              <mat-select
+                                placeholder="Seleccionar cliente"
+                                [(ngModel)]="
+                                  datosPersonales.tercero.id
+                                "
+                              >
+                                <mat-option>
+                                  <ngx-mat-select-search
+                                    [formControl]="filtroTerceroControl"
+                                    #filtroTercero
+                                    placeholderLabel="Buscar proveedor"
+                                    noEntriesFoundLabel="No hay resultados"
+                                  >
+                                    <mat-icon
+                                      style="color: red"
+                                      ngxMatSelectSearchClear
+                                      >delete_forever</mat-icon
+                                    >
+                                  </ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option
+                                  *ngFor="let item of filtroProveedor | async"
+                                  [value]="item.id"
+                                >
+                                  {{ item.nombreComercial }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Nacimiento</mat-label
+                              >
+                              <input
+                                [(ngModel)]="
+                                  this.datosPersonales.fechaNacimiento
+                                "
+                                matInput
+                                [matDatepicker]="picker"
+                              />
+                              <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                              <a
+                                matSuffix
+                                mat-icon-button
+                                aria-label="Clear"
+                                (click)="picker.open()"
+                              >
+                                <mat-icon color="primary"
+                                  >calendar_month</mat-icon
+                                >
+                              </a>
+
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Correo</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.correo"
+                                matInput
+                                type="email"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Telefono</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.telefono"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Dirección</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.direccion"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="outline"
+                              style="width: 100%; height: auto"
+                            >
+                              <mat-label style="font-size: 16px"
+                                >Cargo</mat-label
+                              >
+                              <input
+                                [(ngModel)]="this.datosPersonales.Cargo"
+                                matInput
+                                type="text"
+                                id=""
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex-shrink-0 mt-2">
+                        <div class="d-flex gap-2 justify-content-end arrow-sm">
+                          <button
+                            (click)="
+                              this._editDatosPersonales =
+                                !this._editDatosPersonales
+                            "
+                            mat-raised-button
+                            color="accent"
+                          >
+                            CANCELAR
+                          </button>
+                          <button
+                            (click)="actualizarDatosPersonales()"
+                            mat-raised-button
+                            color="primary"
+                          >
+                            GUARDAR
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end card body -->
+                </div>
+                <!-- end card -->
+
+                <!-- TARGETA EDITAR CONTRATO -->
+
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <p-divider
+                        [text]="'DATOS DEL CONTRATO'"
+                        [align]="'center'"
+                      ></p-divider>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <mat-form-field
+                            appearance="fill"
+                            floatLabel="always"
+                            style="
+                              width: 100%;
+                              height: auto;
+                              margin: 0px 0px 10px 0px;
+                            "
+                          >
+                            <mat-label style="font-size: 16px"
+                              >Salario(Mensual)</mat-label
+                            >
+                            <input
+                              [(ngModel)]="this.datosContrato.salarioBase"
+                              matInput
+                              type="number"
+                              class="example-right-align"
+                              #salarioBase
+                              [disabled]="!_editDatosContrato"
+                            />
+                            <span matPrefix>$&nbsp;</span>
+                            <span matSuffix>.00</span>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <mat-form-field
+                            appearance="outline"
+                            style="
+                              width: 100%;
+                              height: auto;
+                              margin: 0px 0px 10px 0px;
+                            "
+                          >
+                            <mat-label style="font-size: 16px">EPS</mat-label>
+
+                            <mat-select
+                              [(ngModel)]="this.datosContrato.eps.id"
+                              style="text-align: center"
+                              [disabled]="!_editDatosContrato"
+                            >
+                              <mat-option
+                                *ngFor="let item of listadoEps"
+                                [value]="item.id"
+                                >{{ item.tercero }}</mat-option
+                              >
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="
+                            width: 100%;
+                            height: auto;
+                            margin: 0px 0px 10px 0px;
+                          "
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Fondo de pensión</mat-label
+                          >
+
+                          <mat-select
+                            [(ngModel)]="this.datosContrato.fondoPension.id"
+                            style="text-align: center"
+                            [disabled]="!_editDatosContrato"
+                          >
+                            <mat-option
+                              *ngFor="let item of listadoPension"
+                              [value]="item.id"
+                              >{{ item.tercero }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label
+                            style="font-size: 16px; margin: 0px 0px 10px 0px"
+                            >Fonde de cesantias</mat-label
+                          >
+
+                          <mat-select
+                            [(ngModel)]="this.datosContrato.fondoCesantias.id"
+                            style="text-align: center"
+                            [disabled]="!_editDatosContrato"
+                          >
+                            <mat-option
+                              *ngFor="let item of listadoCesantias"
+                              [value]="item.id"
+                              >{{ item.tercero }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Caja de compensación</mat-label
+                          >
+
+                          <mat-select
+                            [(ngModel)]="this.datosContrato.cajaCompensacion.id"
+                            style="text-align: center"
+                            [disabled]="!_editDatosContrato"
+                          >
+                            <mat-option
+                              *ngFor="let item of listadoCajaCompensacion"
+                              [value]="item.id"
+                              >{{ item.tercero }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px">ARL</mat-label>
+
+                          <mat-select
+                            [(ngModel)]="this.datosContrato.arl.id"
+                            style="text-align: center"
+                            [disabled]="!_editDatosContrato"
+                          >
+                            <mat-option
+                              *ngFor="let item of listadoArl"
+                              [value]="item.id"
+                              >{{ item.tercero }}</mat-option
+                            >
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px">Riesgo</mat-label>
+                          <mat-select
+                            [disabled]="!_editDatosContrato"
+                            [(ngModel)]="this.datosContrato.riesgo.valor"
+                            style="text-align: center"
+                          >
+                            <mat-option [value]="0.522">
+                              Minimo - Riesgo 1
+                            </mat-option>
+                            <mat-option [value]="1.044">
+                              Bajo - Riesgo 2
+                            </mat-option>
+                            <mat-option [value]="2.436">
+                              Medio - Riesgo 3
+                            </mat-option>
+                            <mat-option [value]="4.35">
+                              Alto - Riesgo 4
+                            </mat-option>
+                            <mat-option [value]="6.96">
+                              Máximo - Riesgo 5
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Tipo de contrato</mat-label
+                          >
+                          <mat-select
+                            [disabled]="!_editDatosContrato"
+                            [(ngModel)]="this.datosContrato.tipoContrato.valor"
+                            style="text-align: center"
+                          >
+                            <mat-option value="1"> Termino fijo </mat-option>
+                            <mat-option value="2">
+                              Termino indefinido
+                            </mat-option>
+                            <mat-option value="3"> Obra o labor </mat-option>
+                            <mat-option value="4"> Aprendizaje </mat-option>
+                            <mat-option value="5"> Practicas </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >Tipo de trabajador</mat-label
+                          >
+                          <mat-select
+                            [disabled]="!_editDatosContrato"
+                            [(ngModel)]="
+                              this.datosContrato.tipoTrabajador.valor
+                            "
+                            style="text-align: center"
+                          >
+                            <mat-option value="1"> Dependiente </mat-option>
+                            <mat-option value="2">
+                              Servicio domestico
+                            </mat-option>
+                            <mat-option value="3"> Independiente </mat-option>
+                            <mat-option value="4">
+                              Madre comunitaria
+                            </mat-option>
+                            <mat-option value="12">
+                              Aprendices del Sena en etapa lectiva
+                            </mat-option>
+                            <mat-option value="16">
+                              Independiente agremiado o asociado
+                            </mat-option>
+                            <mat-option value="19">
+                              Aprendices del SENA en etapa productiva
+                            </mat-option>
+                            <mat-option value="20">
+                              Estudiantes (régimen especial ley 789 de 2002)
+                            </mat-option>
+                            <mat-option value="21">
+                              Estudiantes de postgrado en salud
+                            </mat-option>
+                            <mat-option value="23">
+                              Estudiantes aportes solo riesgos laborales
+                            </mat-option>
+                            <mat-option value="59">
+                              Independiente con contrato de prestación de
+                              servicios superior a 1 mes
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 100%; height: auto"
+                        >
+                          <mat-label style="font-size: 16px"
+                            >N° Contrato</mat-label
+                          >
+                          <input
+                            [disabled]="!_editDatosContrato"
+                            [(ngModel)]="this.datosContrato.noContrato"
+                            placeholder="this.datosContrato.noContrato"
+                            matInput
+                            type="text"
+                            id=""
+                          />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="fill" style="width: 100%">
+                          <mat-label>Fecha Inicial (contrato)</mat-label>
+                          <input
+                            [disabled]="!_editDatosContrato"
+                            matInput
+                            [(ngModel)]="this.datosContrato.fechaInicioContrato"
+                            [matDatepicker]="f_i"
+                          />
+                          <mat-hint>MM/DD/YYYY</mat-hint>
+                          <a
+                            matSuffix
+                            mat-icon-button
+                            aria-label="Clear"
+                            (click)="f_i.open()"
+                          >
+                            <mat-icon color="primary">calendar_month</mat-icon>
+                          </a>
+
+                          <mat-datepicker #f_i></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+                      <div
+                        class="col-md-4"
+                        *ngIf="this.datosContrato.tipoContrato.valor !== '2'"
+                      >
+                        <mat-form-field appearance="fill" style="width: 100%">
+                          <mat-label>Fecha final (contrato)</mat-label>
+                          <input
+                            [disabled]="!_editDatosContrato"
+                            matInput
+                            [(ngModel)]="this.datosContrato.fechaFinalContrato"
+                            [matDatepicker]="f_f"
+                          />
+                          <mat-hint>MM/DD/YYYY</mat-hint>
+                          <a
+                            matSuffix
+                            mat-icon-button
+                            aria-label="Clear"
+                            (click)="f_f.open()"
+                          >
+                            <mat-icon color="primary">calendar_month</mat-icon>
+                          </a>
+
+                          <mat-datepicker #f_f></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div *ngIf="!_editDatosContrato" class="flex-shrink-0 mt-3">
+                      <div class="d-flex gap-2 justify-content-end arrow-sm">
+                        <button
+                          (click)="
+                            this._editDatosContrato = !this._editDatosContrato
+                          "
+                          mat-mini-fab
+                          color="primary"
+                          aria-label="Example icon button with a plus one icon"
+                        >
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div *ngIf="_editDatosContrato" class="flex-shrink-0 mt-4">
+                      <div class="d-flex gap-2 justify-content-end arrow-sm">
+                        <button
+                          (click)="
+                            this._editDatosContrato = !this._editDatosContrato
+                          "
+                          mat-raised-button
+                          color="accent"
+                        >
+                          CANCELAR
+                        </button>
+                        <button
+                          (click)="actualizarDatosContrato()"
+                          mat-raised-button
+                          color="primary"
+                        >
+                          GUARDAR
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end card body -->
+                </div>
+                <!-- end card -->
+
+              
+                <!-- end card -->
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+
+                    <div class="row">
+                      <p-divider
+                        [text]="'INGRESOS'"
+                        
+                        [align]="'center'"
+                      ></p-divider>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button mat-icon-button (click)="openModalIngresos(IngresosDeducciones)"  matTooltip="Pulsa aca para añadir un nuevo ingreso!" color="primary" class="float-end">
+                          <mat-icon style="color: #43b6ff;">add</mat-icon>
+                        </button>
+
+                        <table class="mt-2 table table-responsive table-nowrap">
+                          <thead>
+                            <tr>
+                              <th>TIPO</th>
+                              <th>CONCEPTO</th>
+                              <th>VALOR</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngFor="let item of this.datosContrato.ingresosRecurrentes">
+                            <tr>
+                              <td class="text-nowrap">{{item.tipo}}</td>
+                              <td class="text-nowrap">{{item.concepto.nombre}}</td>
+                              <td class="text-nowrap">{{item.valorMensual}}</td>
+                            </tr>
+                          </tbody>
+  
+                        </table>
+                      </div>
+                      
+                     
+                      
+                    </div>
+
+                    <!-- <div class="col">
+                      <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px"
+                          >DEDUCCIONES RECURRENTES</mat-label
+                        >
+
+                        <mat-select
+                          
+                          multiple
+                          [(ngModel)]="selectedDeducciones"
+                          (selectionChange)="updateDeducciones($event)"
+                          style="text-align: center"
+                        >
+                          <mat-option
+                            *ngFor="let item of listadoDeduccionesRecurrentes"
+                            [value]="item.id"
+                            >{{ item.concepto }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col">
+                      <!-- <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px"
+                          >INGRESOS RECURRENTES</mat-label
+                        >
+
+                        <mat-select
+                          
+                          multiple
+                          [(ngModel)]="selectedIngresos"
+                          (selectionChange)="updateIngresos($event)"
+                          style="text-align: center"
+                        >
+                          <mat-option
+                            *ngFor="let item of listadoIngresosRecurrentes"
+                            [value]="item.id"
+                            >{{ item.concepto }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field> 
+                    </div> -->
+                  </div>
+                </div>
+
+                <div style="margin-top: 15px;" class="card">
+                  <div class="card-body">
+
+                    <div class="row">
+                      <p-divider
+                        [text]="'DEDUCCIONES'"
+                        
+                        [align]="'center'"
+                      ></p-divider>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button mat-icon-button (click)="openModalDeducciones(IngresosDeducciones)"  matTooltip="Pulsa aca para añadir una nueva deduccion!" color="primary" class="float-end">
+                          <mat-icon style="color: #43b6ff;">add</mat-icon>
+                        </button>
+
+                        <table class="mt-2 table table-responsive table-nowrap">
+                          <thead >
+                            <tr>
+                              <th>TIPO</th>
+                              <th>CONCEPTO</th>
+                              <th>VALOR</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngFor="let item of this.datosContrato.deduccionesRecurrentes">
+                            <tr >
+                              <td class="text-nowrap">{{item.tipo}}</td>
+                              <td class="text-nowrap">{{item.concepto.nombre}}</td>
+                              <td class="text-nowrap">{{item.valorMensual}}</td>
+                            </tr>
+                          </tbody>
+  
+                        </table>
+                      </div>
+                      
+                     
+                      
+                    </div>
+
+                    <!-- <div class="col">
+                      <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px"
+                          >DEDUCCIONES RECURRENTES</mat-label
+                        >
+
+                        <mat-select
+                          
+                          multiple
+                          [(ngModel)]="selectedDeducciones"
+                          (selectionChange)="updateDeducciones($event)"
+                          style="text-align: center"
+                        >
+                          <mat-option
+                            *ngFor="let item of listadoDeduccionesRecurrentes"
+                            [value]="item.id"
+                            >{{ item.concepto }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col">
+                      <!-- <mat-form-field
+                        appearance="outline"
+                        style="width: 100%; height: auto"
+                      >
+                        <mat-label style="font-size: 16px"
+                          >INGRESOS RECURRENTES</mat-label
+                        >
+
+                        <mat-select
+                          
+                          multiple
+                          [(ngModel)]="selectedIngresos"
+                          (selectionChange)="updateIngresos($event)"
+                          style="text-align: center"
+                        >
+                          <mat-option
+                            *ngFor="let item of listadoIngresosRecurrentes"
+                            [value]="item.id"
+                            >{{ item.concepto }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field> 
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              
+
+              <!-- end row -->
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
     </div>
     <!-- End Page-content -->
 
     <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    {{ 'currentYear' | currentYear }}&copy; SarpSoft.
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end d-none d-sm-block">
-                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://sumiprodelacosta.com/" target="_blank" class="text-reset"> Dpto.sistemas</a>
-                    </div>
-                </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            {{ "currentYear" | currentYear }}&copy; SarpSoft.
+          </div>
+          <div class="col-sm-6">
+            <div class="text-sm-end d-none d-sm-block">
+              Crafted with <i class="mdi mdi-heart text-danger"></i> by
+              <a
+                href="https://sumiprodelacosta.com/"
+                target="_blank"
+                class="text-reset"
+              >
+                Dpto.sistemas</a
+              >
             </div>
+          </div>
         </div>
+      </div>
     </footer>
+  </div>
 </div>
+
+<ng-template #IngresosDeducciones let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="modalMarca">Agregar Concepto Tipo ({{ TIPO }})</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalIngresosyDeducciones()" aria-label="Close"></button>
+  </div>
+  
+  <div class="modal-body">
+     <app-modal-ingreso-deduccion [tipo]="TIPO" (resultadoForm)="guardarIngresoDeduccion($event)" ></app-modal-ingreso-deduccion>
+    
+    
+  </div>
+ 
+</ng-template>

@@ -287,21 +287,21 @@ export class ListaCotizacionesComponent implements OnInit {
                   let botonEditar = "";
                   let botonEnviarElectronica = "";
 
-                  if(row.isElectronica){
-                    botonEnviarElectronica = `<a class="dropdown-item" href="javascript:;" id="dian"><i  class="fas fa-signature" style="margin-right: 5px; color:green;"></i>  Firmar</a>`
-                  }else{
-                    botonEnviarElectronica = "";
-                  }
+                  // if(row.isElectronica){
+                  //   botonEnviarElectronica = `<a class="dropdown-item" href="javascript:;" id="dian"><i  class="fas fa-signature" style="margin-right: 5px; color:green;"></i>  Firmar</a>`
+                  // }else{
+                  //   botonEnviarElectronica = "";
+                  // }
 
 
-                  if(row.despachado == false){
-                    botonIngresar =  `<a id="despachado" href="javascript:;" class="dropdown-item"><i  class="mdi mdi-check-circle font-size-16 text-warning me-1">Despachar</i></a> `
-                    if(row.enviadaDian != true){
-                      botonEditar = `<a class="dropdown-item" href="javascript:;" id="editar"><i class="squire ico-editar-blue" style="margin-right: 5px; color:#41B6FF;"></i>  Editar</a>`
-                    }
-                  }else{
-                    botonIngresar =  `<a id="despachado" href="javascript:;" class="dropdown-item"><i  class="mdi mdi-check-circle font-size-16 text-success me-1">Despachar</i></a> `
-                  }
+                  // if(row.despachado == false){
+                  //   botonIngresar =  `<a id="despachado" href="javascript:;" class="dropdown-item"><i  class="mdi mdi-check-circle font-size-16 text-warning me-1">Despachar</i></a> `
+                  //   if(row.enviadaDian != true){
+                       botonEditar = `<a class="dropdown-item" href="javascript:;" id="editar"><i class="squire ico-editar-blue" style="margin-right: 5px; color:#41B6FF;"></i>  Editar</a>`
+                  //   }
+                  // }else{
+                  //   botonIngresar =  `<a id="despachado" href="javascript:;" class="dropdown-item"><i  class="mdi mdi-check-circle font-size-16 text-success me-1">Despachar</i></a> `
+                  // }
 
 
                   let acciones = `
@@ -315,10 +315,10 @@ export class ListaCotizacionesComponent implements OnInit {
                           <a class="dropdown-item"  href="javascript:;" id="imprimir"><i class="squire ico-pdf" style="margin-right: 5px;color:red;"></i>  Imprimir</a>`
                           +botonEditar+
                           
-                          `<a class="dropdown-item" href="javascript:;" id="correo"><i class="squire ico-outlook" style="margin-right: 5px;"></i>  Enviar correo</a>`
-                          +botonEnviarElectronica+
-                          `<a class="dropdown-item" href="javascript:;" id="ver"><i class="fas fa-eye" style="margin-right: 5px;"></i>  Ver factura</a>`
-                          +botonIngresar+
+                          // `<a class="dropdown-item" href="javascript:;" id="correo"><i class="squire ico-outlook" style="margin-right: 5px;"></i>  Enviar correo</a>`
+                          // +botonEnviarElectronica+
+                          // `<a class="dropdown-item" href="javascript:;" id="ver"><i class="fas fa-eye" style="margin-right: 5px;"></i>  Ver factura</a>`
+                          // +botonIngresar+
                           
                           `
                           
@@ -357,13 +357,12 @@ export class ListaCotizacionesComponent implements OnInit {
           
         });
 
-          /* BOTON EDITAR  */
-        // $('#editar', row).off('click');
-        // $('#editar', row).on('click', () => {
-        //   // this.router.navigateByUrl('terceros/'+data.id) 
-        //   this.router.navigateByUrl("facturacion/editar/"+data.id);
-          
-        // });
+          //BOTON EDITAR  
+         $('#editar', row).off('click');
+         $('#editar', row).on('click', () => {
+            // this.router.navigateByUrl('terceros/'+data.id) 
+            this.router.navigateByUrl("facturacion/editarCotizacion/"+data.id);
+         });
 
 
           /* BOTON Ingresar  */

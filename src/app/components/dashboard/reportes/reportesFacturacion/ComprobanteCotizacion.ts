@@ -11,64 +11,81 @@ export class ComprobanteCotizacion{
     constructor(){}
 
     public ReporteComprobanteCotizacion(data:any){
+        console.log(data)
         let doc = new jsPDF('p', 'pt', 'letter');
 
         let detalle = []
-        for (let x = 0; x < 15; x++) {
+        let productos = data.productos
+        for (let x = 0; x < productos.length; x++) {
           let p = [
             {
-              content: "AGE05",
+              content: productos[x].producto?.codigoDeBarra,
               styles: {
-                cellWidth: 50
+                
               }
             },
             {
-              content: "Aguja Spinocan 25G 6X3 1/2 Inv: 2010Dm4778-R3 Unidad (Bbraun)",
+              content: productos[x].producto?.nombreymarcaunico,
               styles: {
-                ceelWidth: 95
+                
               }
             },
             {
-              content: "Unidad",
-              styles: {
-              }
-            },
-            {
-              content: 25,
-              styles: {
-                cellWidth: 40
-              }
-            },
-            {
-              content: this.cp.transform(0),
+              content: productos[x].producto?.unidad,
               styles: {
               }
             },
             {
-              content: this.cp.transform(0),
+              content: productos[x].cantidad,
               styles: {
+                
               }
             },
             {
-              content: this.cp.transform(0),
+              content: (productos[x].iva !== 0 ? '19.0%': '0.00'),
               styles: {
+                
+                
               }
             },
             {
-              content: this.cp.transform(14000),
+              content: this.cp.transform(productos[x].descuento),
               styles: {
+                
               }
             },
             {
-              content: this.cp.transform(350000),
+              content: this.cp.transform(productos[x].valor),
+              styles: {
+                
+              }
+            },
+            {
+              content: this.cp.transform(productos[x].subtotal),
+              
               styles: {
               }
-            }
+            },
+            // {
+            //   content: this.cp.transform(350000),
+            //   styles: {
+            //   }
+            // }
           ]
           detalle.push(p)
         }
         let totalPage = 1
         autoTable(doc, {
+          didParseCell: (data:any) => {
+            // Este callback se llama después de que se ha analizado cada celda
+        
+            // Verificar si la celda está en la última fila de la página actual
+            if (data.row.index === data.table.body.length - 1 && data.row.finalY > data.settings.margin.bottom) {
+              // Si es la última fila y no cabe en la página actual, forzar un salto de página
+              doc.addPage();
+              data.cursor.y = data.settings.margin.top; // Restablecer la posición vertical
+            }
+          },
           head: [
             [{
               content: "Código",
@@ -77,8 +94,9 @@ export class ComprobanteCotizacion{
               }
             },
             {
-              content: "Descripción del Producto",
+              content: "Producto",
               styles: {
+                cellWidth:200,
                 halign: 'left'
               }
             },
@@ -120,14 +138,18 @@ export class ComprobanteCotizacion{
             }]
           ],
           body: detalle,
-          horizontalPageBreak: true,
+          horizontalPageBreak: false,
           margin: {
             top: 240,
-            bottom: 65,
-            left: 15,
-            right: 15
+            bottom: 150,
+            left: 10,
+            right: 10
           },
           didDrawPage: ({ pageNumber, doc: jsPDF }) => {
+            // if (data.table.height > data.settings.margin.bottom) {
+            //   doc.addPage(); // Agregar una nueva página
+            //   data.cursor.y = 40; // Ajustar la posición vertical
+            // }
             totalPage++;
             doc.setFontSize(9)
     
@@ -151,7 +173,7 @@ export class ComprobanteCotizacion{
 
             doc.setFont(undefined, 'bold')
     
-            // Titulo
+            // dida
             doc.setFontSize(14)
             doc.setFont(undefined, 'bold')
             doc.text('COTIZACIÓN', 307, 125, { align: "center" })
@@ -166,7 +188,7 @@ export class ComprobanteCotizacion{
             doc.text("Cotización No.", 473, 45, "center")
             doc.text("Fecha", 549, 45, "center")
             doc.setFont(undefined, 'normal')
-            doc.text("0001", 473, 75, "center")
+            doc.text(String(data.consecutivo).padStart(4, '0'), 473, 75, "center")
             doc.text(moment(new Date()).format("DD/MM/YYYY"), 549, 75, "center")
             doc.line(510, 25, 510, 85)
     
@@ -181,21 +203,21 @@ export class ComprobanteCotizacion{
             doc.setFontSize(11)
             doc.text("Cliente:", 30, 165)
             doc.setFont(undefined, 'normal')
-            var texto2 = doc.splitTextToSize("COOPERATIVA DE HOSPITALES DE SANTANDER Y EL NORORIENTE COLOMBIANO", 320)
+            var texto2 = doc.splitTextToSize(data?.cliente?.nombreComercial, 320)
             doc.text(texto2, 75, 165)
             doc.setFont(undefined, 'bold')
             doc.text("Dirección:", 30, 200)
             doc.setFont(undefined, 'normal')
-            var texto = doc.splitTextToSize("CRA 5TA CALLE 30 BOMBA TEXACO CRA 5TA CALLE 30 BOMBA TEXACO", 320)
+            var texto = doc.splitTextToSize(data?.cliente?.direccion, 320)
             doc.text(texto, 85, 200)
             doc.setFont(undefined, 'bold')
             doc.text("NIT:", 400, 165)
             doc.setFont(undefined, 'normal')
-            doc.text("12620553-5-4", 435, 165)
+            doc.text(data.cliente?.documento, 435, 165)
             doc.setFont(undefined, 'bold')
             doc.text("Telefono:", 400, 200)
             doc.setFont(undefined, 'normal')
-            doc.text("3002573101", 455, 200)
+            doc.text(data.cliente?.telefonoContacto, 455, 200)
           },
           theme: 'grid',
           headStyles: {
@@ -242,7 +264,7 @@ export class ComprobanteCotizacion{
         doc.roundedRect(15, doc.lastAutoTable.finalY + 5, 380, 45, 3, 3)
         doc.setFontSize(9)
         doc.text("Observación:", 30, doc.lastAutoTable.finalY + 15)
-        var textolargo = doc.splitTextToSize("Ejemplo de observación Ejemplo de observación Ejemplo de observación Ejemplo de observación Ejemplo de observación", 350)
+        var textolargo = data.observacion ? doc.splitTextToSize(data.observacion, 350) : "";
         doc.text(textolargo, 30, doc.lastAutoTable.finalY + 25)
         doc.setFontSize(11)
         doc.text("Cotización valida por 24 horas o hasta agotar existencias!", 30, doc.lastAutoTable.finalY + 65)
@@ -256,11 +278,11 @@ export class ComprobanteCotizacion{
         doc.text("RETENCIÓN:", 415, doc.lastAutoTable.finalY + 68)
         doc.text("TOTAL:", 415, doc.lastAutoTable.finalY + 85)
         doc.setFont(undefined, 'bold')
-        doc.text(this.cp.transform(10000000), 585, doc.lastAutoTable.finalY + 17, "right")
-        doc.text(this.cp.transform(10000000), 585, doc.lastAutoTable.finalY + 34, "right")
-        doc.text(this.cp.transform(10000000), 585, doc.lastAutoTable.finalY + 51, "right")
-        doc.text(this.cp.transform(10000000), 585, doc.lastAutoTable.finalY + 68, "right")
-        doc.text(this.cp.transform(10000000), 585, doc.lastAutoTable.finalY + 85, "right")
+        doc.text(this.cp.transform(data.subtotal), 585, doc.lastAutoTable.finalY + 17, "right")
+        doc.text(this.cp.transform(data.valorIva), 585, doc.lastAutoTable.finalY + 34, "right")
+        doc.text(this.cp.transform(data.descuento), 585, doc.lastAutoTable.finalY + 51, "right")
+        doc.text(this.cp.transform(data.valorReteFuente), 585, doc.lastAutoTable.finalY + 68, "right")
+        doc.text(this.cp.transform(data.valor), 585, doc.lastAutoTable.finalY + 85, "right")
         doc.setFont(undefined, 'normal')
     
         return doc

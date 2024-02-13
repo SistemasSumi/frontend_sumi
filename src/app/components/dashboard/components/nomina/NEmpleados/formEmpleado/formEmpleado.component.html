@@ -268,6 +268,30 @@
         </div>
       </div>
       <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">DEDUCCIONES RECURRENTES</mat-label>
+          <mat-select multiple  formControlName="deduccionesRecurrentes" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoDeduccionesRecurrentes" [value]="item.id">{{item.concepto}}</mat-option>
+            
+          </mat-select>
+          <mat-hint>
+            <a href="javascript:;" (click)="openModalPrestacionesARL(prestaciones)">Agregar nueva deduccion <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width:100%; height: auto;">
+          <mat-label style="font-size: 16px;">INGRESOS RECURRENTES</mat-label>
+          <mat-select multiple  formControlName="ingresosRecurrentes" style="text-align: center;">
+            <mat-option *ngFor="let item of listadoIngresosRecurrentes" [value]="item.id">{{item.concepto}}</mat-option>
+            
+          </mat-select>
+          <mat-hint>
+            <a href="javascript:;" (click)="openModalIngresos(prestaciones)">Agregar nuevo ingreso <i class="fas fa-plus-circle"></i></a>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
         <mat-form-field appearance="fill" style="width: 100%;">
           <mat-label>Fecha Inicial (contrato)</mat-label>
           <input matInput formControlName="fechaInicioContrato" [matDatepicker]="f_i" >
@@ -347,6 +371,20 @@
   <div class="modal-header">
       <h5 class="modal-title" id="modalMarca">Agregar Prestacion ({{ TIPO }})</h5>
       <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalPrestaciones()" aria-label="Close"></button>
+  </div>
+  
+  <div class="modal-body">
+     <app-modalPrestaciones (resultadoForm)="guardarPrestacion($event)" ></app-modalPrestaciones>
+    
+
+  </div>
+ 
+</ng-template>
+
+<ng-template #IngresosDeducciones let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="modalMarca">Agregar Concepto Tipo ({{ TIPO }})</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModalIngresosyDeducciones()" aria-label="Close"></button>
   </div>
   
   <div class="modal-body">

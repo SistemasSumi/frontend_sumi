@@ -137,8 +137,16 @@ import { ModuloConciliacionComponent } from './components/dashboard/components/C
 import { VentasVendedorIndividualComponent } from './components/dashboard/components/INFORMES/ventas/VentasVendedorIndividual/VentasVendedorIndividual.component';
 import { AjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/AjusteInventario.component';
 import { FormAjusteInventarioComponent } from './components/dashboard/components/inventario/AjusteInventario/FormAjusteInventario/FormAjusteInventario.component';
-import { CotizacionComponent } from './components/dashboard/components/Facturacion/Cotizacion/Cotizacion.component';
 import { ListaCotizacionesComponent } from './components/dashboard/components/Facturacion/lista-cotizaciones/lista-cotizaciones.component';
+import { EditarCotizacionesComponent } from './components/dashboard/components/Facturacion/editar-cotizaciones/editar-cotizaciones.component';
+import { CertificadoRetencionComponent } from './components/dashboard/components/INFORMES/proveedores/certificado-retencion/certificado-retencion.component';
+import { NominaReporteComponent } from './components/dashboard/components/INFORMES/nomina-reporte/nomina-reporte.component';
+import { FormNominaComponent } from './components/dashboard/components/nomina/form-nomina/form-nomina.component';
+import { NovedadesModalComponent } from './components/dashboard/components/nomina/novedades-modal/novedades-modal.component';
+import { IngresosModalComponent } from './components/dashboard/components/nomina/ingresos-modal/ingresos-modal.component';
+import { DeduccionesModalComponent } from './components/dashboard/components/nomina/deducciones-modal/deducciones-modal.component';
+import { CotizacionComponent } from './components/dashboard/components/Facturacion/cotizacion/cotizacion.component';
+import { ModalIngresoDeduccionComponent } from './components/dashboard/components/nomina/NEmpleados/modal-ingreso-deduccion/modal-ingreso-deduccion.component';
 
 
 
@@ -255,10 +263,14 @@ import { ListaCotizacionesComponent } from './components/dashboard/components/Fa
     FormAjusteInventarioComponent,
     CotizacionComponent,
     ListaCotizacionesComponent,
-
-
-
-
+    EditarCotizacionesComponent,
+    CertificadoRetencionComponent,
+    NominaReporteComponent,
+    FormNominaComponent,
+    NovedadesModalComponent,
+    IngresosModalComponent,
+    DeduccionesModalComponent,
+    ModalIngresoDeduccionComponent,
   ],
   imports: [
     BrowserModule,

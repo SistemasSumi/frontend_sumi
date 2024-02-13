@@ -345,7 +345,6 @@ export class ListadoFacturasComponent implements OnInit  {
         $('#editar', row).on('click', () => {
           // this.router.navigateByUrl('terceros/'+data.id) 
           this.router.navigateByUrl("facturacion/editar/"+data.id);
-          
         });
 
 

@@ -4,10 +4,16 @@ import { SeguridadService } from 'src/app/components/auth/seguridad.service';
 import { DatePipe } from 'src/app/pipes/date.pipe';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { FormControl } from '@angular/forms';
+import { ModelPuc } from '../../Contabilidad/models/ModelPuc';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ComprobanteEgreso } from '../../../reportes/reportesContabilidad/ComprobanteEgreso';
 import { ComprobanteIngreso } from '../../../reportes/reportesContabilidad/ComprobanteIngreso';
 import { FacturacionService } from '../../Facturacion/facturacion.service';
 import { StockService } from '../../inventario/stock/stock.service';
+import { MetodosShared } from 'src/app/components/shared/metodos/metodos';
+import { ModelTerceroCompleto } from '../../configuracion/models/ModelTerceroCompleto';
+import { ConfiguracionService } from '../../configuracion/Configuracion.service';
 declare var $;
 
 
@@ -18,12 +24,70 @@ declare var $;
 })
 export class ListadoCIComponent implements OnInit {
 
+  busquedaAvanzada:boolean = false;
+  meses: any[];
+  years: number[];
   table:any = $('').DataTable({});
   txtbuscarPago:string;
-  constructor(private auth:SeguridadService, private cxc:FacturacionService) { }
+
+  filtroAvanzado:filtroBusquedas = {
+
+    numero      : null,
+    cliente   : null,
+    consecutivo : null,
+    orden       : null,
+    observacion : null,
+    fechaInicial: null,
+    fechaFinal  : null,
+    year        : null,
+    mes         : null,
+    cuenta      : null,
+    concepto    : null,
+    factura     : null,
+    total       : null
+  
+  }
+
+  terceros: ModelTerceroCompleto[] = [];
+  metodos:MetodosShared = new MetodosShared();
+
+  public filtroTerceros: BehaviorSubject<ModelTerceroCompleto[]>;
+  public filtroCuentasControl: FormControl = new FormControl('');
+  protected _onDestroy = new Subject<void>();
+
+  listCuentas:ModelPuc[] = [];
+  listaDeGrupos:grupos[] = [];
+
+  
+  public filtroCuentas: BehaviorSubject<ModelPuc[]> = new BehaviorSubject<ModelPuc[]>([]) ;
+
+  constructor(private auth:SeguridadService, private cxc:FacturacionService,private config:ConfiguracionService) { 
+    this.setYearsDefault();
+  }
 
   ngOnInit() {
       this.llenarTablePagos();
+      this.obtenerTerceros();
+  }
+
+  obtenerTerceros(){
+    this.config.SubjectdataCliente.subscribe(resp => {
+      this.terceros = resp;
+      this.filtroTerceros = new BehaviorSubject<ModelTerceroCompleto[]>(this.terceros);
+    });
+  }
+
+  filtraTerceros(busqueda:string){
+    let filtro:ModelTerceroCompleto[] = new MetodosShared().filtrarArray<ModelTerceroCompleto>(this.terceros,'nombreComercial',busqueda);
+    this.filtroTerceros.next(filtro);
+  }
+
+  setMesesDefault(year:number){
+    this.filtroAvanzado.mes = null;
+    this.meses = new MetodosShared().generateMonths(year);
+  }
+  setYearsDefault(){
+    this.years = new MetodosShared().generateYears();
   }
 
   llenarTable(idtable:string,data,columns,nameButton){
@@ -199,7 +263,7 @@ export class ListadoCIComponent implements OnInit {
   }
 
   llenarTablePagos(){
-    return this.cxc.getPagos().subscribe(resp => {
+    return this.cxc.SubjectdataCI.subscribe(resp => {
       
       this.llenarTable(
         "pagos",
@@ -232,4 +296,85 @@ export class ListadoCIComponent implements OnInit {
     
   }
 
+  limpiarFiltro(){
+    this.filtroAvanzado = {
+      numero      : null,
+      cliente   : null,
+      consecutivo : null,
+      orden       : null,
+      observacion : null,
+      fechaInicial: null,
+      fechaFinal  : null,
+      year        : null,
+      mes         : null,
+      cuenta      : null,
+      concepto    : null,
+      factura     : null,
+      total       : null
+    };
+  
+  }
+  BusquedaAvanzada(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Buscando..',
+      text:'Espere por favor..'
+    });
+    Swal.showLoading();
+    this.cxc.busquedaAvanzadaCI(this.filtroAvanzado).subscribe(() => {
+      Swal.close();
+
+
+    },
+    (ex) => {
+      console.log(ex);
+                  Swal.close();
+                  let errores = '';
+
+                  errores += `
+                  <div class="alert alert-danger" role="alert" style="text-align: left;">
+                    ${ex.error}
+                  </div>
+                  `;
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la busqueda.',
+                    html: errores,
+                    confirmButtonColor: '#4acf50',
+                  });
+    });
+  }
+
+}
+interface filtroBusquedas {
+
+  numero:string,
+  cliente:string,
+  consecutivo:string,
+  orden:string,
+  observacion:string,
+  fechaInicial:string,
+  fechaFinal:string,
+  year:string,
+  mes:string,
+  cuenta:string,
+  concepto:string,
+  factura:string,
+  total:number,
+
+}
+
+interface grupos {
+  nombre: string;
+  codigo: string;
+  cuentas: cuentas[];
+}
+
+interface cuentas {
+  id: number
+  codigo: string;
+  nombre: string;
+  
 }

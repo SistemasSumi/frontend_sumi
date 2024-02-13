@@ -85,17 +85,6 @@ export class ModalPrestacionesComponent implements OnInit {
     this.filtroProveedor.next(filtro);
   }
 
-
-  
-
-
-
-
-
- 
-
-  
-
   obtenerConceptos(){
     this.nconfig.getConceptosEmpleados().subscribe(resp => {
         this.conceptos = resp;

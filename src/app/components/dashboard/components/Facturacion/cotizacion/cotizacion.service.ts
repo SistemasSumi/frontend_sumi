@@ -15,6 +15,7 @@ import { ConfiguracionService } from '../../configuracion/Configuracion.service'
 // import { CxcMoviModels } from './models/CxcMoviModels';
 import { InvoceReport } from '../models/InvoceReport';
 import { facturaElectronicaReport } from '../../../reportes/reportesFacturacion/facturaElectronica';
+import { ComprobanteCotizacion } from '../../../reportes/reportesFacturacion/ComprobanteCotizacion';
 
 
 @Injectable({
@@ -97,6 +98,7 @@ export class CotizacionService {
   }
 
   imprimirCotizacion(id){
+    
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
@@ -106,8 +108,8 @@ export class CotizacionService {
     Swal.showLoading();
     this.obtenerCotizacion(id).subscribe(resp => {
       Swal.close();
-      let reporte = new facturaElectronicaReport();
-      let report = reporte.geerarPDFFacturaSumi(resp);
+      let reporte = new ComprobanteCotizacion();
+      let report = reporte.ReporteComprobanteCotizacion(resp);
       window.open(report.output('bloburl'), '_blank');
   
     },(ex) => {
@@ -142,7 +144,7 @@ export class CotizacionService {
   }
 
   updateFactura(form: FormGroup): Observable<any> {
-    const url = environment.BACKEND_DIR + 'cotizacion/cotizaciones/';
+    const url = environment.BACKEND_DIR + 'facturacion/cotizaciones/';
     const token = this.auth.currentUser.getTokenUser();
     const httpHeaders = new HttpHeaders().set(
       'Authorization',
@@ -155,4 +157,38 @@ export class CotizacionService {
 
     return this.http.put<any>(url, data, { headers: httpHeaders });
   }
+
+  EliminarDetalle(id:number,retencionesArray:any): Observable<any>{
+    
+    const  url = environment.BACKEND_DIR+'facturacion/cotizaciones/productos/eliminar/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+   
+    let data = {
+        "id":id,
+        "retencionesArray":retencionesArray
+    }
+    return this.http.post<any>(url,data,{headers: httpHeaders});
+  }
+
+  AgregarDetalleCotizacion(id:number,detalle:any,retencionCliente:any): Observable<any>{
+    const  url = environment.BACKEND_DIR+'facturacion/cotizaciones/productos/agregar/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+   
+    let data = {
+        "factura":id,
+        "detalle":detalle,
+        "retencionCliente":retencionCliente
+
+    }
+  
+  
+  
+    return this.http.post<any>(url,data,{headers: httpHeaders});
+    
+    
+  
+  }
+  
 }

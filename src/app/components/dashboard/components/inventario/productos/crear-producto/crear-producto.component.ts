@@ -342,14 +342,14 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
             // console.log(ex);
             
             let errores ='';
-            for(let x in ex.error){
+            
               errores +=`
                 <div class="alert alert-danger" role="alert" style="text-align: justify;">
-                  ${x}
+                  ${ex.error}
                 </div>
                 `
-              
-            }
+            
+            
             Swal.fire({
               icon: 'error',
               title: 'Error al guardar.',
@@ -406,14 +406,14 @@ export class CrearProductoComponent implements OnInit,OnDestroy  {
             // console.log(ex);
             
             let errores ='';
-            for(let x in ex.error){
+           
               errores +=`
                 <div class="alert alert-danger" role="alert" style="text-align: justify;">
-                  ${x}
+                  ${ex.error}
                 </div>
                 `
               
-            }
+            
             Swal.fire({
               icon: 'error',
               title: 'Error al guardar.',

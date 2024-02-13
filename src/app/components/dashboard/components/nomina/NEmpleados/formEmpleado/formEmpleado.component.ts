@@ -20,12 +20,16 @@ export class FormEmpleadoComponent implements OnInit {
 
   TIPO = '';
   modalPrestaciones: NgbModalRef;
+  modalIngresosyDeducciones: NgbModalRef;
 
   listadoEps             : any;
   listadoPension         : any;
   listadoArl             : any;
   listadoCajaCompensacion: any;
   listadoCesantias       : any;
+
+  listadoIngresosRecurrentes : any;
+  listadoDeduccionesRecurrentes : any;
   
   formEmpleado = this.formBuilder.group({    
     id: ['',{
@@ -164,6 +168,16 @@ export class FormEmpleadoComponent implements OnInit {
         
       ]
     }],
+    deduccionesRecurrentes: ['',{
+      validators:[
+        
+      ]
+    }],
+    ingresosRecurrentes: ['',{
+      validators:[
+        
+      ]
+    }],
     
     
   });
@@ -183,7 +197,28 @@ export class FormEmpleadoComponent implements OnInit {
     this.obtenerCaja();
     this.obtenerCesantias();
     this.obtenerProveedor();
+
+    this.obtenerIngresosRecurrentes();
+    this.obtenerDeduccionesRecurrentes();
     this.InitFiltroTercero();
+  }
+
+  obtenerIngresosRecurrentes(){
+    this.nconfig.obtenerIngresoRecurrentes().subscribe(resp => {
+      // console.log(resp);
+      this.listadoIngresosRecurrentes = resp;
+      console.log('Ingresos Recurrentes:',resp)
+    });
+
+  }
+
+  obtenerDeduccionesRecurrentes(){
+    this.nconfig.obtenerDeduccionRecurrentes().subscribe(resp => {
+      // console.log(resp);
+      this.listadoDeduccionesRecurrentes = resp;
+      console.log('Deducciones Recurrentes: ',resp)
+    });
+
   }
 
 
@@ -229,6 +264,19 @@ export class FormEmpleadoComponent implements OnInit {
   openModalPrestacionesCESANTIAS(content) {
     this.TIPO = 'CESANTIAS';
 		this.modalPrestaciones = this.modalService.open(content, { size: 'lg',centered: true });
+  }
+  openModalIngresos(content) {
+    this.TIPO = 'INGRESO RECURRENTE';
+		this.modalIngresosyDeducciones = this.modalService.open(content, { size: 'lg',centered: true });
+  }
+  openModalDeducciones(content) {
+    this.TIPO = 'DEDUCCION RECURRENTE';
+		this.modalIngresosyDeducciones = this.modalService.open(content, { size: 'lg',centered: true });
+  }
+
+  cerrarModalIngresosyDeducciones(){
+    this.modalIngresosyDeducciones.close();
+    // this.limpiarDetalle();
   }
 
   cerrarModalPrestaciones(){
@@ -411,13 +459,12 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
   saveEmpleado(){
+    console.log(this.formEmpleado.value)
     new MetodosShared().AlertQuestion(
       '¿ SEGURO DESEA GUARDAR UN NUEVO EMPLEADO ?'
     ).then((result) => {
       if (result.isConfirmed) {
 
-
-         
         Swal.fire({
           allowOutsideClick: false,
           icon: 'info',
@@ -435,7 +482,7 @@ export class FormEmpleadoComponent implements OnInit {
           },
           (error) => {
             Swal.close();
-            // console.log(error.error)
+            console.log(error.error)
           }
         
         );

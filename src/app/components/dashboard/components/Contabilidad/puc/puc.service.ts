@@ -123,7 +123,6 @@ constructor(public settings:ConfiguracionService, public router:Router, private 
         
         return this.http.get<any>(url,{headers: httpHeaders}).pipe(
             map(resp =>  {
-                
                 this.SubjectdataMovimientos.next(resp);
             })
         );

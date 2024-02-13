@@ -364,5 +364,4 @@ interface cuentas {
   id: number
   codigo: string;
   nombre: string;
-  
 }

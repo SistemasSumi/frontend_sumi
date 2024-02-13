@@ -107,6 +107,11 @@ export class CrearNCVComponent implements OnInit {
 
       ]
     }],
+    ingreso: ['',{
+      validators:[
+        Validators.required,
+      ]
+    }],
     
     fecha: [new Date(),{
       validators:[
@@ -273,12 +278,12 @@ export class CrearNCVComponent implements OnInit {
 
 
 
-          // // console.log(detalle);
+          console.log(detalle);
           
 
           this.detalleNota.push(detalle);
 
-          // // console.log(this.detalleNota);
+          console.log(this.detalleNota);
 
 
 
@@ -304,6 +309,8 @@ export class CrearNCVComponent implements OnInit {
         valor:(this.productoSeleccionado.valor - this.productoSeleccionado.descuento ),
         subtotal: (this.productoSeleccionado.valor - this.productoSeleccionado.descuento) * this.cantidadDevolucion
       }
+      console.log('iva del producto',detalle.iva)
+
   
       this.detalleNota.push(detalle);
       this.calcularTotales(this.detalleNota);
@@ -326,6 +333,7 @@ export class CrearNCVComponent implements OnInit {
     for(let x of detalle){
       this.subtotalNota += x.valor * x.cantidad;
       this.ivaNota      += x.iva * x.cantidad;
+      console.log('iteración:', this.ivaNota)
     }
     this.totalNota    += this.subtotalNota + this.ivaNota;   
     
@@ -417,6 +425,8 @@ export class CrearNCVComponent implements OnInit {
           text:'Espere por favor..'
         });
         Swal.showLoading();
+        console.log('NOTA A GUARDAR',this.formNota)
+        console.log('DETALLE DE LA NOTA',this.detalleNota)
 
 
         this.notaService.saveNota(this.formNota,this.detalleNota).subscribe((resp:any) => {
@@ -441,16 +451,16 @@ export class CrearNCVComponent implements OnInit {
           // console.log(ex);
           
           let errores ='';
-          for(let x in ex.error){
-            for(let j of ex.error[x]){
+          
+            
               errores +=`
               <div class="alert alert-danger" role="alert" style="text-align: justify;">
-                ${j}
+                ${ex.error}
               </div>
               `
-            }
             
-          }
+            
+          
           Swal.fire({
             icon: 'error',
             title: 'Error al guardar.',
@@ -506,6 +516,7 @@ interface Productos {
   valor            : number;
   descuento        : number;
   iva              : number;
+  ingreso:          number;
   
 }
 

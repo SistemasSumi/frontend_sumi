@@ -22,6 +22,7 @@ export class ListadoEmpleadoComponent implements OnInit {
 
   llenarTable(idtable:string,data,columns,nameButton){
     
+    
     this.table.destroy();
     var tokenid =  this.auth.currentUser.getTokenUser();
     var beforeSend = function (xhr) {
@@ -316,11 +317,13 @@ export class ListadoEmpleadoComponent implements OnInit {
 
   llenarTableEmpleados(){
     return this.EmpService.SubjectdataEmpleados.subscribe(resp => {
+      console.log(resp)
+      
       this.llenarTable(
         "Empleados",
         resp,
-        [
         
+        [
           {"data": "id"},
           {"data": "foto"},
           {"data": "primerNombre"},
@@ -338,7 +341,7 @@ export class ListadoEmpleadoComponent implements OnInit {
           {"data": "contrato.eps.tercero"},
           {"data": "contrato.arl.tercero"},
           {"data": "contrato.fondoPension.tercero"},
-          {"data": "contrato.fondoCesantias.tercero.nombreComercial"},
+          {"data": "contrato.fondoCesantias.tercero"},
           {"data": "contrato.cajaCompensacion.tercero"},
           {"data": "contrato.riesgo.nombre"},
           {"data": "contrato.tipoTrabajador.nombre"},

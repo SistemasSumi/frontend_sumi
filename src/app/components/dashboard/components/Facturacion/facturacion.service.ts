@@ -19,6 +19,7 @@ import { InvoceReport } from './models/InvoceReport';
   providedIn: 'root'
 })
 export class FacturacionService {
+  SubjectdataCI   : BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
   SubjectdataFacturas:BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
   SubjectdataProformas:BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
 
@@ -31,6 +32,7 @@ constructor(
 ) {
   this.cargarFacturas();
   this.cargarProformas().subscribe();
+  this.getPagos().subscribe();
  }
 
 cargarNumeracion(){
@@ -47,6 +49,7 @@ saveFactura(form:FormGroup,detalle:any[]): Observable<any>{
       "cxc":form.value,
       "detalle":detalle
   }
+  console.log('data enviada al endpoint:',data)
 
 
 
@@ -118,12 +121,8 @@ FirmarInvoce(numero:string): Observable<any>{
       "numero":numero,
   }
 
-
-
   return this.http.post<any>(url,data,{headers: httpHeaders});
   
-  
-
 }
 
 obtenerProformas(){
@@ -385,7 +384,9 @@ getPagos(){
   const token = this.auth.currentUser.getTokenUser();
   const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
 
-  return this.http.get<any[]>(url,{headers: httpHeaders});
+  return this.http.get<any[]>(url,{headers: httpHeaders}).pipe(
+    map(resp =>  this.SubjectdataCI.next(resp))
+  );
 }
 
 imprimirPagos(numero){
@@ -411,18 +412,20 @@ busquedaAvanzada(data:any){
   const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
 
   let datos = data;
-
-  
-  
-
-
-  
-
   return this.http.post<any[]>(url,datos,{headers: httpHeaders}).pipe(
       map(resp =>  this.SubjectdataFacturas.next(resp))
   )
 
 }
+  busquedaAvanzadaCI(datos){
+    const  url = environment.BACKEND_DIR+'facturacion/ingreso/busqueda/';
+    const token = this.auth.currentUser.getTokenUser();
+    const httpHeaders = new HttpHeaders().set('Authorization', 'Token '+token);
+    return this.http.post<any>(url,datos,{headers: httpHeaders}).pipe(
+        
+        map(resp =>  this.SubjectdataCI.next(resp))
+    );
+  }
 
 
 proformaAFactura(data:any){

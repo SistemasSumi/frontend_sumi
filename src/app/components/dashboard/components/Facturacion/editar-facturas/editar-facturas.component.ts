@@ -274,9 +274,7 @@ export class EditarFacturasComponent implements OnInit {
 
   seleccionarInventario(data:InventarioProducto){
     this.listaPrecios = [];
-
     this.lote        = data.lote;
-    
     this.vence       = data.vencimiento;
 
     let cantidadUsada = 0;

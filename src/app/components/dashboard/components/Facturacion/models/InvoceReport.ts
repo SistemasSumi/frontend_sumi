@@ -32,6 +32,41 @@ export class InvoceReport {
     usuario:          string;
     enviadaDian:      boolean;
 }
+export class CotizacionReport {
+    id:               number;
+    numeracion:       Numeracion;
+    formaPago:        FormaPago;
+    cliente:          Cliente;
+    productos:        ProductoElement[];
+    retenciones:      Retenciones[];
+    impuestos:        Impuestos[];
+    consecutivo:      number;
+    numero:           string;
+    prefijo:          string;
+    valor:            number;
+    fecha:            Date;
+    fechaVencimiento: Date;
+    abono:            number;
+    descuento:        number;
+    valorDomicilio:   number;
+    valorLetras:      string;
+    observacion:      null;
+    pagada:           boolean;
+    xmlEstado:        boolean;
+    cufe:             null;
+    proformada:       boolean;
+    qr:               null;
+    statusFac:        null;
+    valorIva:         number;
+    valorReteFuente:  number;
+    subtotal:         number;
+    despachado:       boolean;
+    correoEnviado:    boolean;
+    vendedor:         Vendedor;
+    usuario:          string;
+    enviadaDian:      boolean;
+}
+
 
 
 export interface Cliente {
